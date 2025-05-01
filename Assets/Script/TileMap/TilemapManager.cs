@@ -17,8 +17,7 @@ namespace ShotBall.InGame
         static TilemapManager instance;
         public static TilemapManager Instance => instance;
 
-        [SerializeField] Color originalColor;
-        [SerializeField] Color changeColor;
+        [SerializeField] TileColors[] tileColors;
 
         // tileó‘Ô
         // 0 => ‹ó
@@ -32,11 +31,10 @@ namespace ShotBall.InGame
         private void Awake()
         {
             instance = this;
-
-            originalColor = tilemap.color;
-
-
-            TileColors.SetColor(originalColor, changeColor);
+            foreach(var t in tileColors)
+            {
+                t.Initialize();
+            }
         }
 
         private void Start()
@@ -45,14 +43,8 @@ namespace ShotBall.InGame
             {
                 origin = tilemap.origin;
             }
+        }
 
-        }
-        private void FixedUpdate()
-        {
-          #if UNITY_EDITOR
-            EditorCheck();
-                #endif
-        }
 
         void EditorCheck()
         {
@@ -65,11 +57,11 @@ namespace ShotBall.InGame
                         Debug.Log("EditorCheck");
                         if (tileData[y, x] != 0)
                         {
-                            tilemap.SetColor(new Vector3Int(x + origin.x, y + origin.y, 0), TileColors.tileColors[TileColor.Change]);
+                            tilemap.SetColor(new Vector3Int(x + origin.x, y + origin.y, 0), TileColorMode().GetColor(TileColor.Change));
                         }
                         else
                         {
-                            tilemap.SetColor(new Vector3Int(x + origin.x, y + origin.y, 0), TileColors.tileColors[TileColor.Original]);
+                            tilemap.SetColor(new Vector3Int(x + origin.x, y + origin.y, 0), TileColorMode().GetColor(TileColor.Original));
                         }
                     }
                 }
@@ -161,13 +153,14 @@ namespace ShotBall.InGame
                     }
                 }
             }
+            EditorCheck();
         }
 
         public void TileColorChange(Vector3 worldPoint,TileColor tileColor)
         {
             Vector3Int gridPosition = tilemap.WorldToCell(worldPoint);
 
-            tilemap.SetColor(gridPosition, TileColors.tileColors[tileColor]);
+            tilemap.SetColor(gridPosition, TileColorMode().GetColor(tileColor));
 
             Debug.Log(gridPosition + "" + tileColor);
         }
@@ -212,6 +205,12 @@ namespace ShotBall.InGame
             Vector3 cellSize = tilemap.cellSize;
 
             return cellBottomLeft + new Vector3(cellSize.x / 2, cellSize.y / 2, 0);
+        }
+
+        public TileColors TileColorMode()
+        {
+            if (NightMode.Night) return tileColors[0];
+            return tileColors[1];
         }
     }
 
