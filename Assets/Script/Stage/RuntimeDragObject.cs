@@ -65,7 +65,7 @@ namespace ShotBall.InGame
             isDragging = true;
             if (placed)
             {
-                TilemapManager.Instance.TileDetaChange(GridData, 0, PivotTransform());
+                //TilemapManager.Instance.TileDetaChange(GridData, 0, PivotTransform());
             }
             if (inFrame)
             {
@@ -91,21 +91,20 @@ namespace ShotBall.InGame
 
             isDragging = false;
             Vector3 worldPoint = Camera.main.ScreenToWorldPoint(inputScreenPos);
-            if (TilemapManager.Instance.DropCheck(GridData, worldPoint))
-            {
-                TilemapManager.Instance.Drop(transform, GridData, worldPoint, pivot);
-                placed = true;
-                otherPosition = transform.position;
-            }
-            else if (FramePositionNow())
+
+            if (FramePositionNow())
             {
                 placed = false;
                 otherPosition = transform.position;
+            }
+            else if(!ObjectRange.Instance.InRange(transform.position))
+            {
+                InitalPositionReset();
             }
             else
             {
-                placed = false;
-                InitalPositionReset();
+                placed = true;
+                otherPosition = transform.position;
             }
             offset = Vector3.zero;
         }
@@ -167,13 +166,6 @@ namespace ShotBall.InGame
         void InitalPositionReset()
         {
             transform.position = otherPosition;
-
-            //if (TilemapManager.Instance.DropCheck(GridData, transform.position))
-            {
-                TilemapManager.Instance.Drop(gameObject.transform, GridData, transform.position, pivot);
-                placed = true;
-                otherPosition = transform.position;
-            }
         }
 
     }

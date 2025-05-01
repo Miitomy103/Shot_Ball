@@ -34,15 +34,15 @@ namespace ShotBall.InGame
 
             tilemap.ClearAllTiles(); // 既存のタイルをクリア（再配置防止）
 
-            for (int x = 0; x < gridSize.x; x++)
-            {
-                for (int y = 0; y < gridSize.y; y++)
-                {
-                    Vector3Int tilePosition = new Vector3Int(origin.x + x, origin.y + y , 0);
-                    gridData[x, y] = tile;
-                    tilemap.SetTile(tilePosition, tile);
-                }
-            }
+            //for (int x = 0; x < gridSize.x; x++)
+            //{
+            //    for (int y = 0; y < gridSize.y; y++)
+            //    {
+            //        Vector3Int tilePosition = new Vector3Int(origin.x + x, origin.y + y , 0);
+            //        gridData[x, y] = tile;
+            //        tilemap.SetTile(tilePosition, tile);
+            //    }
+            //}
         }
     }
 }
