@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5861036742326963844}
   - component: {fileID: 4857613519609523318}
   - component: {fileID: -3464046345657449361}
-  - component: {fileID: -7222363286006062803}
   m_Layer: 0
   m_Name: CreaArea
   m_TagString: Untagged
@@ -115,19 +114,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a975587b0bc9d94b9663d278cea5d88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-7222363286006062803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9168146724725515901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 232302876ab2dd3448070426f26aaa31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridData:
-  - 11
-  - 11
-  center: 0

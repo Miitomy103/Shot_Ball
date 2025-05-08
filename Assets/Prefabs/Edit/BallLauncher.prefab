@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4177669525137658543}
   - component: {fileID: 4899617931069398681}
   - component: {fileID: 7284439586543942226}
-  - component: {fileID: 2589643148531233288}
   - component: {fileID: 9208635322664674239}
   m_Layer: 0
   m_Name: BallLauncher
@@ -151,21 +150,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2589643148531233288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1396885561186007638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 232302876ab2dd3448070426f26aaa31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridData:
-  - 2
-  center: 0
 --- !u!114 &9208635322664674239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,4 +162,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a975587b0bc9d94b9663d278cea5d88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {x: 0, y: 0}

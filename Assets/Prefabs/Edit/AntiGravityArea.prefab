@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 9030432293184739202}
   - component: {fileID: 3325167692329069276}
   - component: {fileID: 7388218281199530037}
-  - component: {fileID: 8680226569187523440}
   - component: {fileID: 1098574353652864385}
   m_Layer: 0
   m_Name: AntiGravityArea
@@ -148,21 +147,6 @@ MonoBehaviour:
   ballLayer:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &8680226569187523440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 553285673538879587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 232302876ab2dd3448070426f26aaa31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridData:
-  - 2
-  center: 0
 --- !u!114 &1098574353652864385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,4 +159,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a975587b0bc9d94b9663d278cea5d88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {x: 0, y: 0}

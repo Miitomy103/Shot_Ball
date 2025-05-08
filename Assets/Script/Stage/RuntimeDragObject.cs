@@ -17,25 +17,20 @@ namespace ShotBall.InGame
 
         Vector3 originalSize;
 
-        SpriteRenderer ThisSprite => GetComponent<SpriteRenderer>();
 
         private void Start()
         {
             otherPosition = transform.position;
-
-            GridGet();
-
-            if (GridData == null) Debug.LogError("GridDataÇ»Ç¢ÇÒÇ≈Ç∑ÇØÇ«"+gameObject.name);
         }
 
-        private void Awake()
+        protected override void Awake()
         {
             originalSize = transform.localScale;
         }
         protected virtual void OnMouseDown()
         {
             if (!CanDrag()) return;
-            offset = PivotTransform() - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
             StartDrag(Input.mousePosition);
         }
 
@@ -63,10 +58,6 @@ namespace ShotBall.InGame
             if (!CanDrag()) return;
 
             isDragging = true;
-            if (placed)
-            {
-                //TilemapManager.Instance.TileDetaChange(GridData, 0, PivotTransform());
-            }
             if (inFrame)
             {
                 transform.localScale = originalSize;
@@ -147,7 +138,7 @@ namespace ShotBall.InGame
 
         void FitSpriteInSquare(float squareSize)
         {
-            Vector2 input = ThisSprite.bounds.size;
+            Vector2 input = thisSprite.bounds.size;
 
             float max = Mathf.Max(Mathf.Abs(input.x), Mathf.Abs(input.y));
             if (max == 0) transform.localScale = Vector2.zero; // 0èúéZñhé~

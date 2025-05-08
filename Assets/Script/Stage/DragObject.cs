@@ -6,39 +6,22 @@ namespace ShotBall.InGame
 {
     public abstract class DragObject : MonoBehaviour
     {
-        [SerializeField]protected Vector2 pivot;
 
-        //0 => 空
-        //1 => マス
-        //2 => 中心地
-        protected int[,] GridData { get;private set; }
+        protected SpriteRenderer thisSprite { get; private set; }
 
+        [SerializeField] Vector2 spriteSize = new Vector2(1, 1);
 
-        protected void GridGet()
+        private void OnEnable()
         {
-            var g = GetComponent<IGridData>();
+            thisSprite = GetComponent<SpriteRenderer>();
 
-            GridData = g.GridData;
-        }
-        
-
-        protected Vector3 PivotTransform()
-        {
-            return new Vector3(transform.position.x - pivot.x, transform.position.y - pivot.y + 0);
+            //thisSprite.drawMode = SpriteDrawMode.Sliced;
+            //thisSprite.size = spriteSize;
         }
 
-        protected void OnDrawGizmos()
+        protected virtual void Awake()
         {
-            float size = 0.25f;
-
-            Gizmos.color = Color.red;
-
-            Vector3 pos = PivotTransform();
-
-            // 横線
-            Gizmos.DrawLine(pos + Vector3.left * size, pos + Vector3.right * size);
-            // 縦線
-            Gizmos.DrawLine(pos + Vector3.up * size, pos + Vector3.down * size);
+ 
         }
     }
 

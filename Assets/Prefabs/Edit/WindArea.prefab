@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7318513621556531945}
   - component: {fileID: 8905633214900730983}
   - component: {fileID: 8307075351819568863}
-  - component: {fileID: 8274335102208363092}
   - component: {fileID: -7294387230357869747}
   m_Layer: 0
   m_Name: WindArea
@@ -150,21 +149,6 @@ MonoBehaviour:
     m_Bits: 64
   windPower: 5
   windDirection: {x: 1, y: 0}
---- !u!114 &8274335102208363092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7891805696436677196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 232302876ab2dd3448070426f26aaa31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gridData:
-  - 2
-  center: 0
 --- !u!114 &-7294387230357869747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,4 +161,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a975587b0bc9d94b9663d278cea5d88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {x: 0, y: 0}

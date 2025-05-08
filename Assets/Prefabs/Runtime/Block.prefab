@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5072311046578151041}
   - component: {fileID: 8568168992790733640}
   - component: {fileID: 7137932475183066546}
-  - component: {fileID: 4205304423976095415}
+  - component: {fileID: 4186660810592477461}
   m_Layer: 0
   m_Name: Block
   m_TagString: Untagged
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
+  m_DrawMode: 1
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -126,7 +126,7 @@ BoxCollider2D:
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
@@ -144,9 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a724d9da07953fc4582da7752be2be03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pivot: {x: 0, y: 0}
+  spriteSize: {x: 0, y: 0}
   placed: 0
---- !u!114 &4205304423976095415
+--- !u!114 &4186660810592477461
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,9 +155,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5927850515562060249}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 232302876ab2dd3448070426f26aaa31, type: 3}
+  m_Script: {fileID: 11500000, guid: b3a481800f9e9644da453ef0cc8311c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridData:
-  - 2
-  center: 0
+  size: {x: 1, y: 1}

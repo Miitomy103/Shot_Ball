@@ -32,7 +32,7 @@ Transform:
   - {fileID: 6079838837104713542}
   - {fileID: 866229511805828727}
   - {fileID: 2418309661601259651}
-  m_Father: {fileID: 1196045839599851315}
+  m_Father: {fileID: 6803887848388676872}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3232395187302770303
 GameObject:
@@ -624,25 +624,20 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6384801495773957754, guid: f432199154512d0488b8c91620fe5170, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8052241936730817360}
     - targetCorrespondingSourceObject: {fileID: 703096899870779195, guid: f432199154512d0488b8c91620fe5170, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1723724123992555140}
     - targetCorrespondingSourceObject: {fileID: 703096899870779195, guid: f432199154512d0488b8c91620fe5170, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4558637936082442678}
-    - targetCorrespondingSourceObject: {fileID: 1616274982082335809, guid: f432199154512d0488b8c91620fe5170, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8052241936730817360}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f432199154512d0488b8c91620fe5170, type: 3}
 --- !u!4 &1096338666819249225 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 703096899870779195, guid: f432199154512d0488b8c91620fe5170, type: 3}
-  m_PrefabInstance: {fileID: 501901575135986546}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1196045839599851315 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1616274982082335809, guid: f432199154512d0488b8c91620fe5170, type: 3}
   m_PrefabInstance: {fileID: 501901575135986546}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &6179402599631312582 stripped
@@ -736,8 +731,40 @@ PrefabInstance:
       value: Grid
       objectReference: {fileID: 0}
     - target: {fileID: 5659991403903507797, guid: 5e3423028fab1eb409bc16bca809842a, type: 3}
+      propertyPath: m_Size.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659991403903507797, guid: 5e3423028fab1eb409bc16bca809842a, type: 3}
+      propertyPath: m_Size.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659991403903507797, guid: 5e3423028fab1eb409bc16bca809842a, type: 3}
       propertyPath: m_Color.a
       value: 0.5019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659991403903507797, guid: 5e3423028fab1eb409bc16bca809842a, type: 3}
+      propertyPath: m_Origin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659991403903507797, guid: 5e3423028fab1eb409bc16bca809842a, type: 3}
+      propertyPath: m_Tiles.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659991403903507797, guid: 5e3423028fab1eb409bc16bca809842a, type: 3}
+      propertyPath: m_TileAssetArray.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659991403903507797, guid: 5e3423028fab1eb409bc16bca809842a, type: 3}
+      propertyPath: m_TileColorArray.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659991403903507797, guid: 5e3423028fab1eb409bc16bca809842a, type: 3}
+      propertyPath: m_TileMatrixArray.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659991403903507797, guid: 5e3423028fab1eb409bc16bca809842a, type: 3}
+      propertyPath: m_TileSpriteArray.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6860066496019173077, guid: 5e3423028fab1eb409bc16bca809842a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1219,6 +1246,10 @@ PrefabInstance:
       propertyPath: tilemap
       value: 
       objectReference: {fileID: 7882968983714401738}
+    - target: {fileID: 6895289231330638838, guid: e9b350ca8c67a9741ab56779fa21c121, type: 3}
+      propertyPath: origin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6895289231330638838, guid: e9b350ca8c67a9741ab56779fa21c121, type: 3}
       propertyPath: m_Enabled
       value: 1
