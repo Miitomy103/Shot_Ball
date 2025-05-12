@@ -13,6 +13,12 @@ namespace ShotBall.InGame
 
         [SerializeField] LaunchPad[] launchPads;
 
+        [SerializeField] ResultManager resultManager;
+
+        IGet[] Coins = new IGet[3];
+
+        int goalCount;
+
         int coinCount;
 
         readonly int coinQuantity = 3;
@@ -35,7 +41,23 @@ namespace ShotBall.InGame
             foreach (var l in launchPads) l.GameReset();
             ChangeState(StageState.Setting);
         }
-
+        void GameClear()
+        {
+            resultManager.Result(Coins);
+            ChangeState(StageState.Clear);
+        }
+        public void ClearAreaCheck(Ball ball)
+        {
+            goalCount++;
+            if(goalCount>=launchPads.Length)
+            {
+                GameClear();
+            }
+        }
+        public void CoinSet(IGet[] coins)
+        {
+            Coins = coins;
+        }
         public void GetCoin()
         {
             coinCount++;

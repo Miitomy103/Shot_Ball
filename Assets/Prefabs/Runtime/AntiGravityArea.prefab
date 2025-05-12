@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 9030432293184739202}
   - component: {fileID: 3325167692329069276}
   - component: {fileID: 7388218281199530037}
-  - component: {fileID: 6459098114280269217}
+  - component: {fileID: -7181023944319214314}
+  - component: {fileID: 3066505718068487086}
   m_Layer: 0
   m_Name: AntiGravityArea
   m_TagString: Untagged
@@ -80,7 +81,7 @@ SpriteRenderer:
   m_Color: {r: 0.7315317, g: 0, b: 0.8867924, a: 0.5568628}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
+  m_DrawMode: 1
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -126,7 +127,7 @@ BoxCollider2D:
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
@@ -147,7 +148,7 @@ MonoBehaviour:
   ballLayer:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &6459098114280269217
+--- !u!114 &-7181023944319214314
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,7 +157,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 553285673538879587}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a724d9da07953fc4582da7752be2be03, type: 3}
+  m_Script: {fileID: 11500000, guid: d5202b689ef70a34abc9a5b435daf337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placed: 0
+  size: {x: 1, y: 1}
+--- !u!114 &3066505718068487086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553285673538879587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98b740e98fa3cc64bae506bc18f6311a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  behaviourType: 0

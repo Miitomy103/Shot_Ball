@@ -4,28 +4,25 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    public class Coin : MonoBehaviour
+    public class Coin : AreaBase,IGet
     {
-        [SerializeField] LayerMask ballLayer;
+        bool get = false;
+        public bool Get => get;
 
-        [SerializeField] float areaRudius;
-
-        // Update is called once per frame
-        void Update()
+        protected override void BallEnter(Collider2D other)
         {
-            Collider2D collider = Physics2D.OverlapCircle(transform.position, areaRudius, ballLayer);
-            if (collider)
-            {
-                GameLoop.Instance.GetCoin();
-                gameObject.SetActive(false);
-            }
+            GetCoin();
+            gameObject.SetActive(false);
         }
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.green;
 
-            // 円（ワイヤーフレーム）
-            GizmosUtility.DrawWireRegularPolygon(4, transform.position, areaRudius);
+        void GetCoin()
+        {
+            get = true;
+        }
+
+        protected override void BallExit(Collider2D other)
+        {
+
         }
     }
 }

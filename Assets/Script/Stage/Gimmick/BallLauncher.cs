@@ -4,14 +4,21 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    public class BallLauncher : MonoBehaviour
+    public class BallLauncher : GimmickBase
     {
         [SerializeField] float launchPower = 40f;
         [SerializeField] Vector2 launchDirection;
-        [SerializeField] float coolTime;
+        float coolTime = 0.5f;
         [SerializeField] LayerMask ballLayer;
 
+        protected override Vector2 Direction => launchDirection;
+
         bool inBall;
+        private void Start()
+        {
+            Transform child = transform.Find("Arrow");
+            child.localRotation = DirectionAngle();
+        }
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.layer == ballLayer||inBall) return;
@@ -27,7 +34,7 @@ namespace ShotBall.InGame
             yield return new WaitForSeconds(coolTime);
             inBall = false;
             rb.bodyType = RigidbodyType2D.Dynamic;
-            rb.AddForce(launchPower*10 * launchDirection);
+            rb.AddForce(launchPower*10 * Direction);
         }
 
     }

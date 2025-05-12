@@ -5,9 +5,8 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    public class EditorDragObject :DragObject
+    public class EditorDragObject : DragObject
     {
-
 
     }
 }

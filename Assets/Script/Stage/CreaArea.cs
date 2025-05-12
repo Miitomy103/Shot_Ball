@@ -5,28 +5,18 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    public class CreaArea : MonoBehaviour
+    public class CreaArea : AreaBase
     {
-        [SerializeField] LayerMask ballLayer;
 
-        [SerializeField] float areaRudius;
-
-        // Update is called once per frame
-        void Update()
+        protected override void BallEnter(Collider2D other)
         {
-            Collider2D collider = Physics2D.OverlapCircle(transform.position, areaRudius,ballLayer);
-            if (collider)
-            {
-                Ball ball =collider.gameObject.GetComponent<Ball>();
-                ball.Clear();
-            }
+            Ball ball = other.gameObject.GetComponent<Ball>();
+            ball.Clear();
         }
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.green;
 
-            // 円（ワイヤーフレーム）
-            GizmosUtility.DrawWireCircle(transform.position, areaRudius);
+        protected override void BallExit(Collider2D other)
+        {
+
         }
     }
 }

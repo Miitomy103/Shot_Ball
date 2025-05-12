@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
+using UnityEngine.UI;
 
 namespace ShotBall.InGame
 {
@@ -9,28 +11,56 @@ namespace ShotBall.InGame
         bool isDragging = false;
         public bool placed;
         private Vector3 offset;
+        Collider2D colli;
 
         private Vector3 otherPosition;
+        Vector3 originalSize;
 
         bool inFrame = false;
         Frame frameScr;
 
-        Vector3 originalSize;
+        const int placeOrder = 3;
+        const int dragOrder = 7;
+
+        [SerializeField]readonly Color backColor = new Color(0.1f, 0.1f, 0.1f, 0.75f);
+        readonly Color outColor = new Color(1f, 0, 0, 0.85f);
+
+        SubSprite backSprite;
+        SubSprite outSprite;
 
 
         private void Start()
         {
             otherPosition = transform.position;
+
+            backSprite = new SubSprite(transform, thisSprite, backColor, 1.1f);
+            outSprite = new SubSprite(transform, thisSprite, outColor);
+            OrderInLayerChange(placeOrder);
+
+
+            backSprite.gameObject.SetActive(false);
+            outSprite.gameObject.SetActive(false);
         }
+
 
         protected override void Awake()
         {
+            transform.position += new Vector3(0, 0, -0.1f);
             originalSize = transform.localScale;
+            colli = GetComponent<Collider2D>();
+        }
+
+        private void OnMouseEnter()
+        {
+            backSprite.gameObject.SetActive(true);
+        }
+        private void OnMouseExit()
+        {
+            backSprite.gameObject.SetActive(false);
         }
         protected virtual void OnMouseDown()
         {
             if (!CanDrag()) return;
-            offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
             StartDrag(Input.mousePosition);
         }
 
@@ -52,12 +82,28 @@ namespace ShotBall.InGame
             EndDrag(Input.mousePosition);
         }
 
+        bool IsPlaced()
+        {
+            Debug.Log("IsPlased");
+            if (!ObjectRange.Instance.InRange(transform.position) || IsOverLapping())
+            {
+                if(IsFramePositionAvailable())
+                {
+                    return true;
+                }
+                return false ;
+            }
+            return true;
+        }
 
         public void StartDrag(Vector3 inputScreenPos)
         {
             if (!CanDrag()) return;
 
+            TransformCalculation.SetPositionXY(transform, inputScreenPos);
+            offset = transform.position - inputScreenPos;
             isDragging = true;
+            placed = false;
             if (inFrame)
             {
                 transform.localScale = originalSize;
@@ -65,14 +111,22 @@ namespace ShotBall.InGame
                 frameScr.PutOut();
                 frameScr = null;
             }
+            //backObject.SetActive(false);
+            OrderInLayerChange(dragOrder);
+            backSprite.transform.localScale *= 1.05f;
         }
 
         public void Drag(Vector3 inputScreenPos)
         {
-            if (isDragging && CanDrag())
+            Vector3 newPosition = Camera.main.ScreenToWorldPoint(inputScreenPos) + offset;
+            transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
+            if (IsPlaced())
             {
-                Vector3 newPosition = Camera.main.ScreenToWorldPoint(inputScreenPos) + offset;
-                transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
+                outSprite.gameObject.SetActive(false);
+            }
+            else
+            {
+                outSprite.gameObject.SetActive(true);
             }
         }
 
@@ -81,14 +135,13 @@ namespace ShotBall.InGame
             if (!CanDrag()) return;
 
             isDragging = false;
-            Vector3 worldPoint = Camera.main.ScreenToWorldPoint(inputScreenPos);
 
             if (FramePositionNow())
             {
                 placed = false;
                 otherPosition = transform.position;
             }
-            else if(!ObjectRange.Instance.InRange(transform.position))
+            else if(!ObjectRange.Instance.InRange(transform.position)||IsOverLapping())
             {
                 InitalPositionReset();
             }
@@ -97,11 +150,31 @@ namespace ShotBall.InGame
                 placed = true;
                 otherPosition = transform.position;
             }
+            //backObject.SetActive(true);
+            OrderInLayerChange(placeOrder);
+            backSprite.transform.localScale /= 1.05f;
             offset = Vector3.zero;
         }
+        /// <returns>îÌÇ¡ÇƒÇ¢ÇÈ=>true</returns>
+        private bool IsOverLapping()
+        {
+            ContactFilter2D filter = new ContactFilter2D();
+            filter.useTriggers = false; // Trigger Ç‡ä‹ÇﬂÇΩÇ¢èÍçáÇÕ true Ç…
+            filter.SetLayerMask(Physics2D.DefaultRaycastLayers); // ëSÉåÉCÉÑÅ[ëŒè€Ç…Ç∑ÇÈ
 
+            List<Collider2D> results = new List<Collider2D>();
+            int count = colli.OverlapCollider(filter, results);
 
-        bool FramePositionNow()
+            return count > 0;
+        }
+        void OrderInLayerChange(int order)
+        {
+            thisSprite.sortingOrder = order;
+            backSprite.LayerChange(order - 1);
+            outSprite.LayerChange(order + 1);
+        }
+
+        Frame FindAvailableFrame()
         {
             Vector2 mouseWorldPos = transform.position;
 
@@ -113,21 +186,39 @@ namespace ShotBall.InGame
                 {
                     if (frame.InObject == null)
                     {
-                        FrameSpriteIn(frame);
-                        return true;
+                        return frame;
                     }
                 }
             }
+            return null;
+        }
+
+        bool FramePositionNow()
+        {
+            var frame = FindAvailableFrame();
+            if (frame != null)
+            {
+                FrameSpriteIn(frame);
+                return true;
+            }
             return false;
         }
+
+        bool IsFramePositionAvailable()
+        {
+            return FindAvailableFrame() != null;
+        }
+
 
         public void FrameSpriteIn(Frame frame)
         {
             SpriteRenderer frameSprite = frame.Sprite;
 
-            FitSpriteInSquare(frameSprite.bounds.size.x * 0.75f);
+            FitSpriteInSquare(frameSprite.bounds.size.x * 0.85f);
 
-            transform.position = frame.transform.position;
+            Vector3 pos = frame.transform.position;
+            transform.position = new Vector3(pos.x, pos.y, transform.position.z);
+
 
             inFrame = true;
 
@@ -149,13 +240,13 @@ namespace ShotBall.InGame
 
         protected bool CanDrag()
         {
-            //if (GameLoop.StageState == StageState.Setting) return true;
-            //return false;
+            if (GameLoop.StageState != StageState.Setting) return false;
             return true;
         }
 
         void InitalPositionReset()
         {
+            placed = true;
             transform.position = otherPosition;
         }
 

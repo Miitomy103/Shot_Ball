@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4458656514257679155}
   - component: {fileID: 5072311046578151041}
   - component: {fileID: 8568168992790733640}
-  - component: {fileID: 7137932475183066546}
   - component: {fileID: 3016713154302975573}
-  - component: {fileID: -1842973139382467729}
+  - component: {fileID: 5518453389191053989}
+  - component: {fileID: -3878306488644398563}
   m_Layer: 0
   m_Name: Bouncy
   m_TagString: Untagged
@@ -133,20 +133,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7137932475183066546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5927850515562060249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a724d9da07953fc4582da7752be2be03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteSize: {x: 1, y: 1}
-  placed: 0
 --- !u!114 &3016713154302975573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 10
---- !u!114 &-1842973139382467729
+--- !u!114 &5518453389191053989
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,7 +155,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 5927850515562060249}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3a481800f9e9644da453ef0cc8311c2, type: 3}
+  m_Script: {fileID: 11500000, guid: d5202b689ef70a34abc9a5b435daf337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 1, y: 1}
+--- !u!114 &-3878306488644398563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5927850515562060249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98b740e98fa3cc64bae506bc18f6311a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  behaviourType: 0

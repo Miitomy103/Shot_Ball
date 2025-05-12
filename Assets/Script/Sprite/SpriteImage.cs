@@ -42,12 +42,5 @@ namespace ShotBall.InGame
 
         protected abstract void ColliderSizeChange();
 
-        /*
-        // 外部からサイズ指定する用途がなければ削除してOK
-        public void SetSize(Vector2 newSize)
-        {
-            sr.size = newSize;
-        }
-        */
     }
 }

@@ -8,6 +8,7 @@ namespace ShotBall.InGame
     public class Ball : MonoBehaviour,IAntiGravity
     {
         new Rigidbody2D rigidbody;
+        public new CircleCollider2D collider { get; private set; }
 
         const float localGravity = 9.81f;
 
@@ -18,6 +19,7 @@ namespace ShotBall.InGame
         {
             rigidbody = GetComponent<Rigidbody2D>();
             rigidbody.gravityScale = 0;
+            collider = GetComponent<CircleCollider2D>();
         }
         private void Start()
         {
@@ -44,6 +46,7 @@ namespace ShotBall.InGame
         public void Clear()
         {
             gameObject.SetActive(false);
+            GameLoop.Instance.ClearAreaCheck(this);
         }
 
         public void ChangeGravity()

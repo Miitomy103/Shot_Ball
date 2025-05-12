@@ -4,30 +4,39 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    public class LaunchPad : MonoBehaviour
+    public class LaunchPad : GimmickBase
     {
-        [SerializeField] GameObject ball;
+        [SerializeField] GameObject ballPrefab;
 
-        Ball Ball;
+        Ball ball;
         private void Start()
         {
-            GameObject b = Instantiate(ball, transform.position, Quaternion.identity);
-            Ball = b.GetComponent<Ball>();
+            GameObject b = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+            ball = b.GetComponent<Ball>();
         }
         public void GameStart()
         {
             Debug.Log("Start");
-            Ball.PlayStart();
+            Collider2D collider = GetComponent<Collider2D>();
+            Physics2D.IgnoreCollision(collider, ball.collider, true); // è’ìÀÇñ≥å¯âª
+            StartCoroutine(StartCoroutine(collider));
+            ball.PlayStart();
+        }
+        IEnumerator StartCoroutine(Collider2D collider)
+        {
+            yield return new WaitForSeconds(0.5f);
+
+            Physics2D.IgnoreCollision(collider, ball.collider, false); // è’ìÀÇóLå¯âª
         }
         public void GameReset()
         {
-            if(Ball!=null)
+            if(ball!=null)
             {
-                Destroy(Ball.gameObject);
-                Ball = null;
+                Destroy(ball.gameObject);
+                ball = null;
             }
-            GameObject b = Instantiate(ball, transform.position, Quaternion.identity);
-            Ball = b.GetComponent<Ball>();
+            GameObject b = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+            ball = b.GetComponent<Ball>();
         }
     }
 }
