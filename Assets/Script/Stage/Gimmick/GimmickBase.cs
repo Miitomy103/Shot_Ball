@@ -10,6 +10,10 @@ namespace ShotBall.InGame
     {
         protected virtual Vector2 Direction { get; }
 
+        protected virtual void Awake()
+        {
+
+        }
         protected virtual void Start()
         {
             GameLoop.Instance.StartAction += StageStart;

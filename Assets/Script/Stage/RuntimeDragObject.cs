@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace ShotBall.InGame
 {
-    public class RuntimeDragObject : InFrameObject
+    public class RuntimeDragObject : DragObject
     {
         bool isDragging = false;
         public bool placed;
@@ -14,11 +14,15 @@ namespace ShotBall.InGame
         Collider2D colli;
 
         private Vector3 otherPosition;
+        Vector3 originalSize;
+
+        public bool inFrame { get;private set; }
+        Frame frameScr;
 
         const int placeOrder = 3;
         const int dragOrder = 7;
 
-        [SerializeField]readonly Color backColor = new Color(0.1f, 0.1f, 0.1f, 0.75f);
+        [SerializeField] readonly Color backColor = new Color(0.1f, 0.1f, 0.1f, 0.75f);
         readonly Color outColor = new Color(1f, 0, 0, 0.85f);
 
         SubSprite backSprite;
@@ -62,7 +66,7 @@ namespace ShotBall.InGame
 
         private void Update()
         {
-            if (isDragging&&CanDrag())
+            if (isDragging && CanDrag())
             {
                 Drag(Input.mousePosition);
                 if (Input.GetMouseButtonUp(0))
@@ -83,11 +87,11 @@ namespace ShotBall.InGame
             Debug.Log("IsPlased");
             if (!ObjectRange.Instance.InRange(thisSprite) || IsOverLapping())
             {
-                if(IsFramePositionAvailable())
+                if (IsFramePositionAvailable())
                 {
                     return true;
                 }
-                return false ;
+                return false;
             }
             return true;
         }
@@ -137,7 +141,7 @@ namespace ShotBall.InGame
                 placed = false;
                 otherPosition = transform.position;
             }
-            else if(!ObjectRange.Instance.InRange(thisSprite)||IsOverLapping())
+            else if (!ObjectRange.Instance.InRange(thisSprite) || IsOverLapping())
             {
                 InitalPositionReset();
             }
@@ -170,6 +174,84 @@ namespace ShotBall.InGame
             outSprite.LayerChange(order + 1);
         }
 
+        Frame FindAvailableFrame()
+        {
+            Vector2 mouseWorldPos = transform.position;
+
+            Collider2D[] hits = Physics2D.OverlapPointAll(mouseWorldPos);
+
+            foreach (var hit in hits)
+            {
+                if (hit.gameObject.TryGetComponent<Frame>(out var frame))
+                {
+                    if (frame.InObject == null)
+                    {
+                        return frame;
+                    }
+                }
+            }
+            return null;
+        }
+
+        bool FramePositionNow()
+        {
+            var frame = FindAvailableFrame();
+            if (frame != null)
+            {
+                FrameSpriteIn(frame);
+                return true;
+            }
+            return false;
+        }
+
+        bool IsFramePositionAvailable()
+        {
+            return FindAvailableFrame() != null;
+        }
+
+
+        public void FrameSpriteIn(Frame frame)
+        {
+            SpriteRenderer frameSprite = frame.Sprite;
+
+            FitSpriteInSquare(frameSprite, 0.5f);
+
+
+            Vector3 pos = frame.transform.position;
+            transform.position = new Vector3(pos.x, pos.y, transform.position.z);
+
+            inFrame = true;
+            frameScr = frame;
+            frame.PutIn(gameObject);
+        }
+
+
+        void FitSpriteInSquare(SpriteRenderer frameSprite, float fitRatio)
+        {
+            // フレームスプライトのワールドサイズ
+            Vector2 frameSize = frameSprite.bounds.size;
+            float squareSize = Mathf.Min(frameSize.x, frameSize.y) * fitRatio;
+
+            // 自分のスプライトの「元の」サイズ（ローカルスケール前のワールド単位）
+            Vector2 myOriginalSize = thisSprite.sprite.rect.size / thisSprite.sprite.pixelsPerUnit;
+
+            float maxSide = Mathf.Max(myOriginalSize.x, myOriginalSize.y);
+            if (maxSide == 0)
+            {
+                transform.localScale = Vector3.zero;
+                return;
+            }
+
+            float scaleFactor = squareSize / maxSide;
+
+            // 元のローカルスケール（変更前）をベースにスケーリング
+            transform.localScale = Vector3.one * scaleFactor;
+        }
+
+
+
+
+
         protected bool CanDrag()
         {
             if (GameLoop.StageState != StageState.Setting) return false;
@@ -182,9 +264,5 @@ namespace ShotBall.InGame
             transform.position = otherPosition;
         }
 
-        protected override void FrameItObject(SpriteRenderer frameSprite)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

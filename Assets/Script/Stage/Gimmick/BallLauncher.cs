@@ -4,12 +4,11 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    public class BallLauncher : GimmickBase
+    public class BallLauncher : AreaBase
     {
         [SerializeField] float launchPower = 40f;
         [SerializeField] Vector2 launchDirection;
         float coolTime = 0.5f;
-        [SerializeField] LayerMask ballLayer;
 
         protected override Vector2 Direction => launchDirection;
 
@@ -20,9 +19,10 @@ namespace ShotBall.InGame
             child.localRotation = DirectionAngle();
             base.Start();
         }
-        private void OnTriggerEnter2D(Collider2D other)
+        protected override void BallEnter(Collider2D other)
         {
-            if (other.gameObject.layer == ballLayer||inBall) return;
+            base.BallEnter(other);
+            if (inBall) return;
             Debug.Log("AA");
             StartCoroutine(Coroutine(other.gameObject.GetComponent<Rigidbody2D>()));
         }

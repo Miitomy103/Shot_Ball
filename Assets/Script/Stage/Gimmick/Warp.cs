@@ -12,9 +12,6 @@ namespace ShotBall.InGame
         [SerializeField] Color color;
 
         private LineRenderer lineRenderer;
-
-        private readonly float pullStrength = 1f;  // ‹z‚¢‚Ş—Í
-        private readonly float rotateSpeed = 10f; // ‰QŠª‚«‚Ì‰ñ“]‘¬“xi“x/•bj
         private void OnValidate()
         {
             if(!IsWarpChildren()) warpChildren = GetComponentsInChildren<WarpChild>();
@@ -51,7 +48,12 @@ namespace ShotBall.InGame
         }
         private void FixedUpdate()
         {
-            if (GameLoop.StageState != StageState.Setting) return;
+            if (GameLoop.StageState != StageState.Setting||!OnPair())
+            {
+                lineRenderer.enabled = false;
+                return;
+            }
+            lineRenderer.enabled = true;
             lineRenderer.SetPosition(0, warpChildren[0].transform.position);
             lineRenderer.SetPosition(1, warpChildren[1].transform.position);
         }
@@ -69,6 +71,7 @@ namespace ShotBall.InGame
         }
         public void OnBallInWarp(Collider2D other,int elements)
         {
+            if (!OnPair()) return;
             if (didWarp) return;
             for (int i = 0; i < warpChildren.Length; i++)
             {
@@ -78,6 +81,14 @@ namespace ShotBall.InGame
                     other.transform.position = warpChildren[i].transform.position;
                 }
             }
+        }
+        bool OnPair()
+        {
+            foreach(var w in warpChildren)
+            {
+                if (w.InFrame) return false;
+            }
+            return true;
         }
         protected override void StageStart()
         {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace ShotBall.InGame
@@ -11,6 +12,20 @@ namespace ShotBall.InGame
 
         private SpriteRenderer sprite;
 
+        public bool InFrame
+        {
+            get
+            {
+                if (dragObject != null) return dragObject.inFrame;
+                return false;
+            }
+        }
+        RuntimeDragObject dragObject;
+        protected override void Awake()
+        {
+            base.Awake();
+            dragObject = GetComponent<RuntimeDragObject>();
+        }
         public void ColorChange(Color color)
         {
             if (sprite == null) sprite = GetComponent<SpriteRenderer>();

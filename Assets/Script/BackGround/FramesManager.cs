@@ -53,9 +53,9 @@ namespace ShotBall.InGame
                 f.transform.localScale = new Vector3(scale, scale);
 
                 GameObject obj = dragObjs[i];
-                if (obj.TryGetComponent<InFrameObject>(out var inFrame))
+                if (obj.TryGetComponent<RuntimeDragObject>(out var dragObject))
                 {
-                    inFrame.FrameSpriteIn(f.GetComponent<Frame>());
+                    dragObject.FrameSpriteIn(f.GetComponent<Frame>());
                 }
                 else
                 {

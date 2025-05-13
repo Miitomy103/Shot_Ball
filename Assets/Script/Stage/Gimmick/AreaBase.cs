@@ -9,12 +9,12 @@ namespace ShotBall.InGame
         [SerializeField]protected LayerMask ballLayer;
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.layer == ballLayer) return;
+            if (other.gameObject.layer == ballLayer||GameLoop.StageState!=StageState.Playing) return;
             BallEnter(other);
         }
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.gameObject.layer == ballLayer) return;
+            if (other.gameObject.layer == ballLayer || GameLoop.StageState != StageState.Playing) return;
             BallExit(other);
         }
         protected virtual void BallEnter(Collider2D other) { }
