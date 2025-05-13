@@ -17,7 +17,7 @@ namespace ShotBall.InGame
             if (other.gameObject.layer == ballLayer) return;
             BallExit(other);
         }
-        protected abstract void BallEnter(Collider2D other);
-        protected abstract void BallExit(Collider2D other);
+        protected virtual void BallEnter(Collider2D other) { }
+        protected virtual void BallExit(Collider2D other) { }
     }
 }

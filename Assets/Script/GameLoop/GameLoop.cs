@@ -1,4 +1,5 @@
 using ShotBall.InGame;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,11 @@ namespace ShotBall.InGame
 
         [SerializeField] ResultManager resultManager;
 
+        public Action StateChangeAction { get; set; }
+        public Action ResetAction { get; set; }
+        public Action StartAction { get; set; }
+        
+
         IGet[] Coins = new IGet[3];
 
         int goalCount;
@@ -23,23 +29,23 @@ namespace ShotBall.InGame
 
         readonly int coinQuantity = 3;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             instance = this;
         }
-        private void Start()
+        protected virtual void Start()
         {
             StageState = StageState.Setting;
         }
         public void GameStart()
         {
-            foreach (var l in launchPads) l.GameStart();
             ChangeState(StageState.Playing);
+            StartAction();
         }
         public void GameReset()
         {
-            foreach (var l in launchPads) l.GameReset();
             ChangeState(StageState.Setting);
+            ResetAction();
         }
         void GameClear()
         {
@@ -65,6 +71,7 @@ namespace ShotBall.InGame
         public void ChangeState(StageState stageState)
         {
             StageState = stageState;
+            StateChangeAction();
         }
     }
 }

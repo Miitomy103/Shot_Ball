@@ -9,33 +9,44 @@ namespace ShotBall.InGame
     {
         Vector2 pointA;
         Vector2 pointB;
-        public Vector2 PointA => pointA;
-        public Vector2 PointB => pointB;
 
         static ObjectRange instance;
         public static ObjectRange Instance => instance;
-
-        [SerializeField] Transform A;
-        [SerializeField] Transform B;
 
         private void Awake()
         {
             instance = this;
         }
-        private void OnEnable()
+        private void OnValidate()
         {
-            pointA = A.position;
-            pointB = B.position;
+            instance = this;
         }
 
-        public bool InRange(Vector2 target)
+        public void CameraSizeChange(Vector2 A,Vector2 B)
         {
+            pointA = A;
+            pointB = B;
+        }
+
+        public bool InRange(SpriteRenderer sprite)
+        {
+            if (sprite == null) return false; // スプライトがnullの場合はfalseを返す
+
+            // 範囲の最小・最大点を計算
             Vector2 min = Vector2.Min(pointA, pointB);
             Vector2 max = Vector2.Max(pointA, pointB);
-            return target.x >= min.x && target.x <= max.x &&
-                   target.y >= min.y && target.y <= max.y;
-        }
 
+            // Spriteの境界（bounds）を取得
+            Bounds spriteBounds = sprite.bounds;
+
+            // Spriteの境界の最小・最大点を計算
+            Vector2 spriteMin = spriteBounds.min;
+            Vector2 spriteMax = spriteBounds.max;
+
+            // Spriteの境界全体が範囲内にあるかを判定
+            return spriteMin.x >= min.x && spriteMax.x <= max.x &&
+                   spriteMin.y >= min.y && spriteMax.y <= max.y;
+        }
 
         private void OnDrawGizmos()
         {

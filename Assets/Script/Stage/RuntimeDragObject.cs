@@ -85,7 +85,7 @@ namespace ShotBall.InGame
         bool IsPlaced()
         {
             Debug.Log("IsPlased");
-            if (!ObjectRange.Instance.InRange(transform.position) || IsOverLapping())
+            if (!ObjectRange.Instance.InRange(thisSprite) || IsOverLapping())
             {
                 if(IsFramePositionAvailable())
                 {
@@ -141,7 +141,7 @@ namespace ShotBall.InGame
                 placed = false;
                 otherPosition = transform.position;
             }
-            else if(!ObjectRange.Instance.InRange(transform.position)||IsOverLapping())
+            else if(!ObjectRange.Instance.InRange(thisSprite)||IsOverLapping())
             {
                 InitalPositionReset();
             }
@@ -214,27 +214,41 @@ namespace ShotBall.InGame
         {
             SpriteRenderer frameSprite = frame.Sprite;
 
-            FitSpriteInSquare(frameSprite.bounds.size.x * 0.85f);
+            FitSpriteInSquare(frameSprite, 0.5f);
+
 
             Vector3 pos = frame.transform.position;
             transform.position = new Vector3(pos.x, pos.y, transform.position.z);
 
-
             inFrame = true;
-
             frameScr = frame;
-
             frame.PutIn(gameObject);
         }
 
-        void FitSpriteInSquare(float squareSize)
-        {
-            Vector2 input = thisSprite.bounds.size;
 
-            float max = Mathf.Max(Mathf.Abs(input.x), Mathf.Abs(input.y));
-            if (max == 0) transform.localScale = Vector2.zero; // 0除算防止
-            transform.localScale /= max * squareSize;
+        void FitSpriteInSquare(SpriteRenderer frameSprite, float fitRatio)
+        {
+            // フレームスプライトのワールドサイズ
+            Vector2 frameSize = frameSprite.bounds.size;
+            float squareSize = Mathf.Min(frameSize.x, frameSize.y) * fitRatio;
+
+            // 自分のスプライトの「元の」サイズ（ローカルスケール前のワールド単位）
+            Vector2 myOriginalSize = thisSprite.sprite.rect.size / thisSprite.sprite.pixelsPerUnit;
+
+            float maxSide = Mathf.Max(myOriginalSize.x, myOriginalSize.y);
+            if (maxSide == 0)
+            {
+                transform.localScale = Vector3.zero;
+                return;
+            }
+
+            float scaleFactor = squareSize / maxSide;
+
+            // 元のローカルスケール（変更前）をベースにスケーリング
+            transform.localScale = Vector3.one * scaleFactor;
         }
+
+
 
 
 

@@ -14,10 +14,11 @@ namespace ShotBall.InGame
         protected override Vector2 Direction => launchDirection;
 
         bool inBall;
-        private void Start()
+        protected override void Start()
         {
             Transform child = transform.Find("Arrow");
             child.localRotation = DirectionAngle();
+            base.Start();
         }
         private void OnTriggerEnter2D(Collider2D other)
         {

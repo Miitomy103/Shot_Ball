@@ -9,12 +9,13 @@ namespace ShotBall.InGame
         [SerializeField] GameObject ballPrefab;
 
         Ball ball;
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             GameObject b = Instantiate(ballPrefab, transform.position, Quaternion.identity);
             ball = b.GetComponent<Ball>();
         }
-        public void GameStart()
+        protected override void StageStart()
         {
             Debug.Log("Start");
             Collider2D collider = GetComponent<Collider2D>();
@@ -22,21 +23,21 @@ namespace ShotBall.InGame
             StartCoroutine(StartCoroutine(collider));
             ball.PlayStart();
         }
-        IEnumerator StartCoroutine(Collider2D collider)
+        protected override void StageReset()
         {
-            yield return new WaitForSeconds(0.5f);
-
-            Physics2D.IgnoreCollision(collider, ball.collider, false); // è’ìÀÇóLå¯âª
-        }
-        public void GameReset()
-        {
-            if(ball!=null)
+            if (ball != null)
             {
                 Destroy(ball.gameObject);
                 ball = null;
             }
             GameObject b = Instantiate(ballPrefab, transform.position, Quaternion.identity);
             ball = b.GetComponent<Ball>();
+        }
+        IEnumerator StartCoroutine(Collider2D collider)
+        {
+            yield return new WaitForSeconds(0.5f);
+
+            Physics2D.IgnoreCollision(collider, ball.collider, false); // è’ìÀÇóLå¯âª
         }
     }
 }

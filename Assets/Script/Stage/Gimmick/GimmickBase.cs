@@ -10,6 +10,15 @@ namespace ShotBall.InGame
     {
         protected virtual Vector2 Direction { get; }
 
+        protected virtual void Start()
+        {
+            GameLoop.Instance.StartAction += StageStart;
+            GameLoop.Instance.ResetAction += StageReset;
+            GameLoop.Instance.StateChangeAction += StateChange;
+        }
+        protected virtual void StageStart() { Debug.Log(gameObject.name); }
+        protected virtual void StageReset() { }
+        protected virtual void StateChange() { }
         protected Quaternion DirectionAngle()
         {
             float angle = Mathf.Atan2(Direction.y, Direction.x) * Mathf.Rad2Deg;
