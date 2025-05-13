@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace ShotBall.InGame
 {
-    public class RuntimeDragObject : DragObject
+    public class RuntimeDragObject : InFrameObject
     {
         bool isDragging = false;
         public bool placed;
@@ -14,10 +14,6 @@ namespace ShotBall.InGame
         Collider2D colli;
 
         private Vector3 otherPosition;
-        Vector3 originalSize;
-
-        bool inFrame = false;
-        Frame frameScr;
 
         const int placeOrder = 3;
         const int dragOrder = 7;
@@ -174,84 +170,6 @@ namespace ShotBall.InGame
             outSprite.LayerChange(order + 1);
         }
 
-        Frame FindAvailableFrame()
-        {
-            Vector2 mouseWorldPos = transform.position;
-
-            Collider2D[] hits = Physics2D.OverlapPointAll(mouseWorldPos);
-
-            foreach (var hit in hits)
-            {
-                if (hit.gameObject.TryGetComponent<Frame>(out var frame))
-                {
-                    if (frame.InObject == null)
-                    {
-                        return frame;
-                    }
-                }
-            }
-            return null;
-        }
-
-        bool FramePositionNow()
-        {
-            var frame = FindAvailableFrame();
-            if (frame != null)
-            {
-                FrameSpriteIn(frame);
-                return true;
-            }
-            return false;
-        }
-
-        bool IsFramePositionAvailable()
-        {
-            return FindAvailableFrame() != null;
-        }
-
-
-        public void FrameSpriteIn(Frame frame)
-        {
-            SpriteRenderer frameSprite = frame.Sprite;
-
-            FitSpriteInSquare(frameSprite, 0.5f);
-
-
-            Vector3 pos = frame.transform.position;
-            transform.position = new Vector3(pos.x, pos.y, transform.position.z);
-
-            inFrame = true;
-            frameScr = frame;
-            frame.PutIn(gameObject);
-        }
-
-
-        void FitSpriteInSquare(SpriteRenderer frameSprite, float fitRatio)
-        {
-            // フレームスプライトのワールドサイズ
-            Vector2 frameSize = frameSprite.bounds.size;
-            float squareSize = Mathf.Min(frameSize.x, frameSize.y) * fitRatio;
-
-            // 自分のスプライトの「元の」サイズ（ローカルスケール前のワールド単位）
-            Vector2 myOriginalSize = thisSprite.sprite.rect.size / thisSprite.sprite.pixelsPerUnit;
-
-            float maxSide = Mathf.Max(myOriginalSize.x, myOriginalSize.y);
-            if (maxSide == 0)
-            {
-                transform.localScale = Vector3.zero;
-                return;
-            }
-
-            float scaleFactor = squareSize / maxSide;
-
-            // 元のローカルスケール（変更前）をベースにスケーリング
-            transform.localScale = Vector3.one * scaleFactor;
-        }
-
-
-
-
-
         protected bool CanDrag()
         {
             if (GameLoop.StageState != StageState.Setting) return false;
@@ -264,5 +182,9 @@ namespace ShotBall.InGame
             transform.position = otherPosition;
         }
 
+        protected override void FrameItObject(SpriteRenderer frameSprite)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

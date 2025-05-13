@@ -12,6 +12,9 @@ namespace ShotBall.InGame
         [SerializeField] Color color;
 
         private LineRenderer lineRenderer;
+
+        private readonly float pullStrength = 1f;  // ‹z‚¢‚Ş—Í
+        private readonly float rotateSpeed = 10f; // ‰QŠª‚«‚Ì‰ñ“]‘¬“xi“x/•bj
         private void OnValidate()
         {
             if(!IsWarpChildren()) warpChildren = GetComponentsInChildren<WarpChild>();

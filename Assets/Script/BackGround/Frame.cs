@@ -12,9 +12,12 @@ namespace ShotBall.InGame
 
         private void OnMouseDown()
         {
-            if(InObject!=null&&InObject.TryGetComponent<RuntimeDragObject>(out var dragObject))
+            if(InObject!=null&&InObject.TryGetComponent<InFrameObject>(out var inFrame))
             {
-                dragObject.StartDrag(Camera.main.WorldToScreenPoint(Input.mousePosition));
+                if(inFrame is RuntimeDragObject dragObject)
+                {
+                    dragObject.StartDrag(Camera.main.WorldToScreenPoint(Input.mousePosition));
+                }
             }
         }
 

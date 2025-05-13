@@ -16,7 +16,7 @@ namespace ShotBall.InGame
             GameLoop.Instance.ResetAction += StageReset;
             GameLoop.Instance.StateChangeAction += StateChange;
         }
-        protected virtual void StageStart() { Debug.Log(gameObject.name); }
+        protected virtual void StageStart() { }
         protected virtual void StageReset() { }
         protected virtual void StateChange() { }
         protected Quaternion DirectionAngle()

@@ -8,7 +8,7 @@ namespace ShotBall.InGame
     {
         [SerializeField] GameObject flamePrefab;
         [SerializeField] DragObjects dragObjects;
-        float panelWidth = 3f;
+        readonly float panelWidth = 3f;
         Camera cam;
 
         SpriteRenderer childSprite;
@@ -53,9 +53,9 @@ namespace ShotBall.InGame
                 f.transform.localScale = new Vector3(scale, scale);
 
                 GameObject obj = dragObjs[i];
-                if (obj.TryGetComponent<RuntimeDragObject>(out var dragObject))
+                if (obj.TryGetComponent<InFrameObject>(out var inFrame))
                 {
-                    dragObject.FrameSpriteIn(f.GetComponent<Frame>());
+                    inFrame.FrameSpriteIn(f.GetComponent<Frame>());
                 }
                 else
                 {
