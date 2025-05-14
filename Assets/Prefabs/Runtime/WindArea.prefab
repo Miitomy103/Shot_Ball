@@ -91,7 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetImage: {fileID: 1049928286042821245, guid: 59d34802d29be2f4ea4d5c2cc8cf989e, type: 3}
   imageOffset: {x: 0, y: 0}
-  windArea: {fileID: 8307075351819568863}
+  windArea: {fileID: 421185895146973929}
 --- !u!114 &130044354069159318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,8 +340,8 @@ GameObject:
   - component: {fileID: 5608621683738506392}
   - component: {fileID: 7318513621556531945}
   - component: {fileID: 8905633214900730983}
-  - component: {fileID: 8307075351819568863}
-  - component: {fileID: -8013311664754592359}
+  - component: {fileID: 421185895146973929}
+  - component: {fileID: 1510787773923259300}
   m_Layer: 0
   m_Name: WindArea
   m_TagString: Untagged
@@ -462,7 +462,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &8307075351819568863
+--- !u!114 &421185895146973929
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -471,17 +471,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7891805696436677196}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d2cd2937f8bd7f469eaf4e6f8635330, type: 3}
+  m_Script: {fileID: 11500000, guid: dc6b4933709f7c648b4f2647bf699a1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ballLayer:
     serializedVersion: 2
     m_Bits: 64
   windPower: 5
-  windDirection: {x: 1, y: 1}
-  backArrow: {fileID: 3078468840199991558}
-  windUI: {fileID: 839163156012237711}
---- !u!114 &-8013311664754592359
+  windDirection: {x: 0, y: 0}
+  backArrow: {fileID: 5271231398705665149}
+--- !u!114 &1510787773923259300
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
