@@ -43,7 +43,6 @@ namespace ShotBall.InGame
                 TitleScene();
             }
         }
-        public static string NowStage() => SceneManager.GetActiveScene().name;
         public static void TitleScene()
         {
             SceneManager.LoadScene(TITLENAME);
