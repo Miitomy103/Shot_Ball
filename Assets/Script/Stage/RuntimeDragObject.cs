@@ -110,6 +110,7 @@ namespace ShotBall.InGame
                 inFrame = false;
                 frameScr.PutOut();
                 frameScr = null;
+                //colli.isTrigger = false;
             }
             //backObject.SetActive(false);
             OrderInLayerChange(dragOrder);
@@ -212,40 +213,26 @@ namespace ShotBall.InGame
 
         public void FrameSpriteIn(Frame frame)
         {
-            SpriteRenderer frameSprite = frame.Sprite;
-
-            FitSpriteInSquare(frameSprite, 0.5f);
-
+            FitSpriteInSquare(frame.Sprite.bounds.size.x*0.85f);
 
             Vector3 pos = frame.transform.position;
             transform.position = new Vector3(pos.x, pos.y, transform.position.z);
 
+            //colli.isTrigger = true;
+            //outSprite.gameObject.SetActive(false);
             inFrame = true;
             frameScr = frame;
             frame.PutIn(gameObject);
         }
 
 
-        void FitSpriteInSquare(SpriteRenderer frameSprite, float fitRatio)
+        void FitSpriteInSquare(float squareSize)
         {
-            // フレームスプライトのワールドサイズ
-            Vector2 frameSize = frameSprite.bounds.size;
-            float squareSize = Mathf.Min(frameSize.x, frameSize.y) * fitRatio;
+            Vector2 input = thisSprite.bounds.size;
 
-            // 自分のスプライトの「元の」サイズ（ローカルスケール前のワールド単位）
-            Vector2 myOriginalSize = thisSprite.sprite.rect.size / thisSprite.sprite.pixelsPerUnit;
-
-            float maxSide = Mathf.Max(myOriginalSize.x, myOriginalSize.y);
-            if (maxSide == 0)
-            {
-                transform.localScale = Vector3.zero;
-                return;
-            }
-
-            float scaleFactor = squareSize / maxSide;
-
-            // 元のローカルスケール（変更前）をベースにスケーリング
-            transform.localScale = Vector3.one * scaleFactor;
+            float max = Mathf.Max(Mathf.Abs(input.x), Mathf.Abs(input.y));
+            if (max == 0) transform.localScale = Vector2.zero; // 0除算防止
+            transform.localScale *=squareSize/ max;
         }
 
 

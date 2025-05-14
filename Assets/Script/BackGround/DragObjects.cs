@@ -8,7 +8,7 @@ namespace ShotBall.InGame
 {
     public class DragObjects : MonoBehaviour
     {
-        List<GameObject> objects = new List<GameObject>();
+        [SerializeField] List<GameObject> objects = new List<GameObject>();
         [SerializeField] Transform runtimeParent;
         private void Awake()
         {
@@ -16,13 +16,12 @@ namespace ShotBall.InGame
         }
         void GetChildren(Transform parent)
         {
-            Transform children = parent.GetComponentInChildren<Transform>();
             //éqóvëfÇ™Ç¢Ç»ÇØÇÍÇŒèIóπ
-            if (children.childCount == 0)
+            if (parent.childCount == 0)
             {
                 return;
             }
-            foreach (Transform ob in children)
+            foreach (Transform ob in parent)
             {
                 if(ob.GetComponent<RuntimeDragObject>())
                 {

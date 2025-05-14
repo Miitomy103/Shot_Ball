@@ -412,6 +412,7 @@ MonoBehaviour:
   - {fileID: 7886054092510228460}
   - {fileID: 4542559263234961587}
   - {fileID: 2656041074920601059}
+  stageText: {fileID: 8340041464484435022}
 --- !u!1 &3232395187302770303
 GameObject:
   m_ObjectHideFlags: 0
