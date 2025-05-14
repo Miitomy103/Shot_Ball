@@ -10,9 +10,6 @@ namespace ShotBall.InGame
         [SerializeField] float windPower = 5f;
         [SerializeField] Vector2 windDirection;
         [SerializeField] Transform backArrow;
-
-        [SerializeField] WindUI windUI;
-
         public float WindPower => windPower;
 
         protected override Vector2 Direction => windDirection;
