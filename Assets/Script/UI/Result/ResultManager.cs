@@ -11,6 +11,7 @@ namespace ShotBall.InGame
     {
         [SerializeField] GameObject result;
         [SerializeField] Image[] Coins = new Image[3];
+        [SerializeField] Text stageText;
 
 
         public void Result(IGet[] coins)
@@ -24,6 +25,10 @@ namespace ShotBall.InGame
                     Coins[i].gameObject.SetActive(true);
                 }
             }
+
+            string sceneName = SceneControl.NowStage();
+
+            stageText.text = sceneName;
         }
 
         public void NextStage()
