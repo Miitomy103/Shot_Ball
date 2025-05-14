@@ -8,67 +8,42 @@ namespace ShotBall.InGame.UI
     public class WindUI : MonoBehaviour
     {
         public Image targetImage;
+        [SerializeField] Vector2 imageOffset = new Vector2(32f, 32f); // ← インスペクターで設定推奨
+        [SerializeField] WindArea windArea;
 
-        [SerializeField] Vector2 imageOffset;
-        float moveSpeed = 1;
+        float MoveSpeed => (windArea != null) ? windArea.WindPower / 5f : 1f;
         float between = 0.3f;
 
-        
-         Vector3 leftEdge;
-         Vector3 rightEdge;
-         float upEdge;
-         float downEdge;
-
+        float leftX, rightX, topY, bottomY;
         List<RectTransform> images = new List<RectTransform>();
+
         private void Start()
         {
-
             RectTransform rectTransform = GetComponent<RectTransform>();
+            Rect rect = rectTransform.rect;
 
-            GameObject pare = transform.parent.gameObject;
-            RectTransform parentRect = pare.GetComponent<RectTransform>();
-            rectTransform.sizeDelta = parentRect.sizeDelta * 2;
-
-
-            Vector3[] worldCorners = new Vector3[4];
-            rectTransform.GetWorldCorners(worldCorners);
-
-            // 親オブジェクトのローカル座標に変換
-            Transform parent = transform;
-
-            // 左下と右下を親基準のローカル座標に
-            leftEdge = parent.InverseTransformPoint(worldCorners[0]);  // 左下
-            rightEdge = parent.InverseTransformPoint(worldCorners[3]); // 右下
-
-            imageOffset = targetImage.rectTransform.sizeDelta;
-
-            leftEdge += new Vector3(-imageOffset.x, 0);
-            rightEdge += new Vector3(imageOffset.x, 0);
-            downEdge = rightEdge.y - imageOffset.y;
-
-            Vector3 topLeft = parent.InverseTransformPoint(worldCorners[1]); // 左上
-            upEdge = topLeft.y + imageOffset.y;
-
-
+            // 正方形を前提に表示領域を取得
+            leftX = rect.xMin - imageOffset.x;
+            rightX = rect.xMax + imageOffset.x;
+            bottomY = rect.yMin - imageOffset.y;
+            topY = rect.yMax + imageOffset.y;
 
             StartCoroutine(Enumerator());
         }
 
         private void FixedUpdate()
         {
-            if (images.Count == 0) return;
-
-            for (int j = images.Count - 1; j >= 0; j--)
+            for (int i = images.Count - 1; i >= 0; i--)
             {
-                var i = images[j];
-                Vector3 v = i.localPosition;
-                v.y += moveSpeed * Time.deltaTime;
-                i.localPosition = v;
+                RectTransform img = images[i];
+                Vector3 pos = img.localPosition;
+                pos.y += MoveSpeed * Time.deltaTime;
+                img.localPosition = pos;
 
-                if (v.y > upEdge)
+                if (pos.y > topY)
                 {
-                    images.RemoveAt(j);
-                    Destroy(i.gameObject);
+                    images.RemoveAt(i);
+                    Destroy(img.gameObject);
                 }
             }
         }
@@ -78,20 +53,24 @@ namespace ShotBall.InGame.UI
             bool gap = false;
             while (true)
             {
-                float x = leftEdge.x + (gap ? imageOffset.x : 0);
-                while (x < rightEdge.x)
+                float x = leftX + (gap ? imageOffset.x : 0f);
+                while (x < rightX)
                 {
-                    Vector3 pos = new Vector3(x, downEdge, 0f);
+                    Vector3 pos = new Vector3(x, bottomY, 0f);
                     GameObject obj = Instantiate(targetImage.gameObject, transform);
-                    obj.transform.localPosition = pos;
-                    images.Add(obj.GetComponent<RectTransform>());
+                    RectTransform rect = obj.GetComponent<RectTransform>();
 
+                    // 正方形に設定（縦横固定）
+                    rect.sizeDelta = new Vector2(imageOffset.x, imageOffset.x);
+                    rect.localPosition = pos;
+
+                    images.Add(rect);
                     x += between;
                 }
+
                 gap = !gap;
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(1f / MoveSpeed);
             }
         }
-
     }
 }

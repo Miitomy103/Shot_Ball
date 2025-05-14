@@ -1,3 +1,4 @@
+using ShotBall.InGame.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,22 +9,27 @@ namespace ShotBall.InGame
     {
         [SerializeField] float windPower = 5f;
         [SerializeField] Vector2 windDirection;
-        [SerializeField] RectTransform backArrow;
+        [SerializeField] Transform backArrow;
+
+        [SerializeField] WindUI windUI;
+
+        public float WindPower => windPower;
 
         protected override Vector2 Direction => windDirection;
 
         List<Rigidbody2D> rigidBodies = new List<Rigidbody2D>();
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             backArrow.rotation = DirectionAngle();
-        }
+        } 
         private void FixedUpdate()
         {
             if (rigidBodies.Count == 0) return;
             foreach(Rigidbody2D rb in rigidBodies)
             {
-                rb.AddForce(Direction.normalized * windPower);
+                rb.AddForce(Direction.normalized * WindPower);
             }
         }
         protected override void BallEnter(Collider2D other)
