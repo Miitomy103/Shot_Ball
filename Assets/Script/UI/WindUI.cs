@@ -8,42 +8,67 @@ namespace ShotBall.InGame.UI
     public class WindUI : MonoBehaviour
     {
         public Image targetImage;
-        [SerializeField] Vector2 imageOffset = new Vector2(32f, 32f); // ← インスペクターで設定推奨
-        [SerializeField] WindArea windArea;
 
-        float MoveSpeed => (windArea != null) ? windArea.WindPower / 5f : 1f;
+        [SerializeField] Vector2 imageOffset;
+        float moveSpeed = 1;
         float between = 0.3f;
 
-        float leftX, rightX, topY, bottomY;
-        List<RectTransform> images = new List<RectTransform>();
+        
+         Vector3 leftEdge;
+         Vector3 rightEdge;
+         float upEdge;
+         float downEdge;
 
+        List<RectTransform> images = new List<RectTransform>();
         private void Start()
         {
-            RectTransform rectTransform = GetComponent<RectTransform>();
-            Rect rect = rectTransform.rect;
 
-            // 正方形を前提に表示領域を取得
-            leftX = rect.xMin - imageOffset.x;
-            rightX = rect.xMax + imageOffset.x;
-            bottomY = rect.yMin - imageOffset.y;
-            topY = rect.yMax + imageOffset.y;
+            RectTransform rectTransform = GetComponent<RectTransform>();
+
+            GameObject pare = transform.parent.gameObject;
+            RectTransform parentRect = pare.GetComponent<RectTransform>();
+            rectTransform.sizeDelta = parentRect.sizeDelta * 2;
+
+
+            Vector3[] worldCorners = new Vector3[4];
+            rectTransform.GetWorldCorners(worldCorners);
+
+            // 親オブジェクトのローカル座標に変換
+            Transform parent = transform;
+
+            // 左下と右下を親基準のローカル座標に
+            leftEdge = parent.InverseTransformPoint(worldCorners[0]);  // 左下
+            rightEdge = parent.InverseTransformPoint(worldCorners[3]); // 右下
+
+            imageOffset = targetImage.rectTransform.sizeDelta;
+
+            leftEdge += new Vector3(-imageOffset.x, 0);
+            rightEdge += new Vector3(imageOffset.x, 0);
+            downEdge = rightEdge.y - imageOffset.y;
+
+            Vector3 topLeft = parent.InverseTransformPoint(worldCorners[1]); // 左上
+            upEdge = topLeft.y + imageOffset.y;
+
+
 
             StartCoroutine(Enumerator());
         }
 
         private void FixedUpdate()
         {
-            for (int i = images.Count - 1; i >= 0; i--)
-            {
-                RectTransform img = images[i];
-                Vector3 pos = img.localPosition;
-                pos.y += MoveSpeed * Time.deltaTime;
-                img.localPosition = pos;
+            if (images.Count == 0) return;
 
-                if (pos.y > topY)
+            for (int j = images.Count - 1; j >= 0; j--)
+            {
+                var i = images[j];
+                Vector3 v = i.localPosition;
+                v.y += moveSpeed * Time.deltaTime;
+                i.localPosition = v;
+
+                if (v.y > upEdge)
                 {
-                    images.RemoveAt(i);
-                    Destroy(img.gameObject);
+                    images.RemoveAt(j);
+                    Destroy(i.gameObject);
                 }
             }
         }
@@ -53,24 +78,20 @@ namespace ShotBall.InGame.UI
             bool gap = false;
             while (true)
             {
-                float x = leftX + (gap ? imageOffset.x : 0f);
-                while (x < rightX)
+                float x = leftEdge.x + (gap ? imageOffset.x : 0);
+                while (x < rightEdge.x)
                 {
-                    Vector3 pos = new Vector3(x, bottomY, 0f);
+                    Vector3 pos = new Vector3(x, downEdge, 0f);
                     GameObject obj = Instantiate(targetImage.gameObject, transform);
-                    RectTransform rect = obj.GetComponent<RectTransform>();
+                    obj.transform.localPosition = pos;
+                    images.Add(obj.GetComponent<RectTransform>());
 
-                    // 正方形に設定（縦横固定）
-                    rect.sizeDelta = new Vector2(imageOffset.x, imageOffset.x);
-                    rect.localPosition = pos;
-
-                    images.Add(rect);
                     x += between;
                 }
-
                 gap = !gap;
-                yield return new WaitForSeconds(1f / MoveSpeed);
+                yield return new WaitForSeconds(0.5f);
             }
         }
+
     }
 }

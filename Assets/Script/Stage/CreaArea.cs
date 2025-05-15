@@ -13,11 +13,6 @@ namespace ShotBall.InGame
             Ball ball = other.gameObject.GetComponent<Ball>();
             ball.Clear();
         }
-
-        protected override void BallExit(Collider2D other)
-        {
-
-        }
     }
 }
 

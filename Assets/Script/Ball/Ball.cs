@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngineInternal;
 
 namespace ShotBall.InGame
 {
@@ -9,6 +10,8 @@ namespace ShotBall.InGame
     {
         new Rigidbody2D rigidbody;
         public new CircleCollider2D collider { get; private set; }
+
+        [SerializeField] ParticleSystem dieEffect;
 
         const float localGravity = 9.81f;
 
@@ -30,6 +33,13 @@ namespace ShotBall.InGame
             SetLocalGravity(); //重力をAddForceでかけるメソッドを呼ぶ。FixedUpdateが好ましい。
         }
 
+        public void Die()
+        {
+            gameObject.SetActive(false);
+            GameObject eff = Instantiate(dieEffect.gameObject, transform.position, dieEffect.transform.rotation);
+            Destroy(eff, 3f);
+            GameLoop.Instance.GameReset();
+        }
         private void SetLocalGravity()
         {
             rigidbody.AddForce(GetGravity());

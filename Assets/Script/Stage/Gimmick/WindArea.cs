@@ -10,12 +10,11 @@ namespace ShotBall.InGame
         [SerializeField] Vector2 windDirection;
         [SerializeField] RectTransform backArrow;
 
-        public float WindPower => windPower;
         protected override Vector2 Direction => windDirection;
 
         List<Rigidbody2D> rigidBodies = new List<Rigidbody2D>();
 
-        private void Start()
+        protected override void Start()
         {
             backArrow.rotation = DirectionAngle();
         }

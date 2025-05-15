@@ -19,10 +19,5 @@ namespace ShotBall.InGame
         {
             get = true;
         }
-
-        protected override void BallExit(Collider2D other)
-        {
-
-        }
     }
 }

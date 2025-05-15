@@ -32,12 +32,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3078468840199991558}
+  m_Father: {fileID: 636389743530246846}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2, y: 2}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6076948359768664178
 CanvasRenderer:
@@ -91,7 +91,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetImage: {fileID: 1049928286042821245, guid: 59d34802d29be2f4ea4d5c2cc8cf989e, type: 3}
   imageOffset: {x: 0, y: 0}
-  windArea: {fileID: 421185895146973929}
 --- !u!114 &130044354069159318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,38 +206,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!1 &3629098077695515157
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3078468840199991558}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3078468840199991558
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3629098077695515157}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5271231398705665149}
-  m_Father: {fileID: 636389743530246846}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6834864021701458073
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,7 +237,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3078468840199991558}
+  - {fileID: 5271231398705665149}
   m_Father: {fileID: 4478517018338542277}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -340,8 +307,8 @@ GameObject:
   - component: {fileID: 5608621683738506392}
   - component: {fileID: 7318513621556531945}
   - component: {fileID: 8905633214900730983}
-  - component: {fileID: 421185895146973929}
-  - component: {fileID: 1510787773923259300}
+  - component: {fileID: 2257713251759318622}
+  - component: {fileID: 8883966033569882829}
   m_Layer: 0
   m_Name: WindArea
   m_TagString: Untagged
@@ -405,7 +372,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 7
+  m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0.8862745, b: 0.8144564, a: 0.5568628}
   m_FlipX: 0
@@ -462,7 +429,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &421185895146973929
+--- !u!114 &2257713251759318622
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -480,7 +447,7 @@ MonoBehaviour:
   windPower: 5
   windDirection: {x: 0, y: 0}
   backArrow: {fileID: 5271231398705665149}
---- !u!114 &1510787773923259300
+--- !u!114 &8883966033569882829
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
