@@ -18,10 +18,16 @@ namespace ShotBall.InGame
         }
         private void OnValidate()
         {
+            TypeChange(behaviourType);
+        }
+        public void TypeChange(BehaviourType type=BehaviourType.None)
+        {
+            if (this == null) return;
+            if (type == BehaviourType.None) return;
+
             EditorApplication.delayCall += () =>
             {
-
-                switch (behaviourType)
+                switch (type)
                 {
                     case BehaviourType.Runtime:
                         if (!GetComponent<RuntimeDragObject>())

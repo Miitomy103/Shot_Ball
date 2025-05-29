@@ -303,9 +303,17 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.16
       objectReference: {fileID: 0}
+    - target: {fileID: 3311197602008882227, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4514052053226017914, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_Name
       value: GameObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 5620625291377805787, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5703459293647657572, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: behaviourType

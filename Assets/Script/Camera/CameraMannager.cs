@@ -9,7 +9,7 @@ namespace ShotBall.InGame
         public Camera cam;
         public Transform leftWall;
         public Transform rightWall;
-        float wallWidthInScreenPercent = 0.17f; // ï«Ç™âÊñ ïùÇÃ5%Ç…å©Ç¶ÇÈ
+        [SerializeField] float wallWidthInScreenPercent = 0.17f; // ï«Ç™âÊñ ïùÇÃ5%Ç…å©Ç¶ÇÈ
 
         private void Awake()
         {
@@ -21,6 +21,13 @@ namespace ShotBall.InGame
         {
             if (cam == null) cam = Camera.main;
             AdjustWalls();
+        }
+        public void OnGUIButton()
+        {
+#if UNITY_EDITOR
+            if (cam == null) cam = Camera.main;
+            AdjustWalls();
+#endif
         }
         void AdjustWalls()
         {

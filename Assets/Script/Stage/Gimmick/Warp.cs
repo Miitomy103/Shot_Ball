@@ -1,17 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    public class Warp : GimmickBase
+    public class Warp : LineBase
     {
         [SerializeField] WarpChild[] warpChildren;
 
         bool didWarp = false;
-        [SerializeField] Color color;
+        protected override Transform[] Targets => warpChildren.Select(w => w.transform).ToArray();
 
-        private LineRenderer lineRenderer;
+        [SerializeField] Color color;
+        protected override Color Color => color;
+
+        protected override float startWidth => 0.05f;
+        protected override float endWidth => 0.05f;
+
         private void OnValidate()
         {
             if(!IsWarpChildren()) warpChildren = GetComponentsInChildren<WarpChild>();
@@ -20,24 +26,11 @@ namespace ShotBall.InGame
             {
                 w.ColorChange(color);
             }
-            if (lineRenderer == null)
-            {
-                lineRenderer = GetComponent<LineRenderer>();
-            }
-            lineRenderer.startColor = color;
-            lineRenderer.endColor = color;
-            lineRenderer.positionCount = 2;
-            lineRenderer.SetPosition(0, warpChildren[0].transform.position);
-            lineRenderer.SetPosition(1, warpChildren[1].transform.position);
         }
         protected override void Start()
         {
             base.Start();
             if (!IsWarpChildren()) warpChildren = GetComponentsInChildren<WarpChild>();
-            if(lineRenderer==null)lineRenderer = GetComponent<LineRenderer>();
-            lineRenderer.positionCount = 2;
-            lineRenderer.startWidth = 0.05f;
-            lineRenderer.endWidth = 0.05f;
 
             if (!IsWarpChildren())Debug.LogError("NullWarps");
 
@@ -45,17 +38,6 @@ namespace ShotBall.InGame
             {
                 warpChildren[i].Initialize(this, i);
             }
-        }
-        private void FixedUpdate()
-        {
-            if (GameLoop.StageState != StageState.Setting||!OnPair())
-            {
-                lineRenderer.enabled = false;
-                return;
-            }
-            lineRenderer.enabled = true;
-            lineRenderer.SetPosition(0, warpChildren[0].transform.position);
-            lineRenderer.SetPosition(1, warpChildren[1].transform.position);
         }
         bool IsWarpChildren()
         {
@@ -71,7 +53,7 @@ namespace ShotBall.InGame
         }
         public void OnBallInWarp(Collider2D other,int elements)
         {
-            if (!OnPair()) return;
+            if (!IsLine()) return;
             if (didWarp) return;
             for (int i = 0; i < warpChildren.Length; i++)
             {
@@ -82,21 +64,14 @@ namespace ShotBall.InGame
                 }
             }
         }
-        bool OnPair()
+
+        protected override bool IsLine()
         {
-            foreach(var w in warpChildren)
+            foreach (var w in warpChildren)
             {
                 if (w.InFrame) return false;
             }
             return true;
-        }
-        protected override void StageStart()
-        {
-            lineRenderer.enabled = false;
-        }
-        protected override void StageReset()
-        {
-            lineRenderer.enabled = true;
         }
     }
 }

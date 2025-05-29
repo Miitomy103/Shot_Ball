@@ -8,7 +8,7 @@ namespace ShotBall.InGame
     {
         public void ChangeGravity();
 
-        bool AntiGravity { get; set; }
+        public bool AntiGravity { get; }
 
     }
 }

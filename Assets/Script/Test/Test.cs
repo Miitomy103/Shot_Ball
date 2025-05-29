@@ -9,5 +9,10 @@ public class Test : MonoBehaviour
     private void Update()
     {
         a++;
+        IEnumerator enumerator;
+    }
+    IEnumerator Coroutine()
+    {
+        yield return new WaitForEndOfFrame();
     }
 }

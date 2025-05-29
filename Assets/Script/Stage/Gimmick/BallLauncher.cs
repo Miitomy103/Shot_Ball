@@ -10,9 +10,13 @@ namespace ShotBall.InGame
         [SerializeField] Vector2 launchDirection;
         float coolTime = 0.5f;
 
+        protected override bool HasDirection => true;
         protected override Vector2 Direction => launchDirection;
 
         bool inBall;
+
+        [SerializeField] AudioSource reroad;
+        [SerializeField] AudioSource launchSound;
         protected override void Start()
         {
             Transform child = transform.Find("Arrow");
@@ -32,10 +36,14 @@ namespace ShotBall.InGame
             inBall = true;
             rb.velocity = Vector2.zero;
             rb.gameObject.transform.position = transform.position;
+            reroad.Play();
+
             yield return new WaitForSeconds(coolTime);
+
             inBall = false;
             rb.bodyType = RigidbodyType2D.Dynamic;
             rb.AddForce(launchPower*10 * Direction);
+            launchSound.Play();
         }
 
     }

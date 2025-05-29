@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +29,7 @@ namespace ShotBall.InGame
         SubSprite backSprite;
         SubSprite outSprite;
 
+        public Action DragAction { get; set; }
 
         private void Start()
         {
@@ -45,17 +47,19 @@ namespace ShotBall.InGame
 
         protected override void Awake()
         {
-            transform.position += new Vector3(0, 0, -0.1f);
+            transform.position += new Vector3(0, 0, -0.0f);
             originalSize = transform.localScale;
             colli = GetComponent<Collider2D>();
         }
 
         private void OnMouseEnter()
         {
+            if (!CanDrag()) return;
             backSprite.gameObject.SetActive(true);
         }
         private void OnMouseExit()
         {
+            if (!CanDrag()) return;
             backSprite.gameObject.SetActive(false);
         }
         protected virtual void OnMouseDown()
@@ -121,6 +125,7 @@ namespace ShotBall.InGame
         {
             Vector3 newPosition = Camera.main.ScreenToWorldPoint(inputScreenPos) + offset;
             transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
+            //DragAction();
             if (IsPlaced())
             {
                 outSprite.gameObject.SetActive(false);

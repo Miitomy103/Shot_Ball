@@ -10,6 +10,7 @@ namespace ShotBall.InGame
         [SerializeField] Vector2 windDirection;
         [SerializeField] RectTransform backArrow;
 
+        protected override bool HasDirection => true;
         protected override Vector2 Direction => windDirection;
 
         List<Rigidbody2D> rigidBodies = new List<Rigidbody2D>();

@@ -1,22 +1,54 @@
 using ShotBall.InGame;
+using System.Collections;
 using UnityEngine;
 
-public class Bouncy : MonoBehaviour
+public class Bouncy : CollisionBase
 {
     [SerializeField] float bounceForce = 10f; // 跳ねる強さ
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    [SerializeField] AnimationCurve curve;
+
+    [SerializeField] AudioSource bouncySound;
+    protected override void BallEnter(Collision2D collision)
     {
-        // ボールにだけ作用するようにする
-        if (collision.gameObject.CompareTag(Tags.BALL))
+        StartCoroutine(BoundAnimation());
+        bouncySound.Play();
+    }
+    private IEnumerator BoundAnimation()
+    {
+        float duration = 0.25f;
+        float timer = 0;
+
+        Vector3 startScale = transform.localScale;
+        Vector3 endScale = transform.localScale -= new Vector3(-transform.localScale.x*0.5f, transform.localScale.y*0.5f, 0);
+
+        while(timer<=duration)
         {
-            Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
-            if (rb != null)
-            {
-                // 垂直方向に跳ね返す（Y軸方向の速度をリセットして上に跳ばす）
-                rb.velocity = new Vector2(rb.velocity.x, 0f);
-                rb.AddForce(Vector2.up * bounceForce, ForceMode2D.Impulse);
-            }
+            timer += Time.deltaTime;
+            float t = timer / duration;
+
+            // カーブから補間値を取得
+            float curveValue = curve.Evaluate(t);
+
+            // スケールを補間
+            transform.localScale = Vector3.Lerp(startScale, endScale, curveValue);
+
+            yield return new WaitForEndOfFrame();
         }
+        timer = 0;
+        while(startScale.y>transform.localScale.y)
+        {
+            timer += Time.deltaTime;
+            float t = timer / duration;
+
+            // カーブから補間値を取得
+            float curveValue = curve.Evaluate(t);
+
+            // スケールを補間
+            transform.localScale = Vector3.Lerp(endScale, startScale, curveValue);
+
+            yield return new WaitForEndOfFrame();
+        }
+        //transform.localScale = startScale;
     }
 }
