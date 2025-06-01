@@ -13,6 +13,8 @@ namespace ShotBall.InGame
 
         public Transform Transform => transform;
 
+        public override string Name => "DieBlock";
+
         DragObject dragObject;
 
         Collider2D colli;

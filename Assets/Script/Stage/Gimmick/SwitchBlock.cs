@@ -19,6 +19,8 @@ namespace ShotBall.InGame
 
         public DragObject DragObject => throw new System.NotImplementedException();
 
+        public override string Name => "SwitchBlock";
+
         protected override void Start()
         {
             base.Start();

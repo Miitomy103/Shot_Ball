@@ -8,6 +8,8 @@ namespace ShotBall.InGame
     {
         [SerializeField] AudioSource hitSound;
 
+        public override string Name => "NormalBlock";
+
         protected override void BallEnter(Collision2D collision)
         {
             hitSound.Play();

@@ -13,6 +13,8 @@ namespace ShotBall.InGame
         Ball ball;
         public int KeyNumber{ get;set;  }
 
+        public override string Name => "LaunchPad";
+
         Color color;
 
         protected override void Start()

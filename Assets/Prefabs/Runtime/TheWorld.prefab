@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3670546426704055396}
   - component: {fileID: 3554616654602372756}
   - component: {fileID: 1420472290603619195}
-  - component: {fileID: 2539828152863202666}
   - component: {fileID: 4477660987323771205}
+  - component: {fileID: 3252359179758749799}
   m_Layer: 0
   m_Name: TheWorld
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6822693387543088560}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.43, y: 0.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -103,18 +103,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   time: 1.5
---- !u!114 &2539828152863202666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6822693387543088560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a975587b0bc9d94b9663d278cea5d88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &4477660987323771205
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -150,3 +138,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.46
+--- !u!114 &3252359179758749799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6822693387543088560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98b740e98fa3cc64bae506bc18f6311a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  behaviourType: 0

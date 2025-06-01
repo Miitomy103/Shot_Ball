@@ -4,13 +4,27 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    public abstract class LineManager : CollisionBase
+    public abstract class LineManager : AreaBase
     {
         protected abstract Transform StartPoint { get; }
         private readonly float lineWidth = 0.05f;
+        private RuntimeDragObject dragObject;
+        protected bool InFrame
+        {
+            get
+            {
+                if (dragObject != null) return dragObject.inFrame;
+                else return false;
+            }
+        }
 
         protected List<LineData> lineDatas = new List<LineData>();
 
+        protected override void Awake()
+        {
+            base.Awake();
+            dragObject = GetComponent<RuntimeDragObject>();
+        }
         // ÉâÉCÉìÇçÏê¨Ç∑ÇÈ
         protected void CreateLine(Transform endPoint)
         {
@@ -29,6 +43,7 @@ namespace ShotBall.InGame
         }
         protected void ChangePosition(int index)
         {
+
             if (lineDatas[index].obj.activeSelf && lineDatas[index].start != null && lineDatas[index].end != null)
             {
                 lineDatas[index].renderer.SetPosition(0, lineDatas[index].start.position);

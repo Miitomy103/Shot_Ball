@@ -9,6 +9,9 @@ public class Bouncy : CollisionBase
     [SerializeField] AnimationCurve curve;
 
     [SerializeField] AudioSource bouncySound;
+
+    public override string Name => "Bouncy";
+
     protected override void BallEnter(Collision2D collision)
     {
         StartCoroutine(BoundAnimation());

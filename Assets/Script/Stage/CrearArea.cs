@@ -11,6 +11,8 @@ namespace ShotBall.InGame
 
         public int KeyNumber { get;set; }
 
+        public override string Name => "CreaArea";
+
         public void ColorChange(Color color)
         {
             ThisSprite.color = color;

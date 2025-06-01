@@ -18,7 +18,6 @@ namespace ShotBall.InGame
         }
         private void Start()
         {
-
             GameLoop.Instance.CoinSet(coins);
         }
     }

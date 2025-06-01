@@ -8,6 +8,7 @@ namespace ShotBall.InGame
 {
     public abstract class GimmickBase : MonoBehaviour
     {
+        public abstract string Name { get; }
         protected virtual bool HasDirection => false;
         protected virtual Vector2 Direction { get; }
 

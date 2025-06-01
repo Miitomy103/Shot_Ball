@@ -14,6 +14,8 @@ namespace ShotBall.InGame
         protected override Transform StartPoint => transform;
         public bool isOn { get; private set; }
 
+        public override string Name => "OnOffBlock";
+
         [SerializeField] bool startIsOn;
 
         [SerializeField] GameObject onObject;
@@ -31,14 +33,23 @@ namespace ShotBall.InGame
         private void Update()
         {
             if (GameLoop.StageState != StageState.Setting) return;
-            for(int i=0; i<Targets.Length;i++)
+            if (InFrame)
+            {
+                DisableAllLines();
+                return;
+            }
+            else
+            {
+                EnableAllLines();
+            }
+            for (int i=0; i<Targets.Length;i++)
             {
                 ChangePosition(i);
             }
         }
-        protected override void BallEnter(Collision2D collision)
+        protected override void BallEnter(Collider2D collider)
         {
-            base.BallEnter(collision);
+            base.BallEnter(collider);
             OnOffChange(!isOn);
         }
         private void OnOffChange(bool on)

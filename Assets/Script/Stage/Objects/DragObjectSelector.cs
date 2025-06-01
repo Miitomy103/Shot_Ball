@@ -25,22 +25,22 @@ namespace ShotBall.InGame
             if (this == null) return;
             if (type == BehaviourType.None) return;
 
-            EditorApplication.delayCall += () =>
-            {
-                switch (type)
-                {
-                    case BehaviourType.Runtime:
-                        if (!GetComponent<RuntimeDragObject>())
-                            AddBehaviour<RuntimeDragObject>();
-                        OrderChange(7);
-                        break;
-                    case BehaviourType.Editor:
-                        if (!GetComponent<EditorDragObject>())
-                            AddBehaviour<EditorDragObject>();
-                        OrderChange(0);
-                        break;
-                }
-            };
+            //EditorApplication.delayCall += () =>
+            //{
+            //    switch (type)
+            //    {
+            //        case BehaviourType.Runtime:
+            //            if (!GetComponent<RuntimeDragObject>())
+            //                AddBehaviour<RuntimeDragObject>();
+            //            OrderChange(7);
+            //            break;
+            //        case BehaviourType.Editor:
+            //            if (!GetComponent<EditorDragObject>())
+            //                AddBehaviour<EditorDragObject>();
+            //            OrderChange(0);
+            //            break;
+            //    }
+            //};
         }
         private void OrderChange(int layer)
         {

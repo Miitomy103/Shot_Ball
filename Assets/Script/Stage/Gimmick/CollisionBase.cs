@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    public class CollisionBase : GimmickBase
+    public abstract class CollisionBase : GimmickBase
     {
         [SerializeField] protected LayerMask ballLayer;
         private void OnCollisionEnter2D(Collision2D collision)

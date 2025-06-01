@@ -13,6 +13,8 @@ namespace ShotBall.InGame
         protected override bool HasDirection => true;
         protected override Vector2 Direction => launchDirection;
 
+        public override string Name => "BallLauncher";
+
         bool inBall;
 
         [SerializeField] AudioSource reroad;

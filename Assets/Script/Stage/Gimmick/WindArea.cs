@@ -13,6 +13,8 @@ namespace ShotBall.InGame
         protected override bool HasDirection => true;
         protected override Vector2 Direction => windDirection;
 
+        public override string Name => "WindArea";
+
         List<Rigidbody2D> rigidBodies = new List<Rigidbody2D>();
 
         protected override void Start()

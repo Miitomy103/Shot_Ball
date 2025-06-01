@@ -8,7 +8,7 @@ namespace ShotBall.InGame
 {
     public class DragObjects : MonoBehaviour
     {
-        [SerializeField] List<GameObject> objects = new List<GameObject>();
+        [SerializeField] List<DragObject> objects = new List<DragObject>();
         [SerializeField] Transform runtimeParent;
         private void Awake()
         {
@@ -23,15 +23,15 @@ namespace ShotBall.InGame
             }
             foreach (Transform ob in parent)
             {
-                if(ob.GetComponent<RuntimeDragObject>())
+                if(ob.TryGetComponent<DragObject>(out var run))
                 {
-                    objects.Add(ob.gameObject);
+                    objects.Add(run);
                 }
                 GetChildren(ob);
             }
         }
 
-        public GameObject[] GetObjects() => objects.ToArray();
+        public DragObject[] GetObjects() => objects.ToArray();
     }
 
 }

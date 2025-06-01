@@ -10,6 +10,8 @@ namespace ShotBall.InGame
         bool get = false;
         public bool Get => get;
 
+        public override string Name => "Coin";
+
         readonly float time = 1f;
 
         CoinAnimation anim;

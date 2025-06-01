@@ -20,6 +20,9 @@ namespace ShotBall.InGame
                 return false;
             }
         }
+
+        public override string Name => "WarpChild";
+
         RuntimeDragObject dragObject;
         protected override void Awake()
         {

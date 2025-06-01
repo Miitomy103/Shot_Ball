@@ -11,6 +11,8 @@ namespace ShotBall.InGame
         Color normal;
         Color anti => Camera.main.backgroundColor;
 
+        public override string Name => "AntiGravityArea";
+
         [SerializeField] AudioSource antiGravitySound;
 
         protected override void Awake()

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    public class GravitySwitch : AreaBase,IAntiGravity
+    public class GravitySwitch : AreaBase,IAntiGravity,IOnOff
     {
         static GravitySwitch instance;
         public static GravitySwitch Instance => instance;
@@ -24,6 +24,15 @@ namespace ShotBall.InGame
         public Action Action { get; set; }
 
         public bool AntiGravity => antiGravity;
+
+        private bool isOn;
+        public bool IsOn => isOn;
+
+        public Transform Transform => transform;
+
+        public DragObject DragObject => throw new NotImplementedException();
+
+        public override string Name => "GravitySwitch";
 
         protected override void Awake()
         {
@@ -79,12 +88,29 @@ namespace ShotBall.InGame
             antiGravity = !AntiGravity;
             Action();
         }
+        public void ChangeGravity(bool a)
+        {
+            antiGravity = a;
+            Action();
+        }
 
         Vector3 ChildCircleSize()
         {
             float height = cam.orthographicSize * 2f;
             float width = height * cam.aspect;
             return new Vector3(width, width) * 2;
+        }
+
+        public void ItOn()
+        {
+            isOn = true;
+            ChangeGravity(true);
+        }
+
+        public void ItOff()
+        {
+            isOn=false;
+            ChangeGravity(false);
         }
     }
 }

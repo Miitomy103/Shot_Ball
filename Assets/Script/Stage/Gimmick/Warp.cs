@@ -18,6 +18,8 @@ namespace ShotBall.InGame
         protected override float startWidth => 0.05f;
         protected override float endWidth => 0.05f;
 
+        public override string Name => "Warp";
+
         private void OnValidate()
         {
             if(!IsWarpChildren()) warpChildren = GetComponentsInChildren<WarpChild>();
