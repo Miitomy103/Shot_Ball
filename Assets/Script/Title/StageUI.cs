@@ -25,7 +25,7 @@ namespace ShotBall.InGame
             text.text = $"Stage{stage}";
             for (int i = 0; i < stages.Length; i++)
             {
-                bool clear = (1 == PlayerPrefs.GetInt($"Stage{stage}-{i}", 0));
+                bool clear = (1 == PlayerPrefs.GetInt($"Stage{stage}-{i+1}", 0));
                 if (clear) stages[i].color = clearColor;
                 else stages[i].color = Color.white;
             }

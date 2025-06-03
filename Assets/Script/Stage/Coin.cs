@@ -28,6 +28,10 @@ namespace ShotBall.InGame
             base.Start();
             startPos = transform.position;
         }
+        protected override void OrderChange()
+        {
+            ThisSprite.sortingOrder = (int)OrderInLayer.Coin;
+        }
         protected override void StageReset()
         {
             base.StageReset();

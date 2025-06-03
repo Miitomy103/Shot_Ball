@@ -7,8 +7,15 @@ namespace ShotBall.InGame
     public abstract class CollisionBase : GimmickBase
     {
         [SerializeField] protected LayerMask ballLayer;
+        protected Collider2D Colli { get; private set; }
+        protected override void Awake()
+        {
+            base.Awake();
+            Colli = GetComponent<Collider2D>();
+        }
         private void OnCollisionEnter2D(Collision2D collision)
         {
+            Debug.Log("D");
             if (collision.gameObject.layer == ballLayer || GameLoop.StageState != StageState.Playing||!IsCollision()) return;
             BallEnter(collision);
         }

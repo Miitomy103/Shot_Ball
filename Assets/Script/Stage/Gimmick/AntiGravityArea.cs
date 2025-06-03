@@ -11,6 +11,8 @@ namespace ShotBall.InGame
         Color normal;
         Color anti => Camera.main.backgroundColor;
 
+        GravitySwitch GravitySwitch => GravitySwitch.Instance;
+
         public override string Name => "AntiGravityArea";
 
         [SerializeField] AudioSource antiGravitySound;
@@ -24,21 +26,21 @@ namespace ShotBall.InGame
         protected override void Start()
         {
             base.Start();
-            if (GravitySwitch.Instance != null)
+            if (GravitySwitch != null)
             {
-                GravitySwitch.Instance.Action += ChangeGravity;
+                GravitySwitch.Action += ChangeGravity;
             }
             ThisSprite.color = normal;
         }
         protected override void StageReset()
         {
             base.StageReset();
-            ThisSprite.color = (GravitySwitch.Instance.StartAntiGravity) ? anti : normal;
+            if(GravitySwitch!=null) ThisSprite.color = (GravitySwitch.StartAntiGravity) ? anti : normal;
             Debug.Log("ColorChange");
         }
         public void ChangeGravity()
         {
-            ThisSprite.color = (GravitySwitch.Instance.AntiGravity) ? anti : normal;
+            if (GravitySwitch != null) ThisSprite.color = (GravitySwitch.AntiGravity) ? anti : normal;
         }
 
         protected override void BallCheck(Collider2D other)

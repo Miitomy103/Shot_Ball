@@ -30,7 +30,11 @@ namespace ShotBall.InGame
 
             stageText.text = sceneName;
         }
-
+        public void GameReset()
+        {
+            result.gameObject.SetActive(false);
+            GameLoop.Instance.GameReset();
+        }
         public void NextStage()
         {
 

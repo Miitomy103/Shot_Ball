@@ -16,5 +16,13 @@ namespace ShotBall.InGame
             Vector3 cameraPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Parent.StartDrag(cameraPos);
         }
+        private void OnMouseEnter()
+        {
+            Parent.OnMouseEnterExit(true);
+        }
+        private void OnMouseExit()
+        {
+            Parent.OnMouseEnterExit(false);
+        }
     }
 }

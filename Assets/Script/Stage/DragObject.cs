@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +19,10 @@ namespace ShotBall.InGame
         protected const int dragOrder = 7;
         public bool inFrame { get; set; }
         public Frame frameScript { get; set; }
+
+        public Action DragStartAction { get; set; }
+        public Action DragAction { get; set; }
+        public Action DragEndAction { get; set; }
         protected virtual void Awake()
         {
             OriginalSize = transform.localScale;
@@ -38,13 +42,14 @@ namespace ShotBall.InGame
         public abstract bool IsPlaced();
         public void StartDrag(Vector3 inputScreenPos)
         {
-            if (!CanDrag()) return;
+            if (!CanDrag()||IsDragging) return;
 
             TransformCalculation.SetPositionXY(transform, inputScreenPos);
             offset = transform.position - inputScreenPos;
             IsDragging = true;
             Placed = false;
-            OrderInLayerChange(dragOrder);
+            OrderInLayerChange();
+            DragStartAction?.Invoke();
             StartDragDerivation(inputScreenPos);
         }
         protected abstract void StartDragDerivation(Vector3 inputScreenPos);
@@ -52,6 +57,7 @@ namespace ShotBall.InGame
         {
             Vector3 newPosition = Camera.main.ScreenToWorldPoint(inputScreenPos) + offset;
             transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
+            DragAction?.Invoke();
             DragDerivation(newPosition);
         }
         protected abstract void DragDerivation(Vector3 inputScreenPos);
@@ -79,8 +85,9 @@ namespace ShotBall.InGame
                 otherPosition = transform.position;
             }
             //backObject.SetActive(true);
-            OrderInLayerChange(placeOrder);
+            OrderInLayerChange();
             offset = Vector3.zero;
+            DragEndAction?.Invoke();
             EndDragDerivation(inputScreenPos);
         }
         protected abstract void EndDragDerivation(Vector3 inputScreenPos);
@@ -124,7 +131,7 @@ namespace ShotBall.InGame
         {
             return FrameInMethod(out var frame);
         }
-        protected abstract void OrderInLayerChange(int o);
+        protected abstract void OrderInLayerChange();
         public abstract void FitSpriteInSquare(SpriteRenderer frame);
     }
 

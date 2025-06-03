@@ -6,7 +6,7 @@ namespace ShotBall.InGame
 {
     public class DieBlock : CollisionBase,IOnOff
     {
-        bool isOn;
+        bool isOn = true;
         public bool IsOn => isOn;
 
         public DragObject DragObject => dragObject;
@@ -17,25 +17,22 @@ namespace ShotBall.InGame
 
         DragObject dragObject;
 
-        Collider2D colli;
-
         protected override void Awake()
         {
             base.Awake();
             dragObject = GetComponent<DragObject>();
-            colli = GetComponent<Collider2D>();
         }
         public void ItOff()
         {
             isOn = false;
-            colli.isTrigger = true;
+            Colli.isTrigger = true;
             ColorChangeA(0.5f);
         }
 
         public void ItOn()
         {
             isOn = true;
-            colli.isTrigger = false;
+            Colli.isTrigger = false;
             ColorChangeA(1f);
         }
         protected override bool IsCollision()
@@ -45,6 +42,7 @@ namespace ShotBall.InGame
 
         protected override void BallEnter(Collision2D collision)
         {
+            Debug.Log("B");
             Ball ball = collision.gameObject.GetComponent<Ball>();
             ball.Die();
         }

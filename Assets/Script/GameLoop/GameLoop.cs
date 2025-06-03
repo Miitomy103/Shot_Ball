@@ -19,7 +19,8 @@ namespace ShotBall.InGame
         public Action StateChangeAction { get; set; }
         public Action ResetAction { get; set; }
         public Action StartAction { get; set; }
-        
+
+        private StageState OnceState;
 
         IGet[] Coins = new IGet[3];
 
@@ -45,12 +46,30 @@ namespace ShotBall.InGame
         public void GameReset()
         {
             ChangeState(StageState.Setting);
+            goalCount = 0;
+            Debug.Log("GameReset");
             ResetAction();
+        }
+        public void OnMenu()
+        {
+            Time.timeScale = 0;
+            OnceState = StageState;
+            ChangeState(StageState.Pose);
+        }
+        public void OffMenu()
+        {
+            Time.timeScale = 1;
+            ChangeState(OnceState);
         }
         void GameClear()
         {
             resultManager.Result(Coins);
             ChangeState(StageState.Clear);
+
+            var ints = SceneControl.StageInt(SceneControl.NowStage());
+            PlayerPrefs.SetInt($"Stage{ints.Item1}-{ints.Item2}",1);
+            Debug.Log($"Stage{ints.Item1}-{ints.Item2}" + "Save");
+            PlayerPrefs.Save();
         }
         public void ClearAreaCheck(Ball ball)
         {

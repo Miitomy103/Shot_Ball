@@ -62,6 +62,7 @@ namespace ShotBall.InGame
         }
         IEnumerator MakeItBigger(Transform transform)
         {
+            if (GameLoop.StageState != StageState.Playing) yield break;
             float duration = 0.75f;
             float timer = 0;
 
@@ -86,12 +87,12 @@ namespace ShotBall.InGame
         public void ChangeGravity()
         {
             antiGravity = !AntiGravity;
-            Action();
+            Action?.Invoke();
         }
         public void ChangeGravity(bool a)
         {
             antiGravity = a;
-            Action();
+            Action?.Invoke();
         }
 
         Vector3 ChildCircleSize()
@@ -105,12 +106,14 @@ namespace ShotBall.InGame
         {
             isOn = true;
             ChangeGravity(true);
+            StartCoroutine(MakeItBigger(child.transform));
         }
 
         public void ItOff()
         {
             isOn=false;
             ChangeGravity(false);
+            StartCoroutine(MakeItBigger(child.transform));
         }
     }
 }

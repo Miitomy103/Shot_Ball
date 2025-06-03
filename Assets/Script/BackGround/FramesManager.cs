@@ -10,6 +10,8 @@ namespace ShotBall.InGame
     {
         [SerializeField] GameObject flamePrefab;
         [SerializeField] DragObjects dragObjects;
+
+        [SerializeField] SpriteRenderer frameRangeSprite;
         readonly float panelWidth = 3f;
         Camera cam;
 
@@ -39,8 +41,6 @@ namespace ShotBall.InGame
             }
             int frameCount = uniqueFrames.Count;
 
-
-            Debug.Log("frameCount=>" + frameCount);
             float screenHeight = cam.orthographicSize * 2f;
 
             // spacingを高さから制限（オーバーフロー防止）
@@ -88,13 +88,33 @@ namespace ShotBall.InGame
                 InFrame(d);
             }
             BoxCollider2D colli = GetComponent<BoxCollider2D>();
-            if(colli!=null)
+            Vector2 size = new Vector2(scale * 1.2f, screenHeight*0.9f);
+            if (colli!=null)
             {
                 colli.offset = new Vector3(childSprite.transform.position.x, 0, 0.5f);
-                colli.size = new Vector2(scale * 1.2f, screenHeight);
+                colli.size = size;
+            }
+            if(colli!=null)
+            {
+                frameRangeSprite.drawMode = SpriteDrawMode.Sliced;
+                frameRangeSprite.size = size;
+                frameRangeSprite.gameObject.SetActive(false);
+                frameRangeSprite.transform.localScale = Vector3.one;
+                frameRangeSprite.transform.position = childSprite.transform.position;
             }
         }
-
+        private void OnMouseEnter()
+        {
+            OnMouseEvent(true);
+        }
+        private void OnMouseExit()
+        {
+            OnMouseEvent(false);
+        }
+        private void OnMouseEvent(bool enter)
+        {
+            frameRangeSprite.gameObject.SetActive(enter);
+        }
         private void OnMouseDown()
         {
             // ワールド座標に変換
@@ -120,7 +140,6 @@ namespace ShotBall.InGame
             {
                 if(f.IsFrame(dragObject.FrameData))
                 {
-            Debug.Log("InFrame");
                     f.PutIn();
                     Destroy(dragObject.gameObject);
                 }

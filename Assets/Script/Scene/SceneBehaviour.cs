@@ -10,6 +10,7 @@ namespace ShotBall.InGame
         public void NextScene()
         {
             SceneControl.NextScene(SceneManager.GetActiveScene().name);
+            Debug.Log("NextScene");
         }
         public void TitleScene()
         {

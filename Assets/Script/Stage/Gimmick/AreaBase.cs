@@ -7,6 +7,15 @@ namespace ShotBall.InGame
     public abstract class AreaBase : GimmickBase
     {
         [SerializeField]protected LayerMask ballLayer;
+        protected override void Start()
+        {
+            base.Start();
+            OrderChange();
+        }
+        protected virtual void OrderChange()
+        {
+            ThisSprite.sortingOrder = (int)OrderInLayer.Area;
+        }
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.layer == ballLayer||GameLoop.StageState!=StageState.Playing) return;

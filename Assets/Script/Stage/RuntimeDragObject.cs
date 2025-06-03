@@ -15,7 +15,7 @@ namespace ShotBall.InGame
         SubSprite backSprite;
         SubSprite outSprite;
 
-        public Action DragAction { get; set; }
+
         protected SpriteRenderer thisSprite { get; private set; }
 
         private void OnEnable()
@@ -32,7 +32,8 @@ namespace ShotBall.InGame
 
             backSprite = new SubSprite(transform, thisSprite, backColor, 1.1f);
             outSprite = new SubSprite(transform, thisSprite, outColor);
-            OrderInLayerChange(placeOrder);
+            outSprite.LayerChange((int)OrderInLayer.OutSprite);
+            OrderInLayerChange();
 
 
             backSprite.gameObject.SetActive(false);
@@ -109,6 +110,7 @@ namespace ShotBall.InGame
         protected override void EndDragDerivation(Vector3 inputScreenPos)
         {
             backSprite.transform.localScale /= 1.05f;
+            outSprite.gameObject.SetActive(false);
         }
         /// <returns>”í‚Á‚Ä‚¢‚é=>true</returns>
         protected override bool IsOverLapping()
@@ -122,18 +124,24 @@ namespace ShotBall.InGame
 
             return count > 0;
         }
-        protected override void OrderInLayerChange(int order)
+        protected override void OrderInLayerChange()
         {
-            thisSprite.sortingOrder = order;
-            if (backSprite == null || outSprite == null) return;
-            backSprite.LayerChange(order - 1);
-            outSprite.LayerChange(order + 1);
+            if(IsDragging)
+            {
+                thisSprite.sortingOrder = (int)OrderInLayer.DragNow;
+                if(backSprite!=null) backSprite.LayerChange((int)OrderInLayer.DragBackSprite);
+            }
+            else
+            {
+                thisSprite.sortingOrder = (int)OrderInLayer.NoDrag;
+                if (backSprite != null) backSprite.LayerChange((int)OrderInLayer.StillnessBackSprite);
+            }
         }
         public void OnDestroy()
         {
             foreach(Transform t in transform)
             {
-                Destroy(t.gameObject);
+                //Destroy(t.gameObject);
             }
         }
 

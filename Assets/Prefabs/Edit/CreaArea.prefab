@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 9168146724725515901}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.28, y: 2.74, z: 0}
+  m_LocalPosition: {x: 1.28, y: 2.74, z: 0.1}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -101,7 +101,7 @@ MonoBehaviour:
   ballLayer:
     serializedVersion: 2
     m_Bits: 64
-  areaRudius: 1
+  keyNumber: 0
 --- !u!114 &-3464046345657449361
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,12 +12,13 @@ namespace ShotBall.InGame
             for (int i = 0; i < transform.childCount; i++)
             {
                 children[i] = new ChildData(transform.GetChild(i).gameObject);
-                transform.GetChild(i).gameObject.AddComponent<ChildDragObject>();
+                if(transform.GetChild(i).GetComponent<ChildDragObject>()==null) transform.GetChild(i).gameObject.AddComponent<ChildDragObject>();
             }
         }
         protected override void StartDragDerivation(Vector3 inputScreenPos)
         {
             foreach (var c in children) c.backSprite.transform.localScale *= 1.05f;
+            Debug.Log("*1.05");
         }
 
         protected override void DragDerivation(Vector3 inputScreenPos)
@@ -27,7 +28,12 @@ namespace ShotBall.InGame
 
         protected override void EndDragDerivation(Vector3 inputScreenPos)
         {
-            foreach(var c in children) c.backSprite.transform.localScale /= 1.05f;
+            foreach (var c in children)
+            {
+                c.backSprite.transform.localScale /= 1.05f;
+                c.outSprite.gameObject.SetActive(false);
+            }
+            Debug.Log("/1.05");
         }
 
         public override bool IsPlaced()
@@ -85,17 +91,26 @@ namespace ShotBall.InGame
         }
 
 
+        public void OnMouseEnterExit(bool enter)
+        {
+            foreach(var c in children)c.backSprite.gameObject.SetActive(enter);
+        }
 
 
-
-        protected override void OrderInLayerChange(int order)
+        protected override void OrderInLayerChange()
         {
             foreach(var c in children)
             {
-                c.sprite.sortingOrder = order;
-                if (c.backSprite == null || c.outSprite == null) continue;
-                c.backSprite.LayerChange(order - 1);
-                c.outSprite.LayerChange(order - 1);
+                if (IsDragging)
+                {
+                    c.sprite.sortingOrder = (int)OrderInLayer.DragNow;
+                    c.backSprite.LayerChange((int)OrderInLayer.DragBackSprite);
+                }
+                else
+                {
+                    c.sprite.sortingOrder = (int)OrderInLayer.NoDrag;
+                    c.backSprite.LayerChange((int)OrderInLayer.StillnessBackSprite);
+                }
             }
         }
 
@@ -167,13 +182,6 @@ namespace ShotBall.InGame
 
             Debug.Log("bounds.center;" + bounds.center);
             return bounds.center;
-        }
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.green;
-            Vector3 vector3 = GetCenterOfChildSprites();
-            Gizmos.DrawLine(vector3 - new Vector3(0, 1), vector3 - new Vector3(0, -1));
-            Gizmos.DrawLine(vector3 - new Vector3(1, 0), vector3 - new Vector3(-1, 0));
         }
     }
 }

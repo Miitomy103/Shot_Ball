@@ -29,17 +29,43 @@ namespace ShotBall.InGame
                 w.ColorChange(color);
             }
         }
+        protected override void Awake()
+        {
+            base.Awake();
+            WarpManager.Initialization();
+        }
         protected override void Start()
         {
             base.Start();
-            if (!IsWarpChildren()) warpChildren = GetComponentsInChildren<WarpChild>();
-
-            if (!IsWarpChildren())Debug.LogError("NullWarps");
-
+            WarpManager.AddWarp(this);
+        }
+        public void ChildGenerate(WarpChild warpChild)
+        {
             for(int i=0;i<warpChildren.Length;i++)
             {
-                warpChildren[i].Initialize(this, i);
+                if (warpChildren[i] == null)
+                {
+                    warpChildren[i] = warpChild;
+                    break;
+                }
             }
+            foreach (var w in warpChildren)
+            {
+                if(w!=null) w.ColorChange(color);
+            }
+        }
+        public void ChildDestroy(WarpChild warpChild)
+        {
+            for (int i = 0; i < warpChildren.Length; i++)
+            {
+                if (warpChildren[i] == warpChild) warpChildren[i] = null;
+            }
+            lineRenderer.enabled = false;
+        }
+        public bool Available()
+        {
+            foreach (var w in warpChildren) if (w == null) return true;
+            return false;
         }
         bool IsWarpChildren()
         {
@@ -53,13 +79,13 @@ namespace ShotBall.InGame
             }
             return true;
         }
-        public void OnBallInWarp(Collider2D other,int elements)
+        public void OnBallInWarp(Collider2D other,WarpChild warpChild)
         {
             if (!IsLine()) return;
             if (didWarp) return;
             for (int i = 0; i < warpChildren.Length; i++)
             {
-                if(i!=elements)
+                if (warpChildren[i]!=warpChild && warpChildren[i]!=null)
                 {
                     didWarp = true;
                     other.transform.position = warpChildren[i].transform.position;
@@ -69,11 +95,15 @@ namespace ShotBall.InGame
 
         protected override bool IsLine()
         {
-            foreach (var w in warpChildren)
+            return !IsChildrenNull();
+        }
+        bool IsChildrenNull()
+        {
+            foreach(var w in warpChildren)
             {
-                if (w.InFrame) return false;
+                if (w == null) return true;
             }
-            return true;
+            return false;
         }
     }
 }

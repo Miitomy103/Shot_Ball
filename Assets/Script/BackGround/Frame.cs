@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -27,11 +28,15 @@ namespace ShotBall.InGame
             objectData = GetComponent<FrameObjectData>();
             Sprite = GetComponent<SpriteRenderer>();
         }
+        private void Start()
+        {
+            Sprite.sortingOrder = (int)OrderInLayer.Frame;
+        }
         public void MouseDown()
         {
-            if (ObjectCount <= 0) return;
+            if (ObjectCount <= 0||GameLoop.StageState!=StageState.Setting) return;
 
-            GameObject game = Instantiate(FrameObject, transform.position, FrameObject.transform.rotation);
+            GameObject game = Instantiate(FrameObject, new Vector3(transform.position.x,transform.position.y,FrameObject.transform.position.z), FrameObject.transform.rotation);
             game.SetActive(true);
             PutOut();
             DragObject dragObject = game.GetComponent<DragObject>();
@@ -52,7 +57,15 @@ namespace ShotBall.InGame
         }
         public void FrameSpriteIn(GameObject dragObject)
         {
+            SpriteRenderer[] all = dragObject.GetComponentsInChildren<SpriteRenderer>();
+            int c = 0;
+            foreach(var s in all)
+            {
+                s.sortingOrder = (int)OrderInLayer.DragNow;
+                c++;
+            }
             dragObject.GetComponent<DragObject>().FitSpriteInSquare(Sprite);
+
 
             Vector3 pos = transform.position;
             //dragObject.transform.position = new Vector3(pos.x, pos.y, dragObject.transform.position.z);
@@ -60,10 +73,15 @@ namespace ShotBall.InGame
             Component[] components = dragObject.GetComponents<Component>();
             foreach (Component comp in components)
             {
-                if (comp is SpriteRenderer sprite) sprite.sortingOrder = Sprite.sortingOrder + 1;
-                if (comp is Transform || comp is SpriteRenderer)continue;
+                if (comp is SpriteRenderer)
+                {
+                    continue;
+                }
+                if (comp is Transform) continue;
+
                 DestroyImmediate(comp);
             }
+
         }
         public bool IsFrame(FrameData frameData)
         {

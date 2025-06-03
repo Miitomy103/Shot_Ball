@@ -16,12 +16,13 @@ namespace ShotBall.InGame
         public override string Name => "BallLauncher";
 
         bool inBall;
+        Transform child;
 
         [SerializeField] AudioSource reroad;
         [SerializeField] AudioSource launchSound;
         protected override void Start()
         {
-            Transform child = transform.Find("Arrow");
+            child = transform.Find("Arrow");
             child.localRotation = DirectionAngle();
             base.Start();
         }
@@ -31,6 +32,11 @@ namespace ShotBall.InGame
             if (inBall) return;
             Debug.Log("AA");
             StartCoroutine(Coroutine(other.gameObject.GetComponent<Rigidbody2D>()));
+        }
+        protected override void Rotation()
+        {
+            base.Rotation();
+            child.localRotation = DirectionAngle();
         }
         IEnumerator Coroutine(Rigidbody2D rb)
         {
@@ -44,7 +50,8 @@ namespace ShotBall.InGame
 
             inBall = false;
             rb.bodyType = RigidbodyType2D.Dynamic;
-            rb.AddForce(launchPower*10 * Direction);
+            Vector2 worldForce = Quaternion.Euler(0, 0, transform.eulerAngles.z) * Direction;
+            rb.AddForce(launchPower*10 * worldForce);
             launchSound.Play();
         }
 

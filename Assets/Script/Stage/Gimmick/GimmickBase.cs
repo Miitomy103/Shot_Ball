@@ -24,10 +24,23 @@ namespace ShotBall.InGame
             GameLoop.Instance.StartAction += StageStart;
             GameLoop.Instance.ResetAction += StageReset;
             GameLoop.Instance.StateChangeAction += StateChange;
+            if(TryGetComponent<RotationDragObject>(out var r))
+            {
+                r.Action += Rotation;
+            }
+            if(TryGetComponent<DragObject>(out var drag))
+            {
+                drag.DragStartAction += DragStart;
+                drag.DragAction += Drag;
+                drag.DragEndAction += DragEnd;
+            }
         }
         protected virtual void StageStart() { }
         protected virtual void StageReset() { }
         protected virtual void StateChange() { }
+        protected virtual void DragStart() { }
+        protected virtual void Drag() { }
+        protected virtual void DragEnd() { }
         protected Quaternion DirectionAngle()
         {
             if (!HasDirection) return Quaternion.identity;
@@ -36,6 +49,7 @@ namespace ShotBall.InGame
 
             return Quaternion.Euler(0, 0, angle - 90f);
         }
+        protected virtual void Rotation() { }
         protected void ColorChangeA(float a)
         {
             float colorA = Mathf.Clamp(a, 0, 1);

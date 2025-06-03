@@ -8,8 +8,6 @@ namespace ShotBall.InGame
     {
         bool isEnter = false;
 
-        private Collider2D colli;
-
         [SerializeField] AudioSource switchSound;
 
         bool isOn;
@@ -21,11 +19,6 @@ namespace ShotBall.InGame
 
         public override string Name => "SwitchBlock";
 
-        protected override void Start()
-        {
-            base.Start();
-            colli = GetComponent<Collider2D>();
-        }
         protected override void BallEnter(Collision2D collision)
         {
             base.BallEnter(collision);
@@ -41,14 +34,14 @@ namespace ShotBall.InGame
         public void ItOn()
         {
             isEnter = true;
-            colli.isTrigger = true;
+            Colli.isTrigger = true;
             ColorChangeA(0.5f);
         }
 
         public void ItOff()
         {
             isEnter = false;
-            colli.isTrigger = false;
+            Colli.isTrigger = false;
             ColorChangeA(1);
         }
     }

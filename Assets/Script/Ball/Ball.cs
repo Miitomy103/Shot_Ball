@@ -45,15 +45,16 @@ namespace ShotBall.InGame
             {
                 GravitySwitch.Instance.Action += GravitySwitchChange;
             }
+            thisSprite.sortingOrder = (int)OrderInLayer.Ball;
         }
         private void FixedUpdate()
         {
             SetLocalGravity(); //重力をAddForceでかけるメソッドを呼ぶ。FixedUpdateが好ましい。
 
-            if (!ObjectRange.Instance.InRange(thisSprite))
-            {
-                StartCoroutine(RangeCoroutine());
-            }
+            //if (!ObjectRange.Instance.InRange(thisSprite))
+            //{
+            //    StartCoroutine(RangeCoroutine());
+            //}
         }
         void GravitySwitchChange()
         {

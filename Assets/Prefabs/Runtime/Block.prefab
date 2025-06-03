@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -3131585427274710425}
   - component: {fileID: 3304902449574785773}
   - component: {fileID: 3927546956179958177}
+  - component: {fileID: -6618495560003736256}
   - component: {fileID: -17490499780033128}
   m_Layer: 0
   m_Name: Block
@@ -176,6 +177,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   hitSound: {fileID: -17490499780033128}
+--- !u!114 &-6618495560003736256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5927850515562060249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77cb0443200d97c4692e0baa8eaf127b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveRotation: 45
 --- !u!82 &-17490499780033128
 AudioSource:
   m_ObjectHideFlags: 0
@@ -185,7 +199,7 @@ AudioSource:
   m_GameObject: {fileID: 5927850515562060249}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 645584ff13273de4fad40dc7af1e2f5d, type: 2}
   m_audioClip: {fileID: 8300000, guid: f4e1853476a058741a686919071cab12, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1

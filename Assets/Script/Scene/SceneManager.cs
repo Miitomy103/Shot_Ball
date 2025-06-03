@@ -7,8 +7,6 @@ namespace ShotBall.InGame
 {
     public static class SceneControl
     {
-        public static int nowStage { get; private set; }
-        public static int nowSubStage { get; private set; }
 
         const string TITLENAME = "Title";
 
@@ -24,7 +22,7 @@ namespace ShotBall.InGame
                     if (subStage >= maxStage)
                     {
                         stage++;
-                        subStage = 0;
+                        subStage = 1;
                     }
                     else
                     {
@@ -32,8 +30,6 @@ namespace ShotBall.InGame
                     }
                     string stageName = stage + "-" + subStage;
                     SceneManager.LoadScene(stageName);
-                    nowStage = stage;
-                    nowSubStage = subStage;
                 }
                 else
                 {
@@ -46,6 +42,15 @@ namespace ShotBall.InGame
             SceneManager.LoadScene(stageName);
         }
         public static string NowStage() => SceneManager.GetActiveScene().name;
+        public static (int,int) StageInt(string name)
+        {
+            string[] stageNumbers = name.Split("-");
+            if (int.TryParse(stageNumbers[0], out int stage) && int.TryParse(stageNumbers[1], out int subStage))
+            {
+                return (stage, subStage);
+            }
+            return (0, 0);
+        }
         public static void TitleScene()
         {
             SceneManager.LoadScene(TITLENAME);

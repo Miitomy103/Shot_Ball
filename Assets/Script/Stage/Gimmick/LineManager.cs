@@ -8,7 +8,7 @@ namespace ShotBall.InGame
     {
         protected abstract Transform StartPoint { get; }
         private readonly float lineWidth = 0.05f;
-        private RuntimeDragObject dragObject;
+        private DragObject dragObject;
         protected bool InFrame
         {
             get
@@ -23,7 +23,7 @@ namespace ShotBall.InGame
         protected override void Awake()
         {
             base.Awake();
-            dragObject = GetComponent<RuntimeDragObject>();
+            dragObject = GetComponent<DragObject>();
         }
         // ÉâÉCÉìÇçÏê¨Ç∑ÇÈ
         protected void CreateLine(Transform endPoint)
@@ -41,8 +41,20 @@ namespace ShotBall.InGame
 
             lineDatas.Add(data);
         }
+        private void OnDestroy()
+        {
+            foreach(Transform t in transform)
+            {
+                if (t.TryGetComponent<LineRenderer>(out var l)) DestroyImmediate(l);
+            }
+        }
         protected void ChangePosition(int index)
         {
+            if (index < 0 || index >= lineDatas.Count)
+            {
+                Debug.LogError($"ChangePosition: index {index} is out of range. lineDatas.Count: {lineDatas.Count}");
+                return;
+            }
 
             if (lineDatas[index].obj.activeSelf && lineDatas[index].start != null && lineDatas[index].end != null)
             {
@@ -50,6 +62,7 @@ namespace ShotBall.InGame
                 lineDatas[index].renderer.SetPosition(1, lineDatas[index].end.position);
             }
         }
+
         // ÉâÉCÉìÇÃï\é¶êÿë÷
         protected void SetLineActive(int index, bool isActive)
         {
