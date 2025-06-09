@@ -14,5 +14,10 @@ namespace ShotBall.InGame
         {
             ball.TimeStop(time);   
         }
+
+        protected override string StringData()
+        {
+            return time.ToString();
+        }
     }
 }

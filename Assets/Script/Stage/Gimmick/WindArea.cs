@@ -4,10 +4,11 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    public class WindArea : AreaBase
+    public class WindArea : AreaBase,IOnOff
     {
         [SerializeField] float windPower = 5f;
         [SerializeField] Vector2 windDirection;
+        Vector2 reverseDrection;
         [SerializeField] RectTransform backArrow;
 
         protected override bool HasDirection => true;
@@ -15,18 +16,27 @@ namespace ShotBall.InGame
 
         public override string Name => "WindArea";
 
+        bool isOn;
+        public bool IsOn => isOn;
+
+        public Transform Transform => transform;
+
+        public DragObject DragObject => throw new System.NotImplementedException();
+
         List<Rigidbody2D> rigidBodies = new List<Rigidbody2D>();
 
         protected override void Start()
         {
             backArrow.rotation = DirectionAngle();
+            reverseDrection = -Direction;
         }
         private void FixedUpdate()
         {
             if (rigidBodies.Count == 0) return;
             foreach(Rigidbody2D rb in rigidBodies)
             {
-                rb.AddForce(Direction.normalized * windPower);
+                Vector2 d = isOn ? reverseDrection : Direction;
+                rb.AddForce(d.normalized * windPower);
             }
         }
         protected override void BallEnter(Collider2D other)
@@ -42,6 +52,21 @@ namespace ShotBall.InGame
             {
                 rigidBodies.Remove(rigidbody2D);
             }
+        }
+
+        protected override string StringData()
+        {
+            return windPower.ToString();
+        }
+
+        public void ItOn()
+        {
+            isOn = true;
+        }
+
+        public void ItOff()
+        {
+            isOn = false;
         }
     }
 }

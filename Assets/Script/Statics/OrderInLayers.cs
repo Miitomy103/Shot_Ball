@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,21 +6,32 @@ namespace ShotBall.InGame
 {
     public enum OrderInLayer
     {
-        Ball = 0,
+        // 背景系（〜19）
+        NoputArea=-5,
         Area = 4,
         StillnessBackSprite = 7,
-        NoDrag = 8,
-        Edge = 10,
-        Coin=12,
-        FrameRangeSprite=15,
-        Frame = 16,
-        DragBackSprite = 19,
-        DragNow = 20,
-        OnOffText=21,
-        OutSprite = 22,
-        FrameNumber=23,
-        FrameNumberUp=24,
-        FrameNumberUpUp=25,
+
+        // 固定オブジェクト（20〜39）
+        NoDrag = 20,
+        Edge = 24,
+        Coin = 26,
+
+        Ball = 39,
+
+        // フレーム系（40〜59）
+        FrameRangeSprite = 40,
+        Frame = 41,
+        DragBackSprite = 44,
+        DragNow = 48,
+
+        // UIテキストなど（60〜）
+        OnOffText = 60,
+        OutSprite = 64,
+        ObjectValue=66,
+        FrameNumber = 70,
+        FrameNumberUp = 71,
+        FrameNumberUpUp = 72,
     }
+
 
 }

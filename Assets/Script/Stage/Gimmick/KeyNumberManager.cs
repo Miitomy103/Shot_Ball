@@ -8,7 +8,7 @@ namespace ShotBall.InGame
     {
         [SerializeField] private AKeyNumber[] keyNumbers;
 
-        private void Start()
+        private void Awake()
         {
             for (int i = 0; i < keyNumbers.Length; i++)
             {
@@ -27,21 +27,15 @@ namespace ShotBall.InGame
         int index = 0;
         public void AssignKeyNumber(int number)
         {
-            if (launchPads.Length < crearAreas.Length) Debug.LogError("okashiiiii");
-            IKeyNumber[] keyNumbers = new IKeyNumber[launchPads.Length + crearAreas.Length];
             foreach (var launch in launchPads)
             {
-                keyNumbers[index++] = launch;
+                launch.KeyNumber = number;
+                launch.ColorChange(color);
             }
             foreach (var area in crearAreas)
             {
-                keyNumbers[index++] = area;
-            }
-
-            foreach(var key in keyNumbers)
-            {
-                key.KeyNumber = number;
-                key.ColorChange(color);
+                area.KeyNumber = number;
+                area.ColorChange(color);
             }
 
         }

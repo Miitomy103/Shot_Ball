@@ -30,8 +30,6 @@ namespace ShotBall.InGame
 
         public Transform Transform => transform;
 
-        public DragObject DragObject => throw new NotImplementedException();
-
         public override string Name => "GravitySwitch";
 
         protected override void Awake()
@@ -52,7 +50,7 @@ namespace ShotBall.InGame
         protected override void StageReset()
         {
             base.StageReset();
-            ChangeGravity();
+            ChangeGravity(StartAntiGravity);
             child.transform.localScale = Vector3.zero;
         }
         protected override void BallEnter(Collider2D other)
@@ -114,6 +112,11 @@ namespace ShotBall.InGame
             isOn=false;
             ChangeGravity(false);
             StartCoroutine(MakeItBigger(child.transform));
+        }
+
+        protected override string StringData()
+        {
+            return startAntiGravity.ToString();
         }
     }
 }

@@ -61,9 +61,17 @@ namespace ShotBall.InGame
             int c = 0;
             foreach(var s in all)
             {
-                s.sortingOrder = (int)OrderInLayer.DragNow;
-                c++;
+                if (s.name != "SubSprite")
+                {
+                    s.sortingOrder = (int)OrderInLayer.DragNow;
+                    c++;
+                }
+                else
+                {
+                    s.sortingOrder = -100;
+                }
             }
+            Debug.Log(c + "dragObject.childSpriteCount"+dragObject.name);
             dragObject.GetComponent<DragObject>().FitSpriteInSquare(Sprite);
 
 

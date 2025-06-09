@@ -15,7 +15,6 @@ namespace ShotBall.InGame
         }
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            Debug.Log("D");
             if (collision.gameObject.layer == ballLayer || GameLoop.StageState != StageState.Playing||!IsCollision()) return;
             BallEnter(collision);
         }

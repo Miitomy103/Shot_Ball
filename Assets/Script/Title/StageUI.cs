@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using System;
 
 namespace ShotBall.InGame
 {
@@ -15,6 +16,7 @@ namespace ShotBall.InGame
         [SerializeField] Image backImage;
         [SerializeField] Text text;
         [SerializeField] Image[] stages = new Image[5];
+        [SerializeField] StageThumbnail stageThumbnail;
         private void OnValidate()
         {
             Inialize();
@@ -23,9 +25,25 @@ namespace ShotBall.InGame
         {
             backImage.color = baseColor;
             text.text = $"Stage{stage}";
+            SaveLoad();
             for (int i = 0; i < stages.Length; i++)
             {
-                bool clear = (1 == PlayerPrefs.GetInt($"Stage{stage}-{i+1}", 0));
+                SaveLoad();
+
+                int index = i;
+                // HoverHandlerをアタッチ
+                HoverHandler handler = stages[i].gameObject.AddComponent<HoverHandler>();
+
+                // 処理を設定
+                handler.onEnter = () => ButtonEnter(index + 1);
+                handler.onExit = () => ButtonExit(index + 1);
+            }
+        }
+        public void SaveLoad()
+        {
+            for(int i = 0; i < stages.Length; i++)
+            {
+                bool clear = (1 == PlayerPrefs.GetInt($"Stage{stage}-{i + 1}", 0));
                 if (clear) stages[i].color = clearColor;
                 else stages[i].color = Color.white;
             }
@@ -44,7 +62,7 @@ namespace ShotBall.InGame
         }
         void OnClick(int index)
         {
-            SceneControl.StageChange(stage,index);
+            SceneControl.StageChange(new StageName(stage,index));
         }
         public void TestClearColor()
         {
@@ -54,6 +72,14 @@ namespace ShotBall.InGame
                 if (clear) stages[i].color = clearColor;
                 else stages[i].color = Color.white;
             }
+        }
+        void ButtonEnter(int index)
+        {
+            stageThumbnail.StageChange(new StageName(stage, index));
+        }
+        void ButtonExit(int index)
+        {
+            stageThumbnail.StageExit();
         }
     }
 }

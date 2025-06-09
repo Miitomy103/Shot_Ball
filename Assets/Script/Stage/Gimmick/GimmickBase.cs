@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace ShotBall.InGame
 {
@@ -18,6 +14,12 @@ namespace ShotBall.InGame
         protected virtual void Awake()
         {
             thisSprite = GetComponent<SpriteRenderer>();
+            if (TryGetComponent<DragObject>(out var drag))
+            {
+                drag.DragStartAction += DragStart;
+                drag.DragAction += Drag;
+                drag.DragEndAction += DragEnd;
+            }
         }
         protected virtual void Start()
         {
@@ -28,12 +30,17 @@ namespace ShotBall.InGame
             {
                 r.Action += Rotation;
             }
-            if(TryGetComponent<DragObject>(out var drag))
-            {
-                drag.DragStartAction += DragStart;
-                drag.DragAction += Drag;
-                drag.DragEndAction += DragEnd;
-            }
+
+        }
+        private void OnDestroy()
+        {
+            GameLoop.Instance.StartAction -= StageStart;
+            GameLoop.Instance.ResetAction -= StageReset;
+            GameLoop.Instance.StateChangeAction -= StateChange;
+        }
+        protected void ThisSpriteGet()
+        {
+            thisSprite = GetComponent<SpriteRenderer>();
         }
         protected virtual void StageStart() { }
         protected virtual void StageReset() { }
@@ -50,6 +57,15 @@ namespace ShotBall.InGame
             return Quaternion.Euler(0, 0, angle - 90f);
         }
         protected virtual void Rotation() { }
+        public string FrameData()
+        {
+            string sizeData = ThisSprite.size.ToString();
+            string scaleData = transform.localScale.ToString();
+            Collider2D col = GetComponent<Collider2D>();
+            string colliderTypeName = col.GetType().Name;
+            return Name+sizeData+scaleData+colliderTypeName + StringData();
+        }
+        protected virtual string StringData() { return ""; }
         protected void ColorChangeA(float a)
         {
             float colorA = Mathf.Clamp(a, 0, 1);

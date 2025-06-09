@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7401630718925177431}
   - component: {fileID: 32783626167105480}
   - component: {fileID: 1203404066162103524}
-  - component: {fileID: 8055204494545363465}
   - component: {fileID: 6084280783939970286}
+  - component: {fileID: -3133402582866826759}
   m_Layer: 0
   m_Name: SwichBlock
   m_TagString: Untagged
@@ -149,19 +149,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   switchSound: {fileID: 6084280783939970286}
---- !u!114 &8055204494545363465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1993153186666092458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98b740e98fa3cc64bae506bc18f6311a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  behaviourType: 0
 --- !u!82 &6084280783939970286
 AudioSource:
   m_ObjectHideFlags: 0
@@ -258,3 +245,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-3133402582866826759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993153186666092458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a724d9da07953fc4582da7752be2be03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

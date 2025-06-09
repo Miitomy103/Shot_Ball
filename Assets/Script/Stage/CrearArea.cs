@@ -15,6 +15,7 @@ namespace ShotBall.InGame
 
         public void ColorChange(Color color)
         {
+            if(ThisSprite == null) ThisSpriteGet();
             ThisSprite.color = color;
         }
 

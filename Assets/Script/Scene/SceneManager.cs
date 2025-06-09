@@ -36,20 +36,20 @@ namespace ShotBall.InGame
                     TitleScene();
                 }
         }
-        public static void StageChange(int stage,int subStage)
+        public static void StageChange(StageName stage)
         {
-            string stageName = stage + "-" + subStage;
+            string stageName = stage.mainStage + "-" + stage.subStage;
             SceneManager.LoadScene(stageName);
         }
         public static string NowStage() => SceneManager.GetActiveScene().name;
-        public static (int,int) StageInt(string name)
+        public static StageName StageInt(string name)
         {
             string[] stageNumbers = name.Split("-");
             if (int.TryParse(stageNumbers[0], out int stage) && int.TryParse(stageNumbers[1], out int subStage))
             {
-                return (stage, subStage);
+                return new StageName(stage, subStage);
             }
-            return (0, 0);
+            return new (0, 0);
         }
         public static void TitleScene()
         {

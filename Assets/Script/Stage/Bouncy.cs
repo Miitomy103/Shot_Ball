@@ -1,5 +1,7 @@
 using ShotBall.InGame;
 using System.Collections;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bouncy : CollisionBase
@@ -12,6 +14,24 @@ public class Bouncy : CollisionBase
 
     public override string Name => "Bouncy";
 
+    [SerializeField] TextMeshPro text;
+
+    protected override void Start()
+    {
+        base.Start();
+        float value = bounceForce;
+        float roundedValue = Mathf.Round(value * 10f) / 10f;
+        text.text = roundedValue.ToString();
+        text.gameObject.SetActive(false);
+    }
+    //private void OnMouseEnter()
+    //{
+    //    text.gameObject.SetActive(true);
+    //}
+    //private void OnMouseExit()
+    //{
+    //    text.gameObject.SetActive(false);
+    //}
     protected override void BallEnter(Collision2D collision)
     {
         StartCoroutine(BoundAnimation());
@@ -53,5 +73,10 @@ public class Bouncy : CollisionBase
             yield return new WaitForEndOfFrame();
         }
         //transform.localScale = startScale;
+    }
+
+    protected override string StringData()
+    {
+        return $"{bounceForce}";
     }
 }

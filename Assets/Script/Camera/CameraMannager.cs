@@ -9,7 +9,8 @@ namespace ShotBall.InGame
         public Camera cam;
         public Transform leftWall;
         public Transform rightWall;
-        [SerializeField] float wallWidthInScreenPercent = 0.17f; // 壁が画面幅の5%に見える
+
+        [SerializeField] float centerWorldWidth = 6f; // 中央のスペースをワールド単位で指定
 
         private void Awake()
         {
@@ -22,13 +23,18 @@ namespace ShotBall.InGame
             if (cam == null) cam = Camera.main;
             AdjustWalls();
         }
+
         public void OnGUIButton()
         {
-#if UNITY_EDITOR
             if (cam == null) cam = Camera.main;
             AdjustWalls();
-#endif
         }
+        public void Culcuration()
+        {
+            float f = cam.orthographicSize / 5;
+            Debug.Log(centerWorldWidth = 11.8f * f);
+        }
+
         void AdjustWalls()
         {
             try
@@ -36,15 +42,15 @@ namespace ShotBall.InGame
                 float height = cam.orthographicSize * 2f;
                 float width = height * cam.aspect;
 
-                // ワールド座標における見た目上の壁の幅（画面幅に対して何％か）
-                float desiredWallWidth = width * wallWidthInScreenPercent;
+                // 壁の幅をワールド単位で計算
+                float wallWidth = (width - centerWorldWidth) / 2f;
+                if (wallWidth < 0f) wallWidth = 0f; // 負の幅を防ぐ
 
-                // 実際のスプライトサイズを取得（1単位がスプライト全体の幅・高さになる前提）
+                // スプライト1単位サイズ前提（必要に応じてSpriteRendererから取得してもOK）
                 Vector3 spriteSize = Vector3.one;
 
-                // 壁のスケールを調整して「見た目の幅 = desiredWallWidth」「高さ = カメラの高さ」
                 Vector3 wallScale = new Vector3(
-                    desiredWallWidth / spriteSize.x,
+                    wallWidth / spriteSize.x,
                     height / spriteSize.y,
                     1f
                 );
@@ -52,28 +58,28 @@ namespace ShotBall.InGame
                 if (leftWall != null)
                 {
                     leftWall.localScale = wallScale;
-                    leftWall.position = new Vector3(cam.transform.position.x - width / 2f + desiredWallWidth / 2f, cam.transform.position.y, 0f);
+                    leftWall.position = new Vector3(cam.transform.position.x - width / 2f + wallWidth / 2f, cam.transform.position.y, 0f);
                 }
 
                 if (rightWall != null)
                 {
                     rightWall.localScale = wallScale;
-                    rightWall.position = new Vector3(cam.transform.position.x + width / 2f - desiredWallWidth / 2f, cam.transform.position.y, 0f);
+                    rightWall.position = new Vector3(cam.transform.position.x + width / 2f - wallWidth / 2f, cam.transform.position.y, 0f);
                 }
 
-                float left = cam.transform.position.x - width / 2 + desiredWallWidth;
-                float right = cam.transform.position.x + width / 2f - desiredWallWidth;
+                // 中央の範囲（左右の壁の内側）を通知
+                float left = cam.transform.position.x - width / 2f + wallWidth;
+                float right = cam.transform.position.x + width / 2f - wallWidth;
 
-                Vector3 leftUp = new Vector3(left, height / 2);
-                Vector3 rightDown = new Vector3(right, -(height / 2));
+                Vector3 leftUp = new Vector3(left, height / 2f);
+                Vector3 rightDown = new Vector3(right, -height / 2f);
 
                 ObjectRange.Instance.CameraSizeChange(leftUp, rightDown);
             }
             catch
             {
-
+                Debug.LogWarning("AdjustWalls failed. Check references and sprite settings.");
             }
         }
     }
-
 }

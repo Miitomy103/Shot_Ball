@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 4899617931069398681}
   - component: {fileID: 7284439586543942226}
   - component: {fileID: -393910535197830898}
-  - component: {fileID: 2123319213066603957}
   - component: {fileID: -7906268233215227091}
   - component: {fileID: -4003031961456340015}
   - component: {fileID: -7395542021125567027}
+  - component: {fileID: -329501603783622856}
   m_Layer: 0
   m_Name: BallLauncher
   m_TagString: Untagged
@@ -169,19 +169,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 1, y: 1}
---- !u!114 &2123319213066603957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1396885561186007638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98b740e98fa3cc64bae506bc18f6311a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  behaviourType: 0
 --- !u!82 &-7906268233215227091
 AudioSource:
   m_ObjectHideFlags: 0
@@ -387,6 +374,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveRotation: 45
+--- !u!114 &-329501603783622856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396885561186007638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a724d9da07953fc4582da7752be2be03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4795758543523663149
 GameObject:
   m_ObjectHideFlags: 0

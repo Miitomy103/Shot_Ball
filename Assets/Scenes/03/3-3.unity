@@ -864,6 +864,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 64708628945540237, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: centerWorldWidth
+      value: 17.7708
+      objectReference: {fileID: 0}
+    - target: {fileID: 64708628945540237, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: wallWidthInScreenPercent
       value: 0.17
       objectReference: {fileID: 0}
@@ -909,7 +913,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3408701233431026349, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4.551467
+      value: 4.5012674
       objectReference: {fileID: 0}
     - target: {fileID: 3408701233431026349, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_LocalScale.y
@@ -917,11 +921,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3408701233431026349, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.110933
+      value: -11.136034
       objectReference: {fileID: 0}
     - target: {fileID: 4207839091925163197, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4.551467
+      value: 4.5012674
       objectReference: {fileID: 0}
     - target: {fileID: 4207839091925163197, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_LocalScale.y
@@ -929,7 +933,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4207839091925163197, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.110933
+      value: 11.136034
       objectReference: {fileID: 0}
     - target: {fileID: 4514052053226017914, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_Name

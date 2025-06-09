@@ -26,11 +26,14 @@ namespace ShotBall.InGame
             child.localRotation = DirectionAngle();
             base.Start();
         }
+        protected override void OrderChange()
+        {
+           
+        }
         protected override void BallEnter(Collider2D other)
         {
             base.BallEnter(other);
             if (inBall) return;
-            Debug.Log("AA");
             StartCoroutine(Coroutine(other.gameObject.GetComponent<Rigidbody2D>()));
         }
         protected override void Rotation()
@@ -55,5 +58,9 @@ namespace ShotBall.InGame
             launchSound.Play();
         }
 
+        protected override string StringData()
+        {
+            return launchPower.ToString();
+        }
     }
 }

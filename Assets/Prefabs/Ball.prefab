@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e729a7aa170d33d4ab05a42f4f280901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigid: {fileID: 0}
   dieEffect: {fileID: 4352689600152266540, guid: 962f17d5e752d7147b3cf4024c2427a9, type: 3}
   antiGravitySound: {fileID: 4352074931367197442}
   gravitySound: {fileID: 4352074931367197442}

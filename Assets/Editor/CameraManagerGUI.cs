@@ -17,6 +17,10 @@ namespace ShotBall.InGame
             {
                 camera.OnGUIButton();
             }
+            if (GUILayout.Button("Culcuration"))
+            {
+                camera.Culcuration();
+            }
         }
     }
 }

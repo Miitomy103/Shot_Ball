@@ -58,7 +58,7 @@ namespace ShotBall.InGame
             {
                 useTriggers = false,
                 useLayerMask = true,
-                layerMask = Physics2D.DefaultRaycastLayers
+                 layerMask = Physics2D.DefaultRaycastLayers
             };
 
             // 再利用可能な結果リスト
@@ -66,7 +66,7 @@ namespace ShotBall.InGame
 
             // 自身の Collider を除外対象として登録
             HashSet<Collider2D> selfColliders = new HashSet<Collider2D>();
-            foreach (var c in children)
+           foreach (var c in children)
             {
                 if (c.colli != null)
                     selfColliders.Add(c.colli);

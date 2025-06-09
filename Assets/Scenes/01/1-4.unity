@@ -723,6 +723,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a975587b0bc9d94b9663d278cea5d88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballLayer:
+    serializedVersion: 2
+    m_Bits: 6
 --- !u!4 &1365435539 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1196045839599851315, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
@@ -1003,6 +1006,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 64708628945540237, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: centerWorldWidth
+      value: 11.8
+      objectReference: {fileID: 0}
     - target: {fileID: 298535721430121843, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3
@@ -1030,6 +1037,22 @@ PrefabInstance:
     - target: {fileID: 2418309661601259651, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_LocalPosition.y
       value: -2.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408701233431026349, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.9888892
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408701233431026349, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.3944445
+      objectReference: {fileID: 0}
+    - target: {fileID: 4207839091925163197, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.9888892
+      objectReference: {fileID: 0}
+    - target: {fileID: 4207839091925163197, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.3944445
       objectReference: {fileID: 0}
     - target: {fileID: 4514052053226017914, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_Name

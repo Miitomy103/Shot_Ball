@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 namespace ShotBall.InGame
@@ -14,7 +12,6 @@ namespace ShotBall.InGame
 
         SubSprite backSprite;
         SubSprite outSprite;
-
 
         protected SpriteRenderer thisSprite { get; private set; }
 
@@ -130,11 +127,13 @@ namespace ShotBall.InGame
             {
                 thisSprite.sortingOrder = (int)OrderInLayer.DragNow;
                 if(backSprite!=null) backSprite.LayerChange((int)OrderInLayer.DragBackSprite);
+                Debug.Log("OrderInLayerChange: DragNow " + thisSprite.name + " " + thisSprite.sortingOrder);
             }
             else
             {
                 thisSprite.sortingOrder = (int)OrderInLayer.NoDrag;
                 if (backSprite != null) backSprite.LayerChange((int)OrderInLayer.StillnessBackSprite);
+                Debug.Log("OrderInLayerChange: NoDrag " + thisSprite.name + " " + thisSprite.sortingOrder);
             }
         }
         public void OnDestroy()

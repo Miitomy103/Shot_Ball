@@ -131,6 +131,50 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 53928249881645904, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 53928249881645904, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 843734269652872749, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 893496998539238894, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2420356270696955604, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2420356270696955604, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2420356270696955604, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408701233431026349, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4.933334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408701233431026349, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.366667
+      objectReference: {fileID: 0}
+    - target: {fileID: 4207839091925163197, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4.933334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4207839091925163197, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.366667
+      objectReference: {fileID: 0}
     - target: {fileID: 4514052053226017914, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_Name
       value: GameObject

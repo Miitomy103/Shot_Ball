@@ -15,7 +15,7 @@ namespace ShotBall.InGame
 
         public override string Name => "LaunchPad";
 
-        Color color;
+        Color color = Color.white;
 
         protected override void Start()
         {
@@ -34,6 +34,7 @@ namespace ShotBall.InGame
         {
             GameObject b = Instantiate(ballPrefab, transform.position, Quaternion.identity);
             ball = b.GetComponent<Ball>();
+            ball.ColorChange(color);
             if (isAntiGravity) ball.ChangeGravity();
         }
         protected override void StageReset()
@@ -55,7 +56,6 @@ namespace ShotBall.InGame
         public void ColorChange(Color color)
         {
             this.color = color;
-            ball.ColorChange(color);
         }
     }
 }

@@ -14,11 +14,12 @@ namespace ShotBall.InGame
         [SerializeField] Text stageText;
 
 
-        public void Result(IGet[] coins)
+        public void Result()
         {
+            IGet[] coins = GameLoop.Coins;
             result.SetActive(true);
 
-            for(int i=0;i<coins.Length;i++)
+            for (int i = 0; i < coins.Length; i++)
             {
                 if (coins[i].Get)
                 {
@@ -34,10 +35,25 @@ namespace ShotBall.InGame
         {
             result.gameObject.SetActive(false);
             GameLoop.Instance.GameReset();
+            foreach (var coin in Coins)
+            {
+                coin.gameObject.SetActive(false);
+            }
         }
         public void NextStage()
         {
-
+            SaveCoin();
+            SceneControl.NextScene(SceneControl.NowStage());
+        }
+        public void BackToTitle()
+        {
+            SaveCoin();
+            SceneControl.TitleScene();
+        }
+        void SaveCoin()
+        {
+            IGet[] coins = GameLoop.Coins;
+            DataSave.CoinSave(SceneControl.StageInt(SceneControl.NowStage()), coins);
         }
     }
 }

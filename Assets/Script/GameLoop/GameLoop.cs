@@ -22,21 +22,21 @@ namespace ShotBall.InGame
 
         private StageState OnceState;
 
-        IGet[] Coins = new IGet[3];
+        public static IGet[] Coins { get; set; }
 
         int goalCount;
-
-        int coinCount;
 
         readonly int coinQuantity = 3;
 
         protected virtual void Awake()
         {
             instance = this;
+            Coins = new IGet[coinQuantity];
+            Time.timeScale = 1;
         }
         protected virtual void Start()
         {
-            StageState = StageState.Setting;
+            ChangeState(StageState.Setting);
         }
         public void GameStart()
         {
@@ -63,13 +63,11 @@ namespace ShotBall.InGame
         }
         void GameClear()
         {
-            resultManager.Result(Coins);
+            resultManager.Result();
             ChangeState(StageState.Clear);
 
-            var ints = SceneControl.StageInt(SceneControl.NowStage());
-            PlayerPrefs.SetInt($"Stage{ints.Item1}-{ints.Item2}",1);
-            Debug.Log($"Stage{ints.Item1}-{ints.Item2}" + "Save");
-            PlayerPrefs.Save();
+            StageName s = SceneControl.StageInt(SceneControl.NowStage());
+            DataSave.StageSave(s, true);
         }
         public void ClearAreaCheck(Ball ball)
         {
@@ -82,10 +80,6 @@ namespace ShotBall.InGame
         public void CoinSet(IGet[] coins)
         {
             Coins = coins;
-        }
-        public void GetCoin()
-        {
-            coinCount++;
         }
         public void ChangeState(StageState stageState)
         {

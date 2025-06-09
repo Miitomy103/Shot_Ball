@@ -39,6 +39,11 @@ namespace ShotBall.InGame
             base.Start();
             WarpManager.AddWarp(this);
         }
+        protected override void StageReset()
+        {
+            base.StageReset();
+            didWarp = false;
+        }
         public void ChildGenerate(WarpChild warpChild)
         {
             for(int i=0;i<warpChildren.Length;i++)

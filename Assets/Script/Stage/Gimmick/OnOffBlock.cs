@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using static Unity.VisualScripting.Metadata;
 
 namespace ShotBall.InGame
 {
@@ -96,6 +92,7 @@ namespace ShotBall.InGame
         protected override void StageReset()
         {
             base.StageReset();
+            Debug.Log("StageReset: OnOffBlock");
             OnOffChange(startIsOn);
         }
         protected override void BallEnter(Collider2D collider)
@@ -124,8 +121,11 @@ namespace ShotBall.InGame
         private void OnOffChange(bool on)
         {
             isOn = on;
-            onObject.SetActive(on);
-            offObject.SetActive(!on);
+            if (onObject != null && offObject != null)
+            {
+                onObject.SetActive(on);
+                offObject.SetActive(!on);
+            }
             foreach (var i in IOnOffs)
             {
                 if (on)
@@ -134,6 +134,16 @@ namespace ShotBall.InGame
                     i.ItOff();
             }
 
+        }
+
+        protected override string StringData()
+        {
+            string a = "";
+            foreach(var i in Targets)
+            {
+                a += i.name;
+            }
+            return startIsOn.ToString()+a;
         }
     }
 }

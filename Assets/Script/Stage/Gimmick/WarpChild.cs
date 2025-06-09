@@ -14,16 +14,17 @@ namespace ShotBall.InGame
 
         public override string Name => "WarpChild";
 
-        RuntimeDragObject dragObject;
-        protected override void Awake()
-        {
-            base.Awake();
-            dragObject = GetComponent<RuntimeDragObject>();
-        }
         protected override void Start()
         {
             base.Start();
-            parentWarp = WarpManager.WarpAvailable();
+            if(GetComponent<DragObject>() == null)
+            {
+                parentWarp=transform.parent.GetComponent<Warp>();
+            }
+            else
+            {
+                parentWarp = WarpManager.WarpAvailable();
+            }
             if (parentWarp == null) return;
             parentWarp.ChildGenerate(this);
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    public abstract class DragObject : MonoBehaviour
+    public abstract class DragObject : ObjectBase
     {
         public string Name { get; protected set; }
         protected bool IsDragging { get; set; }
@@ -91,7 +91,6 @@ namespace ShotBall.InGame
             EndDragDerivation(inputScreenPos);
         }
         protected abstract void EndDragDerivation(Vector3 inputScreenPos);
-        protected abstract bool IsOverLapping();
         protected abstract bool CanDrag();
         protected void InitalPositionReset()
         {
@@ -101,7 +100,7 @@ namespace ShotBall.InGame
             if (inFrame)
             {
                 frameScript.PutIn();
-                Destroy(this);
+                Destroy(gameObject);
             }
         }
         protected abstract bool InRange();
@@ -119,7 +118,6 @@ namespace ShotBall.InGame
             {
                 if (hit.isTrigger && hit.gameObject.TryGetComponent<FramesManager>(out var f))
                 {
-                    Debug.Log("Frame‚ ‚è");
                     frame = f;
                     return true;
                 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3554616654602372756}
   - component: {fileID: 1420472290603619195}
   - component: {fileID: 4477660987323771205}
-  - component: {fileID: 3252359179758749799}
+  - component: {fileID: 556113997418865595}
   m_Layer: 0
   m_Name: TheWorld
   m_TagString: Untagged
@@ -138,7 +138,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.46
---- !u!114 &3252359179758749799
+--- !u!114 &556113997418865595
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,7 +147,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6822693387543088560}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98b740e98fa3cc64bae506bc18f6311a, type: 3}
+  m_Script: {fileID: 11500000, guid: a724d9da07953fc4582da7752be2be03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviourType: 0

@@ -8,7 +8,6 @@ namespace ShotBall.InGame
     {
         bool IsOn { get;}
         public Transform Transform { get; }
-        public DragObject DragObject { get; }
         void ItOn();
         void ItOff();
     }

@@ -1,14 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
-using UnityEngineInternal;
 
 namespace ShotBall.InGame
 {
     public class Ball : MonoBehaviour,IAntiGravity,IKeyNumber
     {
-        private Rigidbody2D rigid;
+        [SerializeField] private Rigidbody2D rigid;
         public new CircleCollider2D collider { get; private set; }
 
         [SerializeField] ParticleSystem dieEffect;

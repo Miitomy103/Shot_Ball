@@ -7,8 +7,8 @@ namespace ShotBall.InGame
 {
     public class ObjectRange : MonoBehaviour
     {
-        Vector2 pointA;
-        Vector2 pointB;
+        public static Vector2 pointA { get; private set; } 
+        public static Vector2 pointB { get; private set; }
 
         static ObjectRange instance;
         public static ObjectRange Instance => instance;
