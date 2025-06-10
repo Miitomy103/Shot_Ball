@@ -59,13 +59,14 @@ namespace ShotBall.InGame
         protected virtual void Rotation() { }
         public string FrameData()
         {
-            string sizeData = ThisSprite.size.ToString();
-            string scaleData = transform.localScale.ToString();
-            Collider2D col = GetComponent<Collider2D>();
-            string colliderTypeName = col.GetType().Name;
-            return Name+sizeData+scaleData+colliderTypeName + StringData();
+            //string sizeData = ThisSprite.size.ToString();
+            //string scaleData = transform.localScale.ToString();
+            //Collider2D col = GetComponent<Collider2D>();
+            //string colliderTypeName = col.GetType().Name;
+            //return Name+sizeData+scaleData+colliderTypeName + StringData();
+            return StringData();
         }
-        protected virtual string StringData() { return ""; }
+        protected virtual string StringData() { return string.Empty; }
         protected void ColorChangeA(float a)
         {
             float colorA = Mathf.Clamp(a, 0, 1);
