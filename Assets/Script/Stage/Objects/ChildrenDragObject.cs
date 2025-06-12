@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    public class ChindrenDragObject : DragObject
+    public class ChildrenDragObject : DragObject
     {
         ChildData[] children;
         protected override void Awake()

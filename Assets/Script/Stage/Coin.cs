@@ -12,7 +12,11 @@ namespace ShotBall.InGame
 
         public override string Name => "Coin";
 
+        static float pitch = 1;
+
         readonly float time = 1f;
+
+        [SerializeField] AudioSource enterSound;
 
         CoinAnimation anim;
 
@@ -32,6 +36,11 @@ namespace ShotBall.InGame
         {
             ThisSprite.sortingOrder = (int)OrderInLayer.Coin;
         }
+        protected override void StageStart()
+        {
+            base.StageStart();
+            pitch = 1;
+        }
         protected override void StageReset()
         {
             base.StageReset();
@@ -41,12 +50,15 @@ namespace ShotBall.InGame
             gameObject.SetActive(true);
             anim.RotateStop();
             transform.position = startPos;
+
+            pitch = 1;
         }
 
         protected override void BallEnter(Collider2D other)
         {
             if (Get) return;
             GetCoin();
+
         }
 
         void GetCoin()
@@ -54,6 +66,10 @@ namespace ShotBall.InGame
             get = true;
 
             anim.Rotate(3, GetAfter);
+
+            enterSound.pitch = pitch;
+            enterSound.Play();
+            pitch += 0.2f;
         }
         void GetAfter()
         {

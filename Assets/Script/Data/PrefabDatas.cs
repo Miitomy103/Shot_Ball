@@ -9,7 +9,7 @@ namespace ShotBall.Data
     [CreateAssetMenu(fileName = "PrefabDatas", menuName = "ScriptableObjects/PrefabDatas", order = 1)]
     public class PrefabDatas : ScriptableObject
     {
-        [SerializeField]Prefab[] prefabs;
+        [SerializeField]public Prefab[] prefabs;
         private void OnValidate()
         {
             for(int i = 0; i < prefabs.Length; i++)

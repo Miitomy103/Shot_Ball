@@ -32,10 +32,10 @@ namespace ShotBall.Data
             {
                 RuntimeDragObject => ObjectType.Runtime,
                 EditorDragObject => ObjectType.Editor,
-                ChindrenDragObject => ObjectType.Children,
+                ChildrenDragObject => ObjectType.Children,
                 _ => throw new InvalidOperationException("Unknown object type.")
             };
-            if(objectBase is ChindrenDragObject childrenDragObject)
+            if(objectBase is ChildrenDragObject childrenDragObject)
             {
                 childData = new BlockData[childrenDragObject.transform.childCount];
                 for (int i = 0; i < childrenDragObject.transform.childCount; i++)
@@ -56,6 +56,7 @@ namespace ShotBall.Data
             {
                 GimickName = gimmick.Name;
                 GimmickData = gimmick.FrameData();
+                Debug.Log("GimmickData: " + GimmickData);
             }
         }
     }

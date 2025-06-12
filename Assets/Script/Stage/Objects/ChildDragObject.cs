@@ -6,10 +6,10 @@ namespace ShotBall.InGame
 {
     public class ChildDragObject : MonoBehaviour
     {
-        ChindrenDragObject Parent;
+        ChildrenDragObject Parent;
         private void Start()
         {
-            Parent = transform.parent.gameObject.GetComponent<ChindrenDragObject>();
+            Parent = transform.parent.gameObject.GetComponent<ChildrenDragObject>();
         }
         private void OnMouseDown()
         {

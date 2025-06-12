@@ -10,7 +10,7 @@ namespace ShotBall.InGame
 
         public override string Name => "NormalBlock";
 
-        bool isOn;
+        bool isOn = true;
         public bool IsOn => isOn;
 
         public Transform Transform => transform;
@@ -36,6 +36,7 @@ namespace ShotBall.InGame
         protected override void BallEnter(Collision2D collision)
         {
             hitSound.Play();
+            Debug.Log($"hitSound");
         }
         protected override bool IsCollision()
         {

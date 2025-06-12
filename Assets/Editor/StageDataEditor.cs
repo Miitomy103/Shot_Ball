@@ -18,6 +18,16 @@ namespace ShotBall.Data
                 stageData.Save();
                 Debug.Log("Stage data saved successfully.");
             }
+            if(GUILayout.Button("Load Stage Data"))
+            {
+                stageData.LoadFile();
+                Debug.Log("Stage data loaded successfully.");
+            }
+            if (GUILayout.Button("Clear Stage Data"))
+            {
+                stageData.DelateObject();
+                Debug.Log("Stage data cleared.");
+            }
         }
     }
 }

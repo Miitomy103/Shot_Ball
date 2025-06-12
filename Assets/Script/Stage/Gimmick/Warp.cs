@@ -20,6 +20,8 @@ namespace ShotBall.InGame
 
         public override string Name => "Warp";
 
+        [SerializeField] AudioSource warpSound;
+
         private void OnValidate()
         {
             if(!IsWarpChildren()) warpChildren = GetComponentsInChildren<WarpChild>();
@@ -94,6 +96,7 @@ namespace ShotBall.InGame
                 {
                     didWarp = true;
                     other.transform.position = warpChildren[i].transform.position;
+                    warpSound.Play();
                 }
             }
         }

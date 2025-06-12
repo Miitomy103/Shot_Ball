@@ -20,7 +20,7 @@ namespace ShotBall.InGame
         [SerializeField] AudioSource antiGravitySound;
         [SerializeField] AudioSource gravitySound;
 
-        [SerializeField] AudioSource dieSound;
+        [SerializeField] AudioSource dieSoundPrefab;
 
         public int KeyNumber { get; set; }
 
@@ -73,10 +73,18 @@ namespace ShotBall.InGame
             {
                 GravitySwitch.Instance.Action -= GravitySwitchChange;
             }
-            dieSound.PlayOneShot(dieSound.clip);
-            gameObject.SetActive(false);
+            StartCoroutine(DieCoroutine());
+        }
+        IEnumerator DieCoroutine()
+        {
+            AudioSource dieSound = Instantiate(dieSoundPrefab, transform.position, Quaternion.identity);
+            dieSound.Play();
+            Destroy(dieSound, 3f);
+
             GameObject eff = Instantiate(dieEffect.gameObject, transform.position, dieEffect.transform.rotation);
             Destroy(eff, 3f);
+            gameObject.SetActive(false);
+            yield return new WaitForSeconds(0.5f);
             GameLoop.Instance.GameReset();
         }
         private void SetLocalGravity()
@@ -145,3 +153,5 @@ namespace ShotBall.InGame
         }
     }
 }
+
+

@@ -209,96 +209,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a724d9da07953fc4582da7752be2be03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &202351394 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4514052053226017914, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
-  m_PrefabInstance: {fileID: 1538165551}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &202351395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 202351394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9066775711eca545ade69fdecdc445d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Datas:
-  - GimickName: 
-    Position: {x: -3.6, y: -0.99, z: 0}
-    Scale: {x: 1.55, y: 0.5, z: 1}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-    size: {x: 1, y: 1}
-    color: {r: 0.96981126, g: 0.96981126, b: 0.96981126, a: 1}
-    Type: 0
-    childData: []
-    GimmickData: 
-  - GimickName: 
-    Position: {x: -3.6, y: -0.99, z: 0}
-    Scale: {x: 1.55, y: 0.5, z: 1}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-    size: {x: 1, y: 1}
-    color: {r: 0.96981126, g: 0.96981126, b: 0.96981126, a: 1}
-    Type: 0
-    childData: []
-    GimmickData: 
-  - GimickName: 
-    Position: {x: -3.6, y: -0.99, z: 0}
-    Scale: {x: 1.55, y: 0.5, z: 1}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-    size: {x: 1, y: 1}
-    color: {r: 0.96981126, g: 0.96981126, b: 0.96981126, a: 1}
-    Type: 0
-    childData: []
-    GimmickData: 
-  - GimickName: 
-    Position: {x: -3.6, y: -0.99, z: 0}
-    Scale: {x: 1.55, y: 0.5, z: 1}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-    size: {x: 1, y: 1}
-    color: {r: 0.96981126, g: 0.96981126, b: 0.96981126, a: 1}
-    Type: 0
-    childData: []
-    GimmickData: 
-  - GimickName: 
-    Position: {x: -3.6, y: -0.99, z: 0}
-    Scale: {x: 1.55, y: 0.5, z: 1}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-    size: {x: 1, y: 1}
-    color: {r: 0.96981126, g: 0.96981126, b: 0.96981126, a: 1}
-    Type: 0
-    childData: []
-    GimmickData: 
-  - GimickName: 
-    Position: {x: 0, y: -2.67, z: 0}
-    Scale: {x: 5.8136, y: 0.5, z: 1}
-    Rotation: {x: -0, y: -0, z: -0.17364825, w: 0.9848078}
-    size: {x: 1, y: 1}
-    color: {r: 0.96981126, g: 0.96981126, b: 0.96981126, a: 1}
-    Type: 1
-    childData: []
-    GimmickData: 
-  - GimickName: 
-    Position: {x: 4.3, y: -3.1, z: 0}
-    Scale: {x: 0.15, y: 0.15, z: 0.15}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-    size: {x: 10.8, y: 10.8}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    Type: 1
-    childData: []
-    GimmickData: 
-  - GimickName: 
-    Position: {x: -3.54, y: 3.34, z: 0}
-    Scale: {x: 1, y: 1, z: 1}
-    Rotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-    size: {x: 1, y: 1}
-    color: {r: 0.6830188, g: 0.6830188, b: 0.6830188, a: 1}
-    Type: 1
-    childData: []
-    GimmickData: 
 --- !u!1001 &574476915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -931,10 +841,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1196045839599851315, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       insertIndex: 0
       addedObject: {fileID: 775773085}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4514052053226017914, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 202351395}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
 --- !u!4 &1538165552 stripped
 Transform:

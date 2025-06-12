@@ -35,3 +35,13 @@ MonoBehaviour:
     prefab: {fileID: 6822693387543088560, guid: 3a3eb5b8377c55f49ad76c654631b873, type: 3}
   - name: Warp
     prefab: {fileID: 7695943442504705210, guid: 96ee178c549cdfb48809f92b70ed8c35, type: 3}
+  - name: ChildrenDragObject
+    prefab: {fileID: 7955080270523930391, guid: de85bb75e0a5d6647bc324e1a66f4bc7, type: 3}
+  - name: AutoRotator
+    prefab: {fileID: 3409614123601732474, guid: b660497e06cabba4f9a179e94a9de148, type: 3}
+  - name: Coin
+    prefab: {fileID: 6847386141827474346, guid: d5894b2eb5d1d8743af616d9bbf2b6ff, type: 3}
+  - name: LaunchPad
+    prefab: {fileID: 5258736511331378134, guid: 83a26fc42768de343833bcbbab8abd9f, type: 3}
+  - name: LaunchPad
+    prefab: {fileID: 9168146724725515901, guid: fd19d353cda2ade488d91f413beb2307, type: 3}
