@@ -12,7 +12,7 @@ namespace ShotBall.InGame
         public static GameLoop Instance => instance;
         public static StageState StageState { get; private set; }
 
-        [SerializeField] LaunchPad[] launchPads;
+        [SerializeField]public List<LaunchPad> launchPads = new List<LaunchPad>();
 
         [SerializeField] ResultManager resultManager;
 
@@ -22,16 +22,13 @@ namespace ShotBall.InGame
 
         private StageState OnceState;
 
-        public static IGet[] Coins { get; set; }
+        public static IGet[] Coins { get; set; } = new IGet[3];
 
-        int goalCount;
-
-        readonly int coinQuantity = 3;
+        [SerializeField] int goalCount;
 
         protected virtual void Awake()
         {
             instance = this;
-            Coins = new IGet[coinQuantity];
             Time.timeScale = 1;
         }
         protected virtual void Start()
@@ -72,7 +69,7 @@ namespace ShotBall.InGame
         public void ClearAreaCheck(Ball ball)
         {
             goalCount++;
-            if(goalCount>=launchPads.Length)
+            if(goalCount>=launchPads.Count)
             {
                 GameClear();
             }

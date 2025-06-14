@@ -6,16 +6,16 @@ namespace ShotBall.InGame
 {
     public abstract class AreaBaseTogether : AreaBase
     {
-        protected override void BallEnter(Collider2D other)
+        protected override void BallEnter(Ball other)
         {
             BallCheck(other);
         }
 
-        protected override void BallExit(Collider2D other)
+        protected override void BallExit(Ball other)
         {
             BallCheck(other);
         }
 
-        protected abstract void BallCheck(Collider2D other);
+        protected abstract void BallCheck(Ball other);
     }
 }

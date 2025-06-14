@@ -86,7 +86,7 @@ namespace ShotBall.InGame
             }
             return true;
         }
-        public void OnBallInWarp(Collider2D other,WarpChild warpChild)
+        public void OnBallInWarp(Ball other,WarpChild warpChild)
         {
             if (!IsLine()) return;
             if (didWarp) return;

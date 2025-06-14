@@ -53,6 +53,7 @@ namespace ShotBall.InGame
         void SaveCoin()
         {
             IGet[] coins = GameLoop.Coins;
+            Debug.Log("Save Coins");
             DataSave.CoinSave(SceneControl.StageInt(SceneControl.NowStage()), coins);
         }
     }

@@ -19,5 +19,10 @@ namespace ShotBall.InGame
         {
             return time.ToString();
         }
+        public override void LoadData(string data)
+        {
+            base.LoadData(data);
+            time = float.Parse(data);
+        }
     }
 }

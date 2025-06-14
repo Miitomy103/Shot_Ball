@@ -8,12 +8,14 @@ namespace ShotBall.InGame
     {
         [SerializeField] float launchPower = 40f;
         [SerializeField] Vector2 launchDirection;
-        float coolTime = 0.5f;
+        const float coolTime = 0.5f;
 
         protected override bool HasDirection => true;
         protected override Vector2 Direction => launchDirection;
 
         public override string Name => "BallLauncher";
+
+        IEnumerator Cor;
 
         bool inBall;
         Transform child;
@@ -28,9 +30,9 @@ namespace ShotBall.InGame
         }
         protected override void OrderChange()
         {
-           
+
         }
-        protected override void BallEnter(Collider2D other)
+        protected override void BallEnter(Ball other)
         {
             base.BallEnter(other);
             if (inBall) return;
@@ -54,13 +56,20 @@ namespace ShotBall.InGame
             inBall = false;
             rb.bodyType = RigidbodyType2D.Dynamic;
             Vector2 worldForce = Quaternion.Euler(0, 0, transform.eulerAngles.z) * Direction;
-            rb.AddForce(launchPower*10 * worldForce);
+            rb.AddForce(launchPower * 10 * worldForce);
             launchSound.Play();
         }
 
         protected override string StringData()
         {
-            return launchPower.ToString();
+            return $"{launchPower},{launchDirection.x},{launchDirection.y}";
+        }
+        public override void LoadData(string data)
+        {
+            base.LoadData(data);
+            string[] splitData = data.Split(',');
+            launchPower = float.Parse(splitData[0]);
+            launchDirection = new Vector2(float.Parse(splitData[1]), float.Parse(splitData[2]));
         }
     }
 }

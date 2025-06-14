@@ -9,22 +9,42 @@ namespace ShotBall.InGame
     {
         [SerializeField] int keyNumber;
 
+        [SerializeField] AudioSource clearSound;
+
         public int KeyNumber { get;set; }
 
         public override string Name => "CreaArea";
 
+        static float pitch = 1;
+
+        protected override void StageStart()
+        {
+            base.StageStart();
+            pitch = 1;
+        }
         public void ColorChange(Color color)
         {
             if(ThisSprite == null) ThisSpriteGet();
             ThisSprite.color = color;
         }
-
-        protected override void BallEnter(Collider2D other)
+        protected override string StringData()
         {
-            Ball ball = other.gameObject.GetComponent<Ball>();
-            if(KeyNumber==ball.KeyNumber)
+            return KeyNumber.ToString();
+        }
+        public override void LoadData(string data)
+        {
+            base.LoadData(data);
+            KeyNumber = int.Parse(data);
+        }
+        protected override void BallEnter(Ball other)
+        {
+            Debug.Log("Hit");
+            if(KeyNumber==other.KeyNumber)
             {
-                ball.Clear();
+                other.Clear();
+                clearSound.pitch = pitch;
+                clearSound.Play();
+                pitch += 0.2f;
             }
         }
     }

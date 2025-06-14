@@ -67,12 +67,17 @@ namespace ShotBall.InGame
             return StringData();
         }
         protected virtual string StringData() { return string.Empty; }
+        public virtual void LoadData(string data) { }
         protected void ColorChangeA(float a)
         {
             float colorA = Mathf.Clamp(a, 0, 1);
             Color color = ThisSprite.color;
             color.a = colorA;
             ThisSprite.color = color;
+        }
+        protected string[] Sprit(string data)
+        {
+            return data.Split(',');
         }
         void OnDrawGizmos()
         {

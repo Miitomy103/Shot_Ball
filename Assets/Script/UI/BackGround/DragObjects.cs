@@ -14,20 +14,16 @@ namespace ShotBall.InGame
         {
             GetChildren(runtimeParent);
         }
-        void GetChildren(Transform parent)
+        public void GetChildren(Transform parent)
         {
-            //子要素がいなければ終了
-            if (parent.childCount == 0)
+            DragObject[] components = Resources.FindObjectsOfTypeAll<DragObject>();
+            foreach (var comp in components)
             {
-                return;
-            }
-            foreach (Transform ob in parent)
-            {
-                if(ob.TryGetComponent<DragObject>(out var run))
+                // シーンに存在し、非Editor用のものだけを対象にする
+                if (comp.gameObject.hideFlags == HideFlags.None && comp.gameObject.scene.IsValid())
                 {
-                    objects.Add(run);
+                    objects.Add(comp);
                 }
-                GetChildren(ob);
             }
         }
 

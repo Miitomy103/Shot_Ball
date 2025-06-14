@@ -43,7 +43,7 @@ namespace ShotBall.InGame
             if (GravitySwitch != null) ThisSprite.color = (GravitySwitch.AntiGravity) ? anti : normal;
         }
 
-        protected override void BallCheck(Collider2D other)
+        protected override void BallCheck(Ball other)
         {
             if (other.gameObject.layer == ballLayer) return;
             if(other.gameObject.TryGetComponent<IAntiGravity>(out var gravity))

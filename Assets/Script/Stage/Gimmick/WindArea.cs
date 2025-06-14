@@ -39,14 +39,14 @@ namespace ShotBall.InGame
                 rb.AddForce(d.normalized * windPower);
             }
         }
-        protected override void BallEnter(Collider2D other)
+        protected override void BallEnter(Ball   other)
         {
             if(other.gameObject.TryGetComponent<Rigidbody2D>(out var rigidbody2D))
             {
                 rigidBodies.Add(rigidbody2D);
             }
         }
-        protected override void BallExit(Collider2D other)
+        protected override void BallExit(Ball other)
         {
             if (other.gameObject.TryGetComponent<Rigidbody2D>(out var rigidbody2D))
             {

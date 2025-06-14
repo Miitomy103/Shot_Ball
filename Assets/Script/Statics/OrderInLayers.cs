@@ -16,7 +16,7 @@ namespace ShotBall.InGame
         Edge = 24,
         Coin = 26,
 
-        Ball = 39,
+        Ball = 22,
 
         // フレーム系（40〜59）
         FrameRangeSprite = 40,

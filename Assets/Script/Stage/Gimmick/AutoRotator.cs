@@ -70,6 +70,18 @@ namespace ShotBall.InGame
             base.Drag();
             isStop = false;
         }
+        protected override string StringData()
+        {
+            return $"{s_RotationSpeed.x},{s_RotationSpeed.y},{s_RotationSpeed.z}";
+        }
+        public override void LoadData(string data)
+        {
+            base.LoadData(data);
+            string[] splitData = data.Split(',');
+            s_RotationSpeed.x = float.Parse(splitData[0]);
+            s_RotationSpeed.y = float.Parse(splitData[1]);
+            s_RotationSpeed.z = float.Parse(splitData[2]);
+        }
 
         public void ItOn()
         {

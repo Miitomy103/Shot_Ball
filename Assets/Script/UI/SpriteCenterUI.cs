@@ -26,9 +26,9 @@ namespace ShotBall.InGame
             );
 
             uiElement.anchoredPosition = new Vector2( uiPos.x,uiElement.anchoredPosition.y);
-            Debug.Log("World Position: " + targetTransform.position);
-            Debug.Log("Screen Position: " + screenPos);
-            Debug.Log("UI Position: " + uiElement.anchoredPosition);
+            //Debug.Log("World Position: " + targetTransform.position);
+            //Debug.Log("Screen Position: " + screenPos);
+            //Debug.Log("UI Position: " + uiElement.anchoredPosition);
 
         }
     }

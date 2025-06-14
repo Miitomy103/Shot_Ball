@@ -14,7 +14,6 @@ namespace ShotBall.InGame
         private void Awake()
         {
             Debug.LogError("You have not selected a BahaviourType"+gameObject.name);
-            Debug.Break();
         }
         private void OnValidate()
         {

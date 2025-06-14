@@ -54,7 +54,7 @@ namespace ShotBall.InGame
             pitch = 1;
         }
 
-        protected override void BallEnter(Collider2D other)
+        protected override void BallEnter(Ball other)
         {
             if (Get) return;
             GetCoin();

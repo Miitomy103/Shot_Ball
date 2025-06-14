@@ -10,5 +10,6 @@ namespace ShotBall.InGame
         public Transform Transform { get; }
         void ItOn();
         void ItOff();
+        //TODO:StringLoad‚Å‚«‚é‚æ‚¤‚É‚·‚é
     }
 }

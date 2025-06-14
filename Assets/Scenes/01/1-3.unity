@@ -630,6 +630,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a975587b0bc9d94b9663d278cea5d88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballLayer:
+    serializedVersion: 2
+    m_Bits: 6
 --- !u!1 &1690567209 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5927850515562060249, guid: 6f0619ef79d0e214e8d707ac2c023250, type: 3}
@@ -836,7 +839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 866229511805828727, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 866229511805828727, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -868,7 +871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6079838837104713542, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.5
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 6079838837104713542, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_LocalPosition.y

@@ -15,10 +15,6 @@ namespace ShotBall.InGame
 
         public Transform Transform => transform;
 
-        public DragObject DragObject => throw new System.NotImplementedException();
-
-        public bool Reverse => throw new System.NotImplementedException();
-
         public void ItOff()
         {
             ColorChangeA(0.5f);

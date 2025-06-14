@@ -46,6 +46,18 @@ namespace ShotBall.InGame
             }
             BallGenerate();
         }
+        protected override string StringData()
+        {
+            return $"{isAntiGravity},{KeyNumber}";
+
+        }
+        public override void LoadData(string data)
+        {
+            base.LoadData(data);
+            string[] splitData = data.Split(',');
+            isAntiGravity = bool.Parse(splitData[0]);
+            KeyNumber = int.Parse(splitData[1]);
+        }
         IEnumerator StartCoroutine(Collider2D collider)
         {
             yield return new WaitForSeconds(0.5f);

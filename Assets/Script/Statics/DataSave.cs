@@ -27,6 +27,7 @@ namespace ShotBall.InGame
                     PlayerPrefs.SetInt($"Coin{stage.mainStage}-{stage.subStage}-{i}", 1);
                 }
             }
+            Debug.Log($"CoinSave: Stage {stage.mainStage}-{stage.subStage} Coins Saved");
             PlayerPrefs.Save();
         }
         public static bool CoinGet(StageName stage, int index)

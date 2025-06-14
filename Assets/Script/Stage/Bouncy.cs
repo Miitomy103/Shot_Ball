@@ -79,4 +79,10 @@ public class Bouncy : CollisionBase
     {
         return $"{bounceForce}";
     }
+    public override void LoadData(string data)
+    {
+        base.LoadData(data);
+        string[] splitData = data.Split(',');
+        bounceForce = float.Parse(splitData[0]);
+    }
 }

@@ -53,7 +53,7 @@ namespace ShotBall.InGame
             ChangeGravity(StartAntiGravity);
             child.transform.localScale = Vector3.zero;
         }
-        protected override void BallEnter(Collider2D other)
+        protected override void BallEnter(Ball other)
         {
             ChangeGravity();
             StartCoroutine(MakeItBigger(child.transform));
@@ -117,6 +117,12 @@ namespace ShotBall.InGame
         protected override string StringData()
         {
             return startAntiGravity.ToString();
+        }
+        public override void LoadData(string data)
+        {
+            base.LoadData(data);
+            string[] datas = data.Split(',');
+            startAntiGravity = bool.Parse(datas[0]);
         }
     }
 }

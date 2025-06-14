@@ -26,19 +26,8 @@ namespace ShotBall.InGame
             backImage.color = baseColor;
             text.text = $"Stage{stage}";
             SaveLoad();
-            for (int i = 0; i < stages.Length; i++)
-            {
-                SaveLoad();
-
-                int index = i;
-                // HoverHandlerをアタッチ
-                HoverHandler handler = stages[i].gameObject.AddComponent<HoverHandler>();
-
-                // 処理を設定
-                handler.onEnter = () => ButtonEnter(index + 1);
-                handler.onExit = () => ButtonExit(index + 1);
-            }
         }
+
         public void SaveLoad()
         {
             for(int i = 0; i < stages.Length; i++)
@@ -55,6 +44,12 @@ namespace ShotBall.InGame
             for (int i = 0; i < stages.Length; i++)
             {
                 int index = i+1; // ローカル変数にコピー
+
+                HoverHandler handler = stages[i].gameObject.AddComponent<HoverHandler>();
+                handler.onEnter = () => ButtonEnter(index );
+                handler.onExit = () => ButtonExit(index );
+
+
                 Button button = stages[i].GetComponent<Button>();
                 button.onClick.AddListener(() => OnClick(index));
             }

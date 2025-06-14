@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using ShotBall.InGame;
+using System.Collections.Generic;
 using System.IO;
-using UnityEditor.SearchService;
+using UnityEngine;
 
 namespace ShotBall.Data
 {
@@ -14,8 +12,12 @@ namespace ShotBall.Data
 
         [SerializeField] PrefabDatas prefabDatas;
 
-        [SerializeField] List<GameObject> GenerateObjcts = new List<GameObject>();
+        [SerializeField] List<GameObject> GenerateObjcts;
         [SerializeField] string loadStageName;
+
+        [SerializeField] KeyNumberManager KeyNumberManager;
+        [SerializeField] CameraManager cameraManager;
+        [SerializeField] GameLoop GameLoop;
         public void Save()
         {
             ObjectBase[] gameObjects = GetComponentsInChildren<ObjectBase>();
@@ -31,7 +33,12 @@ namespace ShotBall.Data
 
         public void CreateFile()
         {
-            string json = JsonUtility.ToJson(new BlockDataWrapper { Blocks = Datas,cameraSize=cameraSize }, true);
+            string json = JsonUtility.ToJson(new BlockDataWrapper {
+                Blocks = Datas,
+                cameraSize=cameraSize,
+                centerWorldWidth = cameraManager.CenterWorldWidth,
+                keyNumberData = KeyNumberManager.GetKeyNumberData()
+            }, true);
             string path = Path.Combine(Application.dataPath, $"StageData/StageData.{SceneControl.NowStage()}.json");
             File.WriteAllText(path, json);
 
@@ -41,6 +48,8 @@ namespace ShotBall.Data
         public void LoadFile()
         {
             DelateObject();
+            //GenerateObjcts= new List<GameObject>();
+            GameLoop.launchPads.Clear();
 
             string path = Path.Combine(Application.dataPath, $"StageData/StageData.{loadStageName}.json");
 
@@ -55,6 +64,8 @@ namespace ShotBall.Data
 
             Datas = wrapper.Blocks;
             BlockData[] datas = wrapper.Blocks;
+            cameraManager.CenterWorldWidth = wrapper.centerWorldWidth;
+            KeyNumberManager.LoadKeyNumber(wrapper.keyNumberData);
 
             Camera.main.orthographicSize = wrapper.cameraSize;
             for (int i=0;i<datas.Length;i++)
@@ -71,6 +82,23 @@ namespace ShotBall.Data
                     GameObject obj = Instantiate(prefabDatas.prefabs[i].PrefabObj, data.Position, data.Rotation);
                     GenerateObjcts.Add(obj);
                     obj.transform.localScale = data.Scale;
+                    if(obj.TryGetComponent<GimmickBase>(out var gimmick))
+                    {
+                        gimmick.LoadData(data.GimmickData);
+                        if(gimmick is LaunchPad launchPad)
+                        {
+                            GameLoop.launchPads.Add(launchPad);
+                            string[] datas = data.GimmickData.Split(',');
+                            int keyNumber = int.Parse(datas[1]);
+                            KeyNumberManager.KeyNumbers[keyNumber].launchPads.Add(launchPad);
+                        }
+                        if(gimmick is CrearArea crearArea)
+                        {
+                            string[] datas = data.GimmickData.Split(',');
+                            int keyNumber = int.Parse(datas[0]);
+                            KeyNumberManager.KeyNumbers[keyNumber].crearAreas.Add(crearArea);
+                        }
+                    }
                     SpriteRenderer sprite = obj.GetComponent<SpriteRenderer>();
                     sprite.size = data.size;
                     sprite.color = data.color;
@@ -109,7 +137,9 @@ namespace ShotBall.Data
         private class BlockDataWrapper
         {
             public BlockData[] Blocks;
-            public float cameraSize;    
+            public float cameraSize;
+            public float centerWorldWidth;
+            public KeyNumberData keyNumberData;
         }
     }
 }

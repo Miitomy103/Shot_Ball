@@ -222,7 +222,7 @@
             },
             "Type": 1,
             "childData": [],
-            "GimmickData": ""
+            "GimmickData": "0"
         },
         {
             "GimickName": "LaunchPad",
@@ -254,7 +254,7 @@
             },
             "Type": 1,
             "childData": [],
-            "GimmickData": ""
+            "GimmickData": "False,0"
         },
         {
             "GimickName": "Coin",
@@ -353,5 +353,21 @@
             "GimmickData": ""
         }
     ],
-    "cameraSize": 5.0
+    "cameraSize": 5.0,
+    "centerWorldWidth": 11.800000190734864,
+    "keyNumberData": {
+        "KeyLength": 1,
+        "akeys": [
+            {
+                "color": {
+                    "r": 1.0,
+                    "g": 1.0,
+                    "b": 1.0,
+                    "a": 1.0
+                },
+                "launchLength": 1,
+                "creaLength": 1
+            }
+        ]
+    }
 }

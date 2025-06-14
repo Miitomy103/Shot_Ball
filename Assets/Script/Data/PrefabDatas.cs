@@ -10,19 +10,5 @@ namespace ShotBall.Data
     public class PrefabDatas : ScriptableObject
     {
         [SerializeField]public Prefab[] prefabs;
-        private void OnValidate()
-        {
-            for(int i = 0; i < prefabs.Length; i++)
-            {
-                if (prefabs[i].IsAttached==false)
-                {
-                    if (prefabs[i].PrefabObj.TryGetComponent<GimmickBase>(out var component))
-                    {
-                        prefabs[i].IsAttached = true;
-                        prefabs[i].name = component.Name;
-                    }
-                }
-            }
-        }
     }
 }

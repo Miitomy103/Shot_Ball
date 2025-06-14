@@ -11,6 +11,7 @@ namespace ShotBall.InGame
         public Transform rightWall;
 
         [SerializeField] float centerWorldWidth = 6f; // 中央のスペースをワールド単位で指定
+        public float CenterWorldWidth { get => centerWorldWidth; set=> centerWorldWidth = value; }
 
         private void Awake()
         {

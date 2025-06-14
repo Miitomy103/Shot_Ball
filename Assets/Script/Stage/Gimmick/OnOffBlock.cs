@@ -6,7 +6,7 @@ namespace ShotBall.InGame
 {
     public class OnOffBlock : LineManager
     {
-        [SerializeField]SerializeIOnOff[] iOnOffs;
+        [SerializeField]public SerializeIOnOff[] iOnOffs;
         IOnOff[] IOnOffs => iOnOffs.Select(x => x.Interface).ToArray();
         protected Transform[] Targets => IOnOffs.Select(t => t.Transform).ToArray();
         protected override Transform StartPoint => transform;
@@ -95,7 +95,7 @@ namespace ShotBall.InGame
             Debug.Log("StageReset: OnOffBlock");
             OnOffChange(startIsOn);
         }
-        protected override void BallEnter(Collider2D collider)
+        protected override void BallEnter(Ball collider)
         {
             base.BallEnter(collider);
             OnOffChange(!isOn);
@@ -138,12 +138,7 @@ namespace ShotBall.InGame
 
         protected override string StringData()
         {
-            string a = "";
-            foreach(var i in Targets)
-            {
-                a += i.name;
-            }
-            return startIsOn.ToString()+a;
+            return startIsOn.ToString();
         }
     }
 }

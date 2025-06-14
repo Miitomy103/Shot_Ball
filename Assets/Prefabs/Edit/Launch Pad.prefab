@@ -99,7 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b91bc54664be0428afa83fc0491739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 1102744332326029507, guid: 810810e3e968b0747ade8f89e39f8efa, type: 3}
+  ballPrefab: {fileID: 1102744332326029507, guid: 810810e3e968b0747ade8f89e39f8efa, type: 3}
+  isAntiGravity: 0
 --- !u!114 &1321168346936352078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,6 +113,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a975587b0bc9d94b9663d278cea5d88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!61 &9005409379002989509
 BoxCollider2D:
   m_ObjectHideFlags: 0

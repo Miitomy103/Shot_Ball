@@ -4,13 +4,12 @@ namespace ShotBall.InGame
 {
     public abstract class ItemBase : AreaBase
     {
-        protected override void BallEnter(Collider2D other)
+        protected override void BallEnter(Ball other)
         {
             base.BallEnter(other);
-            Ball ball = other.GetComponent<Ball>();
-            if(ball!=null)
+            if(other!=null)
             {
-                GetItem(ball);
+                GetItem(other);
                 gameObject.SetActive(false);
             }
         }

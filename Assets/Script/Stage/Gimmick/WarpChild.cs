@@ -39,7 +39,7 @@ namespace ShotBall.InGame
 
             sprite.color = color;
         }
-        protected override void BallEnter(Collider2D other)
+        protected override void BallEnter(Ball other)
         {
             parentWarp.OnBallInWarp(other,this);
         }
