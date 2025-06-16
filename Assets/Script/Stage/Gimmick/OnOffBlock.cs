@@ -33,6 +33,8 @@ namespace ShotBall.InGame
                 childSprites[i] = objs[i].GetComponent<SpriteRenderer>();
                 childMeshProes[i] = objs[i].transform.GetChild(0).GetComponent<TextMeshPro>();
             }
+            // ‚·‚×‚Ä‚Ìƒ‰ƒCƒ“‚ªì¬‚³‚ê‚Ä‚©‚ç OnOffChange ‚ğŒÄ‚Ô
+            OnOffChange(startIsOn);
         }
         protected override void Start()
         {

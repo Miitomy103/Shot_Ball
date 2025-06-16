@@ -37,6 +37,7 @@ namespace ShotBall.InGame
         }
         public void GameStart()
         {
+            if (StageState == StageState.Playing) return;
             ChangeState(StageState.Playing);
             StartAction();
         }
@@ -81,7 +82,7 @@ namespace ShotBall.InGame
         public void ChangeState(StageState stageState)
         {
             StageState = stageState;
-            StateChangeAction();
+            StateChangeAction?.Invoke();
         }
     }
 }

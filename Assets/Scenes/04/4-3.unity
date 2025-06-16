@@ -184,57 +184,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83a26fc42768de343833bcbbab8abd9f, type: 3}
---- !u!1 &119623075 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9168146724725515901, guid: fd19d353cda2ade488d91f413beb2307, type: 3}
-  m_PrefabInstance: {fileID: 966458227}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &119623076 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1949266942777549347, guid: fd19d353cda2ade488d91f413beb2307, type: 3}
   m_PrefabInstance: {fileID: 966458227}
   m_PrefabAsset: {fileID: 0}
---- !u!58 &119623078
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 119623075}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 5.87
 --- !u!114 &119623080 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4857613519609523318, guid: fd19d353cda2ade488d91f413beb2307, type: 3}
   m_PrefabInstance: {fileID: 966458227}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 119623075}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43d150562d6829c4f99573c8602061f2, type: 3}
@@ -572,10 +532,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 9168146724725515901, guid: fd19d353cda2ade488d91f413beb2307, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 119623078}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd19d353cda2ade488d91f413beb2307, type: 3}
 --- !u!4 &1404220076 stripped
 Transform:

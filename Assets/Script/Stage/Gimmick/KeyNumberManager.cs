@@ -12,15 +12,15 @@ namespace ShotBall.InGame
 
         private void Awake()
         {
-
-        }
-        private void Start()
-        {
-            //StartCoroutine(Coroutine());
             for (int i = 0; i < keyNumbers.Length; i++)
             {
                 keyNumbers[i].AssignKeyNumber(i);
             }
+        }
+        private void Start()
+        {
+            //StartCoroutine(Coroutine());
+
         }
         IEnumerator Coroutine()
         {

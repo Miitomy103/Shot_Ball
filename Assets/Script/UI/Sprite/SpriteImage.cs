@@ -27,7 +27,11 @@ namespace ShotBall.InGame
             SetupSpriteRenderer();
         }
 #endif
-
+        public void SizeChange(Vector2 newSize)
+        {
+            size = newSize;
+            SetupSpriteRenderer();
+        }
         private void SetupSpriteRenderer()
         {
             if (sr.sprite == null) return;

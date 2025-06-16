@@ -8,8 +8,8 @@ namespace ShotBall.InGame
     {
         [SerializeField]protected LayerMask ballLayer;
 
-        List<Ball> enterBalls = new List<Ball>();
-        List<Ball> exitBalls = new List<Ball>();
+        private readonly List<Ball> enterBalls = new List<Ball>();
+        private readonly List<Ball> exitBalls = new List<Ball>();
 
         protected override void Start()
         {
@@ -28,34 +28,36 @@ namespace ShotBall.InGame
         }
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.layer == ballLayer||GameLoop.StageState!=StageState.Playing) return;
-            if (other.gameObject.TryGetComponent<Ball>(out var ball))
+            if (other.gameObject.layer == ballLayer || GameLoop.StageState != StageState.Playing) return;
+
+            if (other.TryGetComponent<Ball>(out var ball))
             {
-                foreach (var b in enterBalls)
+                if (!enterBalls.Contains(ball))
                 {
-                    if (b == ball) return;
+                    enterBalls.Add(ball);
+                    BallEnter(ball); // ← 本来ここで呼ぶべき
                 }
-                BallExit(ball);
-                enterBalls.Add(other.GetComponent<Ball>());
             }
             else
             {
                 Debug.LogWarning("AreaBaseに衝突したオブジェクトがBallではありません: " + other.gameObject.name);
             }
         }
+
         private void OnTriggerExit2D(Collider2D other)
         {
             if (other.gameObject.layer == ballLayer || GameLoop.StageState != StageState.Playing) return;
-            if(other.gameObject.TryGetComponent<Ball>(out var ball))
+
+            if (other.TryGetComponent<Ball>(out var ball))
             {
-                foreach (var b in exitBalls)
+                if (enterBalls.Contains(ball))
                 {
-                    if (b == ball) break;
+                    enterBalls.Remove(ball);
+                    BallExit(ball); // ← 本来ここで呼ぶべき
                 }
-                BallExit(ball);
-                exitBalls.Add(other.GetComponent<Ball>());
             }
         }
+
         protected virtual void BallEnter(Ball other) { }
         protected virtual void BallExit(Ball other) { }
     }
