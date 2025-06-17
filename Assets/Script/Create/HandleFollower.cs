@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ShotBall.InGame
+namespace ShotBall.Create
 {
     public class HandleFollower : MonoBehaviour
     {
@@ -40,9 +40,14 @@ namespace ShotBall.InGame
 
         void Update()
         {
+            if(InputSystem.Instance.IsDragging || InputSystem.Instance.IsZooming)
+            {
+                ChangeHandles();
+                return;
+            }
             foreach (var handle in Handles)
             {
-                if (handle.IsResize) ChangeHandles(); // どれかがリサイズ中なら更新しない
+                if (handle.IsResize||handle.IsDragging) ChangeHandles();
             }
         }
 

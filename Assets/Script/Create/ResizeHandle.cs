@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using ShotBall.InGame;
 
-namespace ShotBall.InGame
+namespace ShotBall.Create
 {
     public class SpriteResizeHandle : MonoBehaviour, IDragHandler,IPointerUpHandler, IPointerDownHandler
     {
@@ -14,8 +15,10 @@ namespace ShotBall.InGame
         public RectTransform ThisRect { get;private set; }  
 
         private SpriteRenderer spriteRenderer;
+        private CreateObject createObject;
         private Vector3 lastScale;
 
+        public bool IsDragging => createObject != null && createObject.IsDragging; // ドラッグ中かどうか
         public bool IsResize => isResize; // リサイズ中かどうか
         [SerializeField] bool isResize;
 
@@ -34,6 +37,7 @@ namespace ShotBall.InGame
             {
                 lastScale = spriteRenderer.size;
             }
+            createObject = spriteRenderer.GetComponent<CreateObject>();
         }
         public void OnDrag(PointerEventData eventData)
         {
@@ -64,7 +68,7 @@ namespace ShotBall.InGame
                 0f
             );
 
-            target.position -= offset;
+            spriteRenderer.transform.position -= offset;
 
             lastScale = newScale;
 
