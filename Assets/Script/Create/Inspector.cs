@@ -27,20 +27,22 @@ namespace ShotBall.Create
 
         readonly float initialPositionY = -300f;
         readonly float spaceValue = -150;
+
+        [SerializeField,ReadOnly] StageBlockData stageBlockData; // í«â¡: StageBlockDataÇÃéQè∆
         private void Awake()
         {
             instance= this; 
         }
-        public void Choice(string name)
+        public void Choice(StageBlockData blockData)
         {
-            if(name==string.Empty)
+            if(blockData==null)
             {
                 uiDisplay.NullDisplay();
                 return;
             }
             foreach (Prefab prefab in prefabs.prefabs)
             {
-                if (prefab.name == name)
+                if (prefab.name == blockData.Type.ToString())
                 {
                     uiDisplay.GenerateDisplay(prefab.PrefabObj);
                 }
@@ -52,7 +54,7 @@ namespace ShotBall.Create
             valueUIList.Clear();
             foreach (var cre in createObjectData.GimmickDatasArray)
             {
-                if (cre.Name == name)
+                if (cre.Name == blockData.Type.ToString())
                 {
                     gimmickText.text = cre.Name;
                     uniqueText.text = cre.Unique;
@@ -64,15 +66,42 @@ namespace ShotBall.Create
                         {
                             GameObject obj = Instantiate(valueInspectorObj, valueUIParent);
                             valueUIList.Add(obj);
-                            Text text = obj.GetComponentInChildren<Text>();
-                            text.text = dataType.Name;
+                            IChangeText text = obj.GetComponentInChildren<IChangeText>();
+                            text.ChangeText(dataType.Name);
                             RectTransform rectTransform = obj.GetComponent<RectTransform>();
                             rectTransform.anchoredPosition = new Vector3(0, initialPositionY + spaceValue * i, 0);
                         }
                     }
-                    return;
+                    int count = 0;
+                    foreach (var f in blockData.floatParametors.Keys)
+                    {
+                        GameObject obj = GenerateValue(count, DataType.Float, f);
+                        if (obj != null)
+                        {
+                            IChangeText text = obj.GetComponentInChildren<IChangeText>();
+                            text.ChangeText(f);
+
+                            count++;
+                        }
+                    }
+
                 }
             }
+        }
+        GameObject GenerateValue(int valueNumber,DataType type,string key)
+        {
+            GameObject valueInspectorObj = valueInspector.GetValueInspector(type);
+            if (valueInspectorObj != null)
+            {
+                GameObject obj = Instantiate(valueInspectorObj, valueUIParent);
+                valueUIList.Add(obj);
+                IChangeText text = obj.GetComponentInChildren<IChangeText>();
+                text.ChangeText(key);
+                RectTransform rectTransform = obj.GetComponent<RectTransform>();
+                rectTransform.anchoredPosition = new Vector3(0, initialPositionY + spaceValue * valueNumber, 0);
+                return obj;
+            }
+            return null;
         }
         [Serializable]
         class ValueInspector
@@ -82,19 +111,19 @@ namespace ShotBall.Create
             [SerializeField] GameObject Vector2;
             [SerializeField] GameObject Vector3;
             [SerializeField] GameObject Bool;
-            public GameObject GetValueInspector(CreateObjectData.DataType type)
+            public GameObject GetValueInspector(DataType type)
             {
                 switch (type)
                 {
-                    case CreateObjectData.DataType.Int:
+                    case DataType.Int:
                         return Int;
-                    case CreateObjectData.DataType.Float:
+                    case DataType.Float:
                         return Float;
-                    case CreateObjectData.DataType.Vector2:
+                    case DataType.Vector2:
                         return Vector2;
-                    case CreateObjectData.DataType.Vectror3:
+                    case DataType.Vectror3:
                         return Vector3;
-                    case CreateObjectData.DataType.Bool:
+                    case DataType.Bool:
                         return Bool;
                     default:
                         throw new ArgumentOutOfRangeException(nameof(type), type, null);

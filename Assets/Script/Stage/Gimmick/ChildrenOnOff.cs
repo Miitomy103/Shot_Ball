@@ -14,18 +14,16 @@ namespace ShotBall.InGame
 
         public Transform Transform => transform;
 
-        public DragObject DragObject => throw new System.NotImplementedException();
 
-        IOnOff[] onOffs;
+        OnOff[] onOffs;
 
         private void Awake()
         {
-            onOffs = GetComponentsInChildren<MonoBehaviour>(true)
-                .OfType<IOnOff>()
-                .Where(x => x != (object)this)
-                .ToArray();
+            OnOff[] o = GetComponentsInChildren<OnOff>();
+            onOffs = o.Where(t => t != null && t.gameObject != gameObject).ToArray();
 
-            foreach (var i in onOffs) Debug.Log(i.Transform.name);
+
+            foreach (var i in onOffs) Debug.Log(i.transform.name);
         }
 
 

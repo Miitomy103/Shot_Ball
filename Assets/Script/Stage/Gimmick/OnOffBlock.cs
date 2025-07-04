@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    public class OnOffBlock : LineManager
+    public class OnOffBlock : AreaBase
     {
-        [SerializeField]public SerializeIOnOff[] iOnOffs;
-        IOnOff[] IOnOffs => iOnOffs.Select(x => x.Interface).ToArray();
-        protected Transform[] Targets => IOnOffs.Select(t => t.Transform).ToArray();
-        protected override Transform StartPoint => transform;
+        [SerializeField]public OnOff[] iOnOffs;
+        protected Transform[] Targets => iOnOffs.Select(t => t.transform).ToArray();
+
+        LineManager lineManager;
         public bool isOn { get; private set; }
 
         public override string Name => "OnOffBlock";
@@ -25,6 +25,8 @@ namespace ShotBall.InGame
         protected override void Awake()
         {
             base.Awake();
+            lineManager = GetComponent<LineManager>();
+
             GameObject[] objs = new GameObject[] { offObject, onObject };
             childSprites = new SpriteRenderer[objs.Length];
             childMeshProes = new TextMeshPro[objs.Length];
@@ -33,15 +35,12 @@ namespace ShotBall.InGame
                 childSprites[i] = objs[i].GetComponent<SpriteRenderer>();
                 childMeshProes[i] = objs[i].transform.GetChild(0).GetComponent<TextMeshPro>();
             }
-            // ‚·‚×‚Ä‚Ìƒ‰ƒCƒ“‚ªì¬‚³‚ê‚Ä‚©‚ç OnOffChange ‚ğŒÄ‚Ô
-            OnOffChange(startIsOn);
+            
         }
         protected override void Start()
         {
             base.Start();
 
-            lineDatas.Clear();
-
             foreach (Transform t in transform)
             {
                 if (t.name == "Line") Destroy(t.gameObject);
@@ -49,46 +48,28 @@ namespace ShotBall.InGame
 
             for (int i = 0; i < Targets.Length; i++)
             {
-                CreateLine(Targets[i]);
+                lineManager.CreateLine(Targets[i]);
             }
+            lineManager.EnableAllLines(true);
 
             // ‚·‚×‚Ä‚Ìƒ‰ƒCƒ“‚ªì¬‚³‚ê‚Ä‚©‚ç OnOffChange ‚ğŒÄ‚Ô
             OnOffChange(startIsOn);
         }
 
-        private void Update()
-        {
-            if (GameLoop.StageState != StageState.Setting) return;
-
-            if (InFrame)
-            {
-                DisableAllLines();
-                return;
-            }
-            else
-            {
-                EnableAllLines();
-            }
-
-            if (lineDatas.Count < Targets.Length)
-            {
-                Debug.LogWarning("lineDatas.Count is less than Targets.Length. Skipping ChangePosition.");
-                return;
-            }
-
-            for (int i = 0; i < Targets.Length; i++)
-            {
-                ChangePosition(i);
-            }
-        }
-
         private void OnDestroy()
         {
-            for (int i = 0; i < lineDatas.Count; i++) lineDatas.Remove(lineDatas[i]);
-
             foreach (Transform t in transform)
             {
                 if (t.name == "Line") Destroy(t.gameObject);
+            }
+        }
+        protected override void Drag()
+        {
+            base.Drag();
+            lineManager.EnableAllLines(true);
+            for (int i = 0; i < Targets.Length; i++)
+            {
+                lineManager.ChangePosition(i);
             }
         }
         protected override void StageReset()
@@ -128,7 +109,7 @@ namespace ShotBall.InGame
                 onObject.SetActive(on);
                 offObject.SetActive(!on);
             }
-            foreach (var i in IOnOffs)
+            foreach (var i in iOnOffs)
             {
                 if (on)
                     i.ItOn();

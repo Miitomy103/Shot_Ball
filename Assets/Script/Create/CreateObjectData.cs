@@ -28,13 +28,14 @@ namespace ShotBall.Create
             }
         }
 
-        public enum DataType
-        {
-            Int,
-            Float,
-            Bool,
-            Vector2,
-            Vectror3,
-        }
+
+    }
+    public enum DataType
+    {
+        Int,
+        Float,
+        Bool,
+        Vector2,
+        Vectror3,
     }
 }

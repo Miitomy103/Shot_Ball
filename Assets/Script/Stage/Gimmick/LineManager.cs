@@ -4,56 +4,43 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    public abstract class LineManager : AreaBase
+    public class LineManager : MonoBehaviour
     {
-        protected abstract Transform StartPoint { get; }
-        private readonly float lineWidth = 0.05f;
-        private DragObject dragObject;
-        protected bool InFrame
-        {
-            get
-            {
-                if (dragObject != null) return dragObject.inFrame;
-                else return false;
-            }
-        }
+        [SerializeField] float lineWidth = 0.05f;
 
         protected List<LineData> lineDatas = new List<LineData>();
+        public LineData[] LineDatas => lineDatas.ToArray();
 
-        protected override void Awake()
-        {
-            base.Awake();
-            dragObject = GetComponent<DragObject>();
-        }
         // ラインを作成する
-        protected void CreateLine(Transform endPoint)
+        public void CreateLine(Transform endPoint)
         {
             GameObject lineObj = new GameObject("Line");
             lineObj.transform.parent = transform;
             LineRenderer lr = lineObj.AddComponent<LineRenderer>();
             lr.positionCount = 2;
-            lr.SetPosition(0, StartPoint.position);
+            lr.SetPosition(0, transform.position);
             lr.SetPosition(1, endPoint.position);
             lr.startWidth = lineWidth;
             lr.endWidth = lineWidth;
 
-            LineData data = new LineData(StartPoint, endPoint, lr, lineObj);
+            LineData data = new LineData(transform, endPoint, lr, lineObj);
 
             lineDatas.Add(data);
         }
         private void OnDestroy()
         {
-            foreach(Transform t in transform)
+            for (int i = 0; i < lineDatas.Count; i++) lineDatas.Remove(lineDatas[i]);
+            foreach (Transform t in transform)
             {
                 if (t.TryGetComponent<LineRenderer>(out var l)) DestroyImmediate(l);
             }
         }
-        protected void ChangePosition(int index)
+        public void ChangePosition(int index)
         {
             if (index < 0 || index >= lineDatas.Count)
             {
                 Debug.LogError($"ChangePosition: index {index} is out of range. lineDatas.Count: {lineDatas.Count}");
-                return;
+                //return;
             }
 
             if (lineDatas[index].obj.activeSelf && lineDatas[index].start != null && lineDatas[index].end != null)
@@ -64,7 +51,7 @@ namespace ShotBall.InGame
         }
 
         // ラインの表示切替
-        protected void SetLineActive(int index, bool isActive)
+       public void SetLineActive(int index, bool isActive)
         {
             if (index >= 0 && index < lineDatas.Count)
             {
@@ -75,22 +62,14 @@ namespace ShotBall.InGame
                 ChangePosition(index);
             }
         }
-
-        // すべてのラインをオフ
-        protected void DisableAllLines()
-        {
-            foreach (var data in lineDatas)
-            {
-                data.obj.SetActive(false);
-            }
-        }
+        
 
         // すべてのラインをオン
-        protected void EnableAllLines()
+        public void EnableAllLines(bool eneble)
         {
             foreach (var data in lineDatas)
             {
-                data.obj.SetActive(true);
+                data.obj.SetActive(eneble);
             }
         }
     }

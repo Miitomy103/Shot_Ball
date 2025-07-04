@@ -42,7 +42,11 @@ namespace ShotBall.InGame
                     Coins[i].SetActive(false);
                 }
             }
-
+            if (stage.mainStage == 0)
+            {
+                stageText.text = "Tutorial";
+                return;
+            }
             stageText.text=stage.GetName();
         }
         public void StageExit()

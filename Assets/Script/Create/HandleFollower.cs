@@ -51,7 +51,14 @@ namespace ShotBall.Create
             }
         }
 
-
+        public bool IsResize()
+        {
+            foreach (var handle in Handles)
+            {
+                if (handle.IsResize) return true;
+            }
+            return false;
+        }
 
         public void SpriteSet(SpriteRenderer s,bool active)
         {

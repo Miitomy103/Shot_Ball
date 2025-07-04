@@ -37,3 +37,7 @@ MonoBehaviour:
     prefab: {fileID: 6471053707685082404, guid: 19f69d7976ecd3c4da38269cae3d848a, type: 3}
   - name: Warp
     prefab: {fileID: 3737160283713955827, guid: 54041a2a36a3f7a4eac023ea6f026ef6, type: 3}
+  - name: AntiGravityArea
+    prefab: {fileID: 9108754666007763519, guid: 38eedd762ced7fd45b44650c30a26424, type: 3}
+  - name: AutoRotator
+    prefab: {fileID: 3409614123601732474, guid: b660497e06cabba4f9a179e94a9de148, type: 3}

@@ -17,7 +17,7 @@ namespace ShotBall.InGame
 
         protected const int placeOrder = 3;
         protected const int dragOrder = 7;
-        public bool inFrame { get; set; }
+        public bool InFrame { get; set; }
         public Frame frameScript { get; set; }
 
         public Action DragStartAction { get; set; }
@@ -27,7 +27,7 @@ namespace ShotBall.InGame
         {
             OriginalSize = transform.localScale;
         }
-        protected virtual void Start() { inFrame = false; }//TODO
+        protected virtual void Start() { }//TODO
         private void Update()
         {
             if (IsDragging && CanDrag())
@@ -80,7 +80,7 @@ namespace ShotBall.InGame
             }
             else
             {
-                inFrame = false;
+                InFrame = false;
                 Placed = true;
                 otherPosition = transform.position;
             }
@@ -97,7 +97,7 @@ namespace ShotBall.InGame
             Debug.Log("InitalPositionReset()");
             Placed = true;
             transform.position = otherPosition;
-            if (inFrame)
+            if (InFrame)
             {
                 frameScript.PutIn();
                 Destroy(gameObject);

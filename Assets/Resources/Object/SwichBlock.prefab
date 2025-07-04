@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1203404066162103524}
   - component: {fileID: 8055204494545363465}
   - component: {fileID: 6084280783939970286}
+  - component: {fileID: 3076334746659862132}
   m_Layer: 0
   m_Name: SwichBlock
   m_TagString: Untagged
@@ -258,3 +259,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3076334746659862132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993153186666092458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75da714f6dc67134ba3284a4da4a0ac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

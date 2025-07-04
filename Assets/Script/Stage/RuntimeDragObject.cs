@@ -23,7 +23,7 @@ namespace ShotBall.InGame
         protected override void Start()
         {
             base.Start();
-            inFrame = true;
+            InFrame = true;
 
             otherPosition = transform.position;
 

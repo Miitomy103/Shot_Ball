@@ -24,7 +24,8 @@ namespace ShotBall.InGame
         private void Inialize()
         {
             backImage.color = baseColor;
-            text.text = $"Stage{stage}";
+
+            if(text!=null) text.text = $"Stage{stage}";
             SaveLoad();
         }
 

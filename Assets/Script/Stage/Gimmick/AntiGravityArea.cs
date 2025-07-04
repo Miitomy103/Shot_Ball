@@ -15,8 +15,6 @@ namespace ShotBall.InGame
 
         public override string Name => "AntiGravityArea";
 
-        [SerializeField] AudioSource antiGravitySound;
-
         protected override void Awake()
         {
             base.Awake();

@@ -581,6 +581,7 @@ GameObject:
   - component: {fileID: 5555589245682043375}
   - component: {fileID: 1912790302219970481}
   - component: {fileID: 2416851348645632739}
+  - component: {fileID: -941500332021460399}
   m_Layer: 0
   m_Name: OnOffBlock
   m_TagString: Untagged
@@ -621,7 +622,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   iOnOffs:
-  - m_gameobject: {fileID: 0}
+  - {fileID: 0}
   startIsOn: 1
   onObject: {fileID: 1760128378232117716}
   offObject: {fileID: 1196235931124983034}
@@ -735,3 +736,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   behaviourType: 0
+--- !u!114 &-941500332021460399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4643457907176676899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 661a9959fee3c8c4ba033060249ececb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lineWidth: 0.05

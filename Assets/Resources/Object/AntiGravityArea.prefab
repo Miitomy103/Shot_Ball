@@ -148,7 +148,6 @@ MonoBehaviour:
   ballLayer:
     serializedVersion: 2
     m_Bits: 64
-  antiGravitySound: {fileID: 0}
 --- !u!114 &-7181023944319214314
 MonoBehaviour:
   m_ObjectHideFlags: 0
