@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    [RequireComponent(typeof(ChildFitInSprite))]
     public class ChildrenDragObject : DragObject
     {
         ChildData[] children;

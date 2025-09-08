@@ -1,3 +1,4 @@
+using ShotBall;
 using ShotBall.InGame;
 using System.Collections.Generic;
 using System.IO;
@@ -7,8 +8,13 @@ namespace ShotBall.Data
 {
     public class StageData : MonoBehaviour
     {
+        [Header("LoadSettings")]
+        [SerializeField]bool autoLoad = false;
+
         float cameraSize = 5f;
         public BlockData[] Datas;
+
+        
 
         [SerializeField] PrefabDatas prefabDatas;
 
@@ -18,6 +24,14 @@ namespace ShotBall.Data
         [SerializeField] KeyNumberManager KeyNumberManager;
         [SerializeField] CameraManager cameraManager;
         [SerializeField] GameLoop GameLoop;
+
+        [SerializeField] Transform runtimeParent;
+        [SerializeField] Transform editorParent;
+
+        private void Awake()
+        {
+            if (autoLoad) LoadFile();
+        }
         public void Save()
         {
             ObjectBase[] gameObjects = GetComponentsInChildren<ObjectBase>();
@@ -37,7 +51,7 @@ namespace ShotBall.Data
                 Blocks = Datas,
                 cameraSize=cameraSize,
                 centerWorldWidth = cameraManager.CenterWorldWidth,
-                keyNumberData = KeyNumberManager.GetKeyNumberData()
+                //keyNumberData = KeyNumberManager.GetKeyNumberData()
             }, true);
             string path = Path.Combine(Application.dataPath, $"StageData/StageData.{SceneControl.NowStage()}.json");
             File.WriteAllText(path, json);
@@ -51,57 +65,72 @@ namespace ShotBall.Data
             //GenerateObjcts= new List<GameObject>();
             GameLoop.launchPads.Clear();
 
-            string path = Path.Combine(Application.dataPath, $"StageData/StageData.{loadStageName}.json");
-
-            if (!File.Exists(path))
+            BlockDataWrapper wrapper;
+            if (loadStageName=="StaticData")
             {
-                Debug.LogError("ファイルが見つかりません: " + path);
-                return;
+                wrapper= StaticData.blockDataWrapper;
+            }
+            else
+            {
+                string path = $"StageData.{loadStageName}";
+
+                //if (!File.Exists(path))
+                //{
+                //    Debug.LogError("ファイルが見つかりません: " + path);
+                //    return;
+                //}
+                (string a, Texture2D t) = SaveManager.Load(path);
+                wrapper = JsonUtility.FromJson<BlockDataWrapper>(a);
             }
 
-            string json = File.ReadAllText(path);
-            BlockDataWrapper wrapper = JsonUtility.FromJson<BlockDataWrapper>(json);
 
             Datas = wrapper.Blocks;
             BlockData[] datas = wrapper.Blocks;
             cameraManager.CenterWorldWidth = wrapper.centerWorldWidth;
-            KeyNumberManager.LoadKeyNumber(wrapper.keyNumberData);
+            //KeyNumberManager.LoadKeyNumber(wrapper.keyNumberData);
+
+            string json1 = JsonUtility.ToJson(wrapper, true);
+            string path1 = Path.Combine(Application.dataPath, $"StageData/StageData.BlockDatasテスト用.json");
+            File.WriteAllText(path1, json1);
 
             Camera.main.orthographicSize = wrapper.cameraSize;
-            for (int i=0;i<datas.Length;i++)
+            foreach(var data in datas)
             {
-                ObjectGenerate(datas[i]);
+                ObjectGenerate(data);
             }
         }
         void ObjectGenerate(BlockData data)
         {
-            for(int i=0;i<prefabDatas.prefabs.Length; i++)
+            for (int i = 0; i < prefabDatas.prefabs.Length; i++)
             {
-                if (data.GimickName == prefabDatas.prefabs[i].name)
+                if (data.BlockType == prefabDatas.prefabs[i].type)
                 {
+                    Debug.Log("Generate Object: " + data.BlockType + "prefabDara"+prefabDatas.prefabs[i].type);
                     GameObject obj = Instantiate(prefabDatas.prefabs[i].PrefabObj, data.Position, data.Rotation);
-                    GenerateObjcts.Add(obj);
-                    obj.transform.localScale = data.Scale;
-                    if(obj.TryGetComponent<GimmickBase>(out var gimmick))
+                    
+                    obj.transform.parent = data.Type switch
                     {
-                        gimmick.LoadData(data.GimmickData);
-                        if(gimmick is LaunchPad launchPad)
-                        {
-                            GameLoop.launchPads.Add(launchPad);
-                            string[] datas = data.GimmickData.Split(',');
-                            int keyNumber = int.Parse(datas[1]);
-                            KeyNumberManager.KeyNumbers[keyNumber].launchPads.Add(launchPad);
-                        }
-                        if(gimmick is CrearArea crearArea)
-                        {
-                            string[] datas = data.GimmickData.Split(',');
-                            int keyNumber = int.Parse(datas[0]);
-                            KeyNumberManager.KeyNumbers[keyNumber].crearAreas.Add(crearArea);
-                        }
+                        ObjectType.Runtime => runtimeParent,
+                        ObjectType.Editor => editorParent,
+                        ObjectType.Children => null,
+                        _ => throw new System.InvalidOperationException("Unknown object type.")
+                    };
+                    GenerateObjcts.Add(obj);
+
+                    obj.transform.localScale = data.Scale;
+                    if (obj.TryGetComponent<GimmickBase>(out var gimmick))
+                    {
+                         gimmick.LoadData(data.GimmickData);
+                         gimmick.KeyNumberLoad(data.BlockIds);
+                    }
+                    if(obj.TryGetComponent<ObjectBase>(out var objectB))
+                    {
+                        objectB.BlockId = data.BlockId;
                     }
                     SpriteRenderer sprite = obj.GetComponent<SpriteRenderer>();
                     sprite.size = data.size;
                     sprite.color = data.color;
+
                     ObjectType type = data.Type;
                     ObjectBase objectBase = type switch
                     {
@@ -110,18 +139,24 @@ namespace ShotBall.Data
                         ObjectType.Children => obj.AddComponent<ChildrenDragObject>(),
                         _ => throw new System.InvalidOperationException("Unknown object type.")
                     };
+
                     DragObjectSelector selector = obj.GetComponent<DragObjectSelector>();
-                    if (selector != null) DestroyImmediate(selector);
-                    if (data.childData.Length>0)
+                    if (selector != null) Destroy(selector);
+
+                    if (data.childData == null) return;
+
+                    if (data.childData.Length > 0)
                     {
                         for (int k = 0; k < data.childData.Length; k++)
                         {
                             ObjectGenerate(data.childData[k]);
                         }
                     }
+                    return;
                 }
             }
         }
+
         public void DelateObject()
         {
             for (int i = 0; i < GenerateObjcts.Count; i++)
@@ -133,13 +168,14 @@ namespace ShotBall.Data
             }
             GenerateObjcts.Clear();
         }
-        [System.Serializable]
-        private class BlockDataWrapper
-        {
-            public BlockData[] Blocks;
-            public float cameraSize;
-            public float centerWorldWidth;
-            public KeyNumberData keyNumberData;
-        }
+
     }
+}
+[System.Serializable]
+public class BlockDataWrapper
+{
+    public BlockData[] Blocks;
+    public float cameraSize;
+    public float centerWorldWidth;
+    public KeyNumberData keyNumberData;
 }

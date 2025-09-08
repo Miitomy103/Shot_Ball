@@ -18,8 +18,6 @@ namespace ShotBall.InGame
         protected override float startWidth => 0.05f;
         protected override float endWidth => 0.05f;
 
-        public override string Name => "Warp";
-
         [SerializeField] AudioSource warpSound;
 
         private void OnValidate()
@@ -112,6 +110,11 @@ namespace ShotBall.InGame
                 if (w == null) return true;
             }
             return false;
+        }
+
+        public override void LoadData(StageBlockData data)
+        {
+
         }
     }
 }

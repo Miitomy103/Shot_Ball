@@ -301,6 +301,18 @@ PrefabInstance:
       value: -1.8
       objectReference: {fileID: 0}
     - target: {fileID: 6570370871207715949, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 6570370871207715949, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 6570370871207715949, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 6570370871207715949, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.32
       objectReference: {fileID: 0}
@@ -656,6 +668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e987e55ef2da64c904b451267dce21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockType: 0
   ballLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1283,6 +1296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e987e55ef2da64c904b451267dce21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockType: 0
   ballLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1584,6 +1598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e987e55ef2da64c904b451267dce21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockType: 0
   ballLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1947,6 +1962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e987e55ef2da64c904b451267dce21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockType: 0
   ballLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -2248,6 +2264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e987e55ef2da64c904b451267dce21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockType: 0
   ballLayer:
     serializedVersion: 2
     m_Bits: 64

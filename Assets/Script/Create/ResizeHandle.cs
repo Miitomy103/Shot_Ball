@@ -7,7 +7,7 @@ using ShotBall.InGame;
 
 namespace ShotBall.Create
 {
-    public class SpriteResizeHandle : MonoBehaviour, IDragHandler,IPointerUpHandler, IPointerDownHandler
+    public class SpriteResizeHandle : MonoBehaviour, IDragHandler,IPointerUpHandler, IPointerDownHandler,IResize
     {
         public Transform target; // SpriteRendererを持つGameObject
         public Vector2 scaleDirection = Vector2.one; // 例: 左上なら (-1, 1)
@@ -20,10 +20,13 @@ namespace ShotBall.Create
 
         public bool IsDragging => createObject != null && createObject.IsDragging; // ドラッグ中かどうか
         public bool IsResize => isResize; // リサイズ中かどうか
-        [SerializeField] bool isResize;
+        [SerializeField] bool isResize = false;
 
         const float MIN_SCALE = 0.2f; // 最小スケール
         const float MAX_SCALE = 6f; // 最大スケール
+
+        public Action OnResizeStart { get; set; } // リサイズ開始時のアクション
+        public Action OnResizeEnd { get; set; } // リサイズ終了時のアクション
 
         private void Awake()
         {
@@ -36,8 +39,8 @@ namespace ShotBall.Create
             if (spriteRenderer != null)
             {
                 lastScale = spriteRenderer.size;
+                createObject = spriteRenderer.GetComponent<CreateObject>();
             }
-            createObject = spriteRenderer.GetComponent<CreateObject>();
         }
         public void OnDrag(PointerEventData eventData)
         {
@@ -76,16 +79,26 @@ namespace ShotBall.Create
             {
                 spriteImage.SizeChange(newScale);
             }
+            if(spriteRenderer.TryGetComponent<IChangeSize>(out var changeSize))
+            {
+                changeSize.ChangeSize();
+            }
+            else
+            {
+                Debug.Log("なんでないん");
+            }
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
             isResize = false;
+            OnResizeEnd?.Invoke();
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
             isResize = true;
+            OnResizeStart?.Invoke();
         }
     }
 }

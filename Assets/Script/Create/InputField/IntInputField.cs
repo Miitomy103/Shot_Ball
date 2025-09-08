@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,7 +12,7 @@ namespace ShotBall.InGame
         int value;
 
         private string key;
-        private Dictionary<string, int> dict;
+        private Action<string, int, bool> dict;
         public void SetValue(int v)
         {
             value = v;
@@ -32,7 +33,7 @@ namespace ShotBall.InGame
             });
         }
 
-        public void Setup(string key, Dictionary<string, int> data)
+        public void Setup(string key, Action<string, int,bool> data)
         {
             this.key = key;
             this.dict = data;
@@ -44,7 +45,7 @@ namespace ShotBall.InGame
             {
                 value = v;
                 if (dict != null && key != null)
-                    dict[key] = v;
+                    dict?.Invoke(key, v, true);
             }
         }
     }

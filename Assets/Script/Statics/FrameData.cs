@@ -1,22 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    using System;
-    using System.Collections.Generic;
-    using UnityEngine;
 
     public struct FrameData : IEquatable<FrameData>
     {
         public Vector3 scale;
-        public string name;
+        public BlockType blockType;
 
-        public FrameData(Vector3 s, string n)
+        public FrameData(Vector3 s, BlockType b)
         {
             scale = s;
-            name = n;
+            blockType = b;
         }
 
         // HashSetで正しく比較されるために必要
@@ -27,12 +25,12 @@ namespace ShotBall.InGame
 
         public bool Equals(FrameData other)
         {
-            return scale == other.scale && name == other.name;
+            return scale == other.scale && blockType == other.blockType;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(scale, name);
+            return HashCode.Combine(scale, blockType);
         }
 
         // 任意の比較用関数（そのまま残してもOK）

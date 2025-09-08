@@ -1,3 +1,4 @@
+using ShotBall.Create;
 using ShotBall.Data;
 using System;
 using System.Collections;
@@ -14,17 +15,23 @@ namespace ShotBall.InGame
 
         [SerializeField] Button up;
         [SerializeField] Button down;
+
+        [SerializeField] GenerateObject generateObject;
         ItemData[] itemDatas;
         int frameCount => rectTransforms.Length;
+
+        Button[] buttons;
 
         int page = 0;
 
         struct ItemData
         {
-            GameObject[] items;
-            public ItemData(GameObject[] i)
+            public GameObject[] items;
+            public BlockType[] types;
+            public ItemData(GameObject[] i, BlockType[] t)
             {
                 items = i;
+                types = t;
             }
             public void ActiveChange(bool active)
             {
@@ -40,6 +47,12 @@ namespace ShotBall.InGame
         {
             // 自身を除外
             rectTransforms = Array.FindAll(GetComponentsInChildren<RectTransform>(), rt => rt != transform);
+            buttons = Array.FindAll(GetComponentsInChildren<Button>(), b => b != up && b != down);
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                int index = i; // ローカル変数を使用してクロージャーの問題を回避
+                buttons[i].onClick.AddListener(() => ItemClick(index));
+            }
         }
 
         private void Start()
@@ -51,6 +64,7 @@ namespace ShotBall.InGame
             for (int i = 0; i < totalPages; i++)
             {
                 GameObject[] items = new GameObject[frameCount];
+                BlockType[] types = new BlockType[frameCount]; // Prefabの種類を格納する配列
                 for (int j = 0; j < frameCount; j++)
                 {
                     int index = i * frameCount + j;
@@ -59,8 +73,9 @@ namespace ShotBall.InGame
                     var prefab = prefabDatas.prefabs[index];
                     items[j] = Instantiate(prefab.PrefabObj, rectTransforms[j].position, Quaternion.identity, rectTransforms[j]);
                     items[j].SetActive(false);
+                    types[j] = prefab.type; // Prefabの種類を取得
                 }
-                itemDatas[i] = new ItemData(items);
+                itemDatas[i] = new ItemData(items,types);
             }
 
             itemDatas[0].ActiveChange(true);
@@ -74,6 +89,10 @@ namespace ShotBall.InGame
             itemDatas[page].ActiveChange(false);
             page += index;
             itemDatas[page].ActiveChange(true);
+        }
+        private void ItemClick(int index)
+        {
+            generateObject.Generate(itemDatas[page].types[index]);
         }
     }
 

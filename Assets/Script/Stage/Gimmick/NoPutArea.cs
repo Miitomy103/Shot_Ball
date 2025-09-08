@@ -7,7 +7,6 @@ namespace ShotBall.InGame
 {
     public class NoPutArea :GimmickBase
     {
-        public override string Name => "NoPutArea";
 
         Collider2D colli;
 
@@ -32,6 +31,11 @@ namespace ShotBall.InGame
         {
             base.StageReset();
             colli.isTrigger = false;
+        }
+
+        public override void LoadData(StageBlockData data)
+        {
+
         }
     }
 }

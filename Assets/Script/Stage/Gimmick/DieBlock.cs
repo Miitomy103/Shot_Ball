@@ -13,7 +13,6 @@ namespace ShotBall.InGame
 
         public Transform Transform => transform;
 
-        public override string Name => "DieBlock";
 
         DragObject dragObject;
 
@@ -47,5 +46,9 @@ namespace ShotBall.InGame
             ball.Die();
         }
 
+        public override void LoadData(StageBlockData data)
+        {
+
+        }
     }
 }

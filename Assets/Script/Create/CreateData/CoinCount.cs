@@ -1,0 +1,53 @@
+using ShotBall.InGame;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+namespace ShotBall.Create
+{
+    public class CoinCount : MonoBehaviour
+    {
+        public int coinCount = 0; // コインのカウント
+
+        public const int maxCoinCount = 3; // 最大コイン数
+
+        [SerializeField] TextMeshProUGUI coinCountText; // コインのカウントを表示するUI
+
+        Objects objects;
+        private void Awake()
+        {
+            objects = GetComponent<Objects>();
+        }
+        private void Start()
+        {
+            CheckCoin(); // 初期状態でコインの数をチェック
+            objects.UpdateObjects += CheckCoin; // オブジェクトが更新されるたびにコインの数をチェック
+        }
+        public void CheckCoin()
+        {
+            coinCount = 0;
+            foreach(var obj in objects.CreateObjects)
+            {
+                if (obj.StageBlockData.Type == BlockType.Coin)
+                {
+                    coinCount++;
+                }
+            }
+            TextChenge(); // UIのテキストを更新
+        }
+
+        public void TextChenge()
+        {
+            coinCountText.text = coinCount.ToString() + $"/{maxCoinCount}";
+            if (coinCount != maxCoinCount)
+            {
+                coinCountText.color = Color.red; // 3個未満なら赤色
+            }
+            else
+            {
+                coinCountText.color = Color.white; // 3個なら緑色
+            }
+        }
+    }
+}

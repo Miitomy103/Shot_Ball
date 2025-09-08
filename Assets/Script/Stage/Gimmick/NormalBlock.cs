@@ -8,8 +8,6 @@ namespace ShotBall.InGame
     {
         [SerializeField] AudioSource hitSound;
 
-        public override string Name => "NormalBlock";
-
         bool isOn = true;
         public bool IsOn => isOn;
 
@@ -27,6 +25,11 @@ namespace ShotBall.InGame
             ColorChangeA(1);
             isOn = true;
             Colli.isTrigger = !isOn;
+        }
+
+        public override void LoadData(StageBlockData data)
+        {
+
         }
 
         protected override void BallEnter(Collision2D collision)

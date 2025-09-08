@@ -17,7 +17,6 @@ namespace ShotBall.InGame
 
         public DragObject DragObject => throw new System.NotImplementedException();
 
-        public override string Name => "SwitchBlock";
 
         protected override void BallEnter(Collision2D collision)
         {
@@ -43,6 +42,11 @@ namespace ShotBall.InGame
             isEnter = false;
             Colli.isTrigger = false;
             ColorChangeA(1);
+        }
+
+        public override void LoadData(StageBlockData data)
+        {
+
         }
     }
 }

@@ -4,7 +4,8 @@ namespace ShotBall.InGame
 {
     public abstract class GimmickBase : MonoBehaviour
     {
-        public abstract string Name { get; }
+        [SerializeField] BlockType blockType;
+        public BlockType BlockType => blockType;
         protected virtual bool HasDirection => false;
         protected virtual Vector2 Direction { get; }
 
@@ -34,6 +35,7 @@ namespace ShotBall.InGame
         }
         private void OnDestroy()
         {
+            if(GameLoop.Instance == null) return;
             GameLoop.Instance.StartAction -= StageStart;
             GameLoop.Instance.ResetAction -= StageReset;
             GameLoop.Instance.StateChangeAction -= StateChange;
@@ -66,8 +68,26 @@ namespace ShotBall.InGame
             //return Name+sizeData+scaleData+colliderTypeName + StringData();
             return StringData();
         }
-        protected virtual string StringData() { return string.Empty; }
+        protected virtual string StringData() { return null; }
         public virtual void LoadData(string data) { }
+        public virtual void KeyNumberLoad(int[] keyNumbers) { }
+
+        public void CreateLoad(StageBlockData data)
+        {
+            if(data.vector2Parametors.TryGetValue("Size", out Vector2 size))
+            {
+                ThisSprite.size = size;
+            }
+            if (data.vector3Parametors.TryGetValue("Position", out Vector3 position))
+            {
+                transform.position = position;
+            }
+            if(data.vector3Parametors.TryGetValue("Rotation", out Vector3 rotation))
+            {
+                transform.rotation = Quaternion.Euler(rotation);
+            }
+        }
+        public abstract void LoadData(StageBlockData data);
         protected void ColorChangeA(float a)
         {
             float colorA = Mathf.Clamp(a, 0, 1);

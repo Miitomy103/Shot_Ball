@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2df6f844cd9c65458781cfe297116d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockType: 10
 --- !u!114 &3894085326927405827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,4 +159,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64

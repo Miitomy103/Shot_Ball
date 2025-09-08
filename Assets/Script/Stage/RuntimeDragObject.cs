@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    public class RuntimeDragObject :DragObject
+    public class RuntimeDragObject :DragObject,IFitSpriteInSquare
     {
         protected Collider2D colli;
 
@@ -46,7 +46,7 @@ namespace ShotBall.InGame
             colli = GetComponent<Collider2D>();
 
             GimmickBase gimmick = GetComponent<GimmickBase>();
-            if(gimmick!=null) Name = gimmick.Name;
+            if(gimmick!=null) BlockType = gimmick.BlockType;
         }
 
         private void OnMouseEnter()
@@ -156,12 +156,18 @@ namespace ShotBall.InGame
         }
         public override void FitSpriteInSquare(SpriteRenderer frame)
         {
+            if (thisSprite == null) thisSprite = GetComponent<SpriteRenderer>();
             Vector2 input = thisSprite.bounds.size;
 
             float max = Mathf.Max(Mathf.Abs(input.x), Mathf.Abs(input.y));
             if (max == 0) transform.localScale = Vector2.zero; // 0èúéZñhé~
             transform.localScale *= frame.bounds.size.x * 0.85f / max;
             transform.position = frame.transform.position;
+        }
+
+        public void FitSprite(SpriteRenderer frame)
+        {
+            FitSpriteInSquare(frame);
         }
     }
 }

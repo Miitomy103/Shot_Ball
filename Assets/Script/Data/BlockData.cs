@@ -3,21 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using ShotBall.InGame;
 using System;
+using ShotBall.Create;
 
-namespace ShotBall.Data
+namespace ShotBall
 {
     [Serializable]
     public struct BlockData
     {
-        public string GimickName;
+        public BlockType BlockType;
         public Vector3 Position;
         public Vector3 Scale;
         public Quaternion Rotation;
+        public int BlockId;
         public Vector2 size;
         public Color color;
         public ObjectType Type;
         public BlockData[] childData;
         public string GimmickData;
+        public int[] BlockIds;
         public BlockData(GameObject gameObject)
         {
             GimmickBase gimmick = gameObject.GetComponent<GimmickBase>();
@@ -26,6 +29,7 @@ namespace ShotBall.Data
             Position = gameObject.transform.position;
             Scale = gameObject.transform.localScale;
             Rotation = gameObject.transform.rotation;
+            BlockId = objectBase.BlockId;
             size = spriteRenderer.size;
             color = spriteRenderer.color;
             Type = objectBase switch
@@ -49,16 +53,48 @@ namespace ShotBall.Data
             }
             if(gimmick == null)
             {
-                GimmickData = string.Empty;
-                GimickName = string.Empty;
+                GimmickData = null;
+                BlockType = BlockType.Block;
             }
             else
             {
-                GimickName = gimmick.Name;
+                BlockType = gimmick.BlockType;
                 GimmickData = gimmick.FrameData();
                 Debug.Log("GimmickData: " + GimmickData);
             }
+            BlockIds = null;
         }
+        public BlockData(BlockType blockType, Vector3 position, Vector3 scale, Quaternion rotation, Vector2 size, int blockId,Color color, ObjectType type, BlockData[] childData, string gimmickData, int[] blockIds)
+        {
+            BlockType = blockType;
+            Position = position;
+            Scale = scale;
+            Rotation = rotation;
+            BlockId = blockId;
+            this.size = size;
+            this.color = color;
+            Type = type;
+            this.childData = childData;
+            GimmickData = gimmickData;
+            BlockIds = blockIds;
+        }
+        //public BlockData(CreateObject createObject)
+        //{
+        //    StageBlockData stageBlockData = createObject.StageBlockData;
+        //    if (stageBlockData == null)
+        //    {
+        //        throw new InvalidOperationException("CreateObject must implement IStageBlockData.");
+        //    }
+        //    BlockType = stageBlockData.Type;
+        //    Position = createObject.transform.position;
+        //    Scale = createObject.transform.localScale;
+        //    Rotation = createObject.transform.rotation;
+        //    size = createObject.GetComponent<SpriteRenderer>().size;
+        //    color = createObject.GetComponent<SpriteRenderer>().color;
+        //    Type=createObject.inFrame ? ObjectType.Runtime : ObjectType.Editor;
+        //    childData = null;
+        //    //GimmickData = 
+        //}
     }
     public enum ObjectType
     {

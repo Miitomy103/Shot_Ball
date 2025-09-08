@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,10 +11,10 @@ namespace ShotBall.InGame
         [SerializeField] TMP_InputField inputField;
 
         private string key;
-        private Dictionary<string, float> dict;
+        private Action<string, float, bool> dict;
         private float value;
 
-        public void Setup(string key, Dictionary<string, float> data)
+        public void Setup(string key, Action<string, float,bool> data)
         {
             this.key = key;
             this.dict = data;
@@ -34,7 +35,7 @@ namespace ShotBall.InGame
             {
                 value = v;
                 if (dict != null && key != null)
-                    dict[key] = v;
+                    dict?.Invoke(key, v, true);
             }
         }
     }

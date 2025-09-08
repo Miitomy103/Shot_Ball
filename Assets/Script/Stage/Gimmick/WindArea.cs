@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 namespace ShotBall.InGame
@@ -13,8 +14,6 @@ namespace ShotBall.InGame
 
         protected override bool HasDirection => true;
         protected override Vector2 Direction => windDirection;
-
-        public override string Name => "WindArea";
 
         bool isOn;
         public bool IsOn => isOn;
@@ -67,6 +66,11 @@ namespace ShotBall.InGame
         public void ItOff()
         {
             isOn = false;
+        }
+
+        public override void LoadData(StageBlockData data)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

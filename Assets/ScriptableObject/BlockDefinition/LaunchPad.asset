@@ -12,16 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c23cffefceb83a14a893abfe11d08e45, type: 3}
   m_Name: LaunchPad
   m_EditorClassIdentifier: 
-  type: 8
-  position:
-    key: Position
-    defaultValue: {x: 0, y: 0}
-  size:
-    key: Size
-    defaultValue: {x: 1, y: 1}
-  rotation:
-    key: Rotation
-    defaultValue: {x: 0, y: 0, z: 0}
+  type: 9
   isRotationEnabled: 0
   isRotation:
     key: IsRotation
@@ -30,6 +21,9 @@ MonoBehaviour:
   intParameters:
   - key: KeyNumber
     defaultValue: 0
-  boolParameters: []
+  boolParameters:
+  - key: IsAntiGravity
+    defaultValue: 0
   vector2Parameters: []
   vector3Parameters: []
+  uniqueViews: []

@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 7
+  m_SortingOrder: 20
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.08131714, g: 0.39748484, b: 0.9169811, a: 1}
   m_FlipX: 0
@@ -177,7 +177,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 21
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &2490346902275451230
 MonoBehaviour:
@@ -267,7 +267,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   _SortingLayer: 0
   _SortingLayerID: 0
-  _SortingOrder: 0
+  _SortingOrder: 21
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 2113346995853865156}
   m_maskType: 0
@@ -358,7 +358,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 7
+  m_SortingOrder: 20
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.9686275, g: 0.26666668, b: 0.050980397, a: 1}
   m_FlipX: 0
@@ -461,7 +461,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 21
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &4478502885567634941
 MonoBehaviour:
@@ -551,7 +551,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   _SortingLayer: 0
   _SortingLayerID: 0
-  _SortingOrder: 0
+  _SortingOrder: 21
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8247133511721991515}
   m_maskType: 0
@@ -618,6 +618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 713b448761cdfa04c941e4efe0f6323f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockType: 0
   ballLayer:
     serializedVersion: 2
     m_Bits: 64

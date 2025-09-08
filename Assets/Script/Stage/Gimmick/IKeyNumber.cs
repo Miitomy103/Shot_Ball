@@ -6,7 +6,7 @@ namespace ShotBall.InGame
 {
     public interface IKeyNumber
     {
-        int KeyNumber { get; set; }
+        int KeyNumber { get; }
 
         void ColorChange(Color color);
     }

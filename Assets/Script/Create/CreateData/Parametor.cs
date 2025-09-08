@@ -1,3 +1,4 @@
+using ShotBall.Create;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,9 +10,6 @@ namespace ShotBall.InGame
     public class BlockDefinition : ScriptableObject
     {
         public BlockType type;
-        public ParametorVector2 position= new ParametorVector2("Position", Vector2.zero);
-        public ParametorVector2 size = new ParametorVector2("Size", Vector2.one);
-        public ParametorVector3 rotation = new ParametorVector3("Rotation", Vector3.zero);
         public bool isRotationEnabled = false;
         public ParametorBool isRotation = new ParametorBool("IsRotation", false);
         public List<ParameterFloat> floatParameters = new List<ParameterFloat>();
@@ -19,6 +17,7 @@ namespace ShotBall.InGame
         public List<ParametorBool> boolParameters = new List<ParametorBool>();
         public List<ParametorVector2> vector2Parameters = new List<ParametorVector2>();
         public List<ParametorVector3> vector3Parameters = new List<ParametorVector3>();
+        public List<UniqueView> uniqueViews = new List<UniqueView>();
     }
 
     [Serializable]
@@ -74,6 +73,17 @@ namespace ShotBall.InGame
         {
             this.key = key;
             this.defaultValue = defaultValue;
+        }
+    }
+    [Serializable]
+    public class  UniqueView
+    {
+        public string key;
+        public ViewType viewType;
+        public UniqueView(string key, ViewType viewType)
+        {
+            this.key = key;
+            this.viewType = viewType;
         }
     }
 }

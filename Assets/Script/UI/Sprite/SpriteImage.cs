@@ -9,7 +9,7 @@ namespace ShotBall.InGame
         private SpriteRenderer sr;
         protected Collider2D colli;
 
-       [SerializeField] protected Vector2 size = new Vector2(1, 1);
+        [SerializeField] protected Vector2 size = new Vector2(1, 1);
 
         void Awake()
         {

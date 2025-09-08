@@ -184,6 +184,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6570370871207715949, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 6570370871207715949, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 6570370871207715949, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 6570370871207715949, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.14
       objectReference: {fileID: 0}
@@ -825,7 +837,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 5.87
+  m_Radius: 0.5
 --- !u!1001 &514036661
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1890,15 +1902,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1949266942777549347, guid: fd19d353cda2ade488d91f413beb2307, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.15
+      value: 1.65
       objectReference: {fileID: 0}
     - target: {fileID: 1949266942777549347, guid: fd19d353cda2ade488d91f413beb2307, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.15
+      value: 1.65
       objectReference: {fileID: 0}
     - target: {fileID: 1949266942777549347, guid: fd19d353cda2ade488d91f413beb2307, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.15
+      value: 1.65
       objectReference: {fileID: 0}
     - target: {fileID: 1949266942777549347, guid: fd19d353cda2ade488d91f413beb2307, type: 3}
       propertyPath: m_LocalPosition.x

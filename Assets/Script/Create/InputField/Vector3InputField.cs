@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,7 +14,7 @@ namespace ShotBall.InGame
         Vector3 value;
 
         private string key;
-        private Dictionary<string, Vector3> dict;
+        private Action<string, Vector3, bool> dict;
 
         public void SetValue(Vector3 v)
         {
@@ -37,11 +38,11 @@ namespace ShotBall.InGame
             value = new Vector3(x, y,z);
             if (dict != null && key != null)
             {
-                dict[key] = value;
+                dict?.Invoke(key, value, true);
             }
         }
 
-        public void Setup(string key, Dictionary<string, Vector3> data)
+        public void Setup(string key, Action<string, Vector3, bool> data)
         {
             this.key = key;
             this.dict = data;

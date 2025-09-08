@@ -43,8 +43,9 @@ namespace ShotBall.InGame
                 float height = cam.orthographicSize * 2f;
                 float width = height * cam.aspect;
 
+                float c = centerWorldWidth;
                 // 壁の幅をワールド単位で計算
-                float wallWidth = (width - centerWorldWidth) / 2f;
+                float wallWidth = (width - (c*cam.orthographicSize/5f)) / 2f;
                 if (wallWidth < 0f) wallWidth = 0f; // 負の幅を防ぐ
 
                 // スプライト1単位サイズ前提（必要に応じてSpriteRendererから取得してもOK）

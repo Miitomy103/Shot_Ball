@@ -146,6 +146,34 @@ PrefabInstance:
       propertyPath: launchPads.Array.data[0]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1074628686546761659, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: orthographic size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408701233431026349, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.9888892
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408701233431026349, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408701233431026349, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.3944445
+      objectReference: {fileID: 0}
+    - target: {fileID: 4207839091925163197, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.9888892
+      objectReference: {fileID: 0}
+    - target: {fileID: 4207839091925163197, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4207839091925163197, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.3944445
+      objectReference: {fileID: 0}
     - target: {fileID: 4514052053226017914, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_Name
       value: GameObject
@@ -191,12 +219,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 525757326}
     - target: {fileID: 8318082691901564976, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: autoLoad
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318082691901564976, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: loadStageName
-      value: 1-1
+      value: CreateData
       objectReference: {fileID: 0}
     - target: {fileID: 8318082691901564976, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: Datas.Array.size
-      value: 11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8318082691901564976, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: Datas.Array.data[5].Type

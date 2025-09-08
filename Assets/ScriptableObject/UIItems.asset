@@ -13,31 +13,25 @@ MonoBehaviour:
   m_Name: UIItems
   m_EditorClassIdentifier: 
   prefabs:
-  - name: Block
+  - type: 3
     prefab: {fileID: 4151179862490065543, guid: 6c2d36e52aaf02642b5000a7eab0665a, type: 3}
-  - name: Bouncy
+  - type: 4
     prefab: {fileID: 5209964440227585833, guid: fddfe4bacbc8ce945af5d33ba82c628c, type: 3}
-  - name: CreaArea
+  - type: 5
     prefab: {fileID: 5027859080959056195, guid: cfdf030245f5cb642bda6de73b742692, type: 3}
-  - name: DieBlock
+  - type: 7
     prefab: {fileID: 1671116821871737454, guid: 3ae07b11658475945bc83d71a5408d66, type: 3}
-  - name: GravitySwitch
-    prefab: {fileID: 1422097681885229329, guid: 21ebb5a7b4bf15d4690825e049ac00ac, type: 3}
-  - name: LaunchPad
+  - type: 9
     prefab: {fileID: 1677692519150767720, guid: 9296caf884158c443b2b1f19dc991c62, type: 3}
-  - name: BallLauncher
+  - type: 2
     prefab: {fileID: 7368198592485049368, guid: 60bf79f1eef98bb4e9467e26216ecbb4, type: 3}
-  - name: NoPutArea
+  - type: 10
     prefab: {fileID: 9122974929385458160, guid: f18dd069a764d3445a1bed8621697463, type: 3}
-  - name: OnOffBlock
-    prefab: {fileID: 7920683732343765033, guid: 89efb67176be3fc4ab6e42f3718a5ce9, type: 3}
-  - name: TheWorld
+  - type: 13
     prefab: {fileID: 8023226502959007341, guid: c24c6dfaa1f859843b7ae534819a4165, type: 3}
-  - name: SwitchBlock
+  - type: 12
     prefab: {fileID: 6471053707685082404, guid: 19f69d7976ecd3c4da38269cae3d848a, type: 3}
-  - name: Warp
-    prefab: {fileID: 3737160283713955827, guid: 54041a2a36a3f7a4eac023ea6f026ef6, type: 3}
-  - name: AntiGravityArea
+  - type: 0
     prefab: {fileID: 9108754666007763519, guid: 38eedd762ced7fd45b44650c30a26424, type: 3}
-  - name: AutoRotator
-    prefab: {fileID: 3409614123601732474, guid: b660497e06cabba4f9a179e94a9de148, type: 3}
+  - type: 6
+    prefab: {fileID: 806606444113615048, guid: b224b75758d0f9e458c894faa0759fa8, type: 3}

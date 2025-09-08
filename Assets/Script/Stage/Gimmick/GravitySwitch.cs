@@ -30,8 +30,6 @@ namespace ShotBall.InGame
 
         public Transform Transform => transform;
 
-        public override string Name => "GravitySwitch";
-
         protected override void Awake()
         {
             base.Awake();
@@ -116,13 +114,17 @@ namespace ShotBall.InGame
 
         protected override string StringData()
         {
-            return startAntiGravity.ToString();
+            return $"{startAntiGravity}";
         }
         public override void LoadData(string data)
         {
             base.LoadData(data);
             string[] datas = data.Split(',');
             startAntiGravity = bool.Parse(datas[0]);
+        }
+
+        public override void LoadData(StageBlockData data)
+        {
         }
     }
 }

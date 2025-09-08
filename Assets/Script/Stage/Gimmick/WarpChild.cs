@@ -12,8 +12,6 @@ namespace ShotBall.InGame
         private SpriteRenderer sprite;
 
 
-        public override string Name => "WarpChild";
-
         protected override void Start()
         {
             base.Start();
@@ -42,6 +40,11 @@ namespace ShotBall.InGame
         protected override void BallEnter(Ball other)
         {
             parentWarp.OnBallInWarp(other,this);
+        }
+
+        public override void LoadData(StageBlockData data)
+        {
+
         }
     }
 }

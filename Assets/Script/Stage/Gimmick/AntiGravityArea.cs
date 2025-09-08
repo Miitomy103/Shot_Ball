@@ -13,8 +13,6 @@ namespace ShotBall.InGame
 
         GravitySwitch GravitySwitch => GravitySwitch.Instance;
 
-        public override string Name => "AntiGravityArea";
-
         protected override void Awake()
         {
             base.Awake();
@@ -48,6 +46,11 @@ namespace ShotBall.InGame
             {
                 gravity.ChangeGravity();
             }
+        }
+
+        public override void LoadData(StageBlockData data)
+        {
+
         }
     }
 }

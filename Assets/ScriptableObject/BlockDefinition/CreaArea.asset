@@ -33,3 +33,4 @@ MonoBehaviour:
   boolParameters: []
   vector2Parameters: []
   vector3Parameters: []
+  uniqueViews: []

@@ -1,20 +1,24 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ShotBall.InGame
+namespace ShotBall.Create
 {
-    public class UILineInserter : MonoBehaviour
+    public class UILineInserter : MonoBehaviour,IResize
     {
         [SerializeField] RectTransform ui1;              // 始点
         [SerializeField] RectTransform ui2;              // 終点
         [SerializeField] RectTransform lineImage;        // 細長い線Image
+        [SerializeField] Transform handleFollower;
 
+        IResize resizeHandle; // リサイズハンドルのインターフェース
+        public bool IsResize => resizeHandle.IsResize; // リサイズ中かどうか
+        private void Awake()
+        {
+            resizeHandle = handleFollower.GetComponent<IResize>();
+        }
         private void Start()
         {
-            InsertLineBetween();
-        }
-        private void Update()
-        {
+            HandleFollower.Instance.OnResize += InsertLineBetween; // リサイズイベントに登録
             InsertLineBetween();
         }
         public void InsertLineBetween()

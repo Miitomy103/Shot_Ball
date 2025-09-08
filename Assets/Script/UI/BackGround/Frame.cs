@@ -21,11 +21,8 @@ namespace ShotBall.InGame
 
         public bool inFrame { get; private set; }
 
-        private FrameObjectData objectData;
-
         private void Awake()
         {
-            objectData = GetComponent<FrameObjectData>();
             Sprite = GetComponent<SpriteRenderer>();
         }
         private void Start()
@@ -37,6 +34,7 @@ namespace ShotBall.InGame
             if (ObjectCount <= 0||GameLoop.StageState!=StageState.Setting) return;
 
             GameObject game = Instantiate(FrameObject, new Vector3(transform.position.x,transform.position.y,FrameObject.transform.position.z), FrameObject.transform.rotation);
+            
             game.SetActive(true);
             PutOut();
             DragObject dragObject = game.GetComponent<DragObject>();
@@ -53,7 +51,7 @@ namespace ShotBall.InGame
             FrameObject = copy.gameObject;
             //コピーを表示しないようにする
             copy.SetActive(false);
-            Data = new FrameData(drag.OriginalSize, drag.Name);
+            Data = new FrameData(drag.OriginalSize, drag.BlockType);
         }
         public void FrameSpriteIn(GameObject dragObject)
         {
@@ -72,7 +70,11 @@ namespace ShotBall.InGame
                 }
             }
             Debug.Log(c + "dragObject.childSpriteCount"+dragObject.name);
-            dragObject.GetComponent<DragObject>().FitSpriteInSquare(Sprite);
+            //dragObject.GetComponent<IFitSpriteInSquare>().FitSprite(Sprite);
+            if(dragObject.TryGetComponent<IFitSpriteInSquare>(out var drag))
+            {
+                drag.FitSprite(Sprite);
+            }
 
 
             Vector3 pos = transform.position;
@@ -87,7 +89,7 @@ namespace ShotBall.InGame
                 }
                 if (comp is Transform) continue;
 
-                DestroyImmediate(comp);
+                Destroy(comp);
             }
 
         }

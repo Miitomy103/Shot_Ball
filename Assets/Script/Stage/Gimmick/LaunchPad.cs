@@ -9,11 +9,11 @@ namespace ShotBall.InGame
     {
         [SerializeField] GameObject ballPrefab;
         [SerializeField] bool isAntiGravity;
+        [SerializeField]int keyNumber;
+        [SerializeField] KeyNumberColor keyNumberColor;
 
         Ball ball;
-        public int KeyNumber{ get;set;  }
-
-        public override string Name => "LaunchPad";
+        public int KeyNumber => keyNumber;
 
         Color color = Color.white;
 
@@ -29,10 +29,15 @@ namespace ShotBall.InGame
             Physics2D.IgnoreCollision(collider, ball.collider, true); // è’ìÀÇñ≥å¯âª
             StartCoroutine(StartCoroutine(collider));
             ball.PlayStart(KeyNumber);
+            if (keyNumberColor != null)
+            {
+                ColorChange(keyNumberColor.colors[keyNumber]);
+            }
         }
         void BallGenerate()
         {
             GameObject b = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+            b.transform.parent = transform;
             ball = b.GetComponent<Ball>();
             ball.ColorChange(color);
             if (isAntiGravity) ball.ChangeGravity();
@@ -48,7 +53,7 @@ namespace ShotBall.InGame
         }
         protected override string StringData()
         {
-            return $"{isAntiGravity},{KeyNumber}";
+            return $"{isAntiGravity},{keyNumber}";
 
         }
         public override void LoadData(string data)
@@ -56,7 +61,7 @@ namespace ShotBall.InGame
             base.LoadData(data);
             string[] splitData = data.Split(',');
             isAntiGravity = bool.Parse(splitData[0]);
-            KeyNumber = int.Parse(splitData[1]);
+            keyNumber = int.Parse(splitData[1]);
         }
         IEnumerator StartCoroutine(Collider2D collider)
         {
@@ -68,6 +73,18 @@ namespace ShotBall.InGame
         public void ColorChange(Color color)
         {
             this.color = color;
+        }
+
+        public override void LoadData(StageBlockData data)
+        {
+            if(data.intParametors.TryGetValue("KeyNumber", out int keyValue))
+            {
+                keyNumber = keyValue;
+            }
+            if(data.boolParametors.TryGetValue("IsAntiGravity", out bool antiGravityValue))
+            {
+                isAntiGravity = antiGravityValue;
+            }
         }
     }
 }

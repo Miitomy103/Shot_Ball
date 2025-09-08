@@ -78,7 +78,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 66
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &7732556597439404788
 MonoBehaviour:
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   _SortingLayer: 0
   _SortingLayerID: 0
-  _SortingOrder: 0
+  _SortingOrder: 66
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 7448919965255611284}
   m_maskType: 0
@@ -333,6 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00612709cd984604bba7e177aa679940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockType: 0
   ballLayer:
     serializedVersion: 2
     m_Bits: 64

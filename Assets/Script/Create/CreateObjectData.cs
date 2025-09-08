@@ -16,16 +16,8 @@ namespace ShotBall.Create
         [Serializable]
         public class GimmickDatas // Changed accessibility to public  
         {
-            public string Name;
-            public GimmickData[] dataTypes;
+            public BlockType Name;
             public string Unique;
-
-            [Serializable]
-            public class GimmickData // Changed accessibility to public  
-            {
-                public string Name;
-                public DataType Type;
-            }
         }
 
 
@@ -37,5 +29,6 @@ namespace ShotBall.Create
         Bool,
         Vector2,
         Vectror3,
+        Arrow,
     }
 }

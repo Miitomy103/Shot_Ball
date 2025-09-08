@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 namespace ShotBall.InGame
@@ -12,8 +13,6 @@ namespace ShotBall.InGame
 
         protected override bool HasDirection => true;
         protected override Vector2 Direction => launchDirection;
-
-        public override string Name => "BallLauncher";
 
         IEnumerator Cor;
 
@@ -70,6 +69,26 @@ namespace ShotBall.InGame
             string[] splitData = data.Split(',');
             launchPower = float.Parse(splitData[0]);
             launchDirection = new Vector2(float.Parse(splitData[1]), float.Parse(splitData[2]));
+        }
+
+        public override void LoadData(StageBlockData data)
+        {
+            if (data.floatParametors.TryGetValue("LaunchPower", out float powerValue))
+            {
+                launchPower = powerValue;
+            }
+            else
+            {
+                Debug.LogWarning("LaunchPower parameter not found in BallLauncher data.");
+            }
+            if (data.vector2Parametors.TryGetValue("LaunchDirection", out Vector2 directionValue))
+            {
+                launchDirection = directionValue;
+            }
+            else
+            {
+                Debug.LogWarning("LaunchDirection parameter not found in BallLauncher data.");
+            }
         }
     }
 }

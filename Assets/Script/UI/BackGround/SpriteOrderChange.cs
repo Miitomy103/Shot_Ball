@@ -10,17 +10,29 @@ namespace ShotBall.InGame
     {
         [SerializeField] OrderInLayer OrderInLayer;
         // Start is called before the first frame update
-        void Start()
+
+        private void OnValidate()
+        {
+
+
+
+            ChangeLayer();
+        }
+        void Awake()
+        {
+            ChangeLayer();
+        }
+        void ChangeLayer()
         {
             SpriteRenderer sprite = GetComponent<SpriteRenderer>();
             if (sprite != null)
             {
-                sprite.sortingOrder = (int)OrderInLayer; 
+                sprite.sortingOrder = (int)OrderInLayer;
                 return;
             }
 
             TextMeshPro textMeshPro = GetComponent<TextMeshPro>();
-            if(textMeshPro!=null)
+            if (textMeshPro != null)
             {
                 textMeshPro.sortingOrder = (int)OrderInLayer;
             }

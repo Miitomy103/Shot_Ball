@@ -99,8 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b91bc54664be0428afa83fc0491739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockType: 9
   ballPrefab: {fileID: 1102744332326029507, guid: 810810e3e968b0747ade8f89e39f8efa, type: 3}
   isAntiGravity: 0
+  keyNumber: 0
+  keyNumberColor: {fileID: 11400000, guid: 335fbd33ba2720140924867756340ed0, type: 2}
 --- !u!114 &1321168346936352078
 MonoBehaviour:
   m_ObjectHideFlags: 0

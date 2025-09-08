@@ -10,7 +10,6 @@ namespace ShotBall.InGame
         bool get = false;
         public bool Get => get;
 
-        public override string Name => "Coin";
 
         static float pitch = 1;
 
@@ -74,6 +73,10 @@ namespace ShotBall.InGame
         void GetAfter()
         {
             gameObject.SetActive(false);
+        }
+
+        public override void LoadData(StageBlockData data)
+        {
         }
     }
 }

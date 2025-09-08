@@ -12,6 +12,9 @@ namespace ShotBall.InGame
         [SerializeField] DragObjects dragObjects;
 
         [SerializeField] SpriteRenderer frameRangeSprite;
+
+        float baseSpacing=> 0.32f * cam.orthographicSize;
+
         readonly float panelWidth = 3f;
         Camera cam;
 
@@ -21,15 +24,26 @@ namespace ShotBall.InGame
 
         void Start()
         {
+            GameStart();
+        }
+        IEnumerator StartCoroutine()
+        {
+            yield return new WaitForSeconds(5);
+            GameStart();
+        }
+        void GameStart()
+        {
             if (cam == null) cam = Camera.main;
 
             childSprite = GetComponentInChildren<SpriteRenderer>();
 
-            float baseSpacing = 0.32f * cam.orthographicSize;
-
             float scale = 0.25f * cam.orthographicSize;
 
-            DragObject[] dragObjs = dragObjects.GetObjects();
+            DragObject[] dragObjs = dragObjects.GetDragObjects();
+            foreach(var d in dragObjs)
+            {
+                Debug.Log(d.gameObject.name);
+            }
             // FrameData Å® Frame ÇÃëŒâûï\
             Dictionary<FrameData, Frame> frameDict = new Dictionary<FrameData, Frame>();
 

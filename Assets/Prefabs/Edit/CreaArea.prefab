@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -3464046345657449361}
   - component: {fileID: 3904000055772178009}
   - component: {fileID: -3709671377947103410}
+  - component: {fileID: 3057605925544516784}
   m_Layer: 0
   m_Name: CreaArea
   m_TagString: Untagged
@@ -81,8 +82,8 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 10.8, y: 10.8}
+  m_DrawMode: 1
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -100,11 +101,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d150562d6829c4f99573c8602061f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockType: 0
   ballLayer:
     serializedVersion: 2
     m_Bits: 64
   keyNumber: 0
   clearSound: {fileID: -3709671377947103410}
+  keyNumberColor: {fileID: 11400000, guid: 335fbd33ba2720140924867756340ed0, type: 2}
 --- !u!114 &-3464046345657449361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +157,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 5.3999996
+  m_Radius: 0.5
 --- !u!82 &-3709671377947103410
 AudioSource:
   m_ObjectHideFlags: 0
@@ -251,3 +254,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3057605925544516784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9168146724725515901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b74d61fd11647f41b4921508a7b0d2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: {x: 1, y: 1}

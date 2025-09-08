@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 
@@ -6,13 +8,11 @@ namespace ShotBall.InGame
 {
     public class OnOffBlock : AreaBase
     {
-        [SerializeField]public OnOff[] iOnOffs;
+        [SerializeField] public OnOff[] iOnOffs;
         protected Transform[] Targets => iOnOffs.Select(t => t.transform).ToArray();
 
         LineManager lineManager;
         public bool isOn { get; private set; }
-
-        public override string Name => "OnOffBlock";
 
         [SerializeField] bool startIsOn;
 
@@ -30,12 +30,12 @@ namespace ShotBall.InGame
             GameObject[] objs = new GameObject[] { offObject, onObject };
             childSprites = new SpriteRenderer[objs.Length];
             childMeshProes = new TextMeshPro[objs.Length];
-            for(int i=0;i<objs.Length;i++)
+            for (int i = 0; i < objs.Length; i++)
             {
                 childSprites[i] = objs[i].GetComponent<SpriteRenderer>();
                 childMeshProes[i] = objs[i].transform.GetChild(0).GetComponent<TextMeshPro>();
             }
-            
+
         }
         protected override void Start()
         {
@@ -86,7 +86,7 @@ namespace ShotBall.InGame
         protected override void DragStart()
         {
             base.DragStart();
-            for(int i=0;i<childSprites.Length;i++)
+            for (int i = 0; i < childSprites.Length; i++)
             {
                 childSprites[i].sortingOrder = (int)OrderInLayer.DragNow;
                 childMeshProes[i].sortingOrder = (int)OrderInLayer.DragNow;
@@ -100,6 +100,27 @@ namespace ShotBall.InGame
                 childSprites[i].sortingOrder = (int)OrderInLayer.NoDrag;
                 childMeshProes[i].sortingOrder = (int)OrderInLayer.NoDrag;
             }
+        }
+        public override void LoadData(string data)
+        {
+            base.LoadData(data);
+            base.LoadData(data);
+            string[] splitData = data.Split(',');
+            startIsOn = bool.Parse(splitData[0]);
+        }
+        public override void KeyNumberLoad(int[] keyNumbers)
+        {
+            Debug.Log("KeyNumberLoad: OnOffBlock"+keyNumbers.Length);
+            base.KeyNumberLoad(keyNumbers);
+            List<OnOff> onoffs = new List<OnOff>();
+            foreach (var i in keyNumbers)
+            {
+                if(DragObjects.Instance.GetBlockId(i).TryGetComponent<OnOff>(out var onoff))
+                {
+                    onoffs.Add(onoff);
+                }
+            }
+            iOnOffs = onoffs.ToArray();
         }
         private void OnOffChange(bool on)
         {
@@ -121,7 +142,20 @@ namespace ShotBall.InGame
 
         protected override string StringData()
         {
-            return startIsOn.ToString();
+            return $"{startIsOn}"; // ‚±‚±‚Å‚Í startIsOn ‚Ì’l‚ð•Ô‚·
+        }
+
+        public override void LoadData(StageBlockData data)
+        {
+            if (data.boolParametors.TryGetValue("IsOn", out bool b))
+            {
+                startIsOn = b;
+                OnOffChange(startIsOn);
+            }
+            else
+            {
+                Debug.LogWarning("OnOffBlock: IsOn parameter not found in StageBlockData.");
+            }
         }
     }
 }

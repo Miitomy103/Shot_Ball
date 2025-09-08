@@ -13,23 +13,15 @@ MonoBehaviour:
   m_Name: Bouncy
   m_EditorClassIdentifier: 
   type: 4
-  position:
-    key: Position
-    defaultValue: {x: 0, y: 0}
-  size:
-    key: Size
-    defaultValue: {x: 1, y: 1}
-  rotation:
-    key: Rotation
-    defaultValue: {x: 0, y: 0, z: 0}
   isRotationEnabled: 1
   isRotation:
     key: IsRotation
     defaultValue: 1
   floatParameters:
-  - key: BoundForce
+  - key: BounceForce
     defaultValue: 10
   intParameters: []
   boolParameters: []
   vector2Parameters: []
   vector3Parameters: []
+  uniqueViews: []

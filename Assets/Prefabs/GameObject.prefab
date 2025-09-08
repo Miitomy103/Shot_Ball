@@ -423,7 +423,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 40
   m_Sprite: {fileID: 21300000, guid: 5f0c670c0b0278c44b2d88cf7bbcb7c5, type: 3}
   m_Color: {r: 0.3132075, g: 0.3132075, b: 0.3132075, a: 0.5568628}
   m_FlipX: 0
@@ -2083,13 +2083,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9066775711eca545ade69fdecdc445d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoLoad: 0
   Datas: []
   prefabDatas: {fileID: 11400000, guid: e6fde1ba18ab32b449d3cec8f7482b50, type: 2}
   GenerateObjcts: []
-  loadStageName: 
+  loadStageName: 1-1
   KeyNumberManager: {fileID: 6759999074645090783}
   cameraManager: {fileID: 64708628945540237}
   GameLoop: {fileID: 0}
+  runtimeParent: {fileID: 1096338666819249225}
+  editorParent: {fileID: 1196045839599851315}
 --- !u!1 &4671077490619854689
 GameObject:
   m_ObjectHideFlags: 0
@@ -5035,20 +5038,14 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5763522697194652286}
   m_SourcePrefab: {fileID: 100100000, guid: f432199154512d0488b8c91620fe5170, type: 3}
---- !u!114 &237071510609062456 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 413525887838284106, guid: f432199154512d0488b8c91620fe5170, type: 3}
-  m_PrefabInstance: {fileID: 501901575135986546}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43d150562d6829c4f99573c8602061f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1096338666819249225 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 703096899870779195, guid: f432199154512d0488b8c91620fe5170, type: 3}
+  m_PrefabInstance: {fileID: 501901575135986546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1196045839599851315 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1616274982082335809, guid: f432199154512d0488b8c91620fe5170, type: 3}
   m_PrefabInstance: {fileID: 501901575135986546}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1394657220614852800 stripped
@@ -5255,6 +5252,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5927850515562060249, guid: 6f0619ef79d0e214e8d707ac2c023250, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5438476441307060241}
+    - targetCorrespondingSourceObject: {fileID: 5927850515562060249, guid: 6f0619ef79d0e214e8d707ac2c023250, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3610378587069553415}
   m_SourcePrefab: {fileID: 100100000, guid: 6f0619ef79d0e214e8d707ac2c023250, type: 3}
 --- !u!4 &1723724123992555140 stripped
 Transform:
@@ -5291,6 +5291,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveRotation: 45
+--- !u!114 &3610378587069553415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8667253539416233070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62e519b8a08422a498955271cdb3b754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4350672347228487326
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5395,6 +5407,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.5573585
       objectReference: {fileID: 0}
+    - target: {fileID: 2290449940601931773, guid: 93539ebf783dd3d4bbfa59824a188d99, type: 3}
+      propertyPath: m_SortingOrder
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 4155572700135150174, guid: 93539ebf783dd3d4bbfa59824a188d99, type: 3}
       propertyPath: m_Name
       value: Back
@@ -5429,7 +5445,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5554515029932355299, guid: 93539ebf783dd3d4bbfa59824a188d99, type: 3}
       propertyPath: m_SortingOrder
-      value: -1
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 5692559494942161532, guid: 93539ebf783dd3d4bbfa59824a188d99, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6382,12 +6398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8683e0a4d6b74b94e8b0e2a6c823ea65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyNumbers:
-  - color: {r: 1, g: 1, b: 1, a: 1}
-    launchPads:
-    - {fileID: 6179402599631312582}
-    crearAreas:
-    - {fileID: 237071510609062456}
+  keyNumberColor: {fileID: 11400000, guid: 335fbd33ba2720140924867756340ed0, type: 2}
 --- !u!114 &8918637651425382637 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 483550302431107468, guid: e9b350ca8c67a9741ab56779fa21c121, type: 3}

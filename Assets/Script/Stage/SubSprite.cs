@@ -15,7 +15,6 @@ namespace ShotBall.InGame
         {
             parentTrans = parent;
 
-            Debug.Log("SubSprite Create: " + parentTrans.name + " " + parentSprite.name);
             gameObject = new GameObject("SubSprite");
             transform = gameObject.transform;
             thisSprite = gameObject.AddComponent<SpriteRenderer>();

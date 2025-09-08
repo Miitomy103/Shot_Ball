@@ -11,9 +11,9 @@ namespace ShotBall.InGame
 
         [SerializeField] AudioSource clearSound;
 
-        public int KeyNumber { get;set; }
+        [SerializeField] KeyNumberColor keyNumberColor;
 
-        public override string Name => "CreaArea";
+        public int KeyNumber => keyNumber;
 
         static float pitch = 1;
 
@@ -21,6 +21,11 @@ namespace ShotBall.InGame
         {
             base.StageStart();
             pitch = 1;
+
+            if (keyNumberColor != null)
+            {
+                ColorChange(keyNumberColor.colors[keyNumber]);
+            }
         }
         public void ColorChange(Color color)
         {
@@ -29,12 +34,12 @@ namespace ShotBall.InGame
         }
         protected override string StringData()
         {
-            return KeyNumber.ToString();
+            return $"{keyNumber}";
         }
         public override void LoadData(string data)
         {
             base.LoadData(data);
-            KeyNumber = int.Parse(data);
+            keyNumber = int.Parse(data);
         }
         protected override void BallEnter(Ball other)
         {
@@ -45,6 +50,18 @@ namespace ShotBall.InGame
                 clearSound.pitch = pitch;
                 clearSound.Play();
                 pitch += 0.2f;
+            }
+        }
+
+        public override void LoadData(StageBlockData data)
+        {
+            if(data.intParametors.TryGetValue("KeyNumber", out int keyValue))
+            {
+                keyNumber = keyValue;
+            }
+            else
+            {
+                Debug.LogWarning("KeyNumber parameter not found in CrearArea data.");
             }
         }
     }

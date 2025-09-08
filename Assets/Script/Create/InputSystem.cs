@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,9 @@ namespace ShotBall.Create
         public float zoomSpeed = 10.0f;
         public float minZoomDistance = 5f;
         public float maxZoomDistance = 100f;
+
+        public Action CameraScroll { get; set; }
+        public Action CameraDrag { get; set; }
         private void Awake()
         {
             instance = this;
@@ -51,6 +55,7 @@ namespace ShotBall.Create
                 cam.transform.Translate(new Vector3(-moveX, -moveY, 0), Space.Self);
 
                 lastMousePosition = Input.mousePosition;
+                CameraDrag?.Invoke();
             }
         }
         void Scroll()
@@ -72,6 +77,7 @@ namespace ShotBall.Create
                 // カメラ位置を調整して、マウス位置が同じワールド座標になるようにする
                 Vector3 offset = mouseWorldBefore - mouseWorldAfter;
                 cam.transform.position += offset;
+                CameraScroll?.Invoke();
             }
             else
             {

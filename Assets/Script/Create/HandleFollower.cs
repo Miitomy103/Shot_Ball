@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
 
 namespace ShotBall.Create
@@ -15,8 +17,13 @@ namespace ShotBall.Create
         [SerializeField] SpriteResizeHandle bottomLeftHandle;
         [SerializeField] SpriteResizeHandle bottomRightHandle;
 
+        [SerializeField] Lines lines;
+
         public SpriteRenderer spriteRenderer;
         private Canvas canvas;
+
+        [SerializeField] HandleButton[] handleButtons;
+        [SerializeField] Objects objects;
 
         private SpriteResizeHandle[] Handles => new SpriteResizeHandle[]
         {
@@ -25,6 +32,11 @@ namespace ShotBall.Create
             bottomLeftHandle,
             bottomRightHandle
         };
+
+        [SerializeField] ConnectionManager connectionManager;
+
+        public Action OnResize { get; set; } // リサイズ開始時のアクション
+
         private void Awake()
         {
             instance = this;
@@ -35,40 +47,52 @@ namespace ShotBall.Create
 
             if (worldCamera == null) worldCamera = Camera.main;
 
+            SpriteSet(null, false); // 初期状態ではハンドルを非表示にする
+
             ChangeHandles();
         }
 
         void Update()
         {
-            if(InputSystem.Instance.IsDragging || InputSystem.Instance.IsZooming)
+            if (InputSystem.Instance.IsDragging || InputSystem.Instance.IsZooming||isRotate)
             {
                 ChangeHandles();
                 return;
             }
             foreach (var handle in Handles)
             {
-                if (handle.IsResize||handle.IsDragging) ChangeHandles();
+                if (handle.IsResize || handle.IsDragging) ChangeHandles();
             }
         }
 
-        public bool IsResize()
+        public bool ResizeNow()
         {
             foreach (var handle in Handles)
             {
-                if (handle.IsResize) return true;
+                if (handle.IsResize ) return true;
             }
             return false;
         }
 
-        public void SpriteSet(SpriteRenderer s,bool active)
+        public void SpriteSet(SpriteRenderer s, bool active)
         {
+            if(s==null) active = false; // null の場合は非表示にする
             spriteRenderer = s;
             foreach (var handle in Handles)
             {
                 handle.SetSprite(s);
                 handle.gameObject.SetActive(active);
             }
+            foreach (var button in handleButtons)
+            {
+                if(s==null) button.gameObject.SetActive(false);
+                else  button.gameObject.SetActive(true);
+            }
+            if (lines == null||s==null)  lines.ActiveSelf(false);
+            else lines.ActiveSelf(true);
             ChangeHandles();
+            if (s == null) return;
+            connectionManager.Connection(s.gameObject.GetComponent<Connect>());
         }
         void ChangeHandles()
         {
@@ -79,16 +103,18 @@ namespace ShotBall.Create
 
             Vector3[] corners = new Vector3[]
             {
-        t.TransformPoint(new Vector3(-size.x / 2f,  size.y / 2f)), // Top Left
-        t.TransformPoint(new Vector3( size.x / 2f,  size.y / 2f)), // Top Right
-        t.TransformPoint(new Vector3(-size.x / 2f, -size.y / 2f)), // Bottom Left
-        t.TransformPoint(new Vector3( size.x / 2f, -size.y / 2f)), // Bottom Right
+                t.TransformPoint(new Vector3(-size.x / 2f,  size.y / 2f)), // Top Left
+                t.TransformPoint(new Vector3( size.x / 2f,  size.y / 2f)), // Top Right
+                t.TransformPoint(new Vector3(-size.x / 2f, -size.y / 2f)), // Bottom Left
+                t.TransformPoint(new Vector3( size.x / 2f, -size.y / 2f)), // Bottom Right
             };
 
             SetHandlePosition(topLeftHandle.ThisRect, corners[0]);
             SetHandlePosition(topRightHandle.ThisRect, corners[1]);
             SetHandlePosition(bottomLeftHandle.ThisRect, corners[2]);
             SetHandlePosition(bottomRightHandle.ThisRect, corners[3]);
+
+            OnResize?.Invoke();
         }
         void SetHandlePosition(RectTransform handle, Vector3 worldPos)
         {
@@ -103,6 +129,43 @@ namespace ShotBall.Create
 
             handle.anchoredPosition = localPoint;
         }
-    }
+        [SerializeField] private bool isRotate = false;
+        private float rotationSpeed = 0.3f; // 好みに合わせて調整
 
+        private Vector3 prevMousePos;
+        public void RotateDown()
+        {
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mouseWorldPos.z = 0f;
+            isRotate = true;
+            prevMousePos = Input.mousePosition;
+        }
+        public void RotateUp()
+        {
+            isRotate = false;
+        }
+        public void RotateDrag()
+        {
+            Vector3 mouseDelta = Input.mousePosition - prevMousePos;
+            float rotateAmount = mouseDelta.x * rotationSpeed;
+            spriteRenderer.transform.Rotate(0, 0, -rotateAmount); // Z軸回転（右ドラッグで時計回り）
+
+            prevMousePos = Input.mousePosition;
+        }
+        public void Delete()
+        {
+            Destroy(spriteRenderer.gameObject);
+            SpriteSet(null, false);
+
+
+            StartCoroutine(WaitForFrame());
+            Debug.Log("Delete");
+        }
+        IEnumerator WaitForFrame()
+        {
+            yield return new WaitForEndOfFrame();
+            objects.UpdateList();
+        }
+
+    }
 }

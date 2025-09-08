@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3565551167882628751}
   - component: {fileID: 6926104886845311026}
   - component: {fileID: 2903985445172775161}
+  - component: {fileID: 2322024568633801229}
   m_Layer: 0
   m_Name: A
   m_TagString: Untagged
@@ -148,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f21ac5fd69d69741b291ecce41c4b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockType: 0
   ballLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -161,6 +163,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a724d9da07953fc4582da7752be2be03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2322024568633801229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3597347082387615002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62e519b8a08422a498955271cdb3b754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4259613249649817012
@@ -177,6 +191,7 @@ GameObject:
   - component: {fileID: 8877268754790664891}
   - component: {fileID: 1560584373171333533}
   - component: {fileID: 8536309487730067467}
+  - component: {fileID: 6579064717180542643}
   m_Layer: 0
   m_Name: B
   m_TagString: Untagged
@@ -311,6 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f21ac5fd69d69741b291ecce41c4b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockType: 0
   ballLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -324,6 +340,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a724d9da07953fc4582da7752be2be03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6579064717180542643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4259613249649817012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62e519b8a08422a498955271cdb3b754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7695943442504705210
@@ -374,6 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17ad82997231b704d94a4be29e28c8b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockType: 0
   warpChildren:
   - {fileID: 6926104886845311026}
   - {fileID: 1560584373171333533}

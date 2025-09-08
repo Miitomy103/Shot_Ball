@@ -8,7 +8,7 @@ namespace ShotBall.InGame
     {
         [SerializeField] Transform parent;
         [SerializeField]Parametors Parametors; // パラメータの設定を保持するクラス
-        private void Start()
+        private void Awake()
         {
             if (parent == null)
             {

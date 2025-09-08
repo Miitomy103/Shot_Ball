@@ -7,9 +7,8 @@ namespace ShotBall.Data
     [System.Serializable]
     public class Prefab 
     {
-        [SerializeField]public string name;
+        [SerializeField] public BlockType type; // Prefab‚ÌŽí—Þ
         [SerializeField] GameObject prefab;
         public GameObject PrefabObj => prefab;
-        public bool IsAttached { get; set; }
     }
 }

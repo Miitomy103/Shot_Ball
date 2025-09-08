@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ShotBall
 {
-    public enum BlockType
+    public enum     BlockType
     {
         AntiGravityArea,
         AutoRotator,
@@ -12,6 +12,7 @@ namespace ShotBall
         Block,
         Bouncy,
         CreaArea,
+        Coin,
         DieBlock,
         GravitySwitch,
         LaunchPad,

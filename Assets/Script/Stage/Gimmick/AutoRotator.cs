@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 namespace ShotBall.InGame
 {
     public class AutoRotator : GimmickBase,IOnOff
     {
-        public override string Name => "AutoRotator";
 
         bool isOn;
         public bool IsOn => isOn;
@@ -72,7 +72,7 @@ namespace ShotBall.InGame
         }
         protected override string StringData()
         {
-            return $"{s_RotationSpeed.z}";
+            return $"{s_RotationSpeed}";
         }
         public override void LoadData(string data)
         {
@@ -89,6 +89,12 @@ namespace ShotBall.InGame
         public void ItOff()
         {
             rotationSpeed = s_RotationSpeed;
+        }
+
+        public override void LoadData(StageBlockData data)
+        {
+            //if()
+            //TODO: Implement loading data from StageBlockData
         }
     }
 }

@@ -13,15 +13,6 @@ MonoBehaviour:
   m_Name: BallLauncher
   m_EditorClassIdentifier: 
   type: 2
-  position:
-    key: Position
-    defaultValue: {x: 0, y: 0}
-  size:
-    key: Size
-    defaultValue: {x: 0, y: 0}
-  rotation:
-    key: Rotation
-    defaultValue: {x: 0, y: 0, z: 0}
   isRotationEnabled: 1
   isRotation:
     key: IsRotation
@@ -35,3 +26,6 @@ MonoBehaviour:
   - key: LaunchDirection
     defaultValue: {x: 0, y: 1}
   vector3Parameters: []
+  uniqueViews:
+  - key: LaunchDirection
+    viewType: 1
