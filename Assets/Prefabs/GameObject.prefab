@@ -2084,6 +2084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoLoad: 0
+  loadStage: 0
   Datas: []
   prefabDatas: {fileID: 11400000, guid: e6fde1ba18ab32b449d3cec8f7482b50, type: 2}
   GenerateObjcts: []

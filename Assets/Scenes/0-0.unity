@@ -223,6 +223,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8318082691901564976, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: loadStage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318082691901564976, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: loadStageName
       value: CreateData
       objectReference: {fileID: 0}

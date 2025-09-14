@@ -26,6 +26,7 @@ namespace ShotBall.Create
 
         [SerializeField]Parametors parametors;
 
+
         public Action DragObject { get; set; } = delegate { };
 
         public int BlockId;
@@ -42,7 +43,24 @@ namespace ShotBall.Create
             Debug.Log(stageBlockData.isDataSet + gameObject.name);
             gimmickName = stageBlockData.Type.ToString();
         }
+        public void Load(StageBlockData data)
+        {
+            stageBlockData = new StageBlockData(data);
+            transform.localScale = stageBlockData.GetVector3Parameter("Scale");
+            ThisSprite.size = stageBlockData.GetVector2Parameter("Size");
+            transform.position = stageBlockData.GetVector3Parameter("Position");
+            transform.eulerAngles = stageBlockData.GetVector3Parameter("Rotation");
 
+            Color c = ThisSprite.color;
+            c.r = stageBlockData.GetFloatParameter("ColorR");
+            c.g = stageBlockData.GetFloatParameter("ColorG");
+            c.b = stageBlockData.GetFloatParameter("ColorB");
+            c.a = stageBlockData.GetFloatParameter("ColorA");
+            ThisSprite.color = c;
+
+            InFrame = stageBlockData.GetBoolParameter("InFrame");
+            BlockId = stageBlockData.GetIntParameter("BlockId");
+        }
         private void Update()
         {
             if(IsDragging|| HandleFollower.Instance.ResizeNow()) DragObject?.Invoke();
@@ -100,6 +118,7 @@ namespace ShotBall.Create
         }
         public void SaveData()
         {
+            if(ThisSprite == null) ThisSprite = GetComponent<SpriteRenderer>();
             stageBlockData.SetVector3Parameter("Scale", transform.localScale,false);  
             stageBlockData.SetVector2Parameter("Size", ThisSprite.size, false);
             stageBlockData.SetVector3Parameter("Position", (Vector2)transform.position, false);

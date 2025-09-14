@@ -59,5 +59,10 @@ namespace ShotBall.Create
             }
             return true;
         }
+
+        public void Title()
+        {
+            SceneManager.LoadScene("SaveData");
+        }
     }
 }

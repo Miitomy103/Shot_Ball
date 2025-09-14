@@ -29,6 +29,11 @@ namespace ShotBall.InGame
 
             string sceneName = SceneControl.NowStage();
 
+            if(TryGetComponent<IName>(out var nameComponent))
+            {
+                sceneName = nameComponent.Name;
+            }
+
             stageText.text = sceneName;
         }
         public void GameReset()

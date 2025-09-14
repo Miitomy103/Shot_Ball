@@ -19,8 +19,8 @@ namespace ShotBall.Create
         // 残したいコンポーネントの型（複数可）
         Type[] keepTypes = new Type[]
         {
-        typeof(Transform),
-        typeof(SpriteRenderer) // ←残したいコンポーネントを追加
+            typeof(Transform),
+            typeof(SpriteRenderer) // ←残したいコンポーネントを追加
         };
 
 
@@ -41,6 +41,14 @@ namespace ShotBall.Create
         private void Start()
         {
             changeText.ChangeText(blockNumber.ToString());
+        }
+        private void Update()
+        {
+            if (MouseInputHandler.Instance.LeftDown&&MouseEnter.inMouse)
+            {
+                OnMouseDownEvent();
+            }
+
         }
         public void Initialized(CreateObject createObject)
         {
@@ -92,6 +100,24 @@ namespace ShotBall.Create
         public void Save()
         {
             stageBlockData.SetBoolParameter("InFrame", true, false);
+        }
+        public void OnMouseDownEvent()
+        {
+            Debug.Log("Frame Clicked");
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mouseWorldPos.z = thisSprite.transform.position.z;
+
+
+            // Spriteの矩形範囲を取得
+            Bounds bounds = thisSprite.bounds;
+
+
+            // 境界内にマウス座標があるか判定
+            if (bounds.Contains(mouseWorldPos))
+            {
+                Inspector.Instance.Choice(stageBlockData);
+                Debug.Log("Frame Selected");
+            }
         }
     }
 }

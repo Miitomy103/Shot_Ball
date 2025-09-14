@@ -39,5 +39,39 @@ namespace ShotBall.InGame
 
             return new BlockData(blockType, position, scale, rotation, size,blockId, color, type, childData, gimmickData,keyNumbers.ToArray());
         }
+        public static StageBlockData ChangeStageBlockData(BlockData blockData)
+        {
+            StageBlockData stageBlockData = new StageBlockData();
+
+            // 基本情報
+            stageBlockData.SetType(blockData.BlockType);
+            stageBlockData.SetVector3Parameter("Position", blockData.Position, false);
+            stageBlockData.SetVector3Parameter("Scale", blockData.Scale, false);
+            stageBlockData.SetVector3Parameter("Rotation", blockData.Rotation.eulerAngles, false);
+            stageBlockData.SetIntParameter("BlockId", blockData.BlockId, false);
+            stageBlockData.SetVector2Parameter("Size", blockData.size, false);
+
+            // 色
+            stageBlockData.SetFloatParameter("ColorR", blockData.color.r, false);
+            stageBlockData.SetFloatParameter("ColorG", blockData.color.g, false);
+            stageBlockData.SetFloatParameter("ColorB", blockData.color.b, false);
+            stageBlockData.SetFloatParameter("ColorA", blockData.color.a, false);
+
+            // 種別
+            stageBlockData.SetBoolParameter("InFrame", blockData.Type == ObjectType.Runtime, false);
+
+            // KeyNumbers
+            for (int i = 0; i < blockData.BlockIds.Length; i++)
+            {
+                string paramName = "KeyNumber" + i;
+                stageBlockData.SetIntParameter(paramName, blockData.BlockIds[i], false);
+            }
+
+            // 子データ（childData）の扱いは仕様次第
+            // blockData.ChildData を StageBlockData[] に変換したい場合はここで再帰的に処理
+
+            return stageBlockData;
+        }
+
     }
 }

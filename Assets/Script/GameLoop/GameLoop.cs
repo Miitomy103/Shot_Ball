@@ -77,6 +77,7 @@ namespace ShotBall.InGame
         }
         public void CoinSet(IGet[] coins)
         {
+            Debug.Log("GameLoop CoinSet");
             Coins = coins;
         }
         public void ChangeState(StageState stageState)

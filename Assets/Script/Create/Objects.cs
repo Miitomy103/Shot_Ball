@@ -12,11 +12,15 @@ namespace ShotBall.Create
     {
         [SerializeField] List<CreateObject> objects = new List<CreateObject>();
 
-        [SerializeField] string fileName;
-
         [SerializeField]Stage stage;
 
         [SerializeField] FrameManager frameManager;
+
+        [SerializeField] GenerateObject GenerateObject;
+
+        [Header("Save/Load Settings")]
+        [SerializeField] bool isDefault;
+        [SerializeField] bool isLoad = true;
 
 
         public CreateObject[] CreateObjects => objects.ToArray();
@@ -27,10 +31,15 @@ namespace ShotBall.Create
             objects.Add(obj);
             UpdateObjects?.Invoke();
         }
+        private void Awake()
+        {
+            
+            LoadFile();
+        }
         private void Start()
         {
             UpdateList();
-            StartCoroutine(Coroutine());
+            //StartCoroutine(Coroutine());
         }
         IEnumerator Coroutine()
         {
@@ -44,7 +53,7 @@ namespace ShotBall.Create
             string json = JsonUtility.ToJson(Data(), true);
             Texture2D texture2D= stage.CaptureArea();
 
-            SaveManager.Save($"StageData.{fileName}", json, texture2D);
+            SaveManager.Save($"StageData.{StageName.name}", json, texture2D);
         }
         public BlockDataWrapper Data()
         {
@@ -72,9 +81,54 @@ namespace ShotBall.Create
                 //keyNumberData = KeyNumberManager.GetKeyNumberData()
             };
         }
+        public void LoadFile()
+        {
+            if(!isLoad) return;
+            BlockDataWrapper data=LoadScene.BlockDataWrapper;
+            if (data == null&&isDefault)
+            {
+                data = GetComponent<DefaultData>().defaultData;
+            }
+
+
+            for (int i=0;i<objects.Count;i++)
+            {
+                if (objects[i] != null)
+                {
+                    Destroy(objects[i].gameObject);
+                    objects.RemoveAt(i);
+                }
+            }
+            objects.Clear();
+
+            BlockData[] datas = data.Blocks;
+            foreach(var d in datas)
+            {
+                if (d.Type == ObjectType.Editor)
+                {
+                    GenerateObject.LoadObject(DataChange.ChangeStageBlockData(d));
+                }
+                else if(d.Type == ObjectType.Runtime)
+                {
+                    CreateObject c = GenerateObject.LoadObject(DataChange.ChangeStageBlockData(d));
+                    frameManager.InObject(c);
+                }
+            }
+
+            stage.SizeSet(data.cameraSize, data.centerWorldWidth);
+        }
+        IEnumerator WaitOneFrame(BlockDataWrapper data)
+        {
+            yield return null;
+        }
         public void UpdateList()
         {
             objects.Clear();
+            StartCoroutine(UpdateCoroutine());
+        }
+        IEnumerator UpdateCoroutine()
+        {
+            yield return null;
             Debug.Log("Update List");
             foreach (Transform c in transform)
             {

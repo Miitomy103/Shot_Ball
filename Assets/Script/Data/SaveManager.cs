@@ -16,7 +16,6 @@ public static class SaveManager
         return Path.Combine(Application.persistentDataPath, fileName);
     }
 
-
     public static void Save(string fileName, string json, Texture2D texture)
     {
         // 画像をBase64に変換
@@ -52,7 +51,37 @@ public static class SaveManager
 
         return (data.playerJson, tex);
     }
+
+    public static Texture2D ChangeDataImage(string base64)
+    {
+        byte[] imgBytes = System.Convert.FromBase64String(base64);
+        Texture2D tex = new Texture2D(2, 2);
+        tex.LoadImage(imgBytes);
+        return tex;
+    }
+
+    /// <summary>
+    /// セーブデータを削除する
+    /// </summary>
+    public static bool Delete(string fileName)
+    {
+        Debug.Log("削除実行: " + fileName);
+        string path = GetSavePath("StageData."+fileName);
+
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+            Debug.Log("削除完了: " + path);
+            return true;
+        }
+        else
+        {
+            Debug.Log("削除対象が存在しません: " + path);
+            return false;
+        }
+    }
 }
+
 
 [System.Serializable]
 public class SaveData
@@ -68,8 +97,6 @@ public static class SecureSave
     private static readonly string UserKey = "sousouno";    // Keyとして使う文字列
     private static readonly string UserIV = "furirenn";    // IVとして使う文字列
 
-    private static string SavePath(string fileName) =>
-        Path.Combine(Application.persistentDataPath, fileName);
 
     // 任意の文字列をAES用Key（32バイト）に変換
     private static byte[] GenerateAesKey(string key)
@@ -93,7 +120,7 @@ public static class SecureSave
     }
 
     // 暗号化して保存
-    public static void SaveEncrypted(string fileName, string plainText)
+    public static void SaveEncrypted(string fullPath, string plainText)
     {
         using (Aes aes = Aes.Create())
         {
@@ -108,17 +135,16 @@ public static class SecureSave
                 sw.Write(plainText);
                 sw.Flush();
                 cs.FlushFinalBlock();
-                File.WriteAllBytes(SavePath(fileName), ms.ToArray());
+                File.WriteAllBytes(fullPath, ms.ToArray()); // ← SavePath()を削除
             }
         }
     }
 
     // 復号して読み込み
-    public static string LoadEncrypted(string fileName)
+    public static string LoadEncrypted(string fullPath)
     {
-        if (!File.Exists(SavePath(fileName))) return null;
-
-        byte[] cipherBytes = File.ReadAllBytes(SavePath(fileName));
+        if (!File.Exists(fullPath)) return null;
+        byte[] cipherBytes = File.ReadAllBytes(fullPath);
 
         using (Aes aes = Aes.Create())
         {
@@ -170,7 +196,12 @@ public static class StageDataLoader
                     Debug.LogWarning($"復号失敗: {fileName}");
                     continue;
                 }
-
+                string f = Path.GetFileNameWithoutExtension(filePath); // StageData.StageA
+                string[] parts = fileName.Split('.');
+                if (parts.Length > 1)
+                {
+                    fileName = parts[1]; // StageA
+                }
                 SaveData data = JsonUtility.FromJson<SaveData>(decryptedJson);
                 result.Add((fileName, data));
             }

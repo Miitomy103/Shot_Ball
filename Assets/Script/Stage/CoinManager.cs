@@ -9,12 +9,9 @@ namespace ShotBall.InGame
     {
         IGet[] coins = new IGet[3];
         private void Awake()
-        {
-            for(int i=0;i<transform.childCount;i++)
-            {
-                coins[i]= transform.GetChild(i).GetComponent<IGet>();
-            }
+        { 
 
+            coins=GetComponentsInChildren<Coin>().Cast<IGet>().ToArray();
         }
         private void Start()
         {

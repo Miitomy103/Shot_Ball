@@ -99,23 +99,33 @@ namespace ShotBall.Create
             if (spriteRenderer == null) return;
 
             Transform t = spriteRenderer.transform;
-            Vector2 size = spriteRenderer.bounds.size;
 
-            Vector3[] corners = new Vector3[]
+            // Sliced/Tiled の場合は spriteRenderer.size が「見た目のサイズ」
+            Vector2 finalSize = spriteRenderer.size;
+
+            // ローカル空間での四隅（中心基準）
+            Vector3[] localCorners = new Vector3[]
             {
-                t.TransformPoint(new Vector3(-size.x / 2f,  size.y / 2f)), // Top Left
-                t.TransformPoint(new Vector3( size.x / 2f,  size.y / 2f)), // Top Right
-                t.TransformPoint(new Vector3(-size.x / 2f, -size.y / 2f)), // Bottom Left
-                t.TransformPoint(new Vector3( size.x / 2f, -size.y / 2f)), // Bottom Right
+        new Vector3(-finalSize.x / 2f,  finalSize.y / 2f, 0), // Top Left
+        new Vector3( finalSize.x / 2f,  finalSize.y / 2f, 0), // Top Right
+        new Vector3(-finalSize.x / 2f, -finalSize.y / 2f, 0), // Bottom Left
+        new Vector3( finalSize.x / 2f, -finalSize.y / 2f, 0), // Bottom Right
             };
 
-            SetHandlePosition(topLeftHandle.ThisRect, corners[0]);
-            SetHandlePosition(topRightHandle.ThisRect, corners[1]);
-            SetHandlePosition(bottomLeftHandle.ThisRect, corners[2]);
-            SetHandlePosition(bottomRightHandle.ThisRect, corners[3]);
+            // ワールド座標に変換（回転はTransformが持ってるのでOK）
+            Vector3[] worldCorners = new Vector3[4];
+            for (int i = 0; i < 4; i++)
+                worldCorners[i] = t.TransformPoint(localCorners[i]);
+
+            // UIハンドルを更新
+            SetHandlePosition(topLeftHandle.ThisRect, worldCorners[0]);
+            SetHandlePosition(topRightHandle.ThisRect, worldCorners[1]);
+            SetHandlePosition(bottomLeftHandle.ThisRect, worldCorners[2]);
+            SetHandlePosition(bottomRightHandle.ThisRect, worldCorners[3]);
 
             OnResize?.Invoke();
         }
+
         void SetHandlePosition(RectTransform handle, Vector3 worldPos)
         {
             Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(worldCamera, worldPos);

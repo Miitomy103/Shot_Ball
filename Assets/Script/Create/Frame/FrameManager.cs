@@ -1,4 +1,4 @@
-using ShotBall.Data;
+﻿using ShotBall.Data;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -32,7 +32,6 @@ namespace ShotBall.Create
         {
             instance = this;
         }
-
         public void InObject(CreateObject createObject)
         {
             if (createObject == null) return;
@@ -40,7 +39,11 @@ namespace ShotBall.Create
             bool isExist = false;
             foreach (var type in prohibitedTypes)
             {
-                if (createObject.StageBlockData.Type == type) isExist = true;
+                if (createObject.StageBlockData.Type == type)
+                {
+                    isExist = true;
+                    CreateLog.Instance.SetLog("このオブジェクトはフレームに入れられません");
+                }
             }
 
             if (frames.Count >= maxFrame||isExist)
@@ -93,7 +96,7 @@ namespace ShotBall.Create
 
             if (count <= 0)
             {
-                Debug.LogWarning("�I�u�W�F�N�g����1�ȏ�ɂ��Ă�������");
+                Debug.LogWarning("オブジェクト数は1以上にしてください");
                 return;
             }
 

@@ -16,10 +16,6 @@ namespace ShotBall.Create
 
         int blockIdCount = 0;
 
-        public void Generate(StageBlockData stageBlockData)
-        {
-            CreateObject obj = Generate(stageBlockData.Type);
-        }
         public CreateObject Generate(BlockType blockType)
         {
             foreach(var p in prefabDatas.prefabs)
@@ -44,6 +40,24 @@ namespace ShotBall.Create
                         Destroy(obj);
                         return null;
                     }
+                }
+            }
+            return null; // 生成できるオブジェクトが見つからない場合はnullを返す
+        }
+        public CreateObject LoadObject(StageBlockData data)
+        {
+            foreach (var p in prefabDatas.prefabs)
+            {
+                if (p.type == data.Type)
+                {
+                    GameObject obj = Instantiate(p.PrefabObj, Vector3.zero + new Vector3(0, 0, -5), Quaternion.identity);
+                    obj.transform.parent = transform;
+                    CreateObject createObject = obj.GetComponent<CreateObject>();
+                    createObject.Load(data);
+                    createObject.BlockId = data.GetIntParameter("BlockId");
+                    ParametorSet(obj); // パラメータを設定
+                    objects.Add(createObject);
+                    return createObject;
                 }
             }
             return null; // 生成できるオブジェクトが見つからない場合はnullを返す

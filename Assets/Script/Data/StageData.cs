@@ -1,4 +1,5 @@
 using ShotBall;
+using ShotBall.Create;
 using ShotBall.InGame;
 using System.Collections.Generic;
 using System.IO;
@@ -10,6 +11,7 @@ namespace ShotBall.Data
     {
         [Header("LoadSettings")]
         [SerializeField]bool autoLoad = false;
+        [SerializeField] bool loadStage = false;
 
         float cameraSize = 5f;
         public BlockData[] Datas;
@@ -83,6 +85,13 @@ namespace ShotBall.Data
                 wrapper = JsonUtility.FromJson<BlockDataWrapper>(a);
             }
 
+            if (loadStage)
+            {
+                if(LoadScene.BlockDataWrapper != null)
+                {
+                    wrapper = LoadScene.BlockDataWrapper;
+                }
+            }
 
             Datas = wrapper.Blocks;
             BlockData[] datas = wrapper.Blocks;
