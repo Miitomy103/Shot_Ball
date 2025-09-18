@@ -35,6 +35,7 @@ namespace ShotBall.InGame
 
             GameObject game = Instantiate(FrameObject, new Vector3(transform.position.x,transform.position.y,FrameObject.transform.position.z), FrameObject.transform.rotation);
             
+            game.transform.parent=DragObjects.Instance.RuntimeParent;
             game.SetActive(true);
             PutOut();
             DragObject dragObject = game.GetComponent<DragObject>();
@@ -47,7 +48,7 @@ namespace ShotBall.InGame
             frameInObject = Instantiate(drag.gameObject,transform);
             FrameSpriteIn(frameInObject);
             //いつでもコピーが出せるように生成する
-            GameObject copy = Instantiate(drag.gameObject);
+            GameObject copy = Instantiate(drag.gameObject,DragObjects.Instance.RuntimeParent);
             FrameObject = copy.gameObject;
             //コピーを表示しないようにする
             copy.SetActive(false);

@@ -89,6 +89,7 @@ namespace ShotBall.InGame
             itemDatas[page].ActiveChange(false);
             page += index;
             itemDatas[page].ActiveChange(true);
+            ClickSound.Instance.Play();
         }
         private void ItemClick(int index)
         {

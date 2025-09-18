@@ -156,12 +156,20 @@ namespace ShotBall.Create
         }
         public void RotateDrag()
         {
-            Vector3 mouseDelta = Input.mousePosition - prevMousePos;
-            float rotateAmount = mouseDelta.x * rotationSpeed;
-            spriteRenderer.transform.Rotate(0, 0, -rotateAmount); // Z軸回転（右ドラッグで時計回り）
+            // ワールド座標のマウス位置を取得（カメラからのスクリーン変換）
+            Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mouseWorldPos.z = 0f; // 2DならZは固定
 
-            prevMousePos = Input.mousePosition;
+            // 自分の位置からマウスへのベクトルを計算
+            Vector3 dir = mouseWorldPos - spriteRenderer.transform.position;
+
+            // 角度を求める（ラジアン→度）
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+            // Z軸回転を設定（「上をマウス方向にする」なら -90 度補正）
+            spriteRenderer.transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
         }
+
         public void Delete()
         {
             Destroy(spriteRenderer.gameObject);

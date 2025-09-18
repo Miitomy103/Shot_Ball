@@ -37,9 +37,36 @@ namespace ShotBall.Create
         public void ChangeData()
         {
             Debug.Log("CameraChange");
-            cameraSize =stageBlockData.StageBlockData.GetFloatParameter("CameraSize");
-            centerWorldWidth = stageBlockData.StageBlockData.GetFloatParameter("CenterWorldWidth");
+
+            float cameraSize = Mathf.Clamp(
+                stageBlockData.StageBlockData.GetFloatParameter("CameraSize"),
+                3f, 14f);
+
+            if (!Mathf.Approximately(cameraSize, stageBlockData.StageBlockData.GetFloatParameter("CameraSize")))
+            {
+                stageBlockData.StageBlockData.SetFloatParameter("CameraSize", cameraSize);
+            }
+
+            float centerWorldWidth = Mathf.Clamp(
+                stageBlockData.StageBlockData.GetFloatParameter("CenterWorldWidth"),
+                4f, 14.8f);
+
+            if (!Mathf.Approximately(centerWorldWidth, stageBlockData.StageBlockData.GetFloatParameter("CenterWorldWidth")))
+            {
+                stageBlockData.StageBlockData.SetFloatParameter("CenterWorldWidth", centerWorldWidth);
+            }
+
+            this.cameraSize = cameraSize;
+            this.centerWorldWidth = centerWorldWidth;
             stage.SizeSet(cameraSize, centerWorldWidth);
         }
+
+
+
+        private void OnDestroy()
+        {
+            stageBlockData.StageBlockData.floatSet -= ChangeData;
+        }
+
     }
 }

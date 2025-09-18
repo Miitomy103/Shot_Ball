@@ -22,6 +22,8 @@ namespace ShotBall.InGame
 
         private StageState OnceState;
 
+        List<Ball> clearBalls = new List<Ball>();
+
         public static IGet[] Coins { get; set; } = new IGet[3];
 
         [SerializeField] int goalCount;
@@ -34,6 +36,16 @@ namespace ShotBall.InGame
         protected virtual void Start()
         {
             ChangeState(StageState.Setting);
+
+            launchPads.Clear();
+            ObjectBase[] objectBases= DragObjects.Instance.GetAllObjects();
+            foreach (var obj in objectBases)
+            {
+                if(obj.TryGetComponent<LaunchPad>(out var launchPad))
+                {
+                    launchPads.Add(launchPad);
+                }
+            }
         }
         public void GameStart()
         {
@@ -69,6 +81,9 @@ namespace ShotBall.InGame
         }
         public void ClearAreaCheck(Ball ball)
         {
+            if(clearBalls.Contains(ball)) return;
+            clearBalls.Add(ball);
+            Debug.Log("GameLoop ClearAreaCheck");
             goalCount++;
             if(goalCount>=launchPads.Count)
             {

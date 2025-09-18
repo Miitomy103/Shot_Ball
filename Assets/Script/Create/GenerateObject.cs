@@ -28,7 +28,8 @@ namespace ShotBall.Create
                     createObject.BlockId = blockIdCount;
                     blockIdCount++;
                     ParametorSet(obj); // ƒpƒ‰ƒ[ƒ^‚ğİ’è
-                    objects.Add(createObject);
+                    objects.Add(createObject); 
+                    HandleFollower.Instance.SpriteSet(createObject.GetComponent<SpriteRenderer>(), createObject.IsSizeChange);
                     if (createObject != null)
                     {
                         createObject.StageBlockData.SetType(blockType);

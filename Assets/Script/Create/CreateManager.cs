@@ -1,3 +1,4 @@
+using ShotBall.InGame;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -30,9 +31,9 @@ namespace ShotBall.Create
 
             StaticData.blockDataWrapper = objects.Data();
 
-            string json = JsonUtility.ToJson(StaticData.blockDataWrapper, true);
-            string path = Path.Combine(Application.dataPath, $"StageData/StageData.テスト用.json");
-            File.WriteAllText(path, json);
+            //string json = JsonUtility.ToJson(StaticData.blockDataWrapper, true);
+            //string path = Path.Combine(Application.dataPath, $"StageData/StageData.テスト用.json");
+            //File.WriteAllText(path, json);
 
             allObjects = Object.FindObjectsOfType<GameObject>();
             foreach (var obj in allObjects)
@@ -40,6 +41,8 @@ namespace ShotBall.Create
                 obj.SetActive(false);
             }
             SceneManager.LoadScene("CreateTestScene",LoadSceneMode.Additive);
+
+            ClickSound.Instance.Play();
 
         }
         public void TestEnd()

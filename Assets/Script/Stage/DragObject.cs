@@ -1,3 +1,4 @@
+using ShotBall.Audio;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -51,6 +52,8 @@ namespace ShotBall.InGame
             OrderInLayerChange();
             DragStartAction?.Invoke();
             StartDragDerivation(inputScreenPos);
+
+            Tap.Instance.Play();
         }
         protected abstract void StartDragDerivation(Vector3 inputScreenPos);
         public void Drag(Vector3 inputScreenPos)

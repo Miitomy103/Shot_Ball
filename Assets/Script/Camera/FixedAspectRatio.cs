@@ -6,7 +6,7 @@ public class FixedAspectRatio : MonoBehaviour
     public int height = 1080;
     public bool fullscreen = true;
 
-    void Start()
+    void Awake()
     {
         Screen.SetResolution(width, height, fullscreen);
     }

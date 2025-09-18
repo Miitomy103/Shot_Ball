@@ -108,6 +108,7 @@ MonoBehaviour:
   keyNumber: 0
   clearSound: {fileID: -3709671377947103410}
   keyNumberColor: {fileID: 11400000, guid: 335fbd33ba2720140924867756340ed0, type: 2}
+  currentColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &-3464046345657449361
 MonoBehaviour:
   m_ObjectHideFlags: 0

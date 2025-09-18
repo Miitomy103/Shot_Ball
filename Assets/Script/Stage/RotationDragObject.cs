@@ -1,3 +1,4 @@
+using ShotBall.Audio;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ namespace ShotBall.InGame
 
         IEnumerator RotateUntilPlaced()
         {
+            Rotate.Instance.Play();
+
             float totalRotation = 0;
 
             while (totalRotation < 360f)

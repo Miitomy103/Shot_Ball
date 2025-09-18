@@ -11,16 +11,28 @@ namespace ShotBall.InGame
         [SerializeField] bool isAntiGravity;
         [SerializeField]int keyNumber;
         [SerializeField] KeyNumberColor keyNumberColor;
-
+        [SerializeField, ReadOnly] Color currentColor = Color.white;
         Ball ball;
         public int KeyNumber => keyNumber;
 
         Color color = Color.white;
 
+        private void OnValidate()
+        {
+            if (keyNumberColor != null)
+            {
+                ColorChange(keyNumberColor.colors[keyNumber]);
+            }
+        }
         protected override void Start()
         {
             base.Start();
             BallGenerate();
+        }
+        public void ColorChange(Color color)
+        {
+            this.color = color;
+            currentColor = color;
         }
         protected override void StageStart()
         {
@@ -70,10 +82,6 @@ namespace ShotBall.InGame
             Physics2D.IgnoreCollision(collider, ball.collider, false); // è’ìÀÇóLå¯âª
         }
 
-        public void ColorChange(Color color)
-        {
-            this.color = color;
-        }
 
         public override void LoadData(StageBlockData data)
         {

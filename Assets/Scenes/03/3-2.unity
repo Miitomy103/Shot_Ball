@@ -409,6 +409,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 295170080493055866, guid: 6ccf37a50ba248042b9e4b5dfeb10363, type: 3}
   m_PrefabInstance: {fileID: 1349362338}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1074588109 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -5496030534914989408, guid: 6ccf37a50ba248042b9e4b5dfeb10363, type: 3}
+  m_PrefabInstance: {fileID: 1349362338}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074588103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75da714f6dc67134ba3284a4da4a0ac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1154266919
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -973,6 +984,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OnOffBlock
       objectReference: {fileID: 0}
+    - target: {fileID: 5571458862158187615, guid: 138ac421339ee8346a2f2bc0e04e6f35, type: 3}
+      propertyPath: iOnOffs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1074588109}
     - target: {fileID: 5571458862158187615, guid: 138ac421339ee8346a2f2bc0e04e6f35, type: 3}
       propertyPath: iOnOffs.Array.data[0].m_gameobject
       value: 

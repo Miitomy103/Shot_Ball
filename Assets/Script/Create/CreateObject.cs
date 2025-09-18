@@ -10,6 +10,7 @@ namespace ShotBall.Create
     public class CreateObject : MonoBehaviour,IChangeSize,IStageBlockData
     {
         [SerializeField] private bool isSizeChange = true;
+        public bool IsSizeChange => isSizeChange;
 
         SpriteRenderer ThisSprite;
 

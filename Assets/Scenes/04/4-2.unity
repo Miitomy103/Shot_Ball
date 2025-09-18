@@ -766,6 +766,17 @@ MonoBehaviour:
   ballLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &684943851 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -6252756120964383382, guid: b660497e06cabba4f9a179e94a9de148, type: 3}
+  m_PrefabInstance: {fileID: 3803218588920936507}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459708360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75da714f6dc67134ba3284a4da4a0ac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &718635750
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1084,6 +1095,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: OnOffBlock
       objectReference: {fileID: 0}
+    - target: {fileID: 5571458862158187615, guid: 138ac421339ee8346a2f2bc0e04e6f35, type: 3}
+      propertyPath: iOnOffs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5571458862158187615, guid: 138ac421339ee8346a2f2bc0e04e6f35, type: 3}
+      propertyPath: iOnOffs.Array.data[0]
+      value: 
+      objectReference: {fileID: 684943851}
     - target: {fileID: 5571458862158187615, guid: 138ac421339ee8346a2f2bc0e04e6f35, type: 3}
       propertyPath: iOnOffs.Array.data[0].m_gameobject
       value: 

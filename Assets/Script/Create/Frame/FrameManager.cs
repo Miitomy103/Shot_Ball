@@ -42,7 +42,7 @@ namespace ShotBall.Create
                 if (createObject.StageBlockData.Type == type)
                 {
                     isExist = true;
-                    CreateLog.Instance.SetLog("このオブジェクトはフレームに入れられません");
+                    LogDisplay.Instance.SetLog("このオブジェクトはフレームに入れられません");
                 }
             }
 

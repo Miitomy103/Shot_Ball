@@ -15,6 +15,7 @@ namespace ShotBall.InGame
         [SerializeField] List<DragObject> dragObjects = new List<DragObject>();
         [SerializeField] List<ObjectBase> allObjects = new List<ObjectBase>();
         [SerializeField] Transform runtimeParent;
+        public Transform RuntimeParent => runtimeParent;
         private void Awake()
         {
             instance = this;

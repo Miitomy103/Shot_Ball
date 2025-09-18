@@ -98,11 +98,12 @@ namespace ShotBall.Data
             cameraManager.CenterWorldWidth = wrapper.centerWorldWidth;
             //KeyNumberManager.LoadKeyNumber(wrapper.keyNumberData);
 
-            string json1 = JsonUtility.ToJson(wrapper, true);
-            string path1 = Path.Combine(Application.dataPath, $"StageData/StageData.BlockDatasテスト用.json");
-            File.WriteAllText(path1, json1);
+            //string json1 = JsonUtility.ToJson(wrapper, true);
+            //string path1 = Path.Combine(Application.dataPath, $"StageData/StageData.BlockDatasテスト用.json");
+            //File.WriteAllText(path1, json1);
 
             Camera.main.orthographicSize = wrapper.cameraSize;
+            
             foreach(var data in datas)
             {
                 ObjectGenerate(data);
@@ -137,8 +138,12 @@ namespace ShotBall.Data
                         objectB.BlockId = data.BlockId;
                     }
                     SpriteRenderer sprite = obj.GetComponent<SpriteRenderer>();
-                    sprite.size = data.size;
                     sprite.color = data.color;
+
+                    if(obj.TryGetComponent<SpriteImage>(out var spriteImage))
+                    {
+                        spriteImage.SizeChange(data.size);
+                    }
 
                     ObjectType type = data.Type;
                     ObjectBase objectBase = type switch

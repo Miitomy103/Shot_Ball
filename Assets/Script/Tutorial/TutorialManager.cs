@@ -4,87 +4,109 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+
     public class TutorialManager : MonoBehaviour
     {
-        readonly string[] animationName= new string[3]
+        // チュートリアルの種類
+        private enum TutorialType
         {
-            "Move",
-            "Rotation",
-            "Click"
-        };
-        bool[] isClear = new bool[3]
-        {
-            false,
-            false,
-            false
-        };
-        [SerializeField] Animator animator;
-        [SerializeField] int tutorialCount = 0;
+            Move,
+            Rotation,
+            Click
+        }
 
-        [SerializeField] RectTransform rectTransform;
-        [SerializeField] Vector2 rotationPos;
-        [SerializeField] Vector2 clickPos;
+        // アニメーション名と対応づけ
+        private readonly Dictionary<TutorialType, string> animationNames = new Dictionary<TutorialType, string>
+    {
+        { TutorialType.Move, "Move" },
+        { TutorialType.Rotation, "Rotation" },
+        { TutorialType.Click, "Click" }
+    };
+
+        [SerializeField] private Animator animator;
+        [SerializeField] private RectTransform rectTransform;
+        [SerializeField] private Vector2 rotationPos;
+        [SerializeField] private Vector2 clickPos;
+
+        // クリア済みを管理
+        private HashSet<TutorialType> cleared = new HashSet<TutorialType>();
+
         private void Awake()
         {
-            rectTransform=animator.GetComponent<RectTransform>();
+            if (animator != null)
+            {
+                rectTransform = animator.GetComponent<RectTransform>();
+            }
         }
+
         private void Start()
         {
-            GameLoop.Instance.StartAction += ClickClear;
-            ClearTutorial();
-        }
-        public void MoveClear()
-        {
-            isClear[0] = true;
-            ClearTutorial();
-        }
-        public void RotationClear()
-        {
-            isClear[1] = true;
-            ClearTutorial();
-        }
-        public void ClickClear()
-        {
-            isClear[2] = true;
-            ClearTutorial();
-        }
-        public void ClearTutorial()
-        {
-            int c = 0;
-            bool b = false;
-            for(int i = 0; i < isClear.Length; i++)
+            if (GameLoop.Instance != null)
             {
-                if (!isClear[i])
+                GameLoop.Instance.StartAction += () => Clear(TutorialType.Click);
+            }
+            UpdateTutorial();
+        }
+
+        // 外部から呼ぶクリア処理
+        public void ClearMove() => Clear(TutorialType.Move);
+        public void ClearRotation() => Clear(TutorialType.Rotation);
+        public void ClearClick() => Clear(TutorialType.Click);
+
+        private void Clear(TutorialType type)
+        {
+            if (cleared.Contains(type)) return;
+
+            cleared.Add(type);
+            Debug.Log($"Tutorial Cleared: {type}");
+            UpdateTutorial();
+        }
+
+        private void UpdateTutorial()
+        {
+            // 未クリアのものを探す
+            foreach (TutorialType type in System.Enum.GetValues(typeof(TutorialType)))
+            {
+                if (!cleared.Contains(type))
                 {
-                    c = i;
-                    b = true;
-                    break;
+                    PlayTutorial(type);
+                    return;
                 }
             }
-            if (!b)
+
+            // 全部クリア済み
+            if (animator != null)
             {
                 animator.gameObject.SetActive(false);
-                return;
-            }
-            animator.SetTrigger(animationName[c]);
-            Debug.Log("Tutorial Clear: " + animationName[c]);
-            if(c == 1)
-            {
-                StartCoroutine(Coroutine(rotationPos));
-                Debug.Log("Set Position: " + rotationPos);
-            }
-            else if (c == 2)
-            {
-                StartCoroutine(Coroutine(clickPos));
-                Debug.Log("Set Position: " + clickPos);
             }
         }
-        IEnumerator Coroutine(Vector2 vector2)
+
+        private void PlayTutorial(TutorialType type)
+        {
+            if (animator == null) return;
+
+            animator.SetTrigger(animationNames[type]);
+            Debug.Log($"Play Tutorial: {type}");
+
+            if (type == TutorialType.Rotation)
+            {
+                StartCoroutine(SetPositionDelayed(rotationPos));
+            }
+            else if (type == TutorialType.Click)
+            {
+                StartCoroutine(SetPositionDelayed(clickPos));
+            }
+        }
+
+        private IEnumerator SetPositionDelayed(Vector2 pos)
         {
             yield return new WaitForSeconds(1f);
-            rectTransform.anchoredPosition = vector2;
+            if (rectTransform != null)
+            {
+                rectTransform.anchoredPosition = pos;
+                Debug.Log($"Position Set: {pos}");
+            }
         }
     }
 
-    
 }

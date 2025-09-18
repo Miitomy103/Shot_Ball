@@ -39,8 +39,8 @@ namespace ShotBall.InGame
         {
             if (index < 0 || index >= lineDatas.Count)
             {
-                Debug.LogError($"ChangePosition: index {index} is out of range. lineDatas.Count: {lineDatas.Count}");
-                //return;
+                //Debug.LogError($"ChangePosition: index {index} is out of range. lineDatas.Count: {lineDatas.Count}");
+                return;
             }
 
             if (lineDatas[index].obj.activeSelf && lineDatas[index].start != null && lineDatas[index].end != null)

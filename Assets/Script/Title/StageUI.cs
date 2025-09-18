@@ -11,6 +11,7 @@ namespace ShotBall.InGame
     public class StageUI : MonoBehaviour
     {
         [SerializeField] int stage;
+        public int Stage => stage;
         [SerializeField] Color baseColor;
         [SerializeField] Color clearColor;
         [SerializeField] Image backImage;
@@ -55,6 +56,16 @@ namespace ShotBall.InGame
                 button.onClick.AddListener(() => OnClick(index));
             }
 
+        }
+
+        public bool IsAllClear()
+        {
+            for (int i = 0; i < stages.Length; i++)
+            {
+                bool clear = (1 == PlayerPrefs.GetInt($"Stage{stage}-{i + 1}", 0));
+                if (!clear) return false;
+            }
+            return true;
         }
         void OnClick(int index)
         {

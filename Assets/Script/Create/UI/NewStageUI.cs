@@ -18,6 +18,13 @@ namespace ShotBall.Create
                 if (data.Item1 == stageNameInput.text)
                 {
                     Debug.Log("同じ名前のステージがあります");
+                    LogDisplay.Instance.SetLog("同じ名前のステージがあります");
+                    return;
+                }
+                if(string.IsNullOrEmpty(stageNameInput.text))
+                {
+                    Debug.Log("ステージ名を入力してください");
+                    LogDisplay.Instance.SetLog("ステージ名を入力してください");
                     return;
                 }
             }

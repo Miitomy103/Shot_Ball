@@ -17,24 +17,29 @@ namespace ShotBall.InGame
 
             int stage = 0;
             int subStage = 0;
-                if ( stageNumbers.Length == 2 && int.TryParse(stageNumbers[0], out stage) && int.TryParse(stageNumbers[1], out subStage))
+            if (stageNumbers.Length == 2 && int.TryParse(stageNumbers[0], out stage) && int.TryParse(stageNumbers[1], out subStage))
+            {
+                if (subStage >= maxStage)
                 {
-                    if (subStage >= maxStage)
-                    {
-                        stage++;
-                        subStage = 1;
-                    }
-                    else
-                    {
-                        subStage++;
-                    }
-                    string stageName = stage + "-" + subStage;
-                    SceneManager.LoadScene(stageName);
+                    stage++;
+                    subStage = 1;
                 }
                 else
                 {
-                    TitleScene();
+                    subStage++;
                 }
+                if (stage >= maxStage)
+                {
+                    TitleScene();
+                    return;
+                }
+                string stageName = stage + "-" + subStage;
+                SceneManager.LoadScene(stageName);
+            }
+            else
+            {
+                TitleScene();
+            }
         }
         public static void StageChange(StageName stage)
         {
@@ -49,7 +54,7 @@ namespace ShotBall.InGame
             {
                 return new StageName(stage, subStage);
             }
-            return new (0, 0);
+            return new(0, 0);
         }
         public static void TitleScene()
         {

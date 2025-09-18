@@ -13,10 +13,19 @@ namespace ShotBall.InGame
 
         [SerializeField] KeyNumberColor keyNumberColor;
 
+        [SerializeField,ReadOnly] Color currentColor = Color.white;
+
         public int KeyNumber => keyNumber;
 
         static float pitch = 1;
 
+        private void OnValidate()
+        {
+            if (keyNumberColor != null)
+            {
+                ColorChange(keyNumberColor.colors[keyNumber]);
+            }
+        }
         protected override void StageStart()
         {
             base.StageStart();
@@ -31,6 +40,7 @@ namespace ShotBall.InGame
         {
             if(ThisSprite == null) ThisSpriteGet();
             ThisSprite.color = color;
+            currentColor = color;
         }
         protected override string StringData()
         {
