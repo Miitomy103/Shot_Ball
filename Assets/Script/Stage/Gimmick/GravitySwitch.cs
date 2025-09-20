@@ -23,6 +23,8 @@ namespace ShotBall.InGame
 
         public Action Action { get; set; }
 
+        Coroutine cor;
+
         public bool AntiGravity => antiGravity;
 
         private bool isOn;
@@ -49,12 +51,13 @@ namespace ShotBall.InGame
         {
             base.StageReset();
             ChangeGravity(StartAntiGravity);
+            if (cor != null) StopCoroutine(cor);
             child.transform.localScale = Vector3.zero;
         }
         protected override void BallEnter(Ball other)
         {
             ChangeGravity();
-            StartCoroutine(MakeItBigger(child.transform));
+            cor= StartCoroutine(MakeItBigger(child.transform));
         }
         IEnumerator MakeItBigger(Transform transform)
         {
@@ -102,14 +105,14 @@ namespace ShotBall.InGame
         {
             isOn = true;
             ChangeGravity(true);
-            StartCoroutine(MakeItBigger(child.transform));
+            cor= StartCoroutine(MakeItBigger(child.transform));
         }
 
         public void ItOff()
         {
             isOn=false;
             ChangeGravity(false);
-            StartCoroutine(MakeItBigger(child.transform));
+            cor= StartCoroutine(MakeItBigger(child.transform));
         }
 
         protected override string StringData()

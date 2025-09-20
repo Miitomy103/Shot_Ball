@@ -20,19 +20,17 @@ namespace ShotBall.InGame
         protected override void Start()
         {
             base.Start();
-            float value = bounceForce;
-            float roundedValue = Mathf.Round(value * 10f) / 10f;
-            text.text = roundedValue.ToString();
-            text.gameObject.SetActive(false);
+
+            float b= bounceForce / 10f;
+            // 一時的にPhysicsMaterial2Dを作成
+            PhysicsMaterial2D tempMat = new PhysicsMaterial2D();
+            tempMat.bounciness = 1.25f*b;    // 跳ね返り
+            tempMat.friction = 0f;       // 摩擦
+
+            // このオブジェクトのCollider2Dに設定
+            Collider2D col = GetComponent<Collider2D>();
+            col.sharedMaterial = tempMat;
         }
-        //private void OnMouseEnter()
-        //{
-        //    text.gameObject.SetActive(true);
-        //}
-        //private void OnMouseExit()
-        //{
-        //    text.gameObject.SetActive(false);
-        //}
         protected override void BallEnter(Collision2D collision)
         {
             StartCoroutine(BoundAnimation());

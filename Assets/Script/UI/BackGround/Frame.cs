@@ -62,7 +62,7 @@ namespace ShotBall.InGame
             {
                 if (s.name != "SubSprite")
                 {
-                    s.sortingOrder = (int)OrderInLayer.DragNow;
+                    s.sortingOrder = (int)OrderInLayer.DragNow+c;
                     c++;
                 }
                 else

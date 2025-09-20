@@ -17,6 +17,14 @@ namespace ShotBall.InGame
 
         Color color = Color.white;
 
+        protected override void Awake()
+        {
+            base.Awake();
+            if (keyNumberColor != null)
+            {
+                ColorChange(keyNumberColor.colors[keyNumber]);
+            }
+        }
         private void OnValidate()
         {
             if (keyNumberColor != null)

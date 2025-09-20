@@ -16,9 +16,11 @@ namespace ShotBall.InGame
 
         [SerializeField] GameObject startButton;
 
+
         public void PlayClick()
         {
             if (isAnimation) return;
+            Debug.Log("PlayClick");
             isPlay = true;
             animator.SetTrigger("Play");
             AnimationStart();

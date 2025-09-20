@@ -149,19 +149,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2244551527769414410, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2244551527769414410, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1843200540}
+      objectReference: {fileID: 688795917}
     - target: {fileID: 2244551527769414410, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MoveScene
+      value: EndTest
       objectReference: {fileID: 0}
     - target: {fileID: 2244551527769414410, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ShotBall.InGame.SceneMove, Assembly-CSharp
+      value: ShotBall.InGame.TestEnd, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2244551527769414410, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -263,6 +263,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4820815647919266142, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 688795917}
+    - targetCorrespondingSourceObject: {fileID: 3033594070039807895, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1984640863}
+    - targetCorrespondingSourceObject: {fileID: 3033594070039807895, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1984640862}
     - targetCorrespondingSourceObject: {fileID: 8483836597071456796, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1843200540}
@@ -616,6 +622,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 2025316816}
+--- !u!1 &1984640861 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3033594070039807895, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+  m_PrefabInstance: {fileID: 688795913}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1984640862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984640861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01167d4e604fec34d8f60a03975b7251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1984640863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984640861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07f9fdbc22a39cf46962d9ac61287dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDestroyEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1984640862}
+        m_TargetAssemblyTypeName: TimeManager, Assembly-CSharp
+        m_MethodName: ScaleChange
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &2025316816 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3408701233431026349, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}

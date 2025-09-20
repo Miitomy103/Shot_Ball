@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8055204494545363465}
   - component: {fileID: 6084280783939970286}
   - component: {fileID: 3076334746659862132}
+  - component: {fileID: 6011405441668536254}
   m_Layer: 0
   m_Name: SwichBlock
   m_TagString: Untagged
@@ -82,7 +83,7 @@ SpriteRenderer:
   m_Color: {r: 0.7137255, g: 0.70980394, b: 0.16078432, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
+  m_DrawMode: 1
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -128,7 +129,7 @@ BoxCollider2D:
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
@@ -146,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b95d5e84e68aedc4bb04b54c72934910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockType: 0
   ballLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -271,3 +273,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75da714f6dc67134ba3284a4da4a0ac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6011405441668536254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993153186666092458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5202b689ef70a34abc9a5b435daf337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: {x: 1, y: 1}

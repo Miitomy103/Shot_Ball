@@ -9,13 +9,18 @@ namespace ShotBall.InGame
         Vector2 originSize;
         protected override void ColliderSizeChange()
         {
-            if(colli is BoxCollider2D box)
+            if(colli == null)
+            {
+                Debug.LogError("colliNone");
+                return;
+            }
+            if (colli is BoxCollider2D box)
             {
                 box.size = size;
             }
             else
             {
-                Debug.LogError("boxNone");
+                //Debug.LogError("boxNone");
             }
         }
     }

@@ -481,7 +481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3016713154302975573, guid: 2c0648b0587ef2a44b45b047b3a2b2fa, type: 3}
       propertyPath: bounceForce
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4458656514257679155, guid: 2c0648b0587ef2a44b45b047b3a2b2fa, type: 3}
       propertyPath: m_LocalPosition.x

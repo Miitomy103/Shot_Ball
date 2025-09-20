@@ -52,6 +52,7 @@ namespace ShotBall.InGame
         }
         public void BackToTitle()
         {
+            Time.timeScale = 1;
             SaveCoin();
             SceneControl.TitleScene();
         }
