@@ -1,6 +1,7 @@
 using ShotBall.Audio;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace ShotBall.InGame
@@ -56,6 +57,8 @@ namespace ShotBall.InGame
             Tap.Instance.Play();
         }
         protected abstract void StartDragDerivation(Vector3 inputScreenPos);
+
+        Vector3 mousePos;
         public void Drag(Vector3 inputScreenPos)
         {
             Vector3 newPosition = Camera.main.ScreenToWorldPoint(inputScreenPos) + offset;

@@ -56,8 +56,9 @@ namespace ShotBall.Create
 
         public bool CanTest()
         {
-            if(coinCount.coinCount != CoinCount.maxCoinCount)
+            if(!coinCount.IsCoinCountValid())
             {
+                LogDisplay.Instance.SetLog("ƒRƒCƒ“‚Ì”‚ğ3‚Â‚É‚µ‚Ä‚­‚¾‚³‚¢");
                 return false;
             }
             return true;

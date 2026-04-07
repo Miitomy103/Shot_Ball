@@ -23,11 +23,7 @@ public static class SaveManager
         string base64Img = System.Convert.ToBase64String(imgBytes);
 
         // セットにする
-        SaveData data = new SaveData
-        {
-            playerJson = json,
-            imageBase64 = base64Img
-        };
+        SaveData data = new SaveData(json,base64Img);
 
         // JSON化 → 暗号化
         string saveJson = JsonUtility.ToJson(data);
@@ -59,6 +55,12 @@ public static class SaveManager
         tex.LoadImage(imgBytes);
         return tex;
     }
+    public static string TextureToBase64(Texture2D tex)
+    {
+        if (tex == null) return null;
+        byte[] imgBytes = tex.EncodeToPNG(); // PNG形式でバイト配列化
+        return Convert.ToBase64String(imgBytes);
+    }
 
     /// <summary>
     /// セーブデータを削除する
@@ -88,17 +90,19 @@ public class SaveData
 {
     public string playerJson;  // JSON文字列
     public string imageBase64; // 画像をBase64化した文字列
+    public SaveData(string playerJson,string imageBase64)
+    {
+        this.playerJson = playerJson;
+        this.imageBase64 = imageBase64;
+    }
 }
 
 
 public static class SecureSave
 {
-    // 任意の文字列で設定可能
-    private static readonly string UserKey = "sousouno";    // Keyとして使う文字列
-    private static readonly string UserIV = "furirenn";    // IVとして使う文字列
+    private static readonly string UserKey = "sousouno"; // Keyとして使う文字列
+    private static readonly string UserIV = "furirenn";  // IVとして使う文字列
 
-
-    // 任意の文字列をAES用Key（32バイト）に変換
     private static byte[] GenerateAesKey(string key)
     {
         using (SHA256 sha = SHA256.Create())
@@ -107,20 +111,19 @@ public static class SecureSave
         }
     }
 
-    // 任意の文字列をAES用IV（16バイト）に変換
     private static byte[] GenerateAesIV(string iv)
     {
         using (SHA256 sha = SHA256.Create())
         {
             byte[] hash = sha.ComputeHash(Encoding.UTF8.GetBytes(iv));
-            byte[] ivBytes = new byte[16];          // AES IVは16バイト
+            byte[] ivBytes = new byte[16]; // AES IVは16バイト
             Array.Copy(hash, ivBytes, 16);
             return ivBytes;
         }
     }
 
-    // 暗号化して保存
-    public static void SaveEncrypted(string fullPath, string plainText)
+    // 暗号化してBase64文字列を返す
+    public static string EncryptToString(string plainText)
     {
         using (Aes aes = Aes.Create())
         {
@@ -135,16 +138,46 @@ public static class SecureSave
                 sw.Write(plainText);
                 sw.Flush();
                 cs.FlushFinalBlock();
-                File.WriteAllBytes(fullPath, ms.ToArray()); // ← SavePath()を削除
+                return Convert.ToBase64String(ms.ToArray());
             }
         }
     }
 
-    // 復号して読み込み
+    // 暗号化結果をファイルに保存
+    public static void SaveEncrypted(string fullPath, string plainText)
+    {
+        string encrypted = EncryptToString(plainText);
+        File.WriteAllText(fullPath, encrypted);
+    }
+
+    // ファイルから復号
     public static string LoadEncrypted(string fullPath)
     {
         if (!File.Exists(fullPath)) return null;
-        byte[] cipherBytes = File.ReadAllBytes(fullPath);
+
+        string base64 = File.ReadAllText(fullPath);
+        byte[] cipherBytes = Convert.FromBase64String(base64);
+
+        using (Aes aes = Aes.Create())
+        {
+            aes.Key = GenerateAesKey(UserKey);
+            aes.IV = GenerateAesIV(UserIV);
+
+            using (var ms = new MemoryStream(cipherBytes))
+            using (var decryptor = aes.CreateDecryptor())
+            using (var cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
+            using (var sr = new StreamReader(cs))
+            {
+                return sr.ReadToEnd();
+            }
+        }
+    }
+    // 文字列から復号
+    public static string DecryptFromString(string base64Cipher)
+    {
+        if (string.IsNullOrEmpty(base64Cipher)) return null;
+
+        byte[] cipherBytes = Convert.FromBase64String(base64Cipher);
 
         using (Aes aes = Aes.Create())
         {

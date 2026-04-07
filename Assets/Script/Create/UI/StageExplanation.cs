@@ -1,3 +1,4 @@
+using ShotBall.InGame;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace ShotBall.Create
         [SerializeField] GameObject UI;
         [SerializeField] RawImage Thumbnail;
         [SerializeField] Text StageName;
+        [SerializeField] ShareManager shareManager;
         string stageName;
         string json;
         Texture2D thumbnail;
@@ -55,6 +57,11 @@ namespace ShotBall.Create
             LoadScene.BlockDataWrapper = JsonUtility.FromJson<BlockDataWrapper>(json);
             Create.StageName.name = stageName;
             SceneManager.LoadScene("InGameScene");
+        }
+
+        public void ShareOpen()
+        {
+            shareManager.OpenWindow(new SaveData(json, SaveManager.TextureToBase64(thumbnail)), stageName);
         }
     }
 }

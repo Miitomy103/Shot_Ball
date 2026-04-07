@@ -10,7 +10,7 @@ namespace ShotBall.Create
     {
         public int coinCount = 0; // コインのカウント
 
-        public const int maxCoinCount = 3; // 最大コイン数
+        const int maxCoinCount = 3; // 最大コイン数
 
         [SerializeField] TextMeshProUGUI coinCountText; // コインのカウントを表示するUI
 
@@ -34,10 +34,10 @@ namespace ShotBall.Create
                     coinCount++;
                 }
             }
-            TextChenge(); // UIのテキストを更新
+            TextChange(); // UIのテキストを更新
         }
 
-        public void TextChenge()
+        public void TextChange()
         {
             coinCountText.text = coinCount.ToString() + $"/{maxCoinCount}";
             if (coinCount != maxCoinCount)
@@ -48,6 +48,15 @@ namespace ShotBall.Create
             {
                 coinCountText.color = Color.white; // 3個なら緑色
             }
+        }
+
+        /// <summary>
+        /// コインの数が3個であるかどうかを返すメソッド
+        /// </summary>
+        /// <returns></returns>
+        public bool IsCoinCountValid()
+        {
+            return coinCount == maxCoinCount; // コインの数が3個であるかどうかを返す
         }
     }
 }

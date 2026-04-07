@@ -14,15 +14,22 @@ public class LogDisplay : MonoBehaviour
     [SerializeField] TextMeshProUGUI logText;
     [SerializeField] RectTransform image;
 
+    [SerializeField] float defaultDisplayTime = 1f;
+    private float startTime;
+
     private IEnumerator hideCoroutine;
     private void Awake()
     {
         instance = this;
     }
 
+    private void Start()
+    {
+        startTime=defaultDisplayTime;
+    }
+
     public void SetLog(string text)
     {
-        image.gameObject.SetActive(true);
         logText.text = text;
         StartCoroutine(AdjustSizeNextFrame());
 
@@ -35,9 +42,17 @@ public class LogDisplay : MonoBehaviour
         // Imageのサイズを調整
         image.sizeDelta = new Vector2(width + padding.x, height + padding.y);
 
+
+        image.gameObject.SetActive(true);
+
         StartCoroutine(HideLog());
         hideCoroutine = HideLog();
     }
+    public void SetTime(float time)
+    {
+        defaultDisplayTime = time;
+    }
+
     private IEnumerator AdjustSizeNextFrame()
     {
         yield return null; // 1フレーム待つ
@@ -47,10 +62,11 @@ public class LogDisplay : MonoBehaviour
     }
 
 
-    public IEnumerator HideLog(float delay = 1f)
+    public IEnumerator HideLog()
     {
         if (hideCoroutine != null) StopCoroutine(hideCoroutine);
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(defaultDisplayTime);
         image.gameObject.SetActive(false);
+        SetTime(defaultDisplayTime);
     }
 }

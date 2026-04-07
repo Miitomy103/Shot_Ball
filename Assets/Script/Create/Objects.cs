@@ -54,6 +54,8 @@ namespace ShotBall.Create
             Texture2D texture2D= stage.CaptureArea();
 
             SaveManager.Save($"StageData.{StageName.name}", json, texture2D);
+
+            if(LogDisplay.Instance != null) LogDisplay.Instance.SetLog("ÉZÅ[ÉuÇµÇ‹ÇµÇΩ");
         }
         public BlockDataWrapper Data()
         {
