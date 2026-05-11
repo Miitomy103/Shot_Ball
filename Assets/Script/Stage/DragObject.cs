@@ -46,8 +46,9 @@ namespace ShotBall.InGame
         {
             if (!CanDrag()||IsDragging) return;
 
-            TransformCalculation.SetPositionXY(transform, inputScreenPos);
-            offset = transform.position - inputScreenPos;
+            Vector3 inputWorldPos = Camera.main.ScreenToWorldPoint(inputScreenPos);
+            inputWorldPos.z = transform.position.z;
+            offset = transform.position - inputWorldPos;
             IsDragging = true;
             Placed = false;
             OrderInLayerChange();

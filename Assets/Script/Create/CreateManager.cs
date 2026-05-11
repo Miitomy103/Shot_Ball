@@ -31,10 +31,6 @@ namespace ShotBall.Create
 
             StaticData.blockDataWrapper = objects.Data();
 
-            //string json = JsonUtility.ToJson(StaticData.blockDataWrapper, true);
-            //string path = Path.Combine(Application.dataPath, $"StageData/StageData.テスト用.json");
-            //File.WriteAllText(path, json);
-
             allObjects = Object.FindObjectsOfType<GameObject>();
             foreach (var obj in allObjects)
             {

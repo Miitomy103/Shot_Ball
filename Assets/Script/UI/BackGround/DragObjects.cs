@@ -28,6 +28,10 @@ namespace ShotBall.InGame
         }
         public void GetChildren(Transform parent)
         {
+            editorObjects.Clear();
+            dragObjects.Clear();
+            allObjects.Clear();
+
             ObjectBase[] components = FindObjectsOfType<ObjectBase>();
             foreach (var comp in components)
             {
@@ -47,9 +51,23 @@ namespace ShotBall.InGame
             }
         }
 
-        public DragObject[] GetDragObjects() => dragObjects.ToArray();
-        public EditorDragObject[] GetEditorDragObjects() => editorObjects.ToArray();
-        public ObjectBase[] GetAllObjects() => allObjects.ToArray();
+        public DragObject[] GetDragObjects()
+        {
+            GetChildren(runtimeParent);
+            return dragObjects.ToArray();
+        }
+
+        public EditorDragObject[] GetEditorDragObjects()
+        {
+            GetChildren(runtimeParent);
+            return editorObjects.ToArray();
+        }
+
+        public ObjectBase[] GetAllObjects()
+        {
+            GetChildren(runtimeParent);
+            return allObjects.ToArray();
+        }
 
         public ObjectBase GetBlockId(int id)
         {

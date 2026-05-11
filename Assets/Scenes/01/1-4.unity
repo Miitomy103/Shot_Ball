@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -567,7 +566,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3016713154302975573, guid: 2c0648b0587ef2a44b45b047b3a2b2fa, type: 3}
       propertyPath: bounceForce
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4458656514257679155, guid: 2c0648b0587ef2a44b45b047b3a2b2fa, type: 3}
       propertyPath: m_LocalPosition.x
