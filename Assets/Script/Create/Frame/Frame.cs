@@ -16,18 +16,26 @@ namespace ShotBall.Create
 
         IChangeText changeText;
 
-        // 残したいコンポーネントの型（複数可）
         Type[] keepTypes = new Type[]
         {
             typeof(Transform),
-            typeof(SpriteRenderer) // ←残したいコンポーネントを追加
+            typeof(SpriteRenderer)
         };
 
 
-        [SerializeField] private BlockData blockDataPreview; // デバッグ用
+        [SerializeField] private BlockData blockDataPreview;
 
         StageBlockData stageBlockData;
         public StageBlockData StageBlockData => stageBlockData;
+
+        public bool IsSameFrame(CreateObject createObject)
+        {
+            return createObject != null
+                && stageBlockData != null
+                && stageBlockData.Type == createObject.StageBlockData.Type
+                && stageBlockData.GetVector3Parameter("Scale") == createObject.StageBlockData.GetVector3Parameter("Scale")
+                && stageBlockData.GetVector2Parameter("Size") == createObject.StageBlockData.GetVector2Parameter("Size");
+        }
 
         public Action DeleteAction { get; set; }
 
@@ -53,7 +61,7 @@ namespace ShotBall.Create
         public void Initialized(CreateObject createObject)
         {
             stageBlockData = new StageBlockData(createObject.StageBlockData);
-            blockDataPreview = DataChange.ChangeBlockData(stageBlockData); // デバッグ用
+            blockDataPreview = DataChange.ChangeBlockData(stageBlockData);
 
             GameObject copy = Instantiate(createObject.gameObject,transform);
             copy.name = "Copy" + copy.name;
@@ -64,7 +72,7 @@ namespace ShotBall.Create
             {
                 if (!keepTypes.Contains(comp.GetType()))
                 {
-                    DestroyImmediate(comp); // エディタ上でも即座に消したい場合はDestroyImmediate
+                    DestroyImmediate(comp);
                 }
             }
             FitSpriteInSquare(copy.GetComponent<SpriteRenderer>());
@@ -91,7 +99,7 @@ namespace ShotBall.Create
             Vector2 input = obj.bounds.size;
 
             float max = Mathf.Max(Mathf.Abs(input.x), Mathf.Abs(input.y));
-            if (max == 0) obj.transform.localScale = Vector2.zero; // 0除算防止
+            if (max == 0) obj.transform.localScale = Vector2.zero;
             obj.transform.localScale *= thisSprite.bounds.size.x * 0.8f / max;
             obj.transform.position = thisSprite.transform.position;
 
@@ -108,11 +116,9 @@ namespace ShotBall.Create
             mouseWorldPos.z = thisSprite.transform.position.z;
 
 
-            // Spriteの矩形範囲を取得
             Bounds bounds = thisSprite.bounds;
 
 
-            // 境界内にマウス座標があるか判定
             if (bounds.Contains(mouseWorldPos))
             {
                 Inspector.Instance.Choice(stageBlockData);

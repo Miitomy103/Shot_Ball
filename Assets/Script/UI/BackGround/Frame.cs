@@ -52,7 +52,7 @@ namespace ShotBall.InGame
             FrameObject = copy.gameObject;
             //コピーを表示しないようにする
             copy.SetActive(false);
-            Data = new FrameData(drag.OriginalSize, drag.BlockType);
+            Data = drag.FrameData;
         }
         public void FrameSpriteIn(GameObject dragObject)
         {

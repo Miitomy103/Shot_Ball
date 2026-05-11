@@ -15,7 +15,7 @@ namespace ShotBall.InGame
         protected Vector3 otherPosition;
         public Vector3 OriginalSize { get; private set; }
 
-        public FrameData FrameData => new FrameData(OriginalSize, BlockType);
+        public FrameData FrameData => new FrameData(OriginalSize, GetComponent<SpriteRenderer>().size, BlockType);
 
         protected const int placeOrder = 3;
         protected const int dragOrder = 7;

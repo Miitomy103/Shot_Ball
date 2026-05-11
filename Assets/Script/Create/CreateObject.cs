@@ -139,6 +139,24 @@ namespace ShotBall.Create
                 }
             }
         }
+        public void SetStoredInFrame(bool stored)
+        {
+            if (ThisSprite == null) ThisSprite = GetComponent<SpriteRenderer>();
+
+            SpriteRenderer[] sprites = GetComponentsInChildren<SpriteRenderer>(true);
+            foreach (var sprite in sprites)
+            {
+                sprite.enabled = !stored;
+            }
+
+            Collider2D[] colliders = GetComponentsInChildren<Collider2D>(true);
+            foreach (var collider in colliders)
+            {
+                collider.enabled = !stored;
+            }
+
+            IsDragging = false;
+        }
         private void OnDestroy()
         {
             Debug.Log("CreateObject OnDestroy");

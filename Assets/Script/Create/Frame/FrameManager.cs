@@ -46,20 +46,38 @@ namespace ShotBall.Create
                 }
             }
 
-            if (frames.Count >= maxFrame||isExist)
+            if (isExist)
             {
                 createObject.transform.position = new Vector3(00, 00, CreateObject.dragZ);
                 HandleFollower.Instance.SpriteSet(null, false);
                 return;
             }
-            
 
             createObject.InFrame = true;
-
             createObject.SaveData();
 
-            GameObject f= Instantiate(framePrefab,transform);
+            foreach (var existingFrame in frames)
+            {
+                if (existingFrame.IsSameFrame(createObject))
+                {
+                    existingFrame.Plus();
+                    createObject.transform.position = new Vector3(00, 00, CreateObject.dragZ);
+                    createObject.SetStoredInFrame(true);
+                    HandleFollower.Instance.SpriteSet(null, false);
+                    return;
+                }
+            }
 
+            if (frames.Count >= maxFrame)
+            {
+                createObject.InFrame = false;
+                createObject.SaveData();
+                createObject.transform.position = new Vector3(00, 00, CreateObject.dragZ);
+                HandleFollower.Instance.SpriteSet(null, false);
+                return;
+            }
+
+            GameObject f= Instantiate(framePrefab,transform);
             Frame frame = f.GetComponent<Frame>();
 
             frames.Add(frame);
@@ -69,6 +87,7 @@ namespace ShotBall.Create
             FramesPosition();
 
             createObject.transform.position= new Vector3(00, 00, CreateObject.dragZ);
+            createObject.SetStoredInFrame(true);
             HandleFollower.Instance.SpriteSet(null, false);
         }
         void FrameDelete()

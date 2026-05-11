@@ -9,11 +9,13 @@ namespace ShotBall.InGame
     public struct FrameData : IEquatable<FrameData>
     {
         public Vector3 scale;
+        public Vector2 size;
         public BlockType blockType;
 
-        public FrameData(Vector3 s, BlockType b)
+        public FrameData(Vector3 s, Vector2 size, BlockType b)
         {
             scale = s;
+            this.size = size;
             blockType = b;
         }
 
@@ -25,12 +27,12 @@ namespace ShotBall.InGame
 
         public bool Equals(FrameData other)
         {
-            return scale == other.scale && blockType == other.blockType;
+            return scale == other.scale && size == other.size && blockType == other.blockType;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(scale, blockType);
+            return HashCode.Combine(scale, size, blockType);
         }
 
         // 任意の比較用関数（そのまま残してもOK）

@@ -61,16 +61,20 @@ namespace ShotBall.Create
         {
             foreach (var obj in objects)
             {
+                if (obj == null) continue;
                 obj.SaveData();
             }
             List<BlockData> datas = new List<BlockData>();
             for (int i = 0; i < objects.Count; i++)
             {
+                if (objects[i] == null) continue;
+                if (objects[i].StageBlockData.GetBoolParameter("InFrame")) continue;
+
                 datas.Add( DataChange.ChangeBlockData(objects[i].StageBlockData));
             }
             for (int i = 0; i < frameManager.Frames.Length; i++)
             {
-                for(int j=0;j<frameManager.Frames[i].BlockNumber-1; j++)
+                for(int j=0;j<frameManager.Frames[i].BlockNumber; j++)
                 {
                     datas.Add( DataChange.ChangeBlockData(frameManager.Frames[i].StageBlockData));
                 }
