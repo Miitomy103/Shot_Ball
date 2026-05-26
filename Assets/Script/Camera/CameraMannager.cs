@@ -10,7 +10,11 @@ namespace ShotBall.InGame
         public Transform leftWall;
         public Transform rightWall;
 
-        [SerializeField] float centerWorldWidth = 6f; // 中央のスペースをワールド単位で指定
+        private const float DefaultCenterWorldWidth = 6f;
+        private const float ReferenceOrthographicSize = 5f;
+        private const float ReferenceCenterWorldWidth = 11.8f;
+
+        [SerializeField] float centerWorldWidth = DefaultCenterWorldWidth; // 中央のスペースをワールド単位で指定
         public float CenterWorldWidth { get => centerWorldWidth; set=> centerWorldWidth = value; }
 
         private void Awake()
@@ -32,8 +36,8 @@ namespace ShotBall.InGame
         }
         public void Culcuration()
         {
-            float f = cam.orthographicSize / 5;
-            Debug.Log(centerWorldWidth = 11.8f * f);
+            float scale = cam.orthographicSize / ReferenceOrthographicSize;
+            Debug.Log(centerWorldWidth = ReferenceCenterWorldWidth * scale);
         }
 
         void AdjustWalls()
@@ -45,7 +49,7 @@ namespace ShotBall.InGame
 
                 float c = centerWorldWidth;
                 // 壁の幅をワールド単位で計算
-                float wallWidth = (width - (c*cam.orthographicSize/5f)) / 2f;
+                float wallWidth = (width - (c * cam.orthographicSize / ReferenceOrthographicSize)) / 2f;
                 if (wallWidth < 0f) wallWidth = 0f; // 負の幅を防ぐ
 
                 // スプライト1単位サイズ前提（必要に応じてSpriteRendererから取得してもOK）

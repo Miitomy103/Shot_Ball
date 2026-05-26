@@ -8,6 +8,9 @@ namespace ShotBall.Create
 {
     public class HandleFollower : MonoBehaviour
     {
+        private const int CornerCount = 4;
+        private const float RotationOffsetDegrees = 90f;
+
         static HandleFollower instance;
         public static HandleFollower Instance => instance;
 
@@ -113,8 +116,8 @@ namespace ShotBall.Create
             };
 
             // ワールド座標に変換（回転はTransformが持ってるのでOK）
-            Vector3[] worldCorners = new Vector3[4];
-            for (int i = 0; i < 4; i++)
+            Vector3[] worldCorners = new Vector3[CornerCount];
+            for (int i = 0; i < CornerCount; i++)
                 worldCorners[i] = t.TransformPoint(localCorners[i]);
 
             // UIハンドルを更新
@@ -167,7 +170,7 @@ namespace ShotBall.Create
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
             // Z軸回転を設定（「上をマウス方向にする」なら -90 度補正）
-            spriteRenderer.transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
+            spriteRenderer.transform.rotation = Quaternion.Euler(0, 0, angle - RotationOffsetDegrees);
         }
 
         public void Delete()

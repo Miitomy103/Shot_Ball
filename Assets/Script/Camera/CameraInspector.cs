@@ -8,6 +8,11 @@ namespace ShotBall.Create
 {
     public class CameraInspector : MonoBehaviour
     {
+        private const float MinCameraSize = 3f;
+        private const float MaxCameraSize = 14f;
+        private const float MinCenterWorldWidth = 4f;
+        private const float MaxCenterWorldWidth = 14.8f;
+
         [SerializeField] Button button;
 
         [SerializeField] string Name;
@@ -40,7 +45,7 @@ namespace ShotBall.Create
 
             float cameraSize = Mathf.Clamp(
                 stageBlockData.StageBlockData.GetFloatParameter("CameraSize"),
-                3f, 14f);
+                MinCameraSize, MaxCameraSize);
 
             if (!Mathf.Approximately(cameraSize, stageBlockData.StageBlockData.GetFloatParameter("CameraSize")))
             {
@@ -49,7 +54,7 @@ namespace ShotBall.Create
 
             float centerWorldWidth = Mathf.Clamp(
                 stageBlockData.StageBlockData.GetFloatParameter("CenterWorldWidth"),
-                4f, 14.8f);
+                MinCenterWorldWidth, MaxCenterWorldWidth);
 
             if (!Mathf.Approximately(centerWorldWidth, stageBlockData.StageBlockData.GetFloatParameter("CenterWorldWidth")))
             {

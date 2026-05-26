@@ -7,6 +7,9 @@ namespace ShotBall.Create
 {
     public class CaptureStage : MonoBehaviour
     {
+        private const float AlphaCutoutThreshold = 0.01f;
+        private const int RenderTextureDepthBits = 24;
+
         public Camera targetCamera;
         public SpriteRenderer back;
         public SpriteRenderer left;
@@ -38,7 +41,7 @@ namespace ShotBall.Create
 
             for (int i = 0; i < backPixels.Length; i++)
             {
-                if (leftPixels[i].a > 0.01f || rightPixels[i].a > 0.01f)
+                if (leftPixels[i].a > AlphaCutoutThreshold || rightPixels[i].a > AlphaCutoutThreshold)
                 {
                     // Left‚©Right‚ª•`‚©‚ê‚Ä‚¢‚é‚Æ‚±‚ë‚Í“§–¾‰»
                     backPixels[i] = new Color(0, 0, 0, 0);
@@ -57,7 +60,7 @@ namespace ShotBall.Create
 
         private Texture2D CaptureSprite(Camera cam, GameObject target, int width, int height)
         {
-            RenderTexture rt = new RenderTexture(width, height, 24);
+            RenderTexture rt = new RenderTexture(width, height, RenderTextureDepthBits);
             cam.targetTexture = rt;
 
             // ˆê“I‚É‘ÎÛ‚¾‚¯‚ğ•`‰æ

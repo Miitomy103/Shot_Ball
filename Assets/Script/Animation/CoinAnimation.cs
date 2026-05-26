@@ -8,10 +8,13 @@ namespace ShotBall.InGame.Animation
 {
     public class CoinAnimation : MonoBehaviour
     {
+        private const float MoveHeight = 0.75f;
+        private const float RotateDurationSeconds = 0.5f;
+
         SpriteRenderer thisSprite;
         [SerializeField] Sprite[] sprites;
 
-        Vector3 movePos = new Vector3(0, 0.75f);
+        Vector3 movePos = new Vector3(0f, MoveHeight);
 
         IEnumerator coroutine;
 
@@ -35,7 +38,7 @@ namespace ShotBall.InGame.Animation
         }
         IEnumerator RotateCoroutine(int value, Action action)
         {
-            float duration = 0.5f; // ëzíËçƒê∂éûä‘
+            float duration = RotateDurationSeconds; // ëzíËçƒê∂éûä‘
             float elapsed = 0f;
 
             Vector3 start = transform.position;

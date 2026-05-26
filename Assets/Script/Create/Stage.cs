@@ -8,12 +8,18 @@ namespace ShotBall.Create
 {
     public class Stage : MonoBehaviour
     {
+        private const float DefaultCameraSize = 5f;
+        private const float DefaultCenterWorldWidth = 11.8f;
+        private const float AspectWidth = 17.77778f;
+        private const float AspectHeight = 10f;
+        private const int RenderTextureDepthBits = 24;
+
         [Header("”wŒi")]
         [SerializeField] SpriteRenderer back;
-        [SerializeField] float cameraSize = 5f;
+        [SerializeField] float cameraSize = DefaultCameraSize;
         public float CameraSize => cameraSize;
 
-        [SerializeField] float centerWorldWidth = 11.8f;
+        [SerializeField] float centerWorldWidth = DefaultCenterWorldWidth;
         public float CenterWorldWidth => centerWorldWidth;
 
         [SerializeField] SpriteRenderer left;
@@ -22,7 +28,7 @@ namespace ShotBall.Create
         public float topY => back.bounds.max.y;
         public float bottonY => back.bounds.min.y;
         // ‰æ–ÊƒAƒXƒyƒNƒg”ä (—á: 16:9 ¨ 1.777...)
-        Vector2 ratio = new Vector2(17.77778f, 10f);
+        Vector2 ratio = new Vector2(AspectWidth, AspectHeight);
 
         private void OnValidate()
         {
@@ -52,7 +58,7 @@ namespace ShotBall.Create
             float backScaleX = (totalHeight * (ratio.x / ratio.y)) / backSpriteWidth;
             back.transform.localScale = new Vector3(backScaleX, backScaleY, 1f);
             back.transform.localPosition = Vector3.zero;
-            float c=centerWorldWidth*(cameraSize / 5f); // centerWorldWidth ‚ğ cameraSize ‚É‰‚¶‚ÄŠg‘åk¬
+            float c=centerWorldWidth * (cameraSize / DefaultCameraSize); // centerWorldWidth ‚ğ cameraSize ‚É‰‚¶‚ÄŠg‘åk¬
 
             // -------------------------------
             // left/right ‚Í centerWorldWidth ‚ğg‚Á‚Ä—]‚è•‚ğ–„‚ß‚é‚æ‚¤‚É’²®
@@ -100,7 +106,7 @@ namespace ShotBall.Create
             int height = Mathf.RoundToInt(screenTR.y - screenBL.y);
 
             // ‡C RenderTexture‚ÉƒJƒƒ‰‚ğ•`‰æ
-            RenderTexture rt = new RenderTexture(Screen.width, Screen.height, 24);
+            RenderTexture rt = new RenderTexture(Screen.width, Screen.height, RenderTextureDepthBits);
             targetCamera.targetTexture = rt;
             targetCamera.Render();
 

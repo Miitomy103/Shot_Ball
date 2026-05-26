@@ -9,9 +9,15 @@ namespace ShotBall.InGame
     [ExecuteAlways] // シーン編集中でも描画される
     public class CaptureAreaGizmo : MonoBehaviour
     {
+        private const float DefaultCameraSize = 5f;
+        private const float DefaultAspectWidth = 16f;
+        private const float DefaultAspectHeight = 9f;
+        private const float GizmoForwardOffset = 0.1f;
+        private const float GizmoDepth = 0.01f;
+
         public Camera targetCamera;   // キャプチャに使うカメラ
-        public float cameraSize = 5f; // OrthographicSize
-        public Vector2 ratio = new Vector2(16, 9); // 画面比率（例：16:9）
+        public float cameraSize = DefaultCameraSize; // OrthographicSize
+        public Vector2 ratio = new Vector2(DefaultAspectWidth, DefaultAspectHeight); // 画面比率（例：16:9）
 
         private void OnDrawGizmos()
         {
@@ -30,8 +36,8 @@ namespace ShotBall.InGame
             Gizmos.matrix = rotationMatrix;
 
             Gizmos.color = Color.green;
-            Gizmos.DrawWireCube(Vector3.forward * targetCamera.nearClipPlane + Vector3.forward * 0.1f,
-                                new Vector3(totalWidth, totalHeight, 0.01f));
+            Gizmos.DrawWireCube(Vector3.forward * targetCamera.nearClipPlane + Vector3.forward * GizmoForwardOffset,
+                                new Vector3(totalWidth, totalHeight, GizmoDepth));
         }
     }
 

@@ -6,9 +6,13 @@ namespace ShotBall.InGame
 {
     public class RegionCapture : MonoBehaviour
     {
+        private const int DefaultScreenPointMin = 100;
+        private const int DefaultScreenPointMaxX = 400;
+        private const int DefaultScreenPointMaxY = 300;
+
         // スクリーン座標（左下と右上の2点）
-        public Vector2 screenPoint1 = new Vector2(100, 100);
-        public Vector2 screenPoint2 = new Vector2(400, 300);
+        public Vector2 screenPoint1 = new Vector2(DefaultScreenPointMin, DefaultScreenPointMin);
+        public Vector2 screenPoint2 = new Vector2(DefaultScreenPointMaxX, DefaultScreenPointMaxY);
 
         public void Capture()
         {

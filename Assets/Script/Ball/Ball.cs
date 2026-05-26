@@ -24,6 +24,11 @@ namespace ShotBall.InGame
 
         public int KeyNumber { get; set; }
 
+        const float rangeCheckDelaySeconds = 1.5f;
+        const float dieEffectLifetimeSeconds = 3f;
+        const float resetDelaySeconds = 0.5f;
+        const float gravityChangeVelocityMultiplier = 0.5f;
+
         private SpriteRenderer thisSprite;
 
         bool timeStop;
@@ -60,7 +65,7 @@ namespace ShotBall.InGame
         IEnumerator RangeCoroutine()
         {
             Debug.Log("CoroutineSTart");
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(rangeCheckDelaySeconds);
             if(!ObjectRange.Instance.InRange(thisSprite))
             {
                 Debug.Log("CoroutineStart");
@@ -79,12 +84,12 @@ namespace ShotBall.InGame
         {
             AudioSource dieSound = Instantiate(dieSoundPrefab, transform.position, Quaternion.identity);
             dieSound.Play();
-            Destroy(dieSound, 3f);
+            Destroy(dieSound, dieEffectLifetimeSeconds);
 
             GameObject eff = Instantiate(dieEffect.gameObject, transform.position, dieEffect.transform.rotation);
-            Destroy(eff, 3f);
+            Destroy(eff, dieEffectLifetimeSeconds);
             gameObject.SetActive(false);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(resetDelaySeconds);
             GameLoop.Instance.GameReset();
         }
         private void SetLocalGravity()
@@ -112,7 +117,7 @@ namespace ShotBall.InGame
         {
             if (rigid == null) return;
             antiGravity = !AntiGravity;
-            rigid.velocity = rigid.velocity / 2;
+            rigid.velocity *= gravityChangeVelocityMultiplier;
             childObject.SetActive(antiGravity);
             Debug.Log("ChangeGravity");
 
