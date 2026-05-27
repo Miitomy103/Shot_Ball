@@ -6,7 +6,7 @@ namespace ShotBall.InGame
 {
     public class StageUIsManager : MonoBehaviour
     {
-        [SerializeField]StageUI[] stageUIs;
+        StageUI[] stageUIs;
         private void Awake()
         {
             // StageUI‚Ì”z—ñ‚ğ‰Šú‰»

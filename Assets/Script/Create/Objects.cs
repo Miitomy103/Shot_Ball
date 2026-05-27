@@ -74,9 +74,9 @@ namespace ShotBall.Create
             }
             for (int i = 0; i < frameManager.Frames.Length; i++)
             {
-                for(int j=0;j<frameManager.Frames[i].BlockNumber; j++)
+                for (int j = 0; j < frameManager.Frames[i].BlockCount; j++)
                 {
-                    datas.Add( DataChange.ChangeBlockData(frameManager.Frames[i].StageBlockData));
+                    datas.Add(DataChange.ChangeBlockData(frameManager.Frames[i].StageBlockData));
                 }
             }
             return new BlockDataWrapper

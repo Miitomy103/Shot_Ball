@@ -11,8 +11,8 @@ namespace ShotBall.Create
 
         SpriteRenderer thisSprite;
 
-        int blockNumber = 1;
-        public int BlockNumber => blockNumber;
+        int blockCount = 1;
+        public int BlockCount => blockCount;
 
         IChangeText changeText;
 
@@ -48,7 +48,7 @@ namespace ShotBall.Create
         }
         private void Start()
         {
-            changeText.ChangeText(blockNumber.ToString());
+            changeText.ChangeText(blockCount.ToString());
         }
         private void Update()
         {
@@ -80,14 +80,14 @@ namespace ShotBall.Create
 
         public void Plus()
         {
-            blockNumber++;
-            changeText.ChangeText(blockNumber.ToString());
+            blockCount++;
+            changeText.ChangeText(blockCount.ToString());
         }
         public void Minus()
         {
-            blockNumber--;
-            changeText.ChangeText(blockNumber.ToString());
-            if (blockNumber <= 0) Delete();
+            blockCount--;
+            changeText.ChangeText(blockCount.ToString());
+            if (blockCount <= 0) Delete();
         }
         public void Delete()
         {

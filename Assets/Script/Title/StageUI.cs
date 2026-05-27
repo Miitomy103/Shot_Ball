@@ -17,10 +17,40 @@ namespace ShotBall.InGame
         [SerializeField] Image backImage;
         [SerializeField] Text text;
         [SerializeField] Image[] stages = new Image[5];
-        [SerializeField] StageThumbnail stageThumbnail;
+        [SerializeField] Image[] clearImages = new Image[5];
+        StageThumbnail stageThumbnail;
+
+        private void Awake()
+        {
+            stageThumbnail=GameObject.Find("StageWindow").GetComponent<StageThumbnail>();
+
+            for (int i = 0; i < stages.Length; i++)
+            {
+                clearImages[i] = stages[i]
+    .GetComponentsInChildren<Image>(true)
+    .FirstOrDefault(img => img != stages[i]);
+            }
+            if (clearImages != null)
+            {
+                foreach (var clearImage in clearImages)
+                {
+                    if (clearImage != null) clearImage.color = clearColor;
+                }
+            }
+        }
         private void OnValidate()
         {
-            Inialize();
+            backImage.color = baseColor;
+
+            if (text != null) text.text = $"Stage{stage}";
+
+            if(clearImages!=null)
+            {
+                foreach (var clearImage in clearImages)
+                {
+                    if (clearImage != null) clearImage.color = clearColor;
+                }
+            }
         }
         private void Inialize()
         {
@@ -35,8 +65,8 @@ namespace ShotBall.InGame
             for(int i = 0; i < stages.Length; i++)
             {
                 bool clear = (1 == PlayerPrefs.GetInt($"Stage{stage}-{i + 1}", 0));
-                if (clear) stages[i].color = clearColor;
-                else stages[i].color = Color.white;
+                if (clear) clearImages[i].gameObject.SetActive(true);
+                else clearImages[i].gameObject.SetActive(false);
             }
         }
         private void Start()
@@ -47,7 +77,11 @@ namespace ShotBall.InGame
             {
                 int index = i+1; // ローカル変数にコピー
 
-                HoverHandler handler = stages[i].gameObject.AddComponent<HoverHandler>();
+                HoverHandler handler = stages[i].gameObject.GetComponent<HoverHandler>();
+                if(handler == null)
+                {
+                    handler = stages[i].gameObject.AddComponent<HoverHandler>();
+                }
                 handler.onEnter = () => ButtonEnter(index );
                 handler.onExit = () => ButtonExit(index );
 
@@ -76,8 +110,8 @@ namespace ShotBall.InGame
             for (int i = 0; i < stages.Length; i++)
             {
                 bool clear = (i==2);
-                if (clear) stages[i].color = clearColor;
-                else stages[i].color = Color.white;
+                if (clear) clearImages[i].gameObject.SetActive(true);
+                else clearImages[i].gameObject.SetActive(false);
             }
         }
         void ButtonEnter(int index)
