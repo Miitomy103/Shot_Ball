@@ -54,6 +54,7 @@ namespace ShotBall.InGame
         {
             Time.timeScale = 1;
             SaveCoin();
+            StaticData.isSelectView = true;
             SceneControl.TitleScene();
         }
         void SaveCoin()

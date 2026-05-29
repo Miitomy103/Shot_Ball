@@ -7,5 +7,7 @@ namespace ShotBall
     public class StaticData 
     {
         public static BlockDataWrapper blockDataWrapper;
+
+        public static bool isSelectView = false;
     }
 }

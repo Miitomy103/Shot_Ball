@@ -16,7 +16,16 @@ namespace ShotBall.InGame
 
         [SerializeField] GameObject startButton;
 
-
+        private void Start()
+        {
+            if(StaticData.isSelectView)
+            {
+                animator.Play("Play",0,1);
+                animator.Update(0);
+                PlayEnd();
+                StaticData.isSelectView = false;
+            }
+        }
         public void PlayClick()
         {
             if (isAnimation) return;

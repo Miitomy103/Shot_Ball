@@ -21,6 +21,11 @@ namespace ShotBall.InGame
             {
                 if (subStage >= maxStage)
                 {
+                    if (!DataSave.StageAllClear(stage, maxStage))
+                    {
+                        TitleScene();
+                        return;
+                    }
                     stage++;
                     subStage = 1;
                 }
@@ -58,6 +63,7 @@ namespace ShotBall.InGame
         }
         public static void TitleScene()
         {
+            StaticData.isSelectView = true;
             SceneManager.LoadScene(TITLENAME);
         }
     }

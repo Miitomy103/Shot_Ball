@@ -16,6 +16,18 @@ namespace ShotBall.InGame
             PlayerPrefs.SetInt($"Stage{stage.mainStage}-{stage.subStage}", 0);
             PlayerPrefs.Save();
         }
+        public static bool StageGet(StageName stage)
+        {
+            return PlayerPrefs.GetInt($"Stage{stage.mainStage}-{stage.subStage}", 0) == 1;
+        }
+        public static bool StageAllClear(int mainStage, int maxSubStage)
+        {
+            for (int i = 1; i <= maxSubStage; i++)
+            {
+                if (!StageGet(new StageName(mainStage, i))) return false;
+            }
+            return true;
+        }
         public static void CoinSave(StageName stage, IGet[] gets)
         {
             for (int i = 0; i < gets.Length; i++)

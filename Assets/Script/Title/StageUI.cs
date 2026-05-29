@@ -34,7 +34,7 @@ namespace ShotBall.InGame
             {
                 foreach (var clearImage in clearImages)
                 {
-                    if (clearImage != null) clearImage.color = clearColor;
+                    if (clearImage != null) clearImage.color = baseColor;
                 }
             }
         }
@@ -48,7 +48,7 @@ namespace ShotBall.InGame
             {
                 foreach (var clearImage in clearImages)
                 {
-                    if (clearImage != null) clearImage.color = clearColor;
+                    if (clearImage != null) clearImage.color = baseColor;
                 }
             }
         }
@@ -120,7 +120,7 @@ namespace ShotBall.InGame
         }
         void ButtonExit(int index)
         {
-            stageThumbnail.StageExit();
+            //stageThumbnail.StageExit();
         }
     }
 }
