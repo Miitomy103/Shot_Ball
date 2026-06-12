@@ -1804,6 +1804,8 @@ GameObject:
   - component: {fileID: 4062961501894960454}
   - component: {fileID: 5131080058035344116}
   - component: {fileID: 1525099512528348986}
+  - component: {fileID: 7360977365489840080}
+  - component: {fileID: 4331391482646065887}
   m_Layer: 5
   m_Name: ResetButton
   m_TagString: Untagged
@@ -2045,6 +2047,67 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7360977365489840080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3232395187302770303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64f35cc716895224a996910e8a0bbe54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScale: 1.1
+  duration: 0.1
+--- !u!114 &4331391482646065887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3232395187302770303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7360977365489840080}
+          m_TargetAssemblyTypeName: ShotBall.InGame.TransformSmoothScaleChanger,
+            Assembly-CSharp
+          m_MethodName: StartDefaultScaleChange
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7360977365489840080}
+          m_TargetAssemblyTypeName: ShotBall.InGame.TransformSmoothScaleChanger,
+            Assembly-CSharp
+          m_MethodName: StartDefaultScaleReset
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3340352349361479689
 GameObject:
   m_ObjectHideFlags: 0
@@ -4044,6 +4107,8 @@ GameObject:
   - component: {fileID: 1859329996713364405}
   - component: {fileID: 8278867492073048334}
   - component: {fileID: 2593906867837926796}
+  - component: {fileID: 1130677593316970382}
+  - component: {fileID: 931018967512902681}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -4285,6 +4350,67 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1130677593316970382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7083125491402036629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64f35cc716895224a996910e8a0bbe54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScale: 1.1
+  duration: 0.1
+--- !u!114 &931018967512902681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7083125491402036629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1130677593316970382}
+          m_TargetAssemblyTypeName: ShotBall.InGame.TransformSmoothScaleChanger,
+            Assembly-CSharp
+          m_MethodName: StartDefaultScaleChange
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1130677593316970382}
+          m_TargetAssemblyTypeName: ShotBall.InGame.TransformSmoothScaleChanger,
+            Assembly-CSharp
+          m_MethodName: StartDefaultScaleReset
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &7116148439262384162
 GameObject:
   m_ObjectHideFlags: 0
@@ -4818,6 +4944,8 @@ GameObject:
   - component: {fileID: 8388213179442385419}
   - component: {fileID: 6545655537082362785}
   - component: {fileID: 7375947347685498434}
+  - component: {fileID: 6449281021750649077}
+  - component: {fileID: 2105881719611214757}
   m_Layer: 5
   m_Name: StartButton (1)
   m_TagString: Untagged
@@ -5046,6 +5174,67 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6449281021750649077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7959752203877839311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64f35cc716895224a996910e8a0bbe54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScale: 1.1
+  duration: 0.1
+--- !u!114 &2105881719611214757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7959752203877839311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6449281021750649077}
+          m_TargetAssemblyTypeName: ShotBall.InGame.TransformSmoothScaleChanger,
+            Assembly-CSharp
+          m_MethodName: StartDefaultScaleChange
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6449281021750649077}
+          m_TargetAssemblyTypeName: ShotBall.InGame.TransformSmoothScaleChanger,
+            Assembly-CSharp
+          m_MethodName: StartDefaultScaleReset
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &8130070881252698390
 GameObject:
   m_ObjectHideFlags: 0
@@ -6786,6 +6975,30 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c48082b7c4eacf842acce25d258908c8, type: 3}
     - target: {fileID: 1336758284845660862, guid: 4a18527fb02ba9543b9000a01e222b0e, type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336758284845660862, guid: 4a18527fb02ba9543b9000a01e222b0e, type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336758284845660862, guid: 4a18527fb02ba9543b9000a01e222b0e, type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336758284845660862, guid: 4a18527fb02ba9543b9000a01e222b0e, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336758284845660862, guid: 4a18527fb02ba9543b9000a01e222b0e, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336758284845660862, guid: 4a18527fb02ba9543b9000a01e222b0e, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336758284845660862, guid: 4a18527fb02ba9543b9000a01e222b0e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -6966,6 +7179,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8576281154296966176, guid: 4a18527fb02ba9543b9000a01e222b0e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5384426326927817938}
+    - targetCorrespondingSourceObject: {fileID: 8576281154296966176, guid: 4a18527fb02ba9543b9000a01e222b0e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8057917010110632789}
+    - targetCorrespondingSourceObject: {fileID: 8576281154296966176, guid: 4a18527fb02ba9543b9000a01e222b0e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7116570979121336948}
   m_SourcePrefab: {fileID: 100100000, guid: 4a18527fb02ba9543b9000a01e222b0e, type: 3}
 --- !u!224 &959688141403916807 stripped
 RectTransform:
@@ -7086,6 +7305,67 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8057917010110632789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3889955419764283831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64f35cc716895224a996910e8a0bbe54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScale: 1.1
+  duration: 0.1
+--- !u!114 &7116570979121336948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3889955419764283831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8057917010110632789}
+          m_TargetAssemblyTypeName: ShotBall.InGame.TransformSmoothScaleChanger,
+            Assembly-CSharp
+          m_MethodName: StartDefaultScaleChange
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8057917010110632789}
+          m_TargetAssemblyTypeName: ShotBall.InGame.TransformSmoothScaleChanger,
+            Assembly-CSharp
+          m_MethodName: StartDefaultScaleReset
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &5862999932837992022
 PrefabInstance:
   m_ObjectHideFlags: 0

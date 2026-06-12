@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 4161857735258009511}
   - component: {fileID: 8334739840771147224}
   - component: {fileID: 1337272472872826238}
+  - component: {fileID: 3632823207477572632}
+  - component: {fileID: 5154693736091061676}
   m_Layer: 5
   m_Name: Stage
   m_TagString: Untagged
@@ -105,6 +107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3af4c652841094c40a759b9d45dd4369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NewStageUI: {fileID: 0}
+  stageExplanation: {fileID: 0}
   fixedHeight: 250
 --- !u!114 &8334739840771147224
 MonoBehaviour:
@@ -128,10 +132,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -165,6 +169,62 @@ MonoBehaviour:
   texture: {fileID: 2800000, guid: 068c56d7bb43daa4a924fdec476aeed4, type: 3}
   sizeDelta: {x: 150, y: 150}
   color: {r: 0.735849, g: 0.735849, b: 0.735849, a: 1}
+--- !u!114 &3632823207477572632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5752043722414447242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c870532ac41b54eb2ccab37678932f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onTrueEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5154693736091061676}
+        m_TargetAssemblyTypeName: ShotBall.InGame.TransformSmoothScaleChanger, Assembly-CSharp
+        m_MethodName: StartDefaultScaleChange
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onFalseEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5154693736091061676}
+        m_TargetAssemblyTypeName: ShotBall.InGame.TransformSmoothScaleChanger, Assembly-CSharp
+        m_MethodName: StartDefaultScaleReset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5154693736091061676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5752043722414447242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64f35cc716895224a996910e8a0bbe54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScale: 0.95
+  duration: 0.08
 --- !u!1 &8812878798971663014
 GameObject:
   m_ObjectHideFlags: 0

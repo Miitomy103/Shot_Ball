@@ -20,7 +20,7 @@ namespace ShotBall.InGame
         {
             while (scaleTargetObj.transform.localScale.x > 1f)
             {
-                scaleTargetObj.transform.localScale -= new Vector3(scaleSpeed, scaleSpeed, scaleSpeed);
+                scaleTargetObj.transform.localScale -= Vector3.one * scaleSpeed * Time.deltaTime;
                 yield return null;
             }
             Destroy(gameObject);

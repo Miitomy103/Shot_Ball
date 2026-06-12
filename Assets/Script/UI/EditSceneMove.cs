@@ -16,27 +16,22 @@ namespace ShotBall.Create
         [SerializeField] Image fadeImage;
         public void SceneMove()
         {
-            if(async != null)
-            {
-                return;
-            }
-            StartCoroutine(LoadCoroutine());
-            StartCoroutine(OnClick());
+            if (async != null) return;
+            StartCoroutine(SceneMoveCoroutine());
         }
-        IEnumerator LoadCoroutine()
+
+        IEnumerator SceneMoveCoroutine()
         {
             async = SceneManager.LoadSceneAsync(sceneName);
-            async.allowSceneActivation = false; // Å© Ç±ÇÃéûì_Ç≈ÇÕÇ‹Çæà⁄ìÆÇµÇ»Ç¢
-            yield return async;
-        }
-        IEnumerator OnClick()
-        {
-            while(fadeImage.transform.localScale.x < 27f)
+            async.allowSceneActivation = false;
+
+            while (fadeImage.transform.localScale.x < 27f)
             {
-                fadeImage.transform.localScale += new Vector3(fadeSpeed,fadeSpeed,fadeSpeed);
+                fadeImage.transform.localScale += Vector3.one * fadeSpeed * Time.deltaTime;
                 yield return null;
             }
-            async.allowSceneActivation = true; // Å© Ç±Ç±Ç≈ÉVÅ[ÉìêÿÇËë÷Ç¶î≠ìÆ
+
+            async.allowSceneActivation = true;
         }
     }
 }
