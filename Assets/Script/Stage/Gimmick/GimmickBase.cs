@@ -2,11 +2,23 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// ギミックの基底クラス。ギミックはこのクラスを継承して作る。
+    /// </summary>
     public abstract class GimmickBase : MonoBehaviour
     {
         [SerializeField] BlockType blockType;
+        /// <summary>
+        /// このギミックのブロックタイプ。
+        /// </summary>
         public BlockType BlockType => blockType;
+        /// <summary>
+        /// このギミックが向きを持つかどうか。trueの場合、Directionプロパティで向きを指定する必要がある。
+        /// </summary>
         protected virtual bool HasDirection => false;
+        /// <summary>
+        /// このギミックの向き。HasDirectionがtrueの場合のみ有効。
+        /// </summary>
         protected virtual Vector2 Direction { get; }
 
         private SpriteRenderer thisSprite;
@@ -14,7 +26,7 @@ namespace ShotBall.InGame
 
         protected virtual void Awake()
         {
-            thisSprite = GetComponent<SpriteRenderer>();
+            ThisSpriteGet();
             if (TryGetComponent<DragObject>(out var drag))
             {
                 drag.DragStartAction += DragStart;
@@ -40,15 +52,37 @@ namespace ShotBall.InGame
             GameLoop.Instance.ResetAction -= StageReset;
             GameLoop.Instance.StateChangeAction -= StateChange;
         }
+        /// <summary>
+        /// ThisSpriteを取得する。すでに取得している場合は何もしない。
+        /// </summary>
         protected void ThisSpriteGet()
         {
+            if(thisSprite != null) return;
             thisSprite = GetComponent<SpriteRenderer>();
         }
+        /// <summary>
+        /// スタートボタンを押したときの処理。
+        /// </summary>
         protected virtual void StageStart() { }
+        /// <summary>
+        /// リセットボタンを押したときの処理。
+        /// </summary>
         protected virtual void StageReset() { }
+        /// <summary>
+        /// ステージの状態が変化したときの処理。ステージの状態はGameLoop.Instance.StageStateで確認できる。
+        /// </summary>
         protected virtual void StateChange() { }
+        /// <summary>
+        /// ドラッグが開始したときの処理。
+        /// </summary>
         protected virtual void DragStart() { }
+        /// <summary>
+        /// ドラッグしているときの処理。毎フレーム呼ばれる。
+        /// </summary>
         protected virtual void Drag() { }
+        /// <summary>
+        /// ドラッグが終了したときの処理。
+        /// </summary>
         protected virtual void DragEnd() { }
         protected Quaternion DirectionAngle()
         {
@@ -59,35 +93,19 @@ namespace ShotBall.InGame
             return Quaternion.Euler(0, 0, angle - 90f);
         }
         protected virtual void Rotation() { }
-        public string FrameData()
-        {
-            //string sizeData = ThisSprite.size.ToString();
-            //string scaleData = transform.localScale.ToString();
-            //Collider2D col = GetComponent<Collider2D>();
-            //string colliderTypeName = col.GetType().Name;
-            //return Name+sizeData+scaleData+colliderTypeName + StringData();
-            return StringData();
-        }
+        public string FrameData()=>StringData();
         protected virtual string StringData() { return null; }
         public virtual void LoadData(string data) { }
         public virtual void KeyNumberLoad(int[] keyNumbers) { }
 
-        public void CreateLoad(StageBlockData data)
-        {
-            if(data.vector2Parametors.TryGetValue("Size", out Vector2 size))
-            {
-                ThisSprite.size = size;
-            }
-            if (data.vector3Parametors.TryGetValue("Position", out Vector3 position))
-            {
-                transform.position = position;
-            }
-            if(data.vector3Parametors.TryGetValue("Rotation", out Vector3 rotation))
-            {
-                transform.rotation = Quaternion.Euler(rotation);
-            }
-        }
+        /// <summary>
+        /// StageBlockDataを受け取ってギミックの状態を復元する。
+        /// </summary>
         public abstract void LoadData(StageBlockData data);
+
+        /// <summary>
+        /// スプライトのアルファ値を変更する。
+        /// </summary>
         protected void ColorChangeA(float a)
         {
             float colorA = Mathf.Clamp(a, 0, 1);
@@ -95,12 +113,9 @@ namespace ShotBall.InGame
             color.a = colorA;
             ThisSprite.color = color;
         }
-        protected string[] Sprit(string data)
-        {
-            return data.Split(',');
-        }
         void OnDrawGizmos()
         {
+            //矢印の描画
             if (!HasDirection) return;
 
             Vector3 start = transform.position;

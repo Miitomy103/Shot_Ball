@@ -46,7 +46,7 @@ namespace ShotBall.InGame
         {
             Debug.Log("Start");
             Collider2D collider = GetComponent<Collider2D>();
-            Physics2D.IgnoreCollision(collider, ball.collider, true); // Õ“Ë‚ğ–³Œø‰»
+            Physics2D.IgnoreCollision(collider, ball.Collider2d, true); // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼é–¢é€£
             StartCoroutine(StartCoroutine(collider));
             ball.PlayStart(KeyNumber);
             if (keyNumberColor != null)
@@ -87,7 +87,7 @@ namespace ShotBall.InGame
         {
             yield return new WaitForSeconds(0.5f);
 
-            Physics2D.IgnoreCollision(collider, ball.collider, false); // Õ“Ë‚ğ—LŒø‰»
+            Physics2D.IgnoreCollision(collider, ball.Collider2d, false); //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚­ãƒ¼
         }
 
 

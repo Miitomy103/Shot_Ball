@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace ShotBall.Data
 {
+    /// <summary>
+    /// 1.ステージのデータを保存・ロードするクラス
+    /// </summary>
     public class StageData : MonoBehaviour
     {
         [Header("LoadSettings")]
@@ -14,7 +17,7 @@ namespace ShotBall.Data
         [SerializeField] bool loadStage = false;
 
         float cameraSize = 5f;
-        public BlockData[] Datas;
+        private BlockData[] datas;
 
         
 
@@ -37,10 +40,10 @@ namespace ShotBall.Data
         public void Save()
         {
             ObjectBase[] gameObjects = GetComponentsInChildren<ObjectBase>();
-            Datas = new BlockData[gameObjects.Length];
+            datas = new BlockData[gameObjects.Length];
             for (int i = 0; i < gameObjects.Length; i++)
             {
-                Datas[i] = new BlockData(gameObjects[i].gameObject);
+                datas[i] = new BlockData(gameObjects[i].gameObject);
             }
             cameraSize = Camera.main.orthographicSize;
             CreateFile();
@@ -50,7 +53,7 @@ namespace ShotBall.Data
         public void CreateFile()
         {
             string json = JsonUtility.ToJson(new BlockDataWrapper {
-                Blocks = Datas,
+                Blocks = datas,
                 cameraSize=cameraSize,
                 centerWorldWidth = cameraManager.CenterWorldWidth,
                 //keyNumberData = KeyNumberManager.GetKeyNumberData()
@@ -93,7 +96,7 @@ namespace ShotBall.Data
                 }
             }
 
-            Datas = wrapper.Blocks;
+            this.datas = wrapper.Blocks;
             BlockData[] datas = wrapper.Blocks;
             cameraManager.CenterWorldWidth = wrapper.centerWorldWidth;
             //KeyNumberManager.LoadKeyNumber(wrapper.keyNumberData);

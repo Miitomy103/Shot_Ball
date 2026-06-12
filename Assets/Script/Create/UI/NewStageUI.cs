@@ -1,16 +1,17 @@
+using Share;
 using ShotBall.InGame;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// 新しいステージを作成するためのUIクラス
+    /// </summary>
     public class NewStageUI : MonoBehaviour
     {
         [SerializeField] InputField stageNameInput;

@@ -3,10 +3,15 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// ボールのクラス。重力の反転や、死んだときの処理などを行う。
+    /// </summary>
     public class Ball : MonoBehaviour,IAntiGravity,IKeyNumber
     {
         [SerializeField] private Rigidbody2D rigid;
-        public new CircleCollider2D collider { get; private set; }
+
+        Collider2D collider2d;
+        public Collider2D Collider2d => collider2d;
 
         [SerializeField] ParticleSystem dieEffect;
 
@@ -24,9 +29,7 @@ namespace ShotBall.InGame
 
         public int KeyNumber { get; set; }
 
-        const float rangeCheckDelaySeconds = 1.5f;
         const float dieEffectLifetimeSeconds = 3f;
-        const float resetDelaySeconds = 0.5f;
         const float gravityChangeVelocityMultiplier = 0.5f;
 
         private SpriteRenderer thisSprite;
@@ -37,7 +40,7 @@ namespace ShotBall.InGame
         {
             rigid = GetComponent<Rigidbody2D>();
             rigid.gravityScale = 0;
-            collider = GetComponent<CircleCollider2D>();
+            collider2d = GetComponent<Collider2D>();
             thisSprite = GetComponent<SpriteRenderer>();
             childObject = transform.GetChild(0).gameObject;
         }
@@ -51,26 +54,11 @@ namespace ShotBall.InGame
         }
         private void FixedUpdate()
         {
-            SetLocalGravity(); //重力をAddForceでかけるメソッドを呼ぶ。FixedUpdateが好ましい。
-
-            //if (!ObjectRange.Instance.InRange(thisSprite))
-            //{
-            //    StartCoroutine(RangeCoroutine());
-            //}
+            SetLocalGravity(); //重力をAddForceでかけるメソッドを呼ぶ。
         }
         void GravitySwitchChange()
         {
             ChangeGravity();
-        }
-        IEnumerator RangeCoroutine()
-        {
-            Debug.Log("CoroutineSTart");
-            yield return new WaitForSeconds(rangeCheckDelaySeconds);
-            if(!ObjectRange.Instance.InRange(thisSprite))
-            {
-                Debug.Log("CoroutineStart");
-                Die();
-            }
         }
         public void Die()
         {
@@ -78,19 +66,16 @@ namespace ShotBall.InGame
             {
                 GravitySwitch.Instance.Action -= GravitySwitchChange;
             }
-            StartCoroutine(DieCoroutine());
-        }
-        IEnumerator DieCoroutine()
-        {
+
+            //音出す
             AudioSource dieSound = Instantiate(dieSoundPrefab, transform.position, Quaternion.identity);
             dieSound.Play();
             Destroy(dieSound, dieEffectLifetimeSeconds);
 
+            //エフェクト出す
             GameObject eff = Instantiate(dieEffect.gameObject, transform.position, dieEffect.transform.rotation);
             Destroy(eff, dieEffectLifetimeSeconds);
             gameObject.SetActive(false);
-            yield return new WaitForSeconds(resetDelaySeconds);
-            GameLoop.Instance.GameReset();
         }
         private void SetLocalGravity()
         {

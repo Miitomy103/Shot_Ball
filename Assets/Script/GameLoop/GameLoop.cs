@@ -16,9 +16,9 @@ namespace ShotBall.InGame
 
         [SerializeField] ResultManager resultManager;
 
-        public Action StateChangeAction { get; set; }
-        public Action ResetAction { get; set; }
-        public Action StartAction { get; set; }
+        public event Action StartAction;
+        public event Action ResetAction;
+        public event Action StateChangeAction;
 
         private StageState OnceState;
 
@@ -47,18 +47,24 @@ namespace ShotBall.InGame
                 }
             }
         }
+        /// <summary>
+        /// スタートボタンを押したときの処理。
+        /// </summary>
         public void GameStart()
         {
             if (StageState == StageState.Playing) return;
             ChangeState(StageState.Playing);
-            StartAction();
+            StartAction?.Invoke();
         }
+        /// <summary>
+        /// リセットボタンを押したときの処理。
+        /// </summary>
         public void GameReset()
         {
             ChangeState(StageState.Setting);
             goalCount = 0;
             Debug.Log("GameReset");
-            ResetAction();
+            ResetAction?.Invoke();
         }
         public void OnMenu()
         {

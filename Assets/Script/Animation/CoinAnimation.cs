@@ -4,8 +4,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 namespace ShotBall.InGame.Animation
 {
+    /// <summary>
+    /// コインを取得したときのアニメーション
+    /// </summary>
     public class CoinAnimation : MonoBehaviour
     {
         private const float MoveHeight = 0.75f;

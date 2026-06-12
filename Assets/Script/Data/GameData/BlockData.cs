@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using ShotBall.InGame;
 using System;
-using ShotBall.Create;
+using UnityEngine;
 
 namespace ShotBall
 {
+    /// <summary>
+    /// 1ギミックのデータ
+    /// </summary>
     [Serializable]
     public struct BlockData
     {
@@ -78,23 +78,6 @@ namespace ShotBall
             GimmickData = gimmickData;
             BlockIds = blockIds;
         }
-        //public BlockData(CreateObject createObject)
-        //{
-        //    StageBlockData stageBlockData = createObject.StageBlockData;
-        //    if (stageBlockData == null)
-        //    {
-        //        throw new InvalidOperationException("CreateObject must implement IStageBlockData.");
-        //    }
-        //    BlockType = stageBlockData.Type;
-        //    Position = createObject.transform.position;
-        //    Scale = createObject.transform.localScale;
-        //    Rotation = createObject.transform.rotation;
-        //    size = createObject.GetComponent<SpriteRenderer>().size;
-        //    color = createObject.GetComponent<SpriteRenderer>().color;
-        //    Type=createObject.inFrame ? ObjectType.Runtime : ObjectType.Editor;
-        //    childData = null;
-        //    //GimmickData = 
-        //}
     }
     public enum ObjectType
     {
