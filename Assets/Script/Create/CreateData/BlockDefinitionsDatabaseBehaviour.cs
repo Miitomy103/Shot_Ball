@@ -6,7 +6,7 @@ namespace ShotBall.InGame
 {
     public class BlockDefinitionsDatabaseBehaviour : MonoBehaviour
     {
-        [SerializeField] Parametors Parametors;
+        [SerializeField] Parameters Parametors;
 
         private void Awake()
         {

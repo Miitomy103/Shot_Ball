@@ -1,16 +1,19 @@
 using System.IO;
-using UnityEditor;
+using ShotBall.Data;
 using UnityEngine;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// デフォルトのステージデータを保存・ロードするクラス
+    /// </summary>
     public class DefaultData : MonoBehaviour
     {
         public BlockDataWrapper defaultData=>LoadFile();
 
         [SerializeField] string fileName;
 
-        [SerializeField]Objects objects;
+        [SerializeField] Objects objects;
 
         public void ResetData()
         {
@@ -32,9 +35,4 @@ namespace ShotBall.Create
             return JsonUtility.FromJson<BlockDataWrapper>(json);
         }
     }
-
-
-
-
-
 }

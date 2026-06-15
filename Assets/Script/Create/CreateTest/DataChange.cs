@@ -30,7 +30,7 @@ namespace ShotBall.InGame
             for (int i = 0; ; i++)
             {
                 string paramName = "KeyNumber" + i;
-                if (!stageBlockData.intParametors.ContainsKey(paramName))
+                if (!stageBlockData.intParameters.ContainsKey(paramName))
                     break;
 
                 keyNumbers.Add(stageBlockData.GetIntParameter(paramName));

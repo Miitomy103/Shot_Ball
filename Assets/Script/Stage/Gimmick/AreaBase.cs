@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// エリア系ギミックの基底クラス
+    /// ボールが貫通するギミックを作成したい場合、使用する。
+    /// </summary>
     public abstract class AreaBase : GimmickBase
     {
         [SerializeField]protected LayerMask ballLayer;

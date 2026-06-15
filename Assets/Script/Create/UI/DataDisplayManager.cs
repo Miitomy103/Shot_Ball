@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+using ShotBall.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// Editモードで作成したデータの一覧を表示するクラス
+    /// </summary>
     public class DataDisplayManager : MonoBehaviour
     {
         DataDisplay[] dataDisplays;
 
         [SerializeField] bool isNewMark = false;
 
-        (string, SaveData)[] datas;
+        (string, SaveData)[] dataList;
         private void Awake()
         {
             dataDisplays = GetComponentsInChildren<DataDisplay>();
@@ -22,16 +23,19 @@ namespace ShotBall.Create
             OpenMenu();
         }
 
+        /// <summary>
+        /// ステージデータを読み込んでUIに表示する
+        /// </summary>
         public void OpenMenu()
         {
-            datas = StageDataLoader.LoadAllStages(Application.persistentDataPath).ToArray();
+            dataList = StageDataLoader.LoadAllStages(Application.persistentDataPath).ToArray();
 
             for (int i=0;i<dataDisplays.Length;i++)
             {
-                if(i< datas.Length)
+                if(i< dataList.Length)
                 {
-                    Texture2D texture = SaveManager.ChangeDataImage(datas[i].Item2.imageBase64);
-                    dataDisplays[i].Display(texture, datas[i].Item1, datas[i].Item2.playerJson);
+                    Texture2D texture = SaveManager.ChangeDataImage(dataList[i].Item2.imageBase64);
+                    dataDisplays[i].Display(texture, dataList[i].Item1, dataList[i].Item2.playerJson);
                 }
                 else
                 {
@@ -45,14 +49,18 @@ namespace ShotBall.Create
             }
 
         }
+
+        /// <summary>
+        /// ステージを選択したときの処理（外部から呼ぶ）
+        /// </summary>
         public void OnClick(int index)
         {
             Debug.Log(index);
-            for (int i=0;i<datas.Length; i++)
+            for (int i=0;i<dataList.Length; i++)
             {
                 if (i == index)
                 {
-                    LoadScene.BlockDataWrapper = JsonUtility.FromJson<BlockDataWrapper>(datas[i].Item2.playerJson);
+                    LoadScene.BlockDataWrapper = JsonUtility.FromJson<BlockDataWrapper>(dataList[i].Item2.playerJson);
                     SceneManager.LoadScene("CreateScene");
                     
                 }

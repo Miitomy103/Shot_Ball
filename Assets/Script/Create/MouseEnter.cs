@@ -8,6 +8,8 @@ public class MouseEnter : MonoBehaviour
     [SerializeField] UnityEvent onMouseEnter;
     [SerializeField] UnityEvent onMouseExit;
 
+    [SerializeField, Tooltip("ãƒã‚¦ã‚¹ã‚’æŠ¼ã—ã¦ã„ã‚‹é–“ã®ã¿å‹•ä½œã™ã‚‹")] bool isOnDownOnly = false;
+
     private bool isHover = false;
     private Collider2D col;
 
@@ -16,7 +18,7 @@ public class MouseEnter : MonoBehaviour
         col = GetComponent<Collider2D>();
         if (col == null)
         {
-            Debug.LogError("Collider2D ‚ª•K—v‚Å‚·");
+            Debug.LogError("Collider2D ãŒå¿…è¦ã§ã™");
         }
     }
 
@@ -24,11 +26,11 @@ public class MouseEnter : MonoBehaviour
     {
         if (col == null) return;
 
-        // ƒJƒƒ‰‚©‚çƒ}ƒEƒXˆÊ’u‚ğæ“¾
+        // ã‚«ãƒ¡ãƒ©ã‹ã‚‰ãƒã‚¦ã‚¹ä½ç½®ã‚’å–å¾—
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
 
-        // ƒ}ƒEƒXˆÊ’u‚É‚ ‚é‚·‚×‚Ä‚Ì2D Collider‚ğæ“¾
+        // ãƒã‚¦ã‚¹ä½ç½®ã«ã‚ã‚‹å…¨ã¦ã®2D Colliderã‚’å–å¾—
         RaycastHit2D[] hits = Physics2D.RaycastAll(mousePos2D, Vector2.zero);
 
         bool hovering = false;
@@ -41,13 +43,15 @@ public class MouseEnter : MonoBehaviour
             }
         }
 
-        if (hovering && !isHover)
+        bool isActive = isOnDownOnly ? (hovering && Input.GetMouseButton(0)) : hovering;
+
+        if (isActive && !isHover)
         {
             isHover = true;
             inMouse = true;
             onMouseEnter?.Invoke();
         }
-        else if (!hovering && isHover)
+        else if (!isActive && isHover)
         {
             isHover = false;
             inMouse = false;

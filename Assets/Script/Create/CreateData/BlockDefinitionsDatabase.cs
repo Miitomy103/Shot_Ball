@@ -6,7 +6,7 @@ namespace ShotBall.InGame
 {
     public static class BlockDefinitionsDatabase
     {
-        public static Parametors LoadedParametors;
+        public static Parameters LoadedParametors;
 
         //[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         //private static void Init()

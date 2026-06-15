@@ -2,14 +2,21 @@ using JetBrains.Annotations;
 using ShotBall.Data;
 using ShotBall.InGame;
 using System;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// Editモードで配置するためのオブジェクト
+    /// </summary>
     public class CreateObject : MonoBehaviour,IChangeSize,IStageBlockData
     {
         [SerializeField] private bool isSizeChange = true;
+        /// <summary>
+        /// サイズ変更が可能かどうか
+        /// </summary>
         public bool IsSizeChange => isSizeChange;
 
         SpriteRenderer ThisSprite;
@@ -19,31 +26,44 @@ namespace ShotBall.Create
         public bool IsDragging { get; private set; } // ドラッグ中かどうか  
 
         [SerializeField] BlockType definitionType;
+        /// <summary>
+        /// このオブジェクトの種類
+        /// </summary>
+        public BlockType DefinitionType => definitionType;
 
         [SerializeField] private StageBlockData stageBlockData;
         public StageBlockData StageBlockData => stageBlockData;
 
+        //デバッグ用
         [SerializeField, ReadOnly] string gimmickName;
 
-        [SerializeField]Parametors parametors;
+        [SerializeField]Parameters parameters;
 
 
-        public Action DragObject { get; set; } = delegate { };
+        public event Action DragObject;
 
-        public int BlockId;
+        public int BlockId { get; set; }
 
         public bool InFrame { get; set; }
 
-        public const float dragZ = -5f; // Inspector から変更可能にする
+        public const float dragZ = -5f; 
         private void Awake()
         {
             ThisSprite = GetComponent<SpriteRenderer>();
 
-            if(parametors==null)Debug.LogError("Parametors not found"+gameObject.name);
-            stageBlockData = new StageBlockData(definitionType,parametors);
+            if (parameters == null)
+            {
+                parameters=Resources.Load<Parameters>("CreateObject/Parameters");
+                if (parameters == null) Debug.LogError("Parameters not found" + gameObject.name);
+            }
+            stageBlockData = new StageBlockData(definitionType,parameters);
             Debug.Log(stageBlockData.isDataSet + gameObject.name);
             gimmickName = stageBlockData.Type.ToString();
         }
+
+        /// <summary>
+        /// StageBlockDataをもとにオブジェクトを更新する
+        /// </summary>
         public void Load(StageBlockData data)
         {
             stageBlockData = new StageBlockData(data);
@@ -64,7 +84,7 @@ namespace ShotBall.Create
         }
         private void Update()
         {
-            if(IsDragging|| HandleFollower.Instance.ResizeNow()) DragObject?.Invoke();
+            if (IsDragging || HandleFollower.Instance.ResizeNow()) DragObject?.Invoke();
             if (IsDragging && !HandleFollower.Instance.ResizeNow())
             {
                 Vector3 mousePosition = Input.mousePosition;
@@ -84,7 +104,7 @@ namespace ShotBall.Create
                 }
             }
         }
-
+        
         private void OnMouseDown()
         {
             if (EventSystem.current.IsPointerOverGameObject()) return;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ShotBall.Create
+namespace ShotBall.Data
 {
     [CreateAssetMenu(menuName = "MyGame/BlockDataWrapper")]
     public class BlockDataWrapperSC : ScriptableObject

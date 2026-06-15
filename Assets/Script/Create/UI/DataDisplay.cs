@@ -1,11 +1,5 @@
-using ShotBall.InGame;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace ShotBall.Create
 {

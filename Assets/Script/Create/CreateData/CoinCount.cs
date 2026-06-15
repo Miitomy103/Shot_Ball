@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// コインの数をカウントし、UIに表示するクラス
+    /// </summary>
     public class CoinCount : MonoBehaviour
     {
         public int coinCount = 0; // コインのカウント

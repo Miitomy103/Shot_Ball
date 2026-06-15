@@ -6,10 +6,13 @@ using UnityEngine;
 
 namespace ShotBall.Create
 {
-    public class FrameManager : MonoBehaviour
+    /// <summary>
+    /// Editモードでのフレームを管理するクラス
+    /// </summary>
+    public class FrameManager : MonoBehaviour, IFrameManager
     {
-        static FrameManager instance;
-        public static FrameManager Instance { get { return instance; } }
+        private static FrameManager instance;
+        public static FrameManager Instance => instance;
 
         [SerializeField] GameObject framePrefab;
 
@@ -30,8 +33,14 @@ namespace ShotBall.Create
 
         private void Awake()
         {
+            if (instance != null && instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
             instance = this;
         }
+
         public void InObject(CreateObject createObject)
         {
             if (createObject == null) return;
@@ -77,7 +86,7 @@ namespace ShotBall.Create
                 return;
             }
 
-            GameObject f= Instantiate(framePrefab,transform);
+            GameObject f = Instantiate(framePrefab, transform);
             Frame frame = f.GetComponent<Frame>();
 
             frames.Add(frame);
@@ -86,15 +95,15 @@ namespace ShotBall.Create
 
             FramesPosition();
 
-            createObject.transform.position= new Vector3(00, 00, CreateObject.dragZ);
+            createObject.transform.position = new Vector3(00, 00, CreateObject.dragZ);
             createObject.SetStoredInFrame(true);
             HandleFollower.Instance.SpriteSet(null, false);
         }
         void FrameDelete()
         {
-            foreach(var f in frames)
+            foreach (var f in frames)
             {
-                if(f.isDestroy)
+                if (f.isDestroy)
                 {
                     frames.Remove(f);
                     Destroy(f.gameObject);
@@ -105,8 +114,8 @@ namespace ShotBall.Create
         }
         public void FramesPosition()
         {
-            float top = stage.topY;
-            float bottom = stage.bottonY;
+            float top = stage.TopY;
+            float bottom = stage.BottomY;
 
             int count = frames.Count;
 

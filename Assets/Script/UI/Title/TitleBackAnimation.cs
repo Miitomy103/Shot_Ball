@@ -1,10 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace ShotBall.InGame
+namespace ShotBall.UI
 {
+    /// <summary>
+    /// タイトル画面の背景アニメーションを制御するクラス。
+    /// </summary>
     public class TitleBackAnimation : MonoBehaviour
     {
         [SerializeField] GameObject scaleTargetObj;

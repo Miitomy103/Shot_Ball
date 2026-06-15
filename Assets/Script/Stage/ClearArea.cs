@@ -5,7 +5,10 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    public class CrearArea : AreaBase,IKeyNumber
+    /// <summary>
+    /// ステージのクリアオブジェクトクラス
+    /// </summary>
+    public class ClearArea : AreaBase,IKeyNumber
     {
         [SerializeField] int keyNumber;
 
@@ -66,13 +69,13 @@ namespace ShotBall.InGame
 
         public override void LoadData(StageBlockData data)
         {
-            if(data.intParametors.TryGetValue("KeyNumber", out int keyValue))
+            if(data.intParameters.TryGetValue("KeyNumber", out int keyValue))
             {
                 keyNumber = keyValue;
             }
             else
             {
-                Debug.LogWarning("KeyNumber parameter not found in CrearArea data.");
+                Debug.LogWarning("KeyNumber parameter not found in ClearArea data.");
             }
         }
     }

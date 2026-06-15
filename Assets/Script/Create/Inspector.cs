@@ -75,7 +75,7 @@ namespace ShotBall.Create
             gimmickTextComponent.ChangeText(name);
             uniqueTextComponent.ChangeText(unique);
             int count = 0;
-            foreach (var f in blockData.floatParametors.Keys.ToList())
+            foreach (var f in blockData.floatParameters.Keys.ToList())
             {
                 if (IsHideInspector(f, blockData)) continue;
                 DataType type = GetViewType(f, blockData.uniqueViews, DataType.Float);
@@ -85,13 +85,13 @@ namespace ShotBall.Create
                 {
                     ISetValue<float> setValue = obj.GetComponentInChildren<ISetValue<float>>();
                     setValue.Setup(f, blockData.SetFloatParameter);
-                    setValue.SetValue(blockData.floatParametors[f]);
+                    setValue.SetValue(blockData.floatParameters[f]);
 
                     count++;
                 }
             }
 
-            foreach (var i in blockData.intParametors.Keys.ToList())
+            foreach (var i in blockData.intParameters.Keys.ToList())
             {
                 if (IsHideInspector(i, blockData)) continue;
                 DataType type = GetViewType(i, blockData.uniqueViews, DataType.Int);
@@ -100,11 +100,11 @@ namespace ShotBall.Create
                 {
                     ISetValue<int> setValue = obj.GetComponentInChildren<ISetValue<int>>();
                     setValue.Setup(i, blockData.SetIntParameter);
-                    setValue.SetValue(blockData.intParametors[i]);
+                    setValue.SetValue(blockData.intParameters[i]);
                     count++;
                 }
             }
-            foreach (var b in blockData.boolParametors.Keys.ToList())
+            foreach (var b in blockData.boolParameters.Keys.ToList())
             {
                 if (IsHideInspector(b, blockData)) continue;
                 DataType type = GetViewType(b, blockData.uniqueViews, DataType.Bool);
@@ -113,11 +113,11 @@ namespace ShotBall.Create
                 {
                     ISetValue<bool> setValue = obj.GetComponentInChildren<ISetValue<bool>>();
                     setValue.Setup(b, blockData.SetBoolParameter);
-                    setValue.SetValue(blockData.boolParametors[b]);
+                    setValue.SetValue(blockData.boolParameters[b]);
                     count++;
                 }
             }
-            foreach (var v2 in blockData.vector2Parametors.Keys.ToList())
+            foreach (var v2 in blockData.vector2Parameters.Keys.ToList())
             {
                 if (IsHideInspector(v2, blockData)) continue;
                 DataType type = GetViewType(v2, blockData.uniqueViews, DataType.Vector2);
@@ -128,11 +128,11 @@ namespace ShotBall.Create
                 {
                     ISetValue<Vector2> setValue = obj.GetComponentInChildren<ISetValue<Vector2>>();
                     setValue.Setup(v2, blockData.SetVector2Parameter);
-                    setValue.SetValue(blockData.vector2Parametors[v2]);
+                    setValue.SetValue(blockData.vector2Parameters[v2]);
                     count++;
                 }
             }
-            foreach (var v3 in blockData.vector3Parametors.Keys.ToList())
+            foreach (var v3 in blockData.vector3Parameters.Keys.ToList())
             {
                 if (IsHideInspector(v3, blockData)) continue;
                 DataType type = GetViewType(v3, blockData.uniqueViews, DataType.Vectror3);
@@ -141,7 +141,7 @@ namespace ShotBall.Create
                 {
                     ISetValue<Vector3> setValue = obj.GetComponentInChildren<ISetValue<Vector3>>();
                     setValue.Setup(v3, blockData.SetVector3Parameter);
-                    setValue.SetValue(blockData.vector3Parametors[v3]);
+                    setValue.SetValue(blockData.vector3Parameters[v3]);
                     count++;
                 }
             }

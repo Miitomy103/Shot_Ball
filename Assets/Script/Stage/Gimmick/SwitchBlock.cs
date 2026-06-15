@@ -33,14 +33,14 @@ namespace ShotBall.InGame
         public void ItOn()
         {
             isEnter = true;
-            Colli.isTrigger = true;
+            Collider2D.isTrigger = true;
             ColorChangeA(0.5f);
         }
 
         public void ItOff()
         {
             isEnter = false;
-            Colli.isTrigger = false;
+            Collider2D.isTrigger = false;
             ColorChangeA(1);
         }
 

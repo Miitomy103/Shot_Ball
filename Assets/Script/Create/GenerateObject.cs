@@ -9,7 +9,7 @@ namespace ShotBall.Create
     public class GenerateObject : MonoBehaviour
     {
         [SerializeField] PrefabDatas prefabDatas;
-        [SerializeField]Parametors parametors; // パラメータの設定を保持するクラス
+        [SerializeField]Parameters parametors; // パラメータの設定を保持するクラス
 
         [SerializeField] Objects objects;
 
@@ -65,9 +65,9 @@ namespace ShotBall.Create
         }
         void ParametorSet(GameObject gameObject)
         {
-            if (gameObject.TryGetComponent<IParametors>(out var parametors))
+            if (gameObject.TryGetComponent<IParameters>(out var parametors))
             {
-                parametors.Parametors = this.parametors;
+                parametors.Parameters = this.parametors;
             }
             if(gameObject.TryGetComponent<IStageBlockData>(out var stageBlockData))
             {

@@ -52,7 +52,7 @@ namespace ShotBall.Create
         }
         private void Update()
         {
-            if (MouseInputHandler.Instance.LeftDown&&MouseEnter.inMouse)
+            if (MouseInputHandler.Instance.LeftDown)
             {
                 OnMouseDownEvent();
             }

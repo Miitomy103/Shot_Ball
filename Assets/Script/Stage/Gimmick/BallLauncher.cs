@@ -73,7 +73,7 @@ namespace ShotBall.InGame
 
         public override void LoadData(StageBlockData data)
         {
-            if (data.floatParametors.TryGetValue("LaunchPower", out float powerValue))
+            if (data.floatParameters.TryGetValue("LaunchPower", out float powerValue))
             {
                 launchPower = powerValue;
             }
@@ -81,7 +81,7 @@ namespace ShotBall.InGame
             {
                 Debug.LogWarning("LaunchPower parameter not found in BallLauncher data.");
             }
-            if (data.vector2Parametors.TryGetValue("LaunchDirection", out Vector2 directionValue))
+            if (data.vector2Parameters.TryGetValue("LaunchDirection", out Vector2 directionValue))
             {
                 launchDirection = directionValue;
             }

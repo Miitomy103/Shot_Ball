@@ -1,14 +1,18 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// RectTransform.sizeDeltaを滑らかに変更するクラス
+/// </summary>
+//Transformを変更する場合は、TransformSmoothScaleChangerを使用してください
 [RequireComponent(typeof(RectTransform))]
 public class UIScaleSmoothChanger : MonoBehaviour
 {
     private Vector2 originalSize;
     private RectTransform rectTransform;
 
-    [SerializeField] private float targetScale = 1.1f;
-    [SerializeField] private float duration = 0.5f; 
+    [SerializeField, Tooltip("変更する大きさの倍率")] private float targetScale = 1.1f;
+    [SerializeField, Tooltip("変化する時間")] private float duration = 0.5f;
 
     private void Start()
     {

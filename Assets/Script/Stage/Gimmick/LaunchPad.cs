@@ -93,11 +93,11 @@ namespace ShotBall.InGame
 
         public override void LoadData(StageBlockData data)
         {
-            if(data.intParametors.TryGetValue("KeyNumber", out int keyValue))
+            if(data.intParameters.TryGetValue("KeyNumber", out int keyValue))
             {
                 keyNumber = keyValue;
             }
-            if(data.boolParametors.TryGetValue("IsAntiGravity", out bool antiGravityValue))
+            if(data.boolParameters.TryGetValue("IsAntiGravity", out bool antiGravityValue))
             {
                 isAntiGravity = antiGravityValue;
             }

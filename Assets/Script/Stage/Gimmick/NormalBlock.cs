@@ -17,14 +17,14 @@ namespace ShotBall.InGame
         {
             ColorChangeA(0.5f);
             isOn = false;
-            Colli.isTrigger = !isOn;
+            Collider2D.isTrigger = !isOn;
         }
 
         public void ItOn()
         {
             ColorChangeA(1);
             isOn = true;
-            Colli.isTrigger = !isOn;
+            Collider2D.isTrigger = !isOn;
         }
 
         public override void LoadData(StageBlockData data)

@@ -1,12 +1,12 @@
-using ShotBall.InGame;
 using System.Collections;
-using System.Security.Cryptography;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// ボールが触れると跳ねるギミック
+    /// </summary>
     public class Bouncy : CollisionBase
     {
         [SerializeField] float bounceForce = 10f; // 跳ねる強さ
@@ -14,8 +14,6 @@ namespace ShotBall.InGame
         [SerializeField] AnimationCurve curve;
 
         [SerializeField] AudioSource bouncySound;
-
-        [SerializeField] TextMeshPro text;
 
         protected override void Start()
         {
@@ -27,9 +25,7 @@ namespace ShotBall.InGame
             tempMat.bounciness = 1.25f*b;    // 跳ね返り
             tempMat.friction = 0f;       // 摩擦
 
-            // このオブジェクトのCollider2Dに設定
-            Collider2D col = GetComponent<Collider2D>();
-            col.sharedMaterial = tempMat;
+            Collider2D.sharedMaterial = tempMat;
         }
         protected override void BallEnter(Collision2D collision)
         {
@@ -88,7 +84,7 @@ namespace ShotBall.InGame
 
         public override void LoadData(StageBlockData data)
         {
-            if (data.floatParametors.TryGetValue("BounceForce", out float bounceValue))
+            if (data.floatParameters.TryGetValue("BounceForce", out float bounceValue))
             {
                 bounceForce = bounceValue;
             }

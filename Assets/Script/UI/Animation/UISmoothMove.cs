@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// このコンポーネントをアタッチしたUIオブジェクトを、RectTransformのanchoredPositionを補間して移動させます。
+/// </summary>
 public class UISmoothMove : MonoBehaviour
 {
     [Tooltip("移動にかける秒数です。0以下の場合は即座に移動します。")]

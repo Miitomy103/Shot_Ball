@@ -13,10 +13,10 @@ namespace ShotBall.InGame
                 case BlockType.AntiGravityArea:
                     return string.Empty;
                 case BlockType.AutoRotator:
-                    return stageBlockData.floatParametors.TryGetValue("Speed", out float rotationSpeed) ? rotationSpeed.ToString() : "0";
+                    return stageBlockData.floatParameters.TryGetValue("Speed", out float rotationSpeed) ? rotationSpeed.ToString() : "0";
                 case BlockType.BallLauncher:
-                    Vector2 launchDirection = stageBlockData.vector2Parametors.TryGetValue("LaunchDirection", out Vector2 direction) ? direction : Vector2.zero;
-                    string returnString = (stageBlockData.floatParametors.TryGetValue("LaunchPower", out float launchPower) ? launchPower.ToString() : "0") + "," +launchDirection.x + "," + launchDirection.y;
+                    Vector2 launchDirection = stageBlockData.vector2Parameters.TryGetValue("LaunchDirection", out Vector2 direction) ? direction : Vector2.zero;
+                    string returnString = (stageBlockData.floatParameters.TryGetValue("LaunchPower", out float launchPower) ? launchPower.ToString() : "0") + "," +launchDirection.x + "," + launchDirection.y;
                     return returnString;
                 case BlockType.Block:
                     return string.Empty;

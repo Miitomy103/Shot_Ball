@@ -5,8 +5,8 @@ using UnityEngine;
 namespace ShotBall.InGame
 {
     [CreateAssetMenu(menuName = "ScriptableObjects/Block Definitions")]
-    public  class Parametors : ScriptableObject
+    public  class Parameters : ScriptableObject
     {
-        public BlockDefinition[] blockDefinitions;
+        public BlockDefinitionSO[] blockDefinitions;
     }
 }

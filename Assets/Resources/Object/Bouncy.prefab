@@ -363,7 +363,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   bouncySound: {fileID: -1730772988623684305}
-  text: {fileID: 7732556597439404788}
 --- !u!114 &5518453389191053989
 MonoBehaviour:
   m_ObjectHideFlags: 0

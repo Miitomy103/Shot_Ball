@@ -147,7 +147,7 @@ namespace ShotBall.InGame
 
         public override void LoadData(StageBlockData data)
         {
-            if (data.boolParametors.TryGetValue("IsOn", out bool b))
+            if (data.boolParameters.TryGetValue("IsOn", out bool b))
             {
                 startIsOn = b;
                 OnOffChange(startIsOn);

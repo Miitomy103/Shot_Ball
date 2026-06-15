@@ -26,7 +26,7 @@ namespace ShotBall.InGame
 
         public override void LoadData(StageBlockData data)
         {
-            if (data.floatParametors.TryGetValue("Time", out float timeValue))
+            if (data.floatParameters.TryGetValue("Time", out float timeValue))
             {
                 time = timeValue;
             }

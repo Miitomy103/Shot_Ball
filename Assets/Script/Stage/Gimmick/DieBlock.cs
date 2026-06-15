@@ -24,14 +24,14 @@ namespace ShotBall.InGame
         public void ItOff()
         {
             isOn = false;
-            Colli.isTrigger = true;
+            Collider2D.isTrigger = true;
             ColorChangeA(0.5f);
         }
 
         public void ItOn()
         {
             isOn = true;
-            Colli.isTrigger = false;
+            Collider2D.isTrigger = false;
             ColorChangeA(1f);
         }
         protected override bool IsCollision()

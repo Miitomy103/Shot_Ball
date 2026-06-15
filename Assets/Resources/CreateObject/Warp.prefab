@@ -106,8 +106,7 @@ MonoBehaviour:
     isDataSet: 0
     key: 
   gimmickName: 
-  parametors: {fileID: 11400000, guid: 98638102cbc7966419c66ef5502f2ef1, type: 2}
-  BlockId: 0
+  parameters: {fileID: 0}
 --- !u!58 &7383746578785962796
 CircleCollider2D:
   m_ObjectHideFlags: 0

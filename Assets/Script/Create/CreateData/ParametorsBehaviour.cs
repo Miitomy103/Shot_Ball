@@ -6,9 +6,9 @@ namespace ShotBall.InGame
 {
     public class ParametorsBehaviour : MonoBehaviour
     {
-        [SerializeField] Parametors parametors;
+        [SerializeField] Parameters parametors;
 
-        public Parametors Parametors => parametors;
+        public Parameters Parametors => parametors;
 
         static ParametorsBehaviour instance;
 

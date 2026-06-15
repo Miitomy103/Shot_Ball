@@ -1,4 +1,5 @@
 using Share;
+using ShotBall.Data;
 using ShotBall.InGame;
 using System;
 using System.Collections;
@@ -19,9 +20,9 @@ namespace ShotBall.Create
         [SerializeField] Text StagePath;
         public void NewStage()
         {
-            (string,SaveData)[] datas = StageDataLoader.LoadAllStages(Application.persistentDataPath).ToArray();
+            (string,SaveData)[] dataList = StageDataLoader.LoadAllStages(Application.persistentDataPath).ToArray();
 
-            foreach(var data in datas)
+            foreach(var data in dataList)
             {
                 if (data.Item1 == stageNameInput.text)
                 {
@@ -100,12 +101,12 @@ namespace ShotBall.Create
             }
 
             // 既存のステージ一覧を取得
-            (string, SaveData)[] datas = StageDataLoader.LoadAllStages(Application.persistentDataPath).ToArray();
+            (string, SaveData)[] dataList = StageDataLoader.LoadAllStages(Application.persistentDataPath).ToArray();
 
             // かぶっていたら数字を付けて新しい名前を探す
             string baseName = n;
             int i = 1;
-            while (datas.Any(d => d.Item1 == n))
+            while (dataList.Any(d => d.Item1 == n))
             {
                 n = baseName + i;
                 i++;

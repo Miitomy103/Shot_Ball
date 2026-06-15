@@ -1,5 +1,4 @@
 using ShotBall;
-using ShotBall.Create;
 using ShotBall.InGame;
 using System.Collections.Generic;
 using System.IO;
@@ -17,13 +16,13 @@ namespace ShotBall.Data
         [SerializeField] bool loadStage = false;
 
         float cameraSize = 5f;
-        private BlockData[] datas;
+        private BlockData[] dataList;
 
         
 
-        [SerializeField] PrefabDatas prefabDatas;
+        [SerializeField] PrefabDatas prefabDataList;
 
-        [SerializeField] List<GameObject> GenerateObjcts;
+        [SerializeField] List<GameObject> GenerateObjects;
         [SerializeField] string loadStageName;
 
         [SerializeField] KeyNumberManager KeyNumberManager;
@@ -40,10 +39,10 @@ namespace ShotBall.Data
         public void Save()
         {
             ObjectBase[] gameObjects = GetComponentsInChildren<ObjectBase>();
-            datas = new BlockData[gameObjects.Length];
+            dataList = new BlockData[gameObjects.Length];
             for (int i = 0; i < gameObjects.Length; i++)
             {
-                datas[i] = new BlockData(gameObjects[i].gameObject);
+                dataList[i] = new BlockData(gameObjects[i].gameObject);
             }
             cameraSize = Camera.main.orthographicSize;
             CreateFile();
@@ -53,7 +52,7 @@ namespace ShotBall.Data
         public void CreateFile()
         {
             string json = JsonUtility.ToJson(new BlockDataWrapper {
-                Blocks = datas,
+                Blocks = dataList,
                 cameraSize=cameraSize,
                 centerWorldWidth = cameraManager.CenterWorldWidth,
                 //keyNumberData = KeyNumberManager.GetKeyNumberData()
@@ -67,7 +66,7 @@ namespace ShotBall.Data
         public void LoadFile()
         {
             DelateObject();
-            //GenerateObjcts= new List<GameObject>();
+            //GenerateObjects= new List<GameObject>();
             GameLoop.launchPads.Clear();
 
             BlockDataWrapper wrapper;
@@ -79,11 +78,6 @@ namespace ShotBall.Data
             {
                 string path = $"StageData.{loadStageName}";
 
-                //if (!File.Exists(path))
-                //{
-                //    Debug.LogError("ファイルが見つかりません: " + path);
-                //    return;
-                //}
                 (string a, Texture2D t) = SaveManager.Load(path);
                 wrapper = JsonUtility.FromJson<BlockDataWrapper>(a);
             }
@@ -96,14 +90,9 @@ namespace ShotBall.Data
                 }
             }
 
-            this.datas = wrapper.Blocks;
+            this.dataList = wrapper.Blocks;
             BlockData[] datas = wrapper.Blocks;
             cameraManager.CenterWorldWidth = wrapper.centerWorldWidth;
-            //KeyNumberManager.LoadKeyNumber(wrapper.keyNumberData);
-
-            //string json1 = JsonUtility.ToJson(wrapper, true);
-            //string path1 = Path.Combine(Application.dataPath, $"StageData/StageData.BlockDatasテスト用.json");
-            //File.WriteAllText(path1, json1);
 
             Camera.main.orthographicSize = wrapper.cameraSize;
             
@@ -114,12 +103,12 @@ namespace ShotBall.Data
         }
         void ObjectGenerate(BlockData data)
         {
-            for (int i = 0; i < prefabDatas.prefabs.Length; i++)
+            for (int i = 0; i < prefabDataList.prefabs.Length; i++)
             {
-                if (data.BlockType == prefabDatas.prefabs[i].type)
+                if (data.BlockType == prefabDataList.prefabs[i].type)
                 {
-                    Debug.Log("Generate Object: " + data.BlockType + "prefabDara"+prefabDatas.prefabs[i].type);
-                    GameObject obj = Instantiate(prefabDatas.prefabs[i].PrefabObj, data.Position, data.Rotation);
+                    Debug.Log("Generate Object: " + data.BlockType + "prefabDara"+prefabDataList.prefabs[i].type);
+                    GameObject obj = Instantiate(prefabDataList.prefabs[i].PrefabObj, data.Position, data.Rotation);
                     
                     obj.transform.parent = data.Type switch
                     {
@@ -128,7 +117,7 @@ namespace ShotBall.Data
                         ObjectType.Children => null,
                         _ => throw new System.InvalidOperationException("Unknown object type.")
                     };
-                    GenerateObjcts.Add(obj);
+                    GenerateObjects.Add(obj);
 
                     obj.transform.localScale = data.Scale;
                     if (obj.TryGetComponent<GimmickBase>(out var gimmick))
@@ -176,23 +165,27 @@ namespace ShotBall.Data
 
         public void DelateObject()
         {
-            for (int i = 0; i < GenerateObjcts.Count; i++)
+            for (int i = 0; i < GenerateObjects.Count; i++)
             {
-                if (GenerateObjcts[i] != null)
+                if (GenerateObjects[i] != null)
                 {
-                    DestroyImmediate(GenerateObjcts[i]);
+                    DestroyImmediate(GenerateObjects[i]);
                 }
             }
-            GenerateObjcts.Clear();
+            GenerateObjects.Clear();
         }
 
     }
-}
-[System.Serializable]
-public class BlockDataWrapper
-{
-    public BlockData[] Blocks;
-    public float cameraSize;
-    public float centerWorldWidth;
-    public KeyNumberData keyNumberData;
+
+    /// <summary>
+    /// 1ステージをまとめたデータクラス
+    /// </summary>
+    [System.Serializable]
+    public class BlockDataWrapper
+    {
+        public BlockData[] Blocks;
+        public float cameraSize;
+        public float centerWorldWidth;
+        public KeyNumberDataList keyNumberDataList;
+    }
 }

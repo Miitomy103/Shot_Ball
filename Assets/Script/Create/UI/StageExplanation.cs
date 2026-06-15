@@ -4,9 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using ShotBall.Data;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// 作成したステージを表示するUIクラス
+    /// </summary>
     public class StageExplanation : MonoBehaviour
     {
         [SerializeField] GameObject UI;

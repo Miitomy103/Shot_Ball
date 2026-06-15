@@ -2528,9 +2528,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoLoad: 0
   loadStage: 0
-  Datas: []
-  prefabDatas: {fileID: 11400000, guid: e6fde1ba18ab32b449d3cec8f7482b50, type: 2}
-  GenerateObjcts: []
+  prefabDataList: {fileID: 0}
+  GenerateObjects: []
   loadStageName: 1-1
   KeyNumberManager: {fileID: 6759999074645090783}
   cameraManager: {fileID: 64708628945540237}
