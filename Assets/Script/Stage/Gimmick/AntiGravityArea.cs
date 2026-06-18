@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// Ball‚ª“ü‚é‚Æ”½d—Í‚É‚È‚éƒGƒŠƒA
+    /// </summary>
     public class AntiGravityArea : AreaBaseTogether,IAntiGravity
     {
         bool antiGravity;
@@ -48,9 +51,6 @@ namespace ShotBall.InGame
             }
         }
 
-        public override void LoadData(StageBlockData data)
-        {
-
-        }
+        public override void LoadData(StageBlockData data) { }
     }
 }

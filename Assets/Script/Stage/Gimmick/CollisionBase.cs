@@ -7,7 +7,6 @@ namespace ShotBall.InGame
     /// <summary>
     /// ボールと衝突するギミックの基底クラス
     /// </summary>
-    [RequireComponent(typeof(Collider2D))]
     public abstract class CollisionBase : GimmickBase
     {
         [SerializeField] protected LayerMask ballLayer;

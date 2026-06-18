@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// Ž©“®‚Å‰ñ“]‚·‚éƒMƒ~ƒbƒN
+    /// </summary>
     public class AutoRotator : GimmickBase,IOnOff
     {
 
@@ -93,8 +96,7 @@ namespace ShotBall.InGame
 
         public override void LoadData(StageBlockData data)
         {
-            //if()
-            //TODO: Implement loading data from StageBlockData
+
         }
     }
 }

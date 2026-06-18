@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// 子オブジェクトにOnOffをつけると、親オブジェクトのOnOffで一括でOnOffできるようになるクラス
+    /// </summary>
     public class ChildrenOnOff : MonoBehaviour, IOnOff
     {
         
@@ -15,11 +18,11 @@ namespace ShotBall.InGame
         public Transform Transform => transform;
 
 
-        OnOff[] onOffs;
+        OnOffBehaviour[] onOffs;
 
         private void Awake()
         {
-            OnOff[] o = GetComponentsInChildren<OnOff>();
+            OnOffBehaviour[] o = GetComponentsInChildren<OnOffBehaviour>();
             onOffs = o.Where(t => t != null && t.gameObject != gameObject).ToArray();
 
 

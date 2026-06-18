@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// 特に何も起きないただのブロック
+    /// </summary>
     public class NormalBlock : CollisionBase, IOnOff
     {
         [SerializeField] AudioSource hitSound;

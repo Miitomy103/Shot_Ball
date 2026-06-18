@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// ボールが触れると死ぬブロック
+    /// </summary>
     public class DieBlock : CollisionBase,IOnOff
     {
         bool isOn = true;
@@ -46,9 +47,6 @@ namespace ShotBall.InGame
             ball.Die();
         }
 
-        public override void LoadData(StageBlockData data)
-        {
-
-        }
+        public override void LoadData(StageBlockData data) { }
     }
 }

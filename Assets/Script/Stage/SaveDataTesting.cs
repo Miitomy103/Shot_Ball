@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    public class SaveDataTeatiing : MonoBehaviour,IGet
+    public class SaveDataTesting : MonoBehaviour,IGet
     {
         [SerializeField]int maxStage = 4;
 

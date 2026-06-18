@@ -1,16 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using ShotBall.Data;
 using ShotBall.InGame;
 using System;
-using UnityEngine.UI;
+using System.Collections.Generic;
 using System.Linq;
-using UnityEngine.Rendering;
-using System.Runtime.ConstrainedExecution;
+using UnityEngine;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// Editモードでの、オブジェクトのステータスを変更するためのUIクラス
+    /// </summary>
     public class Inspector : MonoBehaviour
     {
         static Inspector instance;
@@ -28,7 +27,7 @@ namespace ShotBall.Create
         private IChangeText gimmickTextComponent;
         private IChangeText uniqueTextComponent;
 
-        List<GameObject> valueUIList = new List<GameObject>();
+        readonly List<GameObject> valueUIList = new List<GameObject>();
 
         readonly float initialPositionY = -300f;
         readonly float spaceValue = -150;

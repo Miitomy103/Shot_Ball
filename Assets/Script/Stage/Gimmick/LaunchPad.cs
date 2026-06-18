@@ -5,12 +5,15 @@ using Cinemachine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// ボールのスタート位置
+    /// </summary>
     public class LaunchPad : GimmickBase,IKeyNumber
     {
         [SerializeField] GameObject ballPrefab;
         [SerializeField] bool isAntiGravity;
-        [SerializeField]int keyNumber;
-        [SerializeField] KeyNumberColor keyNumberColor;
+        [SerializeField,Tooltip("ゴールのIDを指定する")] int keyNumber;
+        [SerializeField,Tooltip("ゴールのIDに合わせて色を変える")] KeyNumberColor keyNumberColor;
         [SerializeField, ReadOnly] Color currentColor = Color.white;
         Ball ball;
         public int KeyNumber => keyNumber;
@@ -42,6 +45,10 @@ namespace ShotBall.InGame
             this.color = color;
             currentColor = color;
         }
+
+        /// <summary>
+        /// 発射
+        /// </summary>
         protected override void StageStart()
         {
             Debug.Log("Start");
@@ -54,6 +61,9 @@ namespace ShotBall.InGame
                 ColorChange(keyNumberColor.colors[keyNumber]);
             }
         }
+        /// <summary>
+        /// ボール生成
+        /// </summary>
         void BallGenerate()
         {
             GameObject b = Instantiate(ballPrefab, transform.position, Quaternion.identity);
@@ -83,8 +93,10 @@ namespace ShotBall.InGame
             isAntiGravity = bool.Parse(splitData[0]);
             keyNumber = int.Parse(splitData[1]);
         }
+
         IEnumerator StartCoroutine(Collider2D collider)
         {
+            //ボールが離れてから判定を復活させる
             yield return new WaitForSeconds(0.5f);
 
             Physics2D.IgnoreCollision(collider, ball.Collider2d, false); //プレイヤーキー

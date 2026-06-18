@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    [CustomEditor(typeof(SaveDataTeatiing))]
-    public class SaveDataTeatiingEditor : Editor
+    [CustomEditor(typeof(SaveDataTesting))]
+    public class SaveDataTestingEditor : Editor
     {
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-            SaveDataTeatiing myScript = (SaveDataTeatiing)target;
+            SaveDataTesting myScript = (SaveDataTesting)target;
             if (GUILayout.Button("All Clear"))
             {
                 myScript.AllClear();

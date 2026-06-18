@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// ステージの進行状況を保存するクラス
+    /// </summary>
     public static class DataSave
     {
         public static void StageSave(StageName stage,bool isClear)

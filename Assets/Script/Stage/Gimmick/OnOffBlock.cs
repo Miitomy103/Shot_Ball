@@ -8,7 +8,7 @@ namespace ShotBall.InGame
 {
     public class OnOffBlock : AreaBase
     {
-        [SerializeField] public OnOff[] iOnOffs;
+        [SerializeField] public OnOffBehaviour[] iOnOffs;
         protected Transform[] Targets => iOnOffs.Select(t => t.transform).ToArray();
 
         LineManager lineManager;
@@ -112,10 +112,10 @@ namespace ShotBall.InGame
         {
             Debug.Log("KeyNumberLoad: OnOffBlock"+keyNumbers.Length);
             base.KeyNumberLoad(keyNumbers);
-            List<OnOff> onoffs = new List<OnOff>();
+            List<OnOffBehaviour> onoffs = new List<OnOffBehaviour>();
             foreach (var i in keyNumbers)
             {
-                if(DragObjects.Instance.GetBlockId(i).TryGetComponent<OnOff>(out var onoff))
+                if(DragObjects.Instance.GetBlockId(i).TryGetComponent<OnOffBehaviour>(out var onoff))
                 {
                     onoffs.Add(onoff);
                 }

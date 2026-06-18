@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    public class OnOff : MonoBehaviour
+    public class OnOffBehaviour : MonoBehaviour
     {
         IOnOff onOff;
         private void Awake()

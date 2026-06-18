@@ -94,8 +94,17 @@ namespace ShotBall.InGame
         }
         protected virtual void Rotation() { }
         public string FrameData()=>StringData();
+        /// <summary>
+        /// ギミックごとに持っている特殊データを string に変換する
+        /// </summary>
         protected virtual string StringData() { return null; }
+        /// <summary>
+        /// string の特殊データを変換する
+        /// </summary>
         public virtual void LoadData(string data) { }
+        /// <summary>
+        /// 一部ギミックが持っている key をロードする
+        /// </summary>
         public virtual void KeyNumberLoad(int[] keyNumbers) { }
 
         /// <summary>

@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// オブジェクトが持っているデータをまとめるクラス
+    /// </summary>
     [CreateAssetMenu(menuName = "ScriptableObjects/Block Definition")]
     public class BlockDefinitionSO : ScriptableObject
     {

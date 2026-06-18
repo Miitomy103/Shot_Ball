@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// Ballが触れたら、一定時間停止してから指定した方向に飛ばすギミック
+    /// </summary>
     public class BallLauncher : AreaBase
     {
         [SerializeField] float launchPower = 40f;
@@ -14,22 +17,16 @@ namespace ShotBall.InGame
         protected override bool HasDirection => true;
         protected override Vector2 Direction => launchDirection;
 
-        IEnumerator Cor;
-
         bool inBall;
         Transform child;
 
-        [SerializeField] AudioSource reroad;
+        [SerializeField] AudioSource reloadSound;
         [SerializeField] AudioSource launchSound;
         protected override void Start()
         {
             child = transform.Find("Arrow");
             child.localRotation = DirectionAngle();
             base.Start();
-        }
-        protected override void OrderChange()
-        {
-
         }
         protected override void BallEnter(Ball other)
         {
@@ -48,7 +45,7 @@ namespace ShotBall.InGame
             inBall = true;
             rb.velocity = Vector2.zero;
             rb.gameObject.transform.position = transform.position;
-            reroad.Play();
+            reloadSound.Play();
 
             yield return new WaitForSeconds(coolTime);
 

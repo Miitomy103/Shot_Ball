@@ -137,6 +137,10 @@ namespace ShotBall.Create
             stageBlockData.SetVector3Parameter("Position", transform.position, false);
             stageBlockData.SetVector3Parameter("Rotation", transform.eulerAngles, false);
         }
+
+        /// <summary>
+        /// ‚±‚ê‚ª‚Á‚Ä‚¢‚éStageBlockData‚ğXV‚·‚é
+        /// </summary>
         public void SaveData()
         {
             if(ThisSprite == null) ThisSprite = GetComponent<SpriteRenderer>();
@@ -159,6 +163,8 @@ namespace ShotBall.Create
                 }
             }
         }
+
+
         public void SetStoredInFrame(bool stored)
         {
             if (ThisSprite == null) ThisSprite = GetComponent<SpriteRenderer>();

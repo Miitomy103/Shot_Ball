@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// Editモードのステージ一覧画面で、ステージを選択したときに表示される処理
+    /// </summary>
     public class DataDisplay : MonoBehaviour
     {
         private RawImage RawImage;

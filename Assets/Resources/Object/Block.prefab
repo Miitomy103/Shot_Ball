@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e987e55ef2da64c904b451267dce21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockType: 0
+  blockType: 3
   ballLayer:
     serializedVersion: 2
     m_Bits: 64

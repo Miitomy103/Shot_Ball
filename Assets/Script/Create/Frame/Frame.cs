@@ -5,6 +5,10 @@ using UnityEngine;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// Editモードでのフレームを表示するクラス
+    /// FrameManagerに管理されている
+    /// </summary>
     public class Frame : MonoBehaviour,IStageBlockData
     {
         public SpriteRenderer objectSprite;
@@ -34,7 +38,8 @@ namespace ShotBall.Create
                 && stageBlockData != null
                 && stageBlockData.Type == createObject.StageBlockData.Type
                 && stageBlockData.GetVector3Parameter("Scale") == createObject.StageBlockData.GetVector3Parameter("Scale")
-                && stageBlockData.GetVector2Parameter("Size") == createObject.StageBlockData.GetVector2Parameter("Size");
+                && stageBlockData.GetVector2Parameter("Size") == createObject.StageBlockData.GetVector2Parameter("Size")
+                && stageBlockData.GetVector3Parameter("Rotation")== createObject.StageBlockData.GetVector3Parameter("Rotation");
         }
 
         public Action DeleteAction { get; set; }
@@ -58,7 +63,10 @@ namespace ShotBall.Create
             }
 
         }
-        public void Initialized(CreateObject createObject)
+        /// <summary>
+        /// 初期化
+        /// </summary>
+        public void Initialize(CreateObject createObject)
         {
             stageBlockData = new StageBlockData(createObject.StageBlockData);
             blockDataPreview = DataChange.ChangeBlockData(stageBlockData);
@@ -78,6 +86,8 @@ namespace ShotBall.Create
             FitSpriteInSquare(copy.GetComponent<SpriteRenderer>());
         }
 
+        //-----------------------------
+        //外部（UnityEvent）で呼ぶ想定
         public void Plus()
         {
             blockCount++;
@@ -94,6 +104,11 @@ namespace ShotBall.Create
             isDestroy = true;
             DeleteAction();
         }
+        //-----------------------------
+
+        /// <summary>
+        /// オブジェクトと同じ見た目のSpriteを複製する
+        /// </summary>\
         public void FitSpriteInSquare(SpriteRenderer obj)
         {
             Vector2 input = obj.bounds.size;

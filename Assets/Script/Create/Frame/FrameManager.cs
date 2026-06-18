@@ -1,7 +1,4 @@
-﻿using ShotBall.Data;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace ShotBall.Create
@@ -41,6 +38,9 @@ namespace ShotBall.Create
             instance = this;
         }
 
+        /// <summary>
+        /// CreateObjectをフレームに追加する
+        /// </summary>
         public void InObject(CreateObject createObject)
         {
             if (createObject == null) return;
@@ -91,7 +91,7 @@ namespace ShotBall.Create
 
             frames.Add(frame);
             frame.DeleteAction += FrameDelete;
-            frame.Initialized(createObject);
+            frame.Initialize(createObject);
 
             FramesPosition();
 
