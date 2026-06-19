@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// 描画順序の定義
+    /// </summary>
     public enum OrderInLayer
     {
         // 背景系（〜19）

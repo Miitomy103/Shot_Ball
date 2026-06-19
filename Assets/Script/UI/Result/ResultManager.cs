@@ -21,7 +21,7 @@ namespace ShotBall.InGame
 
             for (int i = 0; i < coins.Length; i++)
             {
-                if (coins[i].Get)
+                if (coins[i].IsGet)
                 {
                     Coins[i].gameObject.SetActive(true);
                 }

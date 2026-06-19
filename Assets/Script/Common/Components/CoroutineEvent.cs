@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,7 +6,7 @@ namespace ShotBall.InGame
 {
     public class CoroutineEvent : MonoBehaviour
     {
-        [SerializeField]UnityEvent UnityEvent;
+        [SerializeField] UnityEvent UnityEvent;
         [SerializeField] float waitTime = 1f;
         public void StartCoroutineEvent()
         {

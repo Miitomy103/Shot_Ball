@@ -35,7 +35,7 @@ namespace ShotBall.InGame
         {
             for (int i = 0; i < gets.Length; i++)
             {
-                if (!gets[i].Get) continue;
+                if (!gets[i].IsGet) continue;
                 bool isGet = PlayerPrefs.GetInt($"Coin{stage.mainStage}-{stage.subStage}-{i}", 0) == 1;
                 if (!isGet)
                 {

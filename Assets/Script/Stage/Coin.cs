@@ -8,7 +8,7 @@ namespace ShotBall.InGame
     public class Coin : AreaBase,IGet
     {
         bool get = false;
-        public bool Get => get;
+        public bool IsGet => get;
 
 
         static float pitch = 1;
@@ -55,7 +55,7 @@ namespace ShotBall.InGame
 
         protected override void BallEnter(Ball other)
         {
-            if (Get) return;
+            if (IsGet) return;
             GetCoin();
 
         }

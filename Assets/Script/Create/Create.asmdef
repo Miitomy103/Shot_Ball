@@ -1,0 +1,16 @@
+{
+    "name": "Create",
+    "rootNamespace": "",
+    "references": [
+        "GUID:534b0318dfd6228409b458437c124dfd"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

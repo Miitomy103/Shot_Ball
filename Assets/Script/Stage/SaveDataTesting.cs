@@ -9,7 +9,7 @@ namespace ShotBall.InGame
         [SerializeField]int maxStage = 4;
 
         [SerializeField] bool get;
-        public bool Get => get;
+        public bool IsGet => get;
 
         public void AllClear()
         {

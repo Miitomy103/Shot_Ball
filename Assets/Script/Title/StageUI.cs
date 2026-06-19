@@ -82,8 +82,8 @@ namespace ShotBall.InGame
                 {
                     handler = stages[i].gameObject.AddComponent<HoverHandler>();
                 }
-                handler.onEnter = () => ButtonEnter(index );
-                handler.onExit = () => ButtonExit(index );
+                handler.OnEnter = () => ButtonEnter(index );
+                handler.OnExit = () => ButtonExit(index );
 
 
                 Button button = stages[i].GetComponent<Button>();
