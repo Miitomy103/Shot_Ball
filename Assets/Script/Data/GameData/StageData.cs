@@ -20,7 +20,7 @@ namespace ShotBall.Data
 
         
 
-        [SerializeField] PrefabDatas prefabDataList;
+        [SerializeField] PrefabLists prefabDataList;
 
         [SerializeField] List<GameObject> GenerateObjects;
         [SerializeField] string loadStageName;
@@ -88,6 +88,12 @@ namespace ShotBall.Data
                 {
                     wrapper = LoadScene.BlockDataWrapper;
                 }
+            }
+
+            if(wrapper == null)
+            {
+                Debug.LogError("Failed to load stage data.");
+                return;
             }
 
             this.dataList = wrapper.Blocks;

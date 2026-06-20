@@ -1,16 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+using ShotBall.Data;
 using UnityEngine;
 
 namespace ShotBall.InGame
 {
     public class BlockDefinitionsDatabaseBehaviour : MonoBehaviour
     {
-        [SerializeField] Parameters Parametors;
+        [SerializeField] Parameters Parameters;
 
         private void Awake()
         {
-            BlockDefinitionsDatabase.LoadedParametors = Parametors;
+            BlockDefinitionsDatabase.LoadedParameters = Parameters;
         }
     }
 }

@@ -1,0 +1,75 @@
+using ShotBall.Data;
+using ShotBall.InGame;
+using UnityEngine;
+
+namespace ShotBall.Create
+{
+    public class GenerateObject : MonoBehaviour
+    {
+        [SerializeField] PrefabLists prefabLists;
+        [SerializeField] Parameters parameters; // パラメータの設定を保持するクラス
+
+        [SerializeField] Objects objects;
+
+
+        int blockIdCount = 0;
+
+        public CreateObject Generate(BlockType blockType)
+        {
+            foreach(var p in prefabLists.prefabs)
+            {
+                if (p.type == blockType)
+                {
+                    GameObject obj = Instantiate(p.PrefabObj, Vector3.zero+new Vector3(0,0,-5), Quaternion.identity);
+                    obj.transform.parent = transform;
+                    CreateObject createObject = obj.GetComponent<CreateObject>();
+                    createObject.BlockId = blockIdCount;
+                    blockIdCount++;
+                    ParameterSet(obj); // パラメータを設定
+                    objects.Add(createObject); 
+                    HandleFollower.Instance.SpriteSet(createObject.GetComponent<SpriteRenderer>(), createObject.IsSizeChange);
+                    if (createObject != null)
+                    {
+                        createObject.StageBlockData.SetType(blockType);
+                        return createObject;
+                    }
+                    else
+                    {
+                        Debug.LogError("CreateObject component not found on the prefab.");
+                        Destroy(obj);
+                        return null;
+                    }
+                }
+            }
+            return null; // 生成できるオブジェクトが見つからない場合はnullを返す
+        }
+        public CreateObject LoadObject(StageBlockData data)
+        {
+            foreach (var p in prefabLists.prefabs)
+            {
+                if (p.type == data.Type)
+                {
+                    GameObject obj = Instantiate(p.PrefabObj, Vector3.zero + new Vector3(0, 0, -5), Quaternion.identity);
+                    obj.transform.parent = transform;
+                    CreateObject createObject = obj.GetComponent<CreateObject>();
+                    createObject.Load(data);
+                    createObject.BlockId = data.GetIntParameter("BlockId");
+                    ParameterSet(obj); // パラメータを設定
+                    objects.Add(createObject);
+                    return createObject;
+                }
+            }
+            return null; // 生成できるオブジェクトが見つからない場合はnullを返す
+        }
+        void ParameterSet(GameObject gameObject)
+        {
+            if (gameObject.TryGetComponent<IParameters>(out var parameters))
+            {
+                parameters.Parameters = this.parameters;
+            }
+            if(gameObject.TryGetComponent<IStageBlockData>(out var stageBlockData))
+            {
+            }
+        }
+    }
+}

@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -270,6 +269,10 @@ PrefabInstance:
       propertyPath: loadStageName
       value: CreateData
       objectReference: {fileID: 0}
+    - target: {fileID: 8318082691901564976, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
+      propertyPath: prefabDataList
+      value: 
+      objectReference: {fileID: 11400000, guid: e6fde1ba18ab32b449d3cec8f7482b50, type: 2}
     - target: {fileID: 8318082691901564976, guid: 64f202cb431d5164f85cd135d0eeacb0, type: 3}
       propertyPath: Datas.Array.size
       value: 0

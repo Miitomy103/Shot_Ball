@@ -1,4 +1,5 @@
 using UnityEngine;
+using ShotBall.Data;
 
 namespace ShotBall.InGame
 {
@@ -20,10 +21,5 @@ namespace ShotBall.InGame
                 }
             }
         }
-    }
-
-    public interface IParameters
-    {
-        Parameters Parameters { get; set; }
     }
 }

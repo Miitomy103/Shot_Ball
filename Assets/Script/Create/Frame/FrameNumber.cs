@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace ShotBall.InGame
+namespace ShotBall.Create
 {
     public class FrameNumber : MonoBehaviour,IChangeText
     {

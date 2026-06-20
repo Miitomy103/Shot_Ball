@@ -8,7 +8,7 @@ namespace ShotBall.Create
 {
     public class LoadStage : MonoBehaviour
     {
-        [SerializeField] PrefabDatas prefabDatas;
+        [SerializeField] PrefabLists prefabDatas;
         public void Load(CreateStageData createStageData)
         {
 
