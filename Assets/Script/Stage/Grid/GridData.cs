@@ -1,17 +1,20 @@
 using ShotBall.InGame;
 using UnityEngine;
 
+/// <summary>
+/// ã‚¹ãƒ†ãƒ¼ã‚¸ã®ãƒã‚¹æƒ…å ±(GridData)ã‚’æŒã¤åŸºåº•ã‚¯ãƒ©ã‚¹ã€‚Awakeã§ãƒã‚¹æƒ…å ±ã®æ•´åˆæ€§ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹ã€‚
+/// </summary>
 public abstract class GridDataBase : MonoBehaviour, IGridData
 {
-    //0 => ‹ó
-    //1 => ƒ}ƒX
-    //2 => ’†S’n
+    //0 => ç©º
+    //1 => ãƒã‚¹
+    //2 => ä¸­å¿ƒåœ°
     public abstract int[,] GridData { get; }
     public abstract bool Center { get; }
 
     private void Awake()
     {
-        if (GridData == null) Debug.Log("gridData‚È‚¢II");
+        if (GridData == null) Debug.Log("gridDataãªã„ï¼ï¼");
         if (Center)
         {
             bool centerCheck = false;
@@ -27,7 +30,7 @@ public abstract class GridDataBase : MonoBehaviour, IGridData
                     centerCheck = true;
                 }
             }
-            if (!centerCheck) Debug.LogError($"{this.GetType().Name}: ’†S’n‚ª‘¶İ‚µ‚Ü‚¹‚ñ");
+            if (!centerCheck) Debug.LogError($"{this.GetType().Name}: ä¸­å¿ƒåœ°ãŒå­˜åœ¨ã—ã¾ã›ã‚“");
         }
         if(!Center)
         {
@@ -39,7 +42,7 @@ public abstract class GridDataBase : MonoBehaviour, IGridData
                     {
                         if(j!=1||j!=2)
                         {
-                            Debug.LogError("“–‚½‚è”»’è‚È‚µƒuƒƒbƒN‚É“–‚½‚è”»’è‚ª‚ ‚è‚Ü‚·");
+                            Debug.LogError("å½“ãŸã‚Šåˆ¤å®šãªã—ãƒ–ãƒ­ãƒƒã‚¯ã«å½“ãŸã‚Šåˆ¤å®šãŒã‚ã‚Šã¾ã™");
                         }
                     }
                     break;

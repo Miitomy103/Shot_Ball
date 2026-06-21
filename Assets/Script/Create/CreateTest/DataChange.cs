@@ -5,8 +5,14 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// BlockDataとStageBlockDataを相互に変換するための静的クラス。
+    /// </summary>
     public static class DataChange
     {
+        /// <summary>
+        /// StageBlockDataから、テストプレイ用のBlockDataへ変換する。
+        /// </summary>
         public static BlockData ChangeBlockData(StageBlockData stageBlockData)
         {
             BlockType blockType = stageBlockData.Type;
@@ -39,11 +45,14 @@ namespace ShotBall.InGame
 
             return new BlockData(blockType, position, scale, rotation, size,blockId, color, type, childData, gimmickData,keyNumbers.ToArray());
         }
+        /// <summary>
+        /// BlockDataから、保存用のStageBlockDataへ変換する。
+        /// </summary>
         public static StageBlockData ChangeStageBlockData(BlockData blockData)
         {
             StageBlockData stageBlockData = new StageBlockData();
 
-            // ��{���
+            // 基本情報
             stageBlockData.SetType(blockData.BlockType);
             stageBlockData.SetVector3Parameter("Position", blockData.Position, false);
             stageBlockData.SetVector3Parameter("Scale", blockData.Scale, false);
@@ -51,13 +60,13 @@ namespace ShotBall.InGame
             stageBlockData.SetIntParameter("BlockId", blockData.BlockId, false);
             stageBlockData.SetVector2Parameter("Size", blockData.size, false);
 
-            // �F
+            // 色
             stageBlockData.SetFloatParameter("ColorR", blockData.color.r, false);
             stageBlockData.SetFloatParameter("ColorG", blockData.color.g, false);
             stageBlockData.SetFloatParameter("ColorB", blockData.color.b, false);
             stageBlockData.SetFloatParameter("ColorA", blockData.color.a, false);
 
-            // ���
+            // 種別
             stageBlockData.SetBoolParameter("InFrame", blockData.Type == ObjectType.Runtime, false);
 
             // KeyNumbers
@@ -67,8 +76,8 @@ namespace ShotBall.InGame
                 stageBlockData.SetIntParameter(paramName, blockData.BlockIds[i], false);
             }
 
-            // �q�f�[�^�ichildData�j�̈����͎d�l����
-            // blockData.ChildData �� StageBlockData[] �ɕϊ��������ꍇ�͂����ōċA�I�ɏ���
+            // 子データ（childData）の扱いは仕様次第
+            // blockData.ChildData を StageBlockData[] に変換したい場合はここで再帰的に処理
 
             return stageBlockData;
         }

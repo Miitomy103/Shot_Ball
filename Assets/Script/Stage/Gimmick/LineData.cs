@@ -4,10 +4,13 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// LineManagerが管理する1本のラインの情報(起点・終点・LineRenderer・所属オブジェクト)。
+    /// </summary>
     public class LineData
     {
-        public Transform start;     // �N�_
-        public Transform end;       // �I�_
+        public Transform start;     // 起点
+        public Transform end;       // 終点
         public LineRenderer renderer;
         public GameObject obj;
 

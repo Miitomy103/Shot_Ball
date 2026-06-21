@@ -4,9 +4,15 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// シーン名("メイン-サブ"形式)から次のシーン名を計算する構造体。SceneControlと同種の機能を持つ。
+    /// </summary>
     public struct SceneData
     {
         public readonly static int maxStage = 5;
+        /// <summary>
+        /// 現在のシーン名から次のシーン名("メイン-サブ"形式)を計算して返す。
+        /// </summary>
         public string NextScene(string nowScene)
         {
             string[] stageNumbers = nowScene.Split("-");

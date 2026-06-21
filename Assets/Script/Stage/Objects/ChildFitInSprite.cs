@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// å­ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã™ã¹ã¦ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’å›²ã‚€ç¯„å›²ã‚’frameã«åã¾ã‚‹ã‚ˆã†ã«æ‹¡å¤§ç¸®å°ãƒ»ä½ç½®èª¿æ•´ã™ã‚‹ã‚¯ãƒ©ã‚¹ã€‚
+    /// </summary>
     public class ChildFitInSprite : MonoBehaviour,IFitSpriteInSquare
     {
         SpriteRenderer[] children;
@@ -13,22 +16,25 @@ namespace ShotBall.InGame
             SpriteRenderer[] c = GetComponentsInChildren<SpriteRenderer>();
             children = c.Where(t => t != null && t.gameObject != this.gameObject).ToArray();
         }
+        /// <summary>
+        /// å­ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆå…¨ä½“ã‚’frameã«åã¾ã‚‹ã‚ˆã†ã«æ‹¡å¤§ç¸®å°ãƒ»ä½ç½®èª¿æ•´ã™ã‚‹ã€‚
+        /// </summary>
         public void FitSprite(SpriteRenderer frame)
         {
-            // frame‚ªnull‚È‚ç©•ª‚ÉƒAƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚éSpriteRenderer‚ğg‚¤
+            // frameãŒnullãªã‚‰è‡ªåˆ†ã«ã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ã„ã‚‹SpriteRendererã‚’ä½¿ã†
             if (frame == null)
             {
                 frame = GetComponent<SpriteRenderer>();
                 if (frame == null)
                 {
-                    Debug.LogError("FitSprite: frame‚ªnull‚Å‚·BSpriteRenderer‚ğæ“¾‚Å‚«‚Ü‚¹‚ñB");
+                    Debug.LogError("FitSprite: frameãŒnullã§ã™ã€‚SpriteRendererã‚’å–å¾—ã§ãã¾ã›ã‚“ã€‚");
                     return;
                 }
             }
 
             if (children == null || children.Length == 0)
             {
-                Debug.LogWarning("FitSprite: children‚ªnull‚Ü‚½‚Í‹ó‚Å‚·");
+                Debug.LogWarning("FitSprite: childrenãŒnullã¾ãŸã¯ç©ºã§ã™");
                 return;
             }
 
@@ -36,12 +42,12 @@ namespace ShotBall.InGame
             Vector3 min = Vector3.positiveInfinity;
             Vector3 max = Vector3.negativeInfinity;
 
-            // ‚·‚×‚Ä‚ÌƒXƒvƒ‰ƒCƒg‚ÌAABB‚ğ‹‚ß‚é
+            // ã™ã¹ã¦ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®AABBã‚’æ±‚ã‚ã‚‹
             foreach (var data in children)
             {
                 if (data == null || data.sprite == null) continue;
 
-                Bounds bounds = data.sprite.bounds; // ƒ[ƒ‹ƒhÀ•W‚ÌƒoƒEƒ“ƒfƒBƒ“ƒOƒ{ƒbƒNƒX
+                Bounds bounds = data.sprite.bounds; // ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã®ãƒã‚¦ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ãƒœãƒƒã‚¯ã‚¹
 
                 min = Vector3.Min(min, bounds.min);
                 max = Vector3.Max(max, bounds.max);
@@ -50,15 +56,15 @@ namespace ShotBall.InGame
 
             if (!hasValidSprite)
             {
-                Debug.LogWarning("FitSprite: —LŒø‚ÈƒXƒvƒ‰ƒCƒg‚ªchildData‚É‘¶İ‚µ‚Ü‚¹‚ñ");
+                Debug.LogWarning("FitSprite: æœ‰åŠ¹ãªã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãŒchildDataã«å­˜åœ¨ã—ã¾ã›ã‚“");
                 return;
             }
 
-            // ƒXƒvƒ‰ƒCƒg‘S‘Ì‚ÌƒTƒCƒY‚Æ’†S‚ğŒvZ
+            // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆå…¨ä½“ã®ã‚µã‚¤ã‚ºã¨ä¸­å¿ƒã‚’è¨ˆç®—
             Vector3 totalSize = max - min;
             Vector3 currentCenter = (max + min) / 2f;
 
-            // ƒXƒP[ƒ‹”{—¦iframe‚Éû‚ß‚éj
+            // ã‚¹ã‚±ãƒ¼ãƒ«å€ç‡ï¼ˆframeã«åã‚ã‚‹ï¼‰
             float maxDimension = Mathf.Max(totalSize.x, totalSize.y);
             if (maxDimension == 0)
             {
@@ -69,11 +75,14 @@ namespace ShotBall.InGame
             float targetScale = frame.bounds.size.x * 0.85f / maxDimension;
             transform.localScale = Vector3.one * targetScale;
 
-            // ƒXƒvƒ‰ƒCƒg‘S‘Ì‚Ì’†S‚ğframe‚Ì’†S‚É‡‚í‚¹‚é
+            // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆå…¨ä½“ã®ä¸­å¿ƒã‚’frameã®ä¸­å¿ƒã«åˆã‚ã›ã‚‹
             Vector3 offset = frame.transform.position - GetCenterOfChildSprites();
             transform.position += offset;
         }
 
+        /// <summary>
+        /// å­ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆå…¨ä½“ã‚’å›²ã‚€ç¯„å›²ã®ä¸­å¿ƒä½ç½®ã‚’å–å¾—ã™ã‚‹ã€‚
+        /// </summary>
         public Vector3 GetCenterOfChildSprites()
         {
             Bounds bounds = children[0].sprite.bounds;

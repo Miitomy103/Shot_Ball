@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall
 {
+    /// <summary>
+    /// 1つの表示用オブジェクトを生成・差し替え表示するクラス。何も表示していない場合はnullObjectを表示する。
+    /// </summary>
     public class UIDisplay : MonoBehaviour
     {
         [SerializeField] private float displaySizeMagnification = 1;
@@ -11,6 +14,9 @@ namespace ShotBall
 
         GameObject displayObject;
 
+        /// <summary>
+        /// 表示中のオブジェクトを破棄し、空状態の表示(nullObject)に戻す。
+        /// </summary>
         public void NullDisplay()
         {
             nullObject.gameObject.SetActive(true);
@@ -20,11 +26,17 @@ namespace ShotBall
                 displayObject = null;
             }
         }
+        /// <summary>
+        /// 指定したプレハブを複製して表示する。
+        /// </summary>
         public void GenerateDisplay(GameObject obj)
         {
             RectTransform r=Instantiate(obj.gameObject, transform).GetComponent<RectTransform>();
             SetDisplay(r);
         }
+        /// <summary>
+        /// 表示中のオブジェクトを差し替え、サイズ倍率を適用して表示する。
+        /// </summary>
         public void SetDisplay(RectTransform rectTransform)
         {
             if (displayObject != null)

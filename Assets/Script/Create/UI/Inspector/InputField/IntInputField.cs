@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// 入力欄でintパラメータを入力するインスペクターUIのクラス。
+    /// </summary>
     public class IntInputField : MonoBehaviour, ISetValue<int>
     {
         [SerializeField] TMP_InputField inputField;

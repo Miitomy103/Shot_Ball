@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// ブロックを設置できないエリアを示すギミック。プレイ中のみコライダーがトリガーになり、ボールが通過できる。
+    /// </summary>
     public class NoPutArea :GimmickBase
     {
 

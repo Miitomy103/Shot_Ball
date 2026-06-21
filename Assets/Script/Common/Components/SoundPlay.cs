@@ -1,4 +1,7 @@
 using UnityEngine;
+/// <summary>
+/// 名前を指定してSoundControllerに登録し、再生できるようにするクラス。
+/// </summary>
 public class SoundPlay : MonoBehaviour,IPlay
 {
     [SerializeField] string soundName = "Click";

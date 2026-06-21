@@ -8,6 +8,9 @@ using System;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// タイトルのステージ選択画面で、1メインステージ分のサブステージボタン群とクリア状況表示を管理するクラス。
+    /// </summary>
     public class StageUI : MonoBehaviour
     {
         [SerializeField] int stage;
@@ -60,6 +63,9 @@ namespace ShotBall.InGame
             SaveLoad();
         }
 
+        /// <summary>
+        /// 各サブステージのクリア状況をPlayerPrefsから読み込み、クリア表示に反映する。
+        /// </summary>
         public void SaveLoad()
         {
             for(int i = 0; i < stages.Length; i++)
@@ -75,7 +81,7 @@ namespace ShotBall.InGame
 
             for (int i = 0; i < stages.Length; i++)
             {
-                int index = i+1; // ���[�J���ϐ��ɃR�s�[
+                int index = i+1; // ローカル変数にコピー
 
                 HoverHandler handler = stages[i].gameObject.GetComponent<HoverHandler>();
                 if(handler == null)
@@ -92,6 +98,9 @@ namespace ShotBall.InGame
 
         }
 
+        /// <summary>
+        /// このメインステージの全サブステージがクリア済みかどうかを判定する。
+        /// </summary>
         public bool IsAllClear()
         {
             for (int i = 0; i < stages.Length; i++)
@@ -105,6 +114,9 @@ namespace ShotBall.InGame
         {
             SceneControl.StageChange(new StageName(stage,index));
         }
+        /// <summary>
+        /// デバッグ用: 3番目のサブステージのみクリア表示にする。
+        /// </summary>
         public void TestClearColor()
         {
             for (int i = 0; i < stages.Length; i++)

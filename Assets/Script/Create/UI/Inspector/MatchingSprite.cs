@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// テキストの表示幅に合わせて背景スプライト(spriteRect)の幅を一致させるクラス。左端を固定して右に伸縮する。
+    /// </summary>
     public class MatchingSprite : MonoBehaviour, IChangeText
     {
         [SerializeField] TextMeshProUGUI text;
@@ -23,19 +26,22 @@ namespace ShotBall.Create
 
         private IEnumerator AdjustAfterFrame()
         {
-            yield return null; // ���C�A�E�g�X�V��҂�
+            yield return null; // レイアウト更新を待つ
             Match();
         }
 
+        /// <summary>
+        /// テキストの表示幅にスプライトの幅を合わせる(左端固定)。
+        /// </summary>
         public void Match()
         {
             float width = text.preferredWidth;
 
-            // ���[�ʒu�͂��̂܂܂ŁA�E�ɂ����L����
+            // 左端位置はそのままで、右に伸び縮みする
             spriteRect.sizeDelta = new Vector2(width + padding, spriteRect.sizeDelta.y);
 
-            // �ʒu�͕ύX���Ȃ��i���[�Œ�j
-            // spriteRect.position = spriteRect.position; �� ����͕s�v
+            // 位置は変更しない(左端固定)
+            // spriteRect.position = spriteRect.position; ← これは不要
         }
     }
 

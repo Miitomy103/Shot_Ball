@@ -4,16 +4,22 @@ using System.IO;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// æŒ‡å®šã—ãŸ2ç‚¹ã®ç¯„å›²ã‚’ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆã¨ã—ã¦åˆ‡ã‚Šå–ã‚Šã€PNGã¨ã—ã¦ä¿å­˜ã™ã‚‹ã‚¯ãƒ©ã‚¹ã€‚
+    /// </summary>
     public class RegionCapture : MonoBehaviour
     {
         private const int DefaultScreenPointMin = 100;
         private const int DefaultScreenPointMaxX = 400;
         private const int DefaultScreenPointMaxY = 300;
 
-        // ƒXƒNƒŠ[ƒ“À•Wi¶‰º‚Æ‰Eã‚Ì2“_j
+        // ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ï¼ˆå·¦ä¸‹ã¨å³ä¸Šã®2ç‚¹ï¼‰
         public Vector2 screenPoint1 = new Vector2(DefaultScreenPointMin, DefaultScreenPointMin);
         public Vector2 screenPoint2 = new Vector2(DefaultScreenPointMaxX, DefaultScreenPointMaxY);
 
+        /// <summary>
+        /// æŒ‡å®šç¯„å›²ã®ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚·ãƒ§ãƒƒãƒˆã‚’æ’®å½±ã—ã€ãƒ•ã‚¡ã‚¤ãƒ«ã«ä¿å­˜ã™ã‚‹ã€‚
+        /// </summary>
         public void Capture()
         {
             StartCoroutine(CaptureRoutine());
@@ -21,7 +27,7 @@ namespace ShotBall.InGame
 
         private IEnumerator CaptureRoutine()
         {
-            yield return new WaitForEndOfFrame(); // UI‚ğŠÜ‚ß‚ÄƒŒƒ“ƒ_ƒŠƒ“ƒO‚ªŠ®—¹‚·‚é‚Ì‚ğ‘Ò‚Â
+            yield return new WaitForEndOfFrame(); // UIã‚’å«ã‚ã¦ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ãŒå®Œäº†ã™ã‚‹ã®ã‚’å¾…ã¤
 
             Texture2D fullScreenshot = ScreenCapture.CaptureScreenshotAsTexture();
 
@@ -31,18 +37,18 @@ namespace ShotBall.InGame
             Vector3 screenPoint1=Camera.main.WorldToScreenPoint(pointA);
             Vector3 screenPoint2 = Camera.main.WorldToScreenPoint(pointB);
 
-            // 2“_‚©‚ç‹éŒ`‚ğì¬i¶‰ºE•E‚‚³j
+            // 2ç‚¹ã‹ã‚‰çŸ©å½¢ã‚’ä½œæˆï¼ˆå·¦ä¸‹ãƒ»å¹…ãƒ»é«˜ã•ï¼‰
             int xMin = Mathf.RoundToInt(Mathf.Min(screenPoint1.x, screenPoint2.x));
             int yMin = Mathf.RoundToInt(Mathf.Min(screenPoint1.y, screenPoint2.y));
             int width = Mathf.RoundToInt(Mathf.Abs(screenPoint2.x - screenPoint1.x));
             int height = Mathf.RoundToInt(Mathf.Abs(screenPoint2.y - screenPoint1.y));
 
-            // ‹éŒ`”ÍˆÍ‚ğØ‚èæ‚é
+            // çŸ©å½¢ç¯„å›²ã‚’åˆ‡ã‚Šå–ã‚‹
             Texture2D cropped = new Texture2D(width, height, TextureFormat.RGB24, false);
             cropped.SetPixels(fullScreenshot.GetPixels(xMin, yMin, width, height));
             cropped.Apply();
 
-            // •Û‘¶
+            // ä¿å­˜
             byte[] pngData = cropped.EncodeToPNG();
             string path = Application.dataPath + $"/Picture/AreaScreenshot.{SceneControl.NowStage()}.png";
             File.WriteAllBytes(path, pngData);

@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// 全ステージクリア時にのみ編集(Create)シーンへの遷移を許可するクラス。
+    /// </summary>
     public class EditSceneMove : MonoBehaviour
     {
         [SerializeField] StageUIsManager stageUIsManager;
@@ -21,6 +24,9 @@ namespace ShotBall.InGame
         {
             lockObj.SetActive(!isAllClear);
         }
+        /// <summary>
+        /// 全ステージクリア済みなら編集シーンへ移動する。未クリアならログを表示する。
+        /// </summary>
         public void MoveEditScene()
         {
             if (isAllClear)
@@ -29,7 +35,7 @@ namespace ShotBall.InGame
             }
             else
             {
-                LogDisplay.Instance.SetLog("�X�e�[�W��S�ăN���A����΃v���C�ł��܂�");
+                LogDisplay.Instance.SetLog("ステージを全てクリアすればプレイできます");
             }
         }
     }

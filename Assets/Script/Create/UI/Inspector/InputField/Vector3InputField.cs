@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// X/Y/Zの3つの入力欄でVector3パラメータを入力するインスペクターUIのクラス。
+    /// </summary>
     public class Vector3InputField : MonoBehaviour, ISetValue<Vector3>
     {
         [SerializeField] TMP_InputField xField;

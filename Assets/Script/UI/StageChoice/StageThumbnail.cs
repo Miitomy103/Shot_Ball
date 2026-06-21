@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// ステージ選択画面のサムネイル表示。ステージの画像・コイン取得状況・ステージ名を表示する。
+    /// </summary>
     public class StageThumbnail : MonoBehaviour
     {
         StagePictures stagePictures;
@@ -22,6 +25,9 @@ namespace ShotBall.InGame
         {
             StageExit();
         }
+        /// <summary>
+        /// 指定したステージの画像・コイン取得状況・ステージ名をサムネイルに反映する。
+        /// </summary>
         public void StageChange(StageName stage)
         {
             Sprite sprite = stagePictures.FindSpriteByName(stage);
@@ -49,6 +55,9 @@ namespace ShotBall.InGame
             }
             stageText.text=stage.GetName();
         }
+        /// <summary>
+        /// サムネイルを未選択状態(画像なし)に戻す。
+        /// </summary>
         public void StageExit()
         {
             stageImage.sprite = null;

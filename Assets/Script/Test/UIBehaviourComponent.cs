@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// RectTransformのサイズ変化を子のIUIBehaviour実装に伝播させるクラス。
+/// </summary>
 public class UIBehaviourComponent : UIBehaviour
 {
     protected override void OnRectTransformDimensionsChange()

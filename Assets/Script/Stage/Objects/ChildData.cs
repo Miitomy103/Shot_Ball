@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// ChildrenDragObjectが子オブジェクトごとに持つ情報(スプライト・コライダー・ギミック・選択表示用サブスプライト)。
+    /// </summary>
     public struct ChildData
     {
         public GameObject gameObject;

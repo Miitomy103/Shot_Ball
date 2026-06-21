@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// インスペクターでカメラサイズ・中央エリア幅を設定し、StageBlockData/Stageに反映するクラス。
+    /// </summary>
     public class CameraInspector : MonoBehaviour
     {
         private const float MinCameraSize = 3f;
@@ -34,11 +37,17 @@ namespace ShotBall.Create
             stageBlockData.StageBlockData.floatSet += ChangeData;
         }
 
+        /// <summary>
+        /// このブロックの値をInspectorに表示する。
+        /// </summary>
         public void OnClick()
         {
             Inspector.Instance.ValueSet(stageBlockData.StageBlockData, Name, unique);
         }
 
+        /// <summary>
+        /// StageBlockDataのCameraSize/CenterWorldWidthが変更されたときに、値を範囲内にクランプしてStageに反映する。
+        /// </summary>
         public void ChangeData()
         {
             Debug.Log("CameraChange");

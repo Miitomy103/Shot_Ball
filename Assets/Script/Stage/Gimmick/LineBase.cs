@@ -4,13 +4,19 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// 複数のTargets間をLineRendererで結んで表示するギミックの基底クラス。
+    /// </summary>
     public abstract class LineBase : GimmickBase
     {
         protected abstract Color Color { get; }
 
         protected LineRenderer lineRenderer;
+        /// <summary>
+        /// ラインで結ぶ対象の位置一覧。
+        /// </summary>
         protected abstract Transform[] Targets { get; }
-        protected abstract float startWidth { get; } 
+        protected abstract float startWidth { get; }
         protected abstract float endWidth { get; }
         private void OnValidate()
         {
@@ -51,6 +57,9 @@ namespace ShotBall.InGame
                 lineRenderer.SetPosition(i, Targets[i].position);
             }
         }
+        /// <summary>
+        /// ラインを表示するべき状態かどうか。
+        /// </summary>
         protected abstract bool IsLine();
         protected override void StageStart()
         {

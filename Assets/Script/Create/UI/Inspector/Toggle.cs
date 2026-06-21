@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// ボタンクリックでON/OFFを切り替えるトグルUIのクラス。
+    /// </summary>
     public class Toggle : MonoBehaviour
     {
         [SerializeField] Button button;
@@ -13,6 +16,9 @@ namespace ShotBall.Create
 
         public bool IsCheck { get; private set; }
 
+        /// <summary>
+        /// チェック状態が変化したときに呼ばれる。
+        /// </summary>
         public Action<bool> Checked { get; set; }
 
         private void Awake()
@@ -23,6 +29,9 @@ namespace ShotBall.Create
         {
             SetValue(!IsCheck);
         }
+        /// <summary>
+        /// チェック状態を設定し、見た目を更新してCheckedイベントを発火する。
+        /// </summary>
         public void SetValue(bool value)
         {
             IsCheck = value;

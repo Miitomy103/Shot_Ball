@@ -6,6 +6,10 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// マウスでドラッグして配置できるオブジェクトの基底クラス。
+    /// 配置可否の判定やフレームへの収納などの共通処理を持ち、表示差分は派生クラス(Derivation系メソッド)で実装する。
+    /// </summary>
     public abstract class DragObject : ObjectBase
     {
         public BlockType BlockType { get; protected set; }
@@ -41,7 +45,13 @@ namespace ShotBall.InGame
                 }
             }
         }
+        /// <summary>
+        /// 現在の位置に配置可能かどうか。
+        /// </summary>
         public abstract bool IsPlaced();
+        /// <summary>
+        /// ドラッグを開始する。
+        /// </summary>
         public void StartDrag(Vector3 inputScreenPos)
         {
             if (!CanDrag()||IsDragging) return;
@@ -60,6 +70,9 @@ namespace ShotBall.InGame
         protected abstract void StartDragDerivation(Vector3 inputScreenPos);
 
         Vector3 mousePos;
+        /// <summary>
+        /// ドラッグ中、毎フレーム呼ばれて位置を更新する。
+        /// </summary>
         public void Drag(Vector3 inputScreenPos)
         {
             Vector3 newPosition = Camera.main.ScreenToWorldPoint(inputScreenPos) + offset;
@@ -68,6 +81,9 @@ namespace ShotBall.InGame
             DragDerivation(newPosition);
         }
         protected abstract void DragDerivation(Vector3 inputScreenPos);
+        /// <summary>
+        /// ドラッグを終了し、配置先(フレーム内/範囲内/元の位置に戻す)を確定する。
+        /// </summary>
         public void EndDrag(Vector3 inputScreenPos)
         {
             if (!CanDrag()) return;
@@ -111,14 +127,17 @@ namespace ShotBall.InGame
             }
         }
         protected abstract bool InRange();
+        /// <summary>
+        /// 現在のマウス位置にFramesManagerがあるかどうかを判定する。
+        /// </summary>
         public bool FrameInMethod(out FramesManager frame)
         {
             frame = null;
 
-            // �X�N���[�����W �� ���[���h���W�ɕϊ�
+            // スクリーン座標 → ワールド座標に変換
             Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            // �N���b�N�ʒu�ɂ��邷�ׂĂ�Collider2D���擾
+            // クリック位置にあるすべてのCollider2Dを取得
             Collider2D[] hits = Physics2D.OverlapPointAll(worldPos);
 
             foreach (var hit in hits)
@@ -137,6 +156,9 @@ namespace ShotBall.InGame
             return FrameInMethod(out var frame);
         }
         protected abstract void OrderInLayerChange();
+        /// <summary>
+        /// スプライトをframeの大きさに収まるように拡大縮小・位置調整する。
+        /// </summary>
         public abstract void FitSpriteInSquare(SpriteRenderer frame);
     }
 

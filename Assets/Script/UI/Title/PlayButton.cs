@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// タイトル画面のプレイ/バックボタン操作とアニメーション制御を行うクラス。
+    /// </summary>
     public class PlayButton : MonoBehaviour
     {
         [SerializeField] Animator animator;
@@ -26,6 +29,9 @@ namespace ShotBall.InGame
                 StaticData.isSelectView = false;
             }
         }
+        /// <summary>
+        /// プレイボタンが押されたときの処理。ステージ選択へのアニメーションを開始する。
+        /// </summary>
         public void PlayClick()
         {
             if (isAnimation) return;
@@ -38,6 +44,9 @@ namespace ShotBall.InGame
         {
             startButton.SetActive(false);
         }
+        /// <summary>
+        /// バックボタンが押されたときの処理。タイトルへ戻るアニメーションを開始する。
+        /// </summary>
         public void BackClick()
         {
             if (isAnimation) return;
@@ -51,6 +60,9 @@ namespace ShotBall.InGame
             
         }
 
+        /// <summary>
+        /// ボタン操作を無効化し、アニメーション開始の待機処理を行う。
+        /// </summary>
         public void AnimationStart()
         {
             foreach (var item in laycasts)
@@ -66,6 +78,9 @@ namespace ShotBall.InGame
             yield return new WaitForSeconds(0.5f);
             AnimationEnd();
         }
+        /// <summary>
+        /// アニメーション終了時の処理。ボタン操作を再度有効化する。
+        /// </summary>
         public void AnimationEnd()
         {
             foreach (var item in laycasts)

@@ -6,6 +6,10 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// ボールが触れるたびに接続中のOnOffBehaviourをまとめてオン/オフ切り替えるギミック。
+    /// LineManagerで接続先までのラインを表示する。
+    /// </summary>
     public class OnOffBlock : AreaBase
     {
         [SerializeField] public OnOffBehaviour[] iOnOffs;
@@ -52,7 +56,7 @@ namespace ShotBall.InGame
             }
             lineManager.EnableAllLines(true);
 
-            // ���ׂẴ��C�����쐬����Ă��� OnOffChange ���Ă�
+            // すべてのラインが作成されてから OnOffChange を呼ぶ
             OnOffChange(startIsOn);
         }
 
@@ -122,6 +126,9 @@ namespace ShotBall.InGame
             }
             iOnOffs = onoffs.ToArray();
         }
+        /// <summary>
+        /// オン/オフ状態を変更し、接続先のOnOffBehaviourにも反映する。
+        /// </summary>
         private void OnOffChange(bool on)
         {
             isOn = on;
@@ -142,7 +149,7 @@ namespace ShotBall.InGame
 
         protected override string StringData()
         {
-            return $"{startIsOn}"; // �����ł� startIsOn �̒l��Ԃ�
+            return $"{startIsOn}"; // ここでは startIsOn の値を返す
         }
 
         public override void LoadData(StageBlockData data)

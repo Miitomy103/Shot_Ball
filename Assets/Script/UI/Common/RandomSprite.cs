@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
+/// <summary>
+/// 開始時に配列からランダムに1枚選んでImageに表示するクラス。
+/// </summary>
 public class RandomSprite : MonoBehaviour
 {
     [SerializeField] private Sprite[] sprites;

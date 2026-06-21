@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// 矢印(方向)でVector2パラメータを入力するインスペクターUIのクラス。
+    /// </summary>
     public class ArrowInputField : MonoBehaviour,ISetValue<Vector2>
     {
         [SerializeField] ArrowToggle arrowToggle;

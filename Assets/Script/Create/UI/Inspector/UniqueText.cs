@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// 親の幅・高さに収まるようフォントサイズを自動調整するテキスト表示クラス。
+    /// </summary>
     public class UniqueText : MonoBehaviour,IChangeText
     {
         [SerializeField] RectTransform parentRect;
@@ -21,7 +24,6 @@ namespace ShotBall.Create
             tmp.text = str;
             FitText();
         }
-        // Update is called once per frame
         void FitText()
         {
             if (tmp == null || parentRect == null) return;
@@ -39,14 +41,14 @@ namespace ShotBall.Create
             tmp.fontSize = fontSizeMax;
             tmp.ForceMeshUpdate();
 
-            int maxLoop = 100; // �������[�v�h�~
+            int maxLoop = 100; // 無限ループ防止
             while ((tmp.preferredWidth > maxWidth || tmp.preferredHeight > maxHeight) && tmp.fontSize > fontSizeMin && maxLoop-- > 0)
             {
                 tmp.fontSize -= 1f;
                 tmp.ForceMeshUpdate();
             }
 
-            // �ŏ��ȉ��ɂȂ�̂�h��
+            // 最小以下になるのを防ぐ
             if (tmp.fontSize < fontSizeMin)
                 tmp.fontSize = fontSizeMin;
         }

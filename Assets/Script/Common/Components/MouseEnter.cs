@@ -1,9 +1,15 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Collider2D上にマウスがホバーしているかを毎フレーム判定し、進入・退出時にイベントを発火するクラス。
+/// </summary>
 [RequireComponent(typeof(Collider2D))]
 public class MouseEnter : MonoBehaviour
 {
+    /// <summary>
+    /// いずれかのMouseEnter対象上にマウスがあるかどうか。
+    /// </summary>
     public static bool inMouse;
 
     [SerializeField] UnityEvent onMouseEnter;

@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// ランダムな速度で徐々に拡大し、最大スケールに達したら自身を破棄するクラス。
+/// </summary>
 public class ScaleChangeDuration : MonoBehaviour
 {
     [SerializeField] float minSpeed = 20f;

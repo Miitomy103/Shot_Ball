@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// エリア内のボールに風の力を加えるギミック。オフのときは逆方向に力がかかる。
+    /// </summary>
     public class WindArea : AreaBase,IOnOff
     {
         [SerializeField] float windPower = 5f;
@@ -58,11 +61,17 @@ namespace ShotBall.InGame
             return windPower.ToString();
         }
 
+        /// <summary>
+        /// 風をオン状態(指定方向に力を加える)にする。
+        /// </summary>
         public void ItOn()
         {
             isOn = true;
         }
 
+        /// <summary>
+        /// 風をオフ状態(逆方向に力を加える)にする。
+        /// </summary>
         public void ItOff()
         {
             isOn = false;

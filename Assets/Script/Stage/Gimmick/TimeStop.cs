@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// 取得すると一定時間ボールの時間を止めるアイテム。
+    /// </summary>
     public class TimeStop : ItemBase
     {
         [SerializeField] float time = 1;

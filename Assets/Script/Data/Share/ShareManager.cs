@@ -5,6 +5,9 @@ using Share;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// セーブデータを暗号化してJSONBinへアップロードし、共有用IDを表示するウィンドウを管理するクラス。
+    /// </summary>
     public class ShareManager : MonoBehaviour
     {
         [SerializeField]Text Text;
@@ -22,6 +25,9 @@ namespace ShotBall.InGame
             onSuccess = Success;
             onError = Error;
         }
+        /// <summary>
+        /// 指定したステージのセーブデータを共有するウィンドウを開く。
+        /// </summary>
         public void OpenWindow(SaveData saveData,string stageName)
         {
             Text.text = stageName;
@@ -33,6 +39,9 @@ namespace ShotBall.InGame
             gameObject.SetActive(true);
         }
 
+        /// <summary>
+        /// セーブデータを暗号化してJSONBinへアップロードし、共有IDを取得する。
+        /// </summary>
         public void ShareClick()
         {
             string base64=SecureSave.EncryptToString(json);

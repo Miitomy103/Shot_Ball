@@ -1,15 +1,18 @@
 using UnityEngine;
 
 [ExecuteAlways]
+/// <summary>
+/// 0〜1の値に応じてスライダーのつまみ位置を動かし、各部位のサイズを自身の矩形に対する比率で調整するクラス。
+/// </summary>
 public class SliderUI : MonoBehaviour
 {
-    [Header("Slider�̒l��ς�����")]
+    [Header("Sliderの値を変えるやつ")]
     [SerializeField, Range(0, 1)] float sliderValue = 0;
 
     float maxPos;
     float minPos;
     RectTransform thisRect;
-    [Header("������Ȃ��Ă������")]
+    [Header("いじらなくていいやつ")]
     [SerializeField] RectTransform sliderRect;
     [SerializeField] RectTransform backGround;
     [SerializeField] RectTransform line;
@@ -39,7 +42,7 @@ public class SliderUI : MonoBehaviour
 #if UNITY_EDITOR
         if (thisRect == null) thisRect = GetComponent<RectTransform>();
 
-        // �T�C�Y���ς�����Ƃ���������
+        // サイズが変わったときだけ処理
         if (thisRect.rect.size != lastRectSize)
         {
             ApplyLayout();
@@ -52,7 +55,7 @@ public class SliderUI : MonoBehaviour
     {
         Debug.Log("OnValidate called, updating slider value: " + sliderValue);
 
-        // thisRect �� null �̏ꍇ�͎擾����
+        // thisRect が null の場合は取得する
         if (thisRect == null)
             thisRect = GetComponent<RectTransform>();
 
@@ -75,6 +78,9 @@ public class SliderUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 0〜1の値に応じてスライダーのつまみ位置を更新する。
+    /// </summary>
     public void SetSliderValue(float value)
     {
         float clampedValue = value * maxPos;

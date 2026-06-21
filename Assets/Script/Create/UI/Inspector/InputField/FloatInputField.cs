@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// 入力欄でfloatパラメータを入力するインスペクターUIのクラス。
+    /// </summary>
     public class FloatInputField : MonoBehaviour, ISetValue<float>
     {
         [SerializeField] TMP_InputField inputField;

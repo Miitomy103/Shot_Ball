@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// クリックすると、配置できるまで(またはAngle分)同じオブジェクトを回転させ続けるクラス。
+    /// </summary>
     public class RotationDragObject : MonoBehaviour
     {
         [SerializeField] float moveRotation = 45;
@@ -18,12 +21,18 @@ namespace ShotBall.InGame
             dragObject = GetComponent<DragObject>();
         }
 
+        /// <summary>
+        /// クリックされたときに回転を開始する(設定中のみ)。
+        /// </summary>
         public void IsClick()
         {
             if (GameLoop.StageState != StageState.Setting||dragObject==null) return;
             StartCoroutine(RotateUntilPlaced());
         }
 
+        /// <summary>
+        /// 配置可能になるまで、またはちょうど一周するまで回転を続ける。
+        /// </summary>
         IEnumerator RotateUntilPlaced()
         {
             Rotate.Instance.Play();
@@ -36,7 +45,7 @@ namespace ShotBall.InGame
                 totalRotation += moveRotation;
                 Debug.Log("Rotation");
 
-                // 1�t���[���҂�
+                // 1フレーム待つ
                 yield return new WaitForFixedUpdate();
 
                 if (dragObject.IsPlaced())

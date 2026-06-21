@@ -4,16 +4,22 @@ using UnityEngine;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// BlockTypeã«å¿œã˜ã¦ãƒ–ãƒ­ãƒƒã‚¯ã®ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆãƒ»åˆæœŸåŒ–ã™ã‚‹ã‚¯ãƒ©ã‚¹ã€‚
+    /// </summary>
     public class GenerateObject : MonoBehaviour
     {
         [SerializeField] PrefabLists prefabLists;
-        [SerializeField] Parameters parameters; // ƒpƒ‰ƒ[ƒ^‚Ìİ’è‚ğ•Û‚·‚éƒNƒ‰ƒX
+        [SerializeField] Parameters parameters; // ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®è¨­å®šã‚’ä¿æŒã™ã‚‹ã‚¯ãƒ©ã‚¹
 
         [SerializeField] Objects objects;
 
 
         int blockIdCount = 0;
 
+        /// <summary>
+        /// æŒ‡å®šã—ãŸBlockTypeã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ–°è¦ç”Ÿæˆã™ã‚‹ã€‚
+        /// </summary>
         public CreateObject Generate(BlockType blockType)
         {
             foreach(var p in prefabLists.prefabs)
@@ -25,7 +31,7 @@ namespace ShotBall.Create
                     CreateObject createObject = obj.GetComponent<CreateObject>();
                     createObject.BlockId = blockIdCount;
                     blockIdCount++;
-                    ParameterSet(obj); // ƒpƒ‰ƒ[ƒ^‚ğİ’è
+                    ParameterSet(obj); // ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’è¨­å®š
                     objects.Add(createObject); 
                     HandleFollower.Instance.SpriteSet(createObject.GetComponent<SpriteRenderer>(), createObject.IsSizeChange);
                     if (createObject != null)
@@ -41,8 +47,11 @@ namespace ShotBall.Create
                     }
                 }
             }
-            return null; // ¶¬‚Å‚«‚éƒIƒuƒWƒFƒNƒg‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡‚Ínull‚ğ•Ô‚·
+            return null; // ç”Ÿæˆã§ãã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒè¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã¯nullã‚’è¿”ã™
         }
+        /// <summary>
+        /// ä¿å­˜ã•ã‚ŒãŸStageBlockDataã‹ã‚‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å¾©å…ƒç”Ÿæˆã™ã‚‹ã€‚
+        /// </summary>
         public CreateObject LoadObject(StageBlockData data)
         {
             foreach (var p in prefabLists.prefabs)
@@ -54,12 +63,12 @@ namespace ShotBall.Create
                     CreateObject createObject = obj.GetComponent<CreateObject>();
                     createObject.Load(data);
                     createObject.BlockId = data.GetIntParameter("BlockId");
-                    ParameterSet(obj); // ƒpƒ‰ƒ[ƒ^‚ğİ’è
+                    ParameterSet(obj); // ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’è¨­å®š
                     objects.Add(createObject);
                     return createObject;
                 }
             }
-            return null; // ¶¬‚Å‚«‚éƒIƒuƒWƒFƒNƒg‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡‚Ínull‚ğ•Ô‚·
+            return null; // ç”Ÿæˆã§ãã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒè¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã¯nullã‚’è¿”ã™
         }
         void ParameterSet(GameObject gameObject)
         {

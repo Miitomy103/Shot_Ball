@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// ステージ作成画面で、同じ種類のオブジェクトをまとめて格納・複製生成する「枠」を表すクラス。
+    /// </summary>
     public class Frame : MonoBehaviour
     {
         GameObject FrameObject;
@@ -29,6 +32,9 @@ namespace ShotBall.InGame
         {
             Sprite.sortingOrder = (int)OrderInLayer.Frame;
         }
+        /// <summary>
+        /// この枠がクリックされたときの処理。複製オブジェクトを生成してドラッグを開始させる。
+        /// </summary>
         public void MouseDown()
         {
             if (ObjectCount <= 0||GameLoop.StageState!=StageState.Setting) return;
@@ -42,18 +48,24 @@ namespace ShotBall.InGame
             dragObject.frameScript = this;
             dragObject.StartDrag(Input.mousePosition);
         }
+        /// <summary>
+        /// 指定したDragObjectを元に、この枠が複製・表示するためのオブジェクトを生成して初期化する。
+        /// </summary>
         public void Inialize(DragObject drag)
         {
-            //�����̎q�ǂ��Ɍ�����p�ɃQ�[���I�u�W�F�N�g�𐶐����ăR���|�[�l���g�����ׂď����Ēu��
+            //自分の子どもに見せる用にゲームオブジェクトを生成してコンポーネントをすべて消して置く
             frameInObject = Instantiate(drag.gameObject,transform);
             FrameSpriteIn(frameInObject);
-            //���ł��R�s�[���o����悤�ɐ�������
+            //いつでもコピーが出せるように生成する
             GameObject copy = Instantiate(drag.gameObject,DragObjects.Instance.RuntimeParent);
             FrameObject = copy.gameObject;
-            //�R�s�[��\�����Ȃ��悤�ɂ���
+            //コピーを表示しないようにする
             copy.SetActive(false);
             Data = drag.FrameData;
         }
+        /// <summary>
+        /// 枠の中に表示するプレビュー用オブジェクトのスプライト表示・サイズを整え、不要なコンポーネントを削除する。
+        /// </summary>
         public void FrameSpriteIn(GameObject dragObject)
         {
             SpriteRenderer[] all = dragObject.GetComponentsInChildren<SpriteRenderer>();
@@ -94,11 +106,17 @@ namespace ShotBall.InGame
             }
 
         }
+        /// <summary>
+        /// 指定したFrameDataがこの枠の種類と一致するかを判定する。
+        /// </summary>
         public bool IsFrame(FrameData frameData)
         {
             return Data.SameData(frameData);
         }
 
+        /// <summary>
+        /// オブジェクトを枠に戻し、格納数を1増やす。
+        /// </summary>
         public void PutIn()
         {
             ObjectCount++;
@@ -109,6 +127,9 @@ namespace ShotBall.InGame
             }
         }
 
+        /// <summary>
+        /// オブジェクトを枠から取り出し、格納数を1減らす。
+        /// </summary>
         public void PutOut()
         {
             ObjectCount--;

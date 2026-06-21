@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// _Temp配下の実験用クラス。フェードしながら指定シーン(sceneName)へ遷移する。
+    /// </summary>
     public class EditSceneMove : MonoBehaviour
     {
         [SerializeField] string sceneName = "SaveData";
@@ -14,6 +17,9 @@ namespace ShotBall.Create
         [SerializeField]float fadeSpeed = 0.1f;
 
         [SerializeField] Image fadeImage;
+        /// <summary>
+        /// フェードしながらシーン遷移を開始する。
+        /// </summary>
         public void SceneMove()
         {
             if (async != null) return;

@@ -7,6 +7,9 @@ namespace ShotBall.InGame
 {
     [RequireComponent(typeof(Outline))]
     [RequireComponent(typeof(Image))]
+    /// <summary>
+    /// 同一オブジェクトの複数のOutlineコンポーネントに、太さと色をImageの色に合わせて適用するクラス。
+    /// </summary>
     public class OutLineBold : MonoBehaviour
     {
         private Outline[] outlines;

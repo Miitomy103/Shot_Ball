@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// 起動時に指定した解像度・フルスクリーン設定を適用するクラス。
+/// </summary>
 public class FixedAspectRatio : MonoBehaviour
 {
     private const int DefaultScreenWidth = 1920;

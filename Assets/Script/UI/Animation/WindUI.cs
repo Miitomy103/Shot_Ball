@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace ShotBall.InGame.UI
 {
+    /// <summary>
+    /// é¢¨ã§å¹ãä¸ŠãŒã‚‹æ¼”å‡ºã®ãŸã‚ã€ç”»åƒã‚¿ã‚¤ãƒ«ã‚’ä¸‹ç«¯ã‹ã‚‰ç”Ÿæˆã—ã¦ä¸Šç«¯ã¾ã§æµã™ã‚¯ãƒ©ã‚¹ã€‚
+    /// </summary>
     public class WindUI : MonoBehaviour
     {
         public Image targetImage;
@@ -33,12 +36,12 @@ namespace ShotBall.InGame.UI
             Vector3[] worldCorners = new Vector3[4];
             rectTransform.GetWorldCorners(worldCorners);
 
-            // eƒIƒuƒWƒFƒNƒg‚Ìƒ[ƒJƒ‹À•W‚É•ÏŠ·
+            // è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ã«å¤‰æ›
             Transform parent = transform;
 
-            // ¶‰º‚Æ‰E‰º‚ğeŠî€‚Ìƒ[ƒJƒ‹À•W‚É
-            leftEdge = parent.InverseTransformPoint(worldCorners[0]);  // ¶‰º
-            rightEdge = parent.InverseTransformPoint(worldCorners[3]); // ‰E‰º
+            // å·¦ä¸‹ã¨å³ä¸‹ã‚’è¦ªåŸºæº–ã®ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ã«
+            leftEdge = parent.InverseTransformPoint(worldCorners[0]);  // å·¦ä¸‹
+            rightEdge = parent.InverseTransformPoint(worldCorners[3]); // å³ä¸‹
 
             imageOffset = targetImage.rectTransform.sizeDelta;
 
@@ -46,7 +49,7 @@ namespace ShotBall.InGame.UI
             rightEdge += new Vector3(imageOffset.x, 0);
             downEdge = rightEdge.y - imageOffset.y;
 
-            Vector3 topLeft = parent.InverseTransformPoint(worldCorners[1]); // ¶ã
+            Vector3 topLeft = parent.InverseTransformPoint(worldCorners[1]); // å·¦ä¸Š
             upEdge = topLeft.y + imageOffset.y;
 
 

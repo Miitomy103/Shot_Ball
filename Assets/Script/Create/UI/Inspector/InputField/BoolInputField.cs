@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// トグルでboolパラメータを入力するインスペクターUIのクラス。
+    /// </summary>
     public class BoolInputField : MonoBehaviour,ISetValue<bool>
     {
         [SerializeField] Toggle toggle;

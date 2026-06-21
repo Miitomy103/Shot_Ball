@@ -5,6 +5,10 @@ using UnityEngine;
 namespace ShotBall.Create
 
 {
+    /// <summary>
+    /// ステージのスクリーンショットを撮影するクラス。
+    /// Back/Left/Rightのスプライトを個別にキャプチャし、Left/Rightが描かれている部分を透明化したBack画像を合成してPNGとして保存する。
+    /// </summary>
     public class CaptureStage : MonoBehaviour
     {
         private const float AlphaCutoutThreshold = 0.01f;
@@ -22,19 +26,22 @@ namespace ShotBall.Create
                 targetCamera = Camera.main;
             }
         }
+        /// <summary>
+        /// Back/Left/Rightをキャプチャし、Left/Rightが描かれている部分を透明にしたBack画像をfilePathにPNG保存する。
+        /// </summary>
         public void CaptureMasked(string filePath)
         {
             int width = Screen.width;
             int height = Screen.height;
 
-            // --- �@ Back���L���v�`�� ---
+            // --- ① Backをキャプチャ ---
             Texture2D backTex = CaptureSprite(targetCamera, back.gameObject, width, height);
 
-            // --- �A Left/Right���L���v�`�� ---
+            // --- ② Left/Rightをキャプチャ ---
             Texture2D leftTex = CaptureSprite(targetCamera, left.gameObject, width, height);
             Texture2D rightTex = CaptureSprite(targetCamera, right.gameObject, width, height);
 
-            // --- �B �}�X�N�����iLeft/Right�����镔���𓧖��ɂ���j ---
+            // --- ③ マスク処理（Left/Rightがある部分を透明にする） ---
             Color[] backPixels = backTex.GetPixels();
             Color[] leftPixels = leftTex.GetPixels();
             Color[] rightPixels = rightTex.GetPixels();
@@ -43,7 +50,7 @@ namespace ShotBall.Create
             {
                 if (leftPixels[i].a > AlphaCutoutThreshold || rightPixels[i].a > AlphaCutoutThreshold)
                 {
-                    // Left��Right���`����Ă���Ƃ���͓�����
+                    // LeftかRightが描かれているところは透明化
                     backPixels[i] = new Color(0, 0, 0, 0);
                 }
             }
@@ -52,10 +59,10 @@ namespace ShotBall.Create
             resultTex.SetPixels(backPixels);
             resultTex.Apply();
 
-            // --- �C �ۑ� ---
+            // --- ④ 保存 ---
             byte[] bytes = resultTex.EncodeToPNG();
             System.IO.File.WriteAllBytes(filePath, bytes);
-            Debug.Log("�w�i�L���v�`�������iLeft/Right�؂蔲���ς݁j: " + filePath);
+            Debug.Log("背景キャプチャ完了（Left/Right切り抜き済み）: " + filePath);
         }
 
         private Texture2D CaptureSprite(Camera cam, GameObject target, int width, int height)
@@ -63,7 +70,7 @@ namespace ShotBall.Create
             RenderTexture rt = new RenderTexture(width, height, RenderTextureDepthBits);
             cam.targetTexture = rt;
 
-            // �ꎞ�I�ɑΏۂ�����`��
+            // 一時的に対象だけを描画
             int originalLayer = target.layer;
             int mask = LayerMask.NameToLayer("CaptureOnly");
             target.layer = mask;
@@ -78,7 +85,7 @@ namespace ShotBall.Create
             tex.ReadPixels(new Rect(0, 0, width, height), 0, 0);
             tex.Apply();
 
-            // ����
+            // 復元
             target.layer = originalLayer;
             cam.cullingMask = originalMask;
             cam.targetTexture = null;

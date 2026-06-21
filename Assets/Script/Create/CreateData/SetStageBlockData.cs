@@ -5,6 +5,9 @@ using ShotBall.InGame;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// インスペクターで設定した各種パラメータからStageBlockDataを生成するクラス。
+    /// </summary>
     public class SetStageBlockData : MonoBehaviour,IStageBlockData
     {
         public StageBlockData StageBlockData => stageBlockData;
@@ -48,6 +51,9 @@ namespace ShotBall.Create
         }
     }
 
+    /// <summary>
+    /// インスペクターでキーと値の組を設定するための汎用クラス。
+    /// </summary>
     [System.Serializable]
     public class ValueKey<T>
     {

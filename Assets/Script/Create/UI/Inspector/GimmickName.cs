@@ -5,11 +5,14 @@ using TMPro;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// ギミック名のテキストを表示し、親の幅に収まるよう自動でフォントサイズを縮小するクラス。
+    /// </summary>
     public class GimmickName : MonoBehaviour, IChangeText
     {
         [SerializeField] RectTransform parentRect;
         [SerializeField] TextMeshProUGUI tmp;
-        [SerializeField] private float padding = 10f; // ���E�̗]��
+        [SerializeField] private float padding = 10f; // 左右の余白
         public void ChangeText(string str)
         {
             tmp.text = str;

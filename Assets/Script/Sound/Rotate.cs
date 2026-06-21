@@ -5,6 +5,9 @@ using UnityEngine;
 namespace ShotBall.Audio
 {
     [RequireComponent(typeof(AudioSource))]
+    /// <summary>
+    /// 回転操作時の効果音を再生するシングルトンクラス。
+    /// </summary>
     public class Rotate : MonoBehaviour
     {
         private static Rotate instance;

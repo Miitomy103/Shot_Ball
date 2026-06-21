@@ -1,32 +1,41 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®å†…å®¹ã‚’ã‚·ã‚¹ãƒ†ãƒ ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã¨ã‚³ãƒ”ãƒ¼/ãƒšãƒ¼ã‚¹ãƒˆã™ã‚‹ã‚¯ãƒ©ã‚¹ã€‚
+/// </summary>
 public class CopyPasteText : MonoBehaviour
 {
     [SerializeField] Text copyText;
+    /// <summary>
+    /// ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®å†…å®¹ã‚’ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã«ã‚³ãƒ”ãƒ¼ã™ã‚‹ã€‚
+    /// </summary>
     public void Copy()
     {
         if (string.IsNullOrEmpty(copyText.text))
         {
             return;
         }
-        //ƒNƒŠƒbƒvƒ{[ƒh‚ÉƒRƒs[‚·‚é•¶š—ñ
+        //ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã«ã‚³ãƒ”ãƒ¼ã™ã‚‹æ–‡å­—åˆ—
         string value = copyText.text;
 
-        //ƒNƒŠƒbƒvƒ{[ƒh‚Ö•¶š‚ğİ’è(ƒRƒs[)
+        //ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã¸æ–‡å­—ã‚’è¨­å®š(ã‚³ãƒ”ãƒ¼)
         GUIUtility.systemCopyBuffer = value;
 
-        if(LogDisplay.Instance!=null) LogDisplay.Instance.SetLog("ƒNƒŠƒbƒvƒ{[ƒh‚ÉƒRƒs[‚µ‚Ü‚µ‚½");
+        if(LogDisplay.Instance!=null) LogDisplay.Instance.SetLog("ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã«ã‚³ãƒ”ãƒ¼ã—ã¾ã—ãŸ");
     }
+    /// <summary>
+    /// ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã®å†…å®¹ã‚’ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã«è²¼ã‚Šä»˜ã‘ã‚‹ã€‚
+    /// </summary>
     public void Paste()
     {
-        //ƒNƒŠƒbƒvƒ{[ƒh‚©‚ç•¶š‚ğæ“¾(ƒy[ƒXƒg)
+        //ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã‹ã‚‰æ–‡å­—ã‚’å–å¾—(ãƒšãƒ¼ã‚¹ãƒˆ)
         string pasteText = GUIUtility.systemCopyBuffer;
         if (string.IsNullOrEmpty(pasteText))
         {
             return;
         }
         copyText.text = pasteText;
-        if (LogDisplay.Instance != null) LogDisplay.Instance.SetLog("ƒNƒŠƒbƒvƒ{[ƒh‚©‚çƒy[ƒXƒg‚µ‚Ü‚µ‚½");
+        if (LogDisplay.Instance != null) LogDisplay.Instance.SetLog("ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã‹ã‚‰ãƒšãƒ¼ã‚¹ãƒˆã—ã¾ã—ãŸ");
     }
 }

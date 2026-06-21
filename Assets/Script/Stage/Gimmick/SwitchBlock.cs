@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// ボールが当たるとオン状態になるスイッチギミック。
+    /// </summary>
     public class SwitchBlock : CollisionBase,IOnOff
     {
         bool isEnter = false;
@@ -30,6 +33,9 @@ namespace ShotBall.InGame
             ItOff();
         }
 
+        /// <summary>
+        /// スイッチをオン状態にする。
+        /// </summary>
         public void ItOn()
         {
             isEnter = true;
@@ -37,6 +43,9 @@ namespace ShotBall.InGame
             ColorChangeA(0.5f);
         }
 
+        /// <summary>
+        /// スイッチをオフ状態にする。
+        /// </summary>
         public void ItOff()
         {
             isEnter = false;

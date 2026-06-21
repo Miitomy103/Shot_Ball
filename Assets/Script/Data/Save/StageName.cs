@@ -4,7 +4,10 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    public struct StageName 
+    /// <summary>
+    /// メインステージ番号とサブステージ番号の組でステージを識別する構造体。
+    /// </summary>
+    public struct StageName
     {
         public int mainStage;
         public int subStage;
@@ -13,6 +16,9 @@ namespace ShotBall.InGame
             this.mainStage = mainStage;
             this.subStage = subStage;
         }
+        /// <summary>
+        /// "メインステージ-サブステージ" 形式の名前文字列を返す。
+        /// </summary>
         public readonly string GetName()
         {
             return $"{mainStage}-{subStage}";

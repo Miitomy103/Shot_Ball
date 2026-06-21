@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// Warpの片側の出入口。配置時に親Warp(エディット用は親オブジェクト、プレイ用はWarpManagerから空き枠)に登録される。
+    /// </summary>
     public class WarpChild : AreaBase
     {
         public Warp parentWarp { get; private set; }
@@ -31,6 +34,9 @@ namespace ShotBall.InGame
             if (parentWarp == null) return;
             parentWarp.ChildDestroy(this);
         }
+        /// <summary>
+        /// スプライトの色を変更する。
+        /// </summary>
         public void ColorChange(Color color)
         {
             if (sprite == null) sprite = GetComponent<SpriteRenderer>();

@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// 2ã¤ã®Spriteã®é–“ã«UIä¸Šã§ãƒãƒ³ãƒ‰ãƒ«ã¨ç·šã‚’è¡¨ç¤ºã—ã€Spriteã®ä½ç½®ã«è¿½å¾“ã•ã›ã‚‹ã‚¯ãƒ©ã‚¹ã€‚
+    /// </summary>
     public class ConnectionHandle
     {
         private SpriteRenderer from;
@@ -22,22 +25,25 @@ namespace ShotBall.InGame
             this.camera = camera;
         }
 
+        /// <summary>
+        /// ãƒãƒ³ãƒ‰ãƒ«ã¨ç·šã®ä½ç½®ã‚’ã€ç¾åœ¨ã®from/toã®ä½ç½®ã«åˆã‚ã›ã¦æ›´æ–°ã™ã‚‹ã€‚
+        /// </summary>
         public void Update()
         {
             if (from == null || to == null) return;
 
-            // Sprite‚Ì’†Sƒ[ƒ‹ƒhÀ•W
+            // Spriteã®ä¸­å¿ƒãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™
             Vector3 fromWorld = from.bounds.center;
             Vector3 toWorld = to.bounds.center;
 
-            // Canvasã‚Ìƒ[ƒJƒ‹À•W‚É•ÏŠ·
+            // Canvasä¸Šã®ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ã«å¤‰æ›
             Vector2 fromLocal = WorldToCanvasLocal(fromWorld);
             Vector2 toLocal = WorldToCanvasLocal(toWorld);
 
-            // Handle‚ğXViSprite‚Ì’†S‚É’u‚­j
+            // Handleã‚’æ›´æ–°ï¼ˆSpriteã®ä¸­å¿ƒã«ç½®ãï¼‰
             handle.anchoredPosition = fromLocal;
 
-            // ü‚ğXV
+            // ç·šã‚’æ›´æ–°
             UpdateLine(fromLocal, toLocal);
         }
 
@@ -58,13 +64,13 @@ namespace ShotBall.InGame
             Vector2 dir = end - start;
             float length = dir.magnitude;
 
-            // ü‚ÌˆÊ’u‚ğ2“_‚Ì’†ŠÔ‚É’u‚­
+            // ç·šã®ä½ç½®ã‚’2ç‚¹ã®ä¸­é–“ã«ç½®ã
             line.rectTransform.anchoredPosition = (start + end) / 2f;
 
-            // ü‚Ì’·‚³‚ğ’²®i‰¡•ûŒü‚ÉL‚Ñ‚éImage‚ğ‘z’èj
+            // ç·šã®é•·ã•ã‚’èª¿æ•´ï¼ˆæ¨ªæ–¹å‘ã«ä¼¸ã³ã‚‹Imageã‚’æƒ³å®šï¼‰
             line.rectTransform.sizeDelta = new Vector2(length, line.rectTransform.sizeDelta.y);
 
-            // ‰ñ“]‚ğ’²®
+            // å›è»¢ã‚’èª¿æ•´
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             line.rectTransform.rotation = Quaternion.Euler(0, 0, angle);
         }

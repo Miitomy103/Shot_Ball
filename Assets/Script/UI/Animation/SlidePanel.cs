@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 namespace Okutani.UI
 {
+    /// <summary>
+    /// 指定方向にスライドして開閉するパネルを制御するクラス。
+    /// パネル外側のクリック/タップを検知して自動的に閉じる機能も持つ。
+    /// </summary>
     public sealed class SlidePanel : MonoBehaviour
     {
         // パネルをどの方向からスライドさせるかを示すフラグ。
@@ -95,13 +99,18 @@ namespace Okutani.UI
             }
         }
 
-        // OnClick などから呼び出し、開閉状態をトグルするヘルパー。
+        /// <summary>
+        /// OnClick などから呼び出し、開閉状態をトグルするヘルパー。
+        /// </summary>
         public void Toggle()
         {
             if (isOpen) Close();
             else Open();
         }
 
+        /// <summary>
+        /// パネルを開く。
+        /// </summary>
         public void Open()
         {
             // 既存コルーチンを止めてから開くアニメーションを開始する。
@@ -111,6 +120,9 @@ namespace Okutani.UI
             if (blocker != null) blocker.SetActive(true);
         }
 
+        /// <summary>
+        /// パネルを閉じる。
+        /// </summary>
         public void Close()
         {
             // 進行中のアニメーションを打ち切って閉じる側へ補間する。

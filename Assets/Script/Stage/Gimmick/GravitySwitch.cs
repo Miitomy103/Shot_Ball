@@ -6,6 +6,10 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// ボールが触れると重力反転(無重力)状態を切り替えるギミック。
+    /// 子オブジェクトの円(child)を無重力状態に応じて拡大/縮小する。
+    /// </summary>
     public class GravitySwitch : AreaBase,IAntiGravity,IOnOff
     {
         static GravitySwitch instance;
@@ -15,7 +19,7 @@ namespace ShotBall.InGame
         [SerializeField] bool startAntiGravity;
         public bool StartAntiGravity => startAntiGravity;
 
-        GameObject child=>transform.GetChild(0).gameObject; // �ŏ��̎q
+        GameObject child=>transform.GetChild(0).gameObject; // 最初の子
 
         Camera cam => Camera.main;
 
@@ -59,6 +63,9 @@ namespace ShotBall.InGame
             ChangeGravity();
             cor= StartCoroutine(MakeItBigger(child.transform));
         }
+        /// <summary>
+        /// 無重力中央の円を、無重力状態に応じて拡大/縮小させる。
+        /// </summary>
         IEnumerator MakeItBigger(Transform transform)
         {
             if (GameLoop.StageState != StageState.Playing) yield break;
@@ -72,10 +79,10 @@ namespace ShotBall.InGame
             {
                 timer += Time.deltaTime;
 
-                // �J�[�u�����Ԓl���擾
-                float t = Mathf.Clamp01(timer / duration); // t��0�`1�ɐ���
+                // カーブから補間値を取得
+                float t = Mathf.Clamp01(timer / duration); // tを0〜1に制限
 
-                // �X�P�[������
+                // スケールを補間
                 transform.localScale = Vector3.Lerp(startScale, endScale, t);
 
                 yield return new WaitForEndOfFrame();
@@ -83,17 +90,26 @@ namespace ShotBall.InGame
 
         }
 
+        /// <summary>
+        /// 無重力状態を反転させる。
+        /// </summary>
         public void ChangeGravity()
         {
             antiGravity = !AntiGravity;
             Action?.Invoke();
         }
+        /// <summary>
+        /// 無重力状態を指定の値に変更する。
+        /// </summary>
         public void ChangeGravity(bool a)
         {
             antiGravity = a;
             Action?.Invoke();
         }
 
+        /// <summary>
+        /// 画面全体を覆う大きさの円のスケールを計算する。
+        /// </summary>
         Vector3 ChildCircleSize()
         {
             float height = cam.orthographicSize * 2f;
@@ -101,6 +117,9 @@ namespace ShotBall.InGame
             return new Vector3(width, width) * 2;
         }
 
+        /// <summary>
+        /// 無重力状態をオンにする。
+        /// </summary>
         public void ItOn()
         {
             isOn = true;
@@ -108,6 +127,9 @@ namespace ShotBall.InGame
             cor= StartCoroutine(MakeItBigger(child.transform));
         }
 
+        /// <summary>
+        /// 無重力状態をオフにする。
+        /// </summary>
         public void ItOff()
         {
             isOn=false;

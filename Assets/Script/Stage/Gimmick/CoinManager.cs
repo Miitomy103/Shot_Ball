@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// 子オブジェクトのCoinをまとめて取得し、GameLoopに登録するクラス。
+    /// </summary>
     public class CoinManager : MonoBehaviour
     {
         IGet[] coins = new IGet[3];

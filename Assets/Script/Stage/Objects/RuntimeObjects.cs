@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// 子オブジェクトすべてに自身と同じOutlineを付けるクラス。
+    /// </summary>
     public class RuntimeObjects : MonoBehaviour
     {
         public GameObject[] objects;

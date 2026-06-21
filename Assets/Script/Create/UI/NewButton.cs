@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// テクスチャ画像を表示する「新規作成」ボタンのクラス。
+    /// </summary>
     public class NewButton : MonoBehaviour,INullDisplay
     {
         [SerializeField] Texture2D texture;
@@ -16,6 +19,9 @@ namespace ShotBall.Create
         {
             rawImage = GetComponentInChildren<RawImage>();
         }
+        /// <summary>
+        /// 設定されたテクスチャ・サイズ・色をRawImageに反映する。
+        /// </summary>
         public void Display()
         {
             rawImage.texture = texture;
@@ -23,8 +29,14 @@ namespace ShotBall.Create
             rawImage.color = color;
         }
     }
+    /// <summary>
+    /// 表示処理を持つことを表すインターフェース。
+    /// </summary>
     public interface INullDisplay
     {
+        /// <summary>
+        /// 表示する。
+        /// </summary>
         void Display();
     }
 }

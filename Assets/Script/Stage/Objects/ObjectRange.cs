@@ -5,9 +5,12 @@ using static UnityEngine.GraphicsBuffer;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// オブジェクトを配置できる範囲(画面範囲)を保持し、判定するクラス。
+    /// </summary>
     public class ObjectRange : MonoBehaviour
     {
-        public static Vector2 pointA { get; private set; } 
+        public static Vector2 pointA { get; private set; }
         public static Vector2 pointB { get; private set; }
 
         static ObjectRange instance;
@@ -22,28 +25,34 @@ namespace ShotBall.InGame
             instance = this;
         }
 
+        /// <summary>
+        /// 配置可能範囲の対角2点を設定する。
+        /// </summary>
         public void CameraSizeChange(Vector2 A,Vector2 B)
         {
             pointA = A;
             pointB = B;
         }
 
+        /// <summary>
+        /// 指定したスプライトの全体が配置可能範囲内にあるかどうか。
+        /// </summary>
         public bool InRange(SpriteRenderer sprite)
         {
-            if (sprite == null) return false; // �X�v���C�g��null�̏ꍇ��false��Ԃ�
+            if (sprite == null) return false; // スプライトがnullの場合はfalseを返す
 
-            // �͈͂̍ŏ��E�ő�_���v�Z
+            // 範囲の最小・最大点を計算
             Vector2 min = Vector2.Min(pointA, pointB);
             Vector2 max = Vector2.Max(pointA, pointB);
 
-            // Sprite�̋��E�ibounds�j���擾
+            // Spriteの境界（bounds）を取得
             Bounds spriteBounds = sprite.bounds;
 
-            // Sprite�̋��E�̍ŏ��E�ő�_���v�Z
+            // Spriteの境界の最小・最大点を計算
             Vector2 spriteMin = spriteBounds.min;
             Vector2 spriteMax = spriteBounds.max;
 
-            // Sprite�̋��E�S�̂��͈͓��ɂ��邩�𔻒�
+            // Spriteの境界全体が範囲内にあるかを判定
             return spriteMin.x >= min.x && spriteMax.x <= max.x &&
                    spriteMin.y >= min.y && spriteMax.y <= max.y;
         }

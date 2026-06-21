@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// ChildrenDragObjectの子オブジェクトに付け、子をクリックしても親のドラッグ操作に転送するクラス。
+    /// </summary>
     public class ChildDragObject : MonoBehaviour
     {
         ChildrenDragObject Parent;

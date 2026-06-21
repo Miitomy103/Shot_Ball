@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// ステージ上のDragObjectの種類ごとにFrameを生成し、画面右側に並べて配置するクラス。
+    /// </summary>
     public class FramesManager : MonoBehaviour
     {
         private const float BaseSpacingScale = 0.32f;
@@ -39,6 +42,9 @@ namespace ShotBall.InGame
             yield return new WaitForSeconds(StartDelaySeconds);
             GameStart();
         }
+        /// <summary>
+        /// シーン上のDragObjectを種類ごとに集計し、Frameを生成して画面上に並べる。
+        /// </summary>
         void GameStart()
         {
             if (cam == null) cam = Camera.main;
@@ -52,20 +58,20 @@ namespace ShotBall.InGame
             {
                 Debug.Log(d.gameObject.name);
             }
-            // FrameData �� Frame �̑Ή��\
+            // FrameData → Frame の対応表
             Dictionary<FrameData, Frame> frameDict = new Dictionary<FrameData, Frame>();
 
             int objCount = dragObjs.Length;
             HashSet<FrameData> uniqueFrames = new HashSet<FrameData>();
             foreach (var obj in dragObjs)
             {
-                uniqueFrames.Add(obj.FrameData); // FrameData �� Equals/GetHashCode ���K�؂Ɏ�������Ă���K�v����
+                uniqueFrames.Add(obj.FrameData); // FrameData で Equals/GetHashCode が適切に実装されている必要あり
             }
             int frameCount = uniqueFrames.Count;
 
             float screenHeight = cam.orthographicSize * 2f;
 
-            // spacing���������琧���i�I�[�o�[�t���[�h�~�j
+            // spacingを高さから制限（オーバーフロー防止）
             float spacing = Mathf.Min(baseSpacing, screenHeight / (frameCount + HalfItemOffset));
 
             float offset;
@@ -78,7 +84,7 @@ namespace ShotBall.InGame
                 offset = (frameCount / 2) * spacing;
             }
 
-            // �p�l���̉E�[�ɍ��킹��x�ʒu�v�Z
+            // パネルの右端に合わせてx位置計算
             float screenWidth = screenHeight * cam.aspect;
             float x = cam.transform.position.x + screenWidth / 2f - PanelWidth / 2f;
 
@@ -139,10 +145,10 @@ namespace ShotBall.InGame
         }
         private void OnMouseDown()
         {
-            // ���[���h���W�ɕϊ�
+            // ワールド座標に変換
             Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            // �N���b�N�ʒu�ɂ��邷�ׂĂ�Collider2D���擾
+            // クリック位置にあるすべてのCollider2Dを取得
             Collider2D[] hits = Physics2D.OverlapPointAll(mouseWorldPos);
 
             foreach (Collider2D hit in hits)
@@ -156,6 +162,9 @@ namespace ShotBall.InGame
                 }
             }
         }
+        /// <summary>
+        /// 指定したDragObjectと種類が一致するFrameに格納し、元のオブジェクトを破棄する。
+        /// </summary>
         public void InFrame(DragObject dragObject)
         {
             foreach(var f in frames)

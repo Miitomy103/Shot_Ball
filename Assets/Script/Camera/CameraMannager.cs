@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// カメラの表示範囲に合わせて左右の壁オブジェクトの位置・大きさを調整するクラス。
+    /// </summary>
     public class CameraManager : MonoBehaviour
     {
         public Camera cam;
@@ -14,7 +17,7 @@ namespace ShotBall.InGame
         private const float ReferenceOrthographicSize = 5f;
         private const float ReferenceCenterWorldWidth = 11.8f;
 
-        [SerializeField] float centerWorldWidth = DefaultCenterWorldWidth; // �����̃X�y�[�X�����[���h�P�ʂŎw��
+        [SerializeField] float centerWorldWidth = DefaultCenterWorldWidth; // 中央のスペースをワールド単位で指定
         public float CenterWorldWidth { get => centerWorldWidth; set=> centerWorldWidth = value; }
 
         private void Awake()
@@ -29,11 +32,17 @@ namespace ShotBall.InGame
             AdjustWalls();
         }
 
+        /// <summary>
+        /// GUIボタンから壁の再調整を行うときの処理。
+        /// </summary>
         public void OnGUIButton()
         {
             if (cam == null) cam = Camera.main;
             AdjustWalls();
         }
+        /// <summary>
+        /// 現在のカメラサイズから中央スペース幅を再計算する。
+        /// </summary>
         public void Culcuration()
         {
             float scale = cam.orthographicSize / ReferenceOrthographicSize;
@@ -48,11 +57,11 @@ namespace ShotBall.InGame
                 float width = height * cam.aspect;
 
                 float c = centerWorldWidth;
-                // �ǂ̕������[���h�P�ʂŌv�Z
+                // 壁の幅をワールド単位で計算
                 float wallWidth = (width - (c * cam.orthographicSize / ReferenceOrthographicSize)) / 2f;
-                if (wallWidth < 0f) wallWidth = 0f; // ���̕���h��
+                if (wallWidth < 0f) wallWidth = 0f; // 負の幅を防ぐ
 
-                // �X�v���C�g1�P�ʃT�C�Y�O��i�K�v�ɉ�����SpriteRenderer����擾���Ă�OK�j
+                // スプライト1単位サイズ前提（必要に応じてSpriteRendererから取得してもOK）
                 Vector3 spriteSize = Vector3.one;
 
                 Vector3 wallScale = new Vector3(
@@ -73,7 +82,7 @@ namespace ShotBall.InGame
                     rightWall.position = new Vector3(cam.transform.position.x + width / 2f - wallWidth / 2f, cam.transform.position.y, 0f);
                 }
 
-                // �����͈̔́i���E�̕ǂ̓����j��ʒm
+                // 中央の範囲（左右の壁の内側）を通知
                 float left = cam.transform.position.x - width / 2f + wallWidth;
                 float right = cam.transform.position.x + width / 2f - wallWidth;
 

@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// ブロック同士の接続(Connect)をUI上のハンドル・線で表示し、ドラッグで接続先を選択する処理を行うクラス。
+    /// </summary>
     public class ConnectionManager : MonoBehaviour
     {
         public static ConnectionManager Instance => instance;
@@ -13,7 +16,7 @@ namespace ShotBall.Create
         [SerializeField] Image pointUI;
         [SerializeField] Image lineUI;
 
-        [Header("�A�^�b�`")]
+        [Header("アタッチ")]
         [SerializeField] Transform parent;
         [SerializeField] RectTransform centerPoint;
         [SerializeField] Canvas canvas;
@@ -35,16 +38,22 @@ namespace ShotBall.Create
         private void Start()
         {
             PointerDownHandler handler = centerPoint.GetComponent<PointerDownHandler>();
-            if (handler == null) Debug.LogError("PointerDownHandler���A�^�b�`����Ă��܂���");
+            if (handler == null) Debug.LogError("PointerDownHandlerがアタッチされていません");
             handler.AddListener(OnClick);
             CreateInputSystem.Instance.CameraScroll += Scroll;
             CreateInputSystem.Instance.CameraDrag += Scroll;
         }
+        /// <summary>
+        /// カメラのスクロール/移動に合わせて、表示中の接続ハンドルの位置を更新する。
+        /// </summary>
         public void Scroll()
         {
             if(connect == null) return;
             centerPoint.position = Camera.main.WorldToScreenPoint(connect.transform.position);
         }
+        /// <summary>
+        /// 指定したConnectの接続UIを表示する。nullを渡すと非表示にする。
+        /// </summary>
         public void Connection(Connect connect)
         {
             if (this.connect != null)
@@ -138,6 +147,9 @@ namespace ShotBall.Create
             }
 
         }
+        /// <summary>
+        /// マウス位置をCanvas上のローカル座標に変換してpを移動し、線(l)を更新する。
+        /// </summary>
         public void LineSet(Vector2 mousePos,RectTransform p,RectTransform l)
         {
             if(p == null || l == null || centerPoint == null || canvas == null) return;
@@ -146,7 +158,7 @@ namespace ShotBall.Create
 
             Vector2 localPoint;
 
-            // �X�N���[�����W��Canvas�̃��[�J�����W�ɕϊ�
+            // スクリーン座標をCanvasのローカル座標に変換
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 canvas.transform as RectTransform,
                 mousePos,
@@ -154,12 +166,15 @@ namespace ShotBall.Create
                 out localPoint
             );
 
-            // UI�̈ʒu��ݒ�
+            // UIの位置を設定
             p.localPosition = localPoint;
 
             LineSet(p, l);
         }
 
+        /// <summary>
+        /// pとcenterPointの間を結ぶ線(l)の位置・長さ・向きを更新する。
+        /// </summary>
         public void LineSet(RectTransform p,RectTransform l)
         {
             SetHandlePosition(centerPoint, connect.transform.position);
@@ -167,18 +182,18 @@ namespace ShotBall.Create
             Vector3 worldPos1 = p.position;
             Vector3 worldPos2 = centerPoint.position;
 
-            // ���̈ʒu
+            // 線の位置
             Vector3 midPoint = (worldPos1 + worldPos2) / 2f;
             l.position = midPoint;
 
-            // ��������
+            // 長さ調整
             float length = Vector3.Distance(worldPos1, worldPos2);
-            l.sizeDelta = new Vector2(l.sizeDelta.x, length); // �������ɐL�т�O��
+            l.sizeDelta = new Vector2(l.sizeDelta.x, length); // 横方向に伸びる前提
 
-            // ���������i+90�x�␳�j
+            // 向き調整（+90度補正）
             Vector3 direction = (worldPos2 - worldPos1).normalized;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            l.rotation = Quaternion.Euler(0f, 0f, angle + 90f); // �� �����I
+            l.rotation = Quaternion.Euler(0f, 0f, angle + 90f); // ← ここ！
         }
 
         void OnClick()
@@ -189,7 +204,7 @@ namespace ShotBall.Create
             line = Instantiate(lineUI,parent).rectTransform;
 
             PointerDownHandler handler = point.GetComponent<PointerDownHandler>();
-            if (handler == null) Debug.LogError("PointerDownHandler���A�^�b�`����Ă��܂���");
+            if (handler == null) Debug.LogError("PointerDownHandlerがアタッチされていません");
             handler.AddListener(() => OnClickToPoint(new ConnectUI(point, line)));
 
             var connectUI = new ConnectUI(point, line);
@@ -197,7 +212,7 @@ namespace ShotBall.Create
         }
         void OnClickToPoint(ConnectUI connectUI)
         {
-            if(connectUI.toPoint == null || connectUI.lineUI == null) Debug.LogError("ConnectUI�̗v�f��null�ł�");    
+            if(connectUI.toPoint == null || connectUI.lineUI == null) Debug.LogError("ConnectUIの要素がnullです");    
             point = connectUI.toPoint;
             line = connectUI.lineUI;
             onMouseDown = true;

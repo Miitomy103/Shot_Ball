@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// è¤‡æ•°ã®å­ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ã¾ã¨ã‚ã¦1ã¤ã®ãƒ–ãƒ­ãƒƒã‚¯ã¨ã—ã¦ãƒ‰ãƒ©ãƒƒã‚°æ“ä½œã™ã‚‹DragObjectã€‚
+    /// </summary>
     [RequireComponent(typeof(ChildFitInSprite))]
     public class ChildrenDragObject : DragObject
     {
@@ -54,7 +57,7 @@ namespace ShotBall.InGame
 
         protected override bool IsOverLapping()
         {
-            // Œy—Ê‚È ContactFilter2D ‚Ì¶¬i“s“x struct ‚ğƒ[ƒJƒ‹‚Åì‚é‚Ì‚ª³‰ğj
+            // è»½é‡ãª ContactFilter2D ã®ç”Ÿæˆï¼ˆéƒ½åº¦ struct ã‚’ãƒ­ãƒ¼ã‚«ãƒ«ã§ä½œã‚‹ã®ãŒæ­£è§£ï¼‰
             ContactFilter2D filter = new ContactFilter2D
             {
                 useTriggers = false,
@@ -62,10 +65,10 @@ namespace ShotBall.InGame
                  layerMask = Physics2D.DefaultRaycastLayers
             };
 
-            // Ä—˜—p‰Â”\‚ÈŒ‹‰ÊƒŠƒXƒg
+            // å†åˆ©ç”¨å¯èƒ½ãªçµæœãƒªã‚¹ãƒˆ
             List<Collider2D> results = new List<Collider2D>(8);
 
-            // ©g‚Ì Collider ‚ğœŠO‘ÎÛ‚Æ‚µ‚Ä“o˜^
+            // è‡ªèº«ã® Collider ã‚’é™¤å¤–å¯¾è±¡ã¨ã—ã¦ç™»éŒ²
             HashSet<Collider2D> selfColliders = new HashSet<Collider2D>();
            foreach (var c in children)
             {
@@ -73,7 +76,7 @@ namespace ShotBall.InGame
                     selfColliders.Add(c.colli);
             }
 
-            // Še Collider ‚ğƒ`ƒFƒbƒNi‘¼Ò‚Æd‚È‚Á‚Ä‚¢‚½‚ç‘¦ truej
+            // å„ Collider ã‚’ãƒã‚§ãƒƒã‚¯ï¼ˆä»–è€…ã¨é‡ãªã£ã¦ã„ãŸã‚‰å³ trueï¼‰
             foreach (var c in children)
             {
                 if (c.colli == null) continue;
@@ -92,6 +95,9 @@ namespace ShotBall.InGame
         }
 
 
+        /// <summary>
+        /// å­ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒã‚¦ã‚¹ãƒ›ãƒãƒ¼çŠ¶æ…‹ã«å¿œã˜ã¦ã€èƒŒæ™¯ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®è¡¨ç¤ºã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹ã€‚
+        /// </summary>
         public void OnMouseEnterExit(bool enter)
         {
             foreach(var c in children)c.backSprite.gameObject.SetActive(enter);
@@ -134,12 +140,12 @@ namespace ShotBall.InGame
             Vector3 min = Vector3.positiveInfinity;
             Vector3 max = Vector3.negativeInfinity;
 
-            // ‚·‚×‚Ä‚ÌƒXƒvƒ‰ƒCƒg‚ÌAABB‚ğ‹‚ß‚é
+            // ã™ã¹ã¦ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®AABBã‚’æ±‚ã‚ã‚‹
             foreach (var data in children)
             {
                 if (data.sprite == null) continue;
 
-                Bounds bounds = data.sprite.bounds; // ƒ[ƒ‹ƒhÀ•W‚ÌƒoƒEƒ“ƒfƒBƒ“ƒOƒ{ƒbƒNƒX
+                Bounds bounds = data.sprite.bounds; // ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã®ãƒã‚¦ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ãƒœãƒƒã‚¯ã‚¹
 
                 min = Vector3.Min(min, bounds.min);
                 max = Vector3.Max(max, bounds.max);
@@ -148,15 +154,15 @@ namespace ShotBall.InGame
 
             if (!hasValidSprite)
             {
-                Debug.LogWarning("—LŒø‚ÈƒXƒvƒ‰ƒCƒg‚ªchildData‚É‘¶İ‚µ‚Ü‚¹‚ñ");
+                Debug.LogWarning("æœ‰åŠ¹ãªã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãŒchildDataã«å­˜åœ¨ã—ã¾ã›ã‚“");
                 return;
             }
 
-            // ƒXƒvƒ‰ƒCƒg‘S‘Ì‚ÌƒTƒCƒY‚Æ’†S‚ğŒvZ
+            // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆå…¨ä½“ã®ã‚µã‚¤ã‚ºã¨ä¸­å¿ƒã‚’è¨ˆç®—
             Vector3 totalSize = max - min;
             Vector3 currentCenter = (max + min) / 2f;
 
-            // ƒXƒP[ƒ‹”{—¦iframe‚Éû‚ß‚éj
+            // ã‚¹ã‚±ãƒ¼ãƒ«å€ç‡ï¼ˆframeã«åã‚ã‚‹ï¼‰
             float maxDimension = Mathf.Max(totalSize.x, totalSize.y);
             if (maxDimension == 0)
             {
@@ -167,7 +173,7 @@ namespace ShotBall.InGame
             float targetScale = frame.bounds.size.x * 0.85f / maxDimension;
             transform.localScale = Vector3.one * targetScale;
 
-            // ƒXƒvƒ‰ƒCƒg‘S‘Ì‚Ì’†S‚ğframe‚Ì’†S‚É‡‚í‚¹‚é
+            // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆå…¨ä½“ã®ä¸­å¿ƒã‚’frameã®ä¸­å¿ƒã«åˆã‚ã›ã‚‹
             Vector3 offset =  frame.transform.position - GetCenterOfChildSprites();
             Debug.Log("offset+"+offset);
             transform.position += offset;

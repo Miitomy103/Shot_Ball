@@ -4,18 +4,24 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// 配下のStageUI群を管理し、クリア済みステージに応じて次のステージを解放するクラス。
+    /// </summary>
     public class StageUIsManager : MonoBehaviour
     {
         StageUI[] stageUIs;
         private void Awake()
         {
-            // StageUI�̔z���������
+            // StageUIの配列を初期化
             stageUIs = GetComponentsInChildren<StageUI>();
         }
         private void Start()
         {
             SaveLoad();
         }
+        /// <summary>
+        /// 保存データを読み込み、各StageUIの状態とステージの解放状況を更新する。
+        /// </summary>
         public void SaveLoad()
         {
             foreach (var stageUI in stageUIs)
@@ -35,6 +41,9 @@ namespace ShotBall.InGame
                 Debug.Log($"Stage{stageUIs[i].Stage} clearAll:{stageUIs[i].IsAllClear()}");
             }
         }
+        /// <summary>
+        /// 配下の全ステージがクリア済みかどうかを判定する。
+        /// </summary>
         public bool IsAllClear()
         {
             stageUIs = GetComponentsInChildren<StageUI>();

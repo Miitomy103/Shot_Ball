@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall
 {
+    /// <summary>
+    /// ギミック・ブロックの種別を表す列挙型。
+    /// </summary>
     public enum     BlockType
     {
         AntiGravityArea,

@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// 単一のSpriteRendererをSliced表示で任意サイズに引き伸ばし、Collider2Dのサイズも追従させる基底クラス。
+    /// </summary>
     public abstract class SpriteImage : MonoBehaviour
     {
         private SpriteRenderer sr;
@@ -19,7 +22,7 @@ namespace ShotBall.InGame
         }
 
 #if UNITY_EDITOR
-        // Editor�ŕύX�𔽉f�����邽��
+        // Editorで変更を反映させるため
         void OnValidate()
         {
             if (sr == null) sr = GetComponent<SpriteRenderer>();
@@ -27,6 +30,9 @@ namespace ShotBall.InGame
             SetupSpriteRenderer();
         }
 #endif
+        /// <summary>
+        /// サイズを変更し、スプライトとColliderの表示に反映する。
+        /// </summary>
         public void SizeChange(Vector2 newSize)
         {
             size = newSize;
@@ -38,12 +44,15 @@ namespace ShotBall.InGame
 
             sr.drawMode = SpriteDrawMode.Sliced;
 
-            // �X�v���C�g��Border���ݒ肳��ĂȂ���Sliced�������Ȃ��̂Œ���
+            // スプライトにBorderが設定されてないとSlicedが効かないので注意
             sr.size =size;
 
             ColliderSizeChange();
         }
 
+        /// <summary>
+        /// 派生クラスでColliderの種類に応じたサイズ反映処理を行う。
+        /// </summary>
         protected abstract void ColliderSizeChange();
 
     }

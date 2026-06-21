@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// ステージのマス情報を持つことを表すインターフェース。
+    /// </summary>
     public interface IGridData
     {
         int[,] GridData { get; }

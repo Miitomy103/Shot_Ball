@@ -5,9 +5,12 @@ using UnityEngine;
 namespace ShotBall.InGame
 {
 
+    /// <summary>
+    /// 未クリアのチュートリアル（移動・回転・クリック）を順番に再生し、クリア状況を管理するクラス。
+    /// </summary>
     public class TutorialManager : MonoBehaviour
     {
-        // �`���[�g���A���̎��
+        // チュートリアルの種類
         private enum TutorialType
         {
             Move,
@@ -15,7 +18,7 @@ namespace ShotBall.InGame
             Click
         }
 
-        // �A�j���[�V�������ƑΉ��Â�
+        // アニメーション名と対応づけ
         private readonly Dictionary<TutorialType, string> animationNames = new Dictionary<TutorialType, string>
     {
         { TutorialType.Move, "Move" },
@@ -28,7 +31,7 @@ namespace ShotBall.InGame
         [SerializeField] private Vector2 rotationPos;
         [SerializeField] private Vector2 clickPos;
 
-        // �N���A�ς݂��Ǘ�
+        // クリア済みを管理
         private HashSet<TutorialType> cleared = new HashSet<TutorialType>();
 
         private void Awake()
@@ -48,9 +51,18 @@ namespace ShotBall.InGame
             UpdateTutorial();
         }
 
-        // �O������ĂԃN���A����
+        // 外部から呼ぶクリア処理
+        /// <summary>
+        /// 移動チュートリアルをクリア済みにする。
+        /// </summary>
         public void ClearMove() => Clear(TutorialType.Move);
+        /// <summary>
+        /// 回転チュートリアルをクリア済みにする。
+        /// </summary>
         public void ClearRotation() => Clear(TutorialType.Rotation);
+        /// <summary>
+        /// クリックチュートリアルをクリア済みにする。
+        /// </summary>
         public void ClearClick() => Clear(TutorialType.Click);
 
         private void Clear(TutorialType type)
@@ -64,7 +76,7 @@ namespace ShotBall.InGame
 
         private void UpdateTutorial()
         {
-            // ���N���A�̂��̂�T��
+            // 未クリアのものを探す
             foreach (TutorialType type in System.Enum.GetValues(typeof(TutorialType)))
             {
                 if (!cleared.Contains(type))
@@ -74,7 +86,7 @@ namespace ShotBall.InGame
                 }
             }
 
-            // �S���N���A�ς�
+            // 全部クリア済み
             if (animator != null)
             {
                 animator.gameObject.SetActive(false);

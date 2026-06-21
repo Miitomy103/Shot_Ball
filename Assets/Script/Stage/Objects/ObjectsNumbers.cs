@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// 子オブジェクトすべてにObjectsNumberを付与し、インデックス番号を割り振るクラス。
+    /// </summary>
     public class ObjectsNumbers : MonoBehaviour
     {
         public static GameObject[] Childs { get; private set; }

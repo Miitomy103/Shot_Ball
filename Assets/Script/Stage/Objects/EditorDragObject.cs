@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// エディット画面でのドラッグ操作を担当するクラス。ball用レイヤー以外との重なりを判定する。
+    /// </summary>
     public class EditorDragObject : ObjectBase
     {
         Collider2D[] collis;
@@ -23,7 +26,7 @@ namespace ShotBall.InGame
 
         protected override bool IsOverLapping()
         {
-            // ���O���������C���[���������}�X�N�𐶐�
+            // 除外したいレイヤーを除いたマスクを生成
             LayerMask excludeMask = Physics2D.DefaultRaycastLayers & ~ballLayer;
 
             ContactFilter2D filter = new ContactFilter2D

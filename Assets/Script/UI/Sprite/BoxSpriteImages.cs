@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// BoxCollider2D用にサイズを反映するSpriteImages。
+    /// </summary>
     public class BoxSpriteImages : SpriteImages
     {
         protected override void ColliderSizeChange()

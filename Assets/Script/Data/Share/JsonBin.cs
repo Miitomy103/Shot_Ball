@@ -7,15 +7,22 @@ using System.Linq;
 
 namespace Share
 {
+    /// <summary>
+    /// JSONBin.io(外部のJSON保管サービス)へデータをアップロード・ダウンロードするための静的クラス。
+    /// ステージ共有機能で使用する。
+    /// </summary>
     public static class JsonBin
     {
-        // ������JSONBin�ō쐬����Access Key������
+        // ここにJSONBinで作成したAccess Keyを入れる
         private static string accessKey = "$2a$10$PdzrfbRvgUobxhYwZrdUI.DiVdLshsrkm9KkoOEDUYsYWE5qwMkje";
         private const string baseUrl = "https://api.jsonbin.io/v3/b";
 
         // ========================
-        // Upload�i�V�K�쐬�j
+        // Upload（新規作成）
         // ========================
+        /// <summary>
+        /// JSON文字列をJSONBinへ新規アップロードし、成功時に発行されたbinIdをonSuccessへ渡す。
+        /// </summary>
         public static IEnumerator Upload(string jsonString, Action<string> onSuccess, Action<string> onError)
         {
             var uwr = new UnityWebRequest(baseUrl, "POST");
@@ -24,7 +31,7 @@ namespace Share
             uwr.downloadHandler = new DownloadHandlerBuffer();
             uwr.SetRequestHeader("Content-Type", "application/json");
             uwr.SetRequestHeader("X-Access-Key", accessKey);
-            uwr.SetRequestHeader("X-Bin-Private", "false"); // ���J�����N�ɂ���ꍇ
+            uwr.SetRequestHeader("X-Bin-Private", "false"); // 公開リンクにする場合
 
             yield return uwr.SendWebRequest();
 
@@ -43,15 +50,15 @@ namespace Share
                     string idOrUrl = resp.metadata.id;
                     string binId = idOrUrl;
 
-                    // URL�Ȃ�X���b�V���ȍ~�𔲂��o��
+                    // URLならスラッシュ以降を抜き出す
                     int lastSlash = idOrUrl.LastIndexOf('/');
                     if (lastSlash >= 0 && lastSlash < idOrUrl.Length - 1)
                     {
                         binId = idOrUrl.Substring(lastSlash + 1);
                     }
 
-                    Debug.Log($"[Upload] Extracted binId = {binId}"); // �� �f�o�b�O�o�͒ǉ�
-                    onSuccess?.Invoke(binId); // �K��ID����
+                    Debug.Log($"[Upload] Extracted binId = {binId}"); // ← デバッグ出力追加
+                    onSuccess?.Invoke(binId); // 必ずIDだけ
                 }
                 else
                 {
@@ -67,8 +74,11 @@ namespace Share
 
 
         // ========================
-        // Download�i�ǂݍ��݁j
+        // Download（読み込み）
         // ========================
+        /// <summary>
+        /// 指定したbinIdのJSONデータをJSONBinからダウンロードする。
+        /// </summary>
         public static IEnumerator Download(string binId, Action<string> onSuccess, Action<string> onError, bool omitMeta = true)
         {
             string url = $"{baseUrl}/{binId}";
@@ -89,7 +99,7 @@ namespace Share
         }
 
         // ========================
-        // ���X�|���X�p�N���X
+        // レスポンス用クラス
         // ========================
         [Serializable]
         private class CreateResponse

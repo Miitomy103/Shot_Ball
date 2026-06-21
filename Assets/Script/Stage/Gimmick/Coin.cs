@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// 取得できるコインのギミック。ボールが触れると取得済みになり非表示になる。
+    /// </summary>
     public class Coin : AreaBase,IGet
     {
         bool get = false;

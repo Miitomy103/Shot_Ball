@@ -4,8 +4,11 @@ using UnityEngine;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// ステージ1つ分のデータ(ブロック配列、フレーム配列、カメラサイズなど)を保持するクラス。
+    /// </summary>
     [System.Serializable]
-    public class CreateStageData 
+    public class CreateStageData
     {
         public float CameraSize { get; private set; } = 5f; // Default camera size
         public float CenterWorldWidth { get; private set; } = 10f; // Default center world width

@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// 2つのWarpChild間をボールが通過するとワープさせるギミック。
+    /// </summary>
     public class Warp : LineBase
     {
         [SerializeField] WarpChild[] warpChildren;
@@ -42,6 +45,9 @@ namespace ShotBall.InGame
             base.StageReset();
             didWarp = false;
         }
+        /// <summary>
+        /// 空いている枠にWarpChildを登録する。
+        /// </summary>
         public void ChildGenerate(WarpChild warpChild)
         {
             for(int i=0;i<warpChildren.Length;i++)
@@ -57,6 +63,9 @@ namespace ShotBall.InGame
                 if(w!=null) w.ColorChange(color);
             }
         }
+        /// <summary>
+        /// 登録済みのWarpChildを枠から外す。
+        /// </summary>
         public void ChildDestroy(WarpChild warpChild)
         {
             for (int i = 0; i < warpChildren.Length; i++)
@@ -65,6 +74,9 @@ namespace ShotBall.InGame
             }
             lineRenderer.enabled = false;
         }
+        /// <summary>
+        /// WarpChildを追加できる空き枠があるかどうか。
+        /// </summary>
         public bool Available()
         {
             foreach (var w in warpChildren) if (w == null) return true;
@@ -82,6 +94,9 @@ namespace ShotBall.InGame
             }
             return true;
         }
+        /// <summary>
+        /// ボールがこのワープのWarpChildに入ったときに、もう一方のWarpChildへ移動させる。
+        /// </summary>
         public void OnBallInWarp(Ball other,WarpChild warpChild)
         {
             if (!IsLine()) return;

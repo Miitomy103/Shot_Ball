@@ -5,6 +5,10 @@ using UnityEngine;
 
 namespace ShotBall
 {
+    /// <summary>
+    /// 1つのギミック・ブロックが持つパラメータ群（float/int/bool/Vector2/Vector3/ユニーク表示）を
+    /// 種類別の辞書として保持するデータクラス。
+    /// </summary>
     [System.Serializable]
     public class StageBlockData
     {
@@ -30,6 +34,9 @@ namespace ShotBall
         [SerializeField, ReadOnly] string key;
         public StageBlockData() { }
 
+        /// <summary>
+        /// 既存のStageBlockDataの内容をコピーして新しいインスタンスを作成する。
+        /// </summary>
         public StageBlockData(StageBlockData data)
         {
             Type = data.Type;
@@ -42,6 +49,9 @@ namespace ShotBall
             isDisplays = new Dictionary<string, bool>(data.isDisplays);
             isDataSet = data.isDataSet;
         }
+        /// <summary>
+        /// ブロック定義(BlockDefinitionSO)からデフォルトパラメータを読み込んで初期化する。
+        /// </summary>
         public StageBlockData(BlockType definitionType, BlockDefinitionSO[] parameters)
         {
             Type = definitionType;

@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// このオブジェクトから複数のendPointへ向かうLineRendererを生成・管理するクラス。
+    /// OnOffBlockなどで接続先を視覚的に示すために使う。
+    /// </summary>
     public class LineManager : MonoBehaviour
     {
         [SerializeField] float lineWidth = 0.05f;
@@ -11,7 +15,7 @@ namespace ShotBall.InGame
         protected List<LineData> lineDatas = new List<LineData>();
         public LineData[] LineDatas => lineDatas.ToArray();
 
-        // ���C�����쐬����
+        // ラインを作成する
         public void CreateLine(Transform endPoint)
         {
             GameObject lineObj = new GameObject("Line");
@@ -35,6 +39,9 @@ namespace ShotBall.InGame
                 if (t.TryGetComponent<LineRenderer>(out var l)) DestroyImmediate(l);
             }
         }
+        /// <summary>
+        /// 指定したラインの位置を起点・終点の現在位置に合わせて更新する。
+        /// </summary>
         public void ChangePosition(int index)
         {
             if (index < 0 || index >= lineDatas.Count)
@@ -50,7 +57,10 @@ namespace ShotBall.InGame
             }
         }
 
-        // ���C���̕\���ؑ�
+        // ラインの表示切替
+        /// <summary>
+        /// 指定したラインの表示有無を切り替える。
+        /// </summary>
        public void SetLineActive(int index, bool isActive)
         {
             if (index >= 0 && index < lineDatas.Count)
@@ -64,7 +74,10 @@ namespace ShotBall.InGame
         }
         
 
-        // ���ׂẴ��C�����I��
+        // すべてのラインをオン
+        /// <summary>
+        /// すべてのラインの表示有無を切り替える。
+        /// </summary>
         public void EnableAllLines(bool eneble)
         {
             foreach (var data in lineDatas)

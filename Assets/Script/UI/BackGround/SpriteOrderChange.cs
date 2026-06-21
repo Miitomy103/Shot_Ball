@@ -6,6 +6,9 @@ using UnityEngine;
 namespace ShotBall.InGame
 {
     
+    /// <summary>
+    /// SpriteRendererまたはTextMeshProの描画順(sortingOrder)を、指定したOrderInLayerの値に合わせるクラス。
+    /// </summary>
     public class SpriteOrderChange : MonoBehaviour
     {
         [SerializeField] OrderInLayer OrderInLayer;
@@ -22,6 +25,9 @@ namespace ShotBall.InGame
         {
             ChangeLayer();
         }
+        /// <summary>
+        /// アタッチされているSpriteRendererまたはTextMeshProの描画順を更新する。
+        /// </summary>
         void ChangeLayer()
         {
             SpriteRenderer sprite = GetComponent<SpriteRenderer>();

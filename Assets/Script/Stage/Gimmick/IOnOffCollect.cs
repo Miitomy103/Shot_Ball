@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// 未実装のクラス(中身が空)。
+    /// </summary>
     public class IOnOffCollect : MonoBehaviour
     {
 

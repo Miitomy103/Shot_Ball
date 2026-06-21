@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// マウスの左右ボタンの状態と移動の有無を毎フレーム保持し、右クリックでオブジェクトの回転操作を行うクラス。
+    /// </summary>
     public class MouseInputHandler : MonoBehaviour
     {
         static MouseInputHandler instance;
@@ -17,7 +20,7 @@ namespace ShotBall.InGame
         public bool LeftButton => l_Button;
         [SerializeField] bool isMove;
         public bool IsMove=>isMove;
-        Vector3 prevMousePosition; // �ǉ�
+        Vector3 prevMousePosition; // 追加
         private void Awake()
         {
             instance = this;
@@ -32,7 +35,7 @@ namespace ShotBall.InGame
             r_Button = Input.GetMouseButton(1);
             if (r_Down)RightClick();
 
-            // �}�E�X�ړ�����
+            // マウス移動判定
             if (Input.mousePosition != prevMousePosition)
             {
                 isMove = true;

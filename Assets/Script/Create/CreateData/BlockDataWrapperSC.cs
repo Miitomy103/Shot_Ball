@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall.Data
 {
+    /// <summary>
+    /// BlockDataWrapperをアセット化するためのScriptableObject。
+    /// </summary>
     [CreateAssetMenu(menuName = "MyGame/BlockDataWrapper")]
     public class BlockDataWrapperSC : ScriptableObject
     {

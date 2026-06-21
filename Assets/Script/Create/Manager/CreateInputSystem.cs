@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace ShotBall.Create
 {
+    /// <summary>
+    /// Createã‚·ãƒ¼ãƒ³ã§ã®ã‚«ãƒ¡ãƒ©ã®ãƒ‰ãƒ©ãƒƒã‚°ç§»å‹•ãƒ»ã‚ºãƒ¼ãƒ å…¥åŠ›ã‚’å‡¦ç†ã™ã‚‹ã‚¯ãƒ©ã‚¹ã€‚
+    /// </summary>
     public class CreateInputSystem : MonoBehaviour
     {
         static CreateInputSystem instance;
@@ -11,23 +14,29 @@ namespace ShotBall.Create
         Camera cam;
 
         public bool IsDragging { get; private set; }
-        [Header("ƒhƒ‰ƒbƒOİ’è")]
+        [Header("ãƒ‰ãƒ©ãƒƒã‚°è¨­å®š")]
         Vector3 lastMousePosition;
-        [SerializeField] float dragSpeed = 1f; // ƒhƒ‰ƒbƒO‘¬“x‚Ì’²®
+        [SerializeField] float dragSpeed = 1f; // ãƒ‰ãƒ©ãƒƒã‚°é€Ÿåº¦ã®èª¿æ•´
 
         public bool IsZooming { get; private set; }
-        [Header("ƒY[ƒ€İ’è")]
+        [Header("ã‚ºãƒ¼ãƒ è¨­å®š")]
         public float zoomSpeed = 10.0f;
         public float minZoomDistance = 5f;
         public float maxZoomDistance = 100f;
 
+        /// <summary>
+        /// ãƒã‚¦ã‚¹ãƒ›ã‚¤ãƒ¼ãƒ«ã§ã‚ºãƒ¼ãƒ ã—ãŸã¨ãã«å‘¼ã°ã‚Œã‚‹ã€‚
+        /// </summary>
         public Action CameraScroll { get; set; }
+        /// <summary>
+        /// å³ã‚¯ãƒªãƒƒã‚¯ãƒ‰ãƒ©ãƒƒã‚°ã§ã‚«ãƒ¡ãƒ©ã‚’ç§»å‹•ã—ãŸã¨ãã«å‘¼ã°ã‚Œã‚‹ã€‚
+        /// </summary>
         public Action CameraDrag { get; set; }
         private void Awake()
         {
             if(instance != null)
             {
-                Debug.LogError("CreateInputSystem‚ª2‚ÂˆÈã‘¶İ‚µ‚Ä‚Ü‚·");
+                Debug.LogError("CreateInputSystemãŒ2ã¤ä»¥ä¸Šå­˜åœ¨ã—ã¦ã¾ã™");
             }
             instance = this;
         }
@@ -38,12 +47,12 @@ namespace ShotBall.Create
         void Update()
         {
             Scroll();
-            if (Input.GetMouseButtonDown(1)) // ‰EƒNƒŠƒbƒNŠJn
+            if (Input.GetMouseButtonDown(1)) // å³ã‚¯ãƒªãƒƒã‚¯é–‹å§‹
             {
                 IsDragging = true;
                 lastMousePosition = Input.mousePosition;
             }
-            else if (Input.GetMouseButtonUp(1)) // ‰EƒNƒŠƒbƒNI—¹
+            else if (Input.GetMouseButtonUp(1)) // å³ã‚¯ãƒªãƒƒã‚¯çµ‚äº†
             {
                 IsDragging = false;
             }
@@ -57,7 +66,7 @@ namespace ShotBall.Create
                 float moveX = 1 * delta.x * d * Time.deltaTime;
                 float moveY = 1 * delta.y * d * Time.deltaTime;
 
-                // ƒJƒƒ‰‚ğ•½sˆÚ“®
+                // ã‚«ãƒ¡ãƒ©ã‚’å¹³è¡Œç§»å‹•
                 cam.transform.Translate(new Vector3(-moveX, -moveY, 0), Space.Self);
 
                 lastMousePosition = Input.mousePosition;
@@ -70,17 +79,17 @@ namespace ShotBall.Create
             if (scroll != 0f)
             {
                 IsZooming = true;
-                // ƒY[ƒ€‘O‚Ìƒ}ƒEƒXˆÊ’uiƒ[ƒ‹ƒhÀ•Wj
+                // ã‚ºãƒ¼ãƒ å‰ã®ãƒã‚¦ã‚¹ä½ç½®ï¼ˆãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ï¼‰
                 Vector3 mouseWorldBefore = cam.ScreenToWorldPoint(Input.mousePosition);
 
-                // orthographicSize ‚ğ•ÏX
+                // orthographicSize ã‚’å¤‰æ›´
                 cam.orthographicSize -= scroll * zoomSpeed;
                 cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minZoomDistance, maxZoomDistance);
 
-                // ƒY[ƒ€Œã‚Ìƒ}ƒEƒXˆÊ’uiƒ[ƒ‹ƒhÀ•Wj
+                // ã‚ºãƒ¼ãƒ å¾Œã®ãƒã‚¦ã‚¹ä½ç½®ï¼ˆãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ï¼‰
                 Vector3 mouseWorldAfter = cam.ScreenToWorldPoint(Input.mousePosition);
 
-                // ƒJƒƒ‰ˆÊ’u‚ğ’²®‚µ‚ÄAƒ}ƒEƒXˆÊ’u‚ª“¯‚¶ƒ[ƒ‹ƒhÀ•W‚É‚È‚é‚æ‚¤‚É‚·‚é
+                // ã‚«ãƒ¡ãƒ©ä½ç½®ã‚’èª¿æ•´ã—ã¦ã€ãƒã‚¦ã‚¹ä½ç½®ãŒåŒã˜ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã«ãªã‚‹ã‚ˆã†ã«ã™ã‚‹
                 Vector3 offset = mouseWorldBefore - mouseWorldAfter;
                 cam.transform.position += offset;
                 CameraScroll?.Invoke();

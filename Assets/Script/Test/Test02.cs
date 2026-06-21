@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 namespace ShotBall.InGame
 {
-    public class Test02<T> 
+    /// <summary>
+    /// デバッグ用の検証コード。ジェネリックで2つの値を保持するだけのクラス。
+    /// </summary>
+    public class Test02<T>
     {
         public T Speed;
         public T Smart;

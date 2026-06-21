@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// ランダムな間隔・位置でスケール変化するUI要素を生成し続けるクラス。
+    /// </summary>
     public class ScaleChangeDurationManager : MonoBehaviour
     {
         [SerializeField] float minTime = 0.5f;
@@ -19,6 +22,9 @@ namespace ShotBall.InGame
             StartCoroutine(StartScaleChangeDuration());
         }
 
+        /// <summary>
+        /// ランダムな待機時間ごとに、親キャンバス内のランダムな位置へprefabを生成し続ける。
+        /// </summary>
         private IEnumerator StartScaleChangeDuration()
         {
             while (true)

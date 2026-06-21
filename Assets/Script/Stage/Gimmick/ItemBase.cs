@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// ボールが触れると取得され非表示になるアイテムの基底クラス。
+    /// </summary>
     public abstract class ItemBase : AreaBase
     {
         protected override void BallEnter(Ball other)
@@ -18,6 +21,9 @@ namespace ShotBall.InGame
             base.StageReset();
             gameObject.SetActive(true);
         }
+        /// <summary>
+        /// アイテムを取得したときの効果。
+        /// </summary>
         protected abstract void GetItem(Ball ball);
     }
 }

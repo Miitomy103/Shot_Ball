@@ -5,6 +5,10 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// behaviourTypeの指定に応じてRuntimeDragObject/EditorDragObjectを付け替えるためのクラス。
+    /// TypeChangeの中身は現在コメントアウトされており未実装。
+    /// </summary>
     public class DragObjectSelector : MonoBehaviour
     {
         public BehaviourType behaviourType;
@@ -55,16 +59,19 @@ namespace ShotBall.InGame
         }
         private void RemoveDragObject()
         {
-            // DragObject �܂��͂��̔h�������ׂĎ擾
+            // DragObject またはその派生をすべて取得
             var dragObjects = GetComponents<DragObject>();
             foreach (var obj in dragObjects)
             {
-                if (obj != this)  // �������g�͏����Ȃ��悤�ɕی�
+                if (obj != this)  // 自分自身は消さないように保護
                     DestroyImmediate(obj);
             }
         }
 
     }
+    /// <summary>
+    /// DragObjectSelectorが付け替える対象の種類。
+    /// </summary>
     public enum BehaviourType
     {
         None,

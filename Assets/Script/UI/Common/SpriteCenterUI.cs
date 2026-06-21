@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// ワールド座標上の対象のスクリーンX位置に、このUI要素のX座標を合わせるクラス。
+    /// </summary>
     public class SpriteCenterUI : MonoBehaviour
     {
         [SerializeField] Transform targetTransform;
@@ -16,7 +19,7 @@ namespace ShotBall.InGame
 
             Vector3 screenPos = Camera.main.WorldToScreenPoint(targetTransform.position);
 
-            // �X�N���[�����W �� UI���W
+            // スクリーン座標 → UI座標
             Vector2 uiPos;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 canvas.transform as RectTransform,

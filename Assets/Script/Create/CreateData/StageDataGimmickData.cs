@@ -4,8 +4,14 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
-    public static class StageDataGimmickData 
+    /// <summary>
+    /// StageBlockDataをセーブ用の文字列に変換するための静的クラス。
+    /// </summary>
+    public static class StageDataGimmickData
     {
+        /// <summary>
+        /// BlockTypeに応じて必要なパラメータを取り出し、セーブ用の文字列に変換する。
+        /// </summary>
         public static string GetGimmickData(StageBlockData stageBlockData)
         {
             switch(stageBlockData.Type)

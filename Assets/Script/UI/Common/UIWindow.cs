@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// 表示中はゲームを一時停止(Pose状態・タイムスケール0)にし、非表示になったら元の状態に戻すウィンドウ用クラス。
+    /// </summary>
     public class UIWindow : MonoBehaviour
     {
         StageState beforeState;

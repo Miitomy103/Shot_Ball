@@ -6,6 +6,9 @@ using UnityEngine;
 namespace ShotBall.InGame
 {
 
+    /// <summary>
+    /// フレームに置いたオブジェクトの元のスケール・サイズ・ブロック種別を保持する構造体。
+    /// </summary>
     public struct FrameData : IEquatable<FrameData>
     {
         public Vector3 scale;
@@ -19,7 +22,7 @@ namespace ShotBall.InGame
             blockType = b;
         }
 
-        // HashSet�Ő�������r����邽�߂ɕK�v
+        // HashSetで正しく比較されるために必要
         public override bool Equals(object obj)
         {
             return obj is FrameData data && Equals(data);
@@ -35,7 +38,7 @@ namespace ShotBall.InGame
             return HashCode.Combine(scale, size, blockType);
         }
 
-        // �C�ӂ̔�r�p�֐��i���̂܂܎c���Ă�OK�j
+        // 任意の比較用関数（そのまま残してもOK）
         public bool SameData(FrameData data)
         {
             return Equals(data);

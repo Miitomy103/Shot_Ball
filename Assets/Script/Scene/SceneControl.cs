@@ -5,12 +5,18 @@ using UnityEngine.SceneManagement;
 
 namespace ShotBall.InGame
 {
+    /// <summary>
+    /// シーン名("メイン-サブ"形式)の解析とシーン遷移を行う静的クラス。
+    /// </summary>
     public static class SceneControl
     {
 
         const string TITLENAME = "Title";
 
         public readonly static int maxStage = 5;
+        /// <summary>
+        /// 現在のシーン名から次のサブステージ（または次のメインステージ／タイトル）へ遷移する。
+        /// </summary>
         public static void NextScene(string nowScene)
         {
             string[] stageNumbers = nowScene.Split("-");
@@ -46,12 +52,21 @@ namespace ShotBall.InGame
                 TitleScene();
             }
         }
+        /// <summary>
+        /// 指定したステージのシーンへ遷移する。
+        /// </summary>
         public static void StageChange(StageName stage)
         {
             string stageName = stage.mainStage + "-" + stage.subStage;
             SceneManager.LoadScene(stageName);
         }
+        /// <summary>
+        /// 現在アクティブなシーン名を取得する。
+        /// </summary>
         public static string NowStage() => SceneManager.GetActiveScene().name;
+        /// <summary>
+        /// "メイン-サブ"形式のシーン名をStageNameに変換する。
+        /// </summary>
         public static StageName StageInt(string name)
         {
             string[] stageNumbers = name.Split("-");
@@ -61,6 +76,9 @@ namespace ShotBall.InGame
             }
             return new(0, 0);
         }
+        /// <summary>
+        /// タイトルシーンへ遷移する。
+        /// </summary>
         public static void TitleScene()
         {
             StaticData.isSelectView = true;
