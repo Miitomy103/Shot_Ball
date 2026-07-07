@@ -9,7 +9,7 @@ namespace ShotBall.Create
     /// </summary>
     public class GenerateObject : MonoBehaviour
     {
-        [SerializeField] PrefabLists prefabLists;
+        [SerializeField] PrefabDatas prefabLists;
         [SerializeField] Parameters parameters; // パラメータの設定を保持するクラス
 
         [SerializeField] Objects objects;

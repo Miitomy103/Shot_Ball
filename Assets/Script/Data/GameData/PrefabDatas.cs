@@ -7,7 +7,7 @@ namespace ShotBall.Data
     /// <summary>
     /// ブロック種別とプレハブの対応リストを保持するScriptableObject。
     /// </summary>
-    public class PrefabLists : ScriptableObject
+    public class PrefabDatas : ScriptableObject
     {
         [SerializeField]public Prefab[] prefabs;
     }

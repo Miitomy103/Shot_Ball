@@ -11,7 +11,7 @@ namespace ShotBall.Create
     /// </summary>
     public class LoadStage : MonoBehaviour
     {
-        [SerializeField] PrefabLists prefabDatas;
+        [SerializeField] PrefabDatas prefabDatas;
         /// <summary>
         /// 中身が空の未実装メソッド。CreateStageDataの読み込み処理を行う想定。
         /// </summary>

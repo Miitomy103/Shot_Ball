@@ -11,7 +11,7 @@ namespace ShotBall.Create
     public class Items : MonoBehaviour
     {
         RectTransform[] rectTransforms;
-        [SerializeField] PrefabLists prefabDatas;
+        [SerializeField] PrefabDatas prefabDatas;
 
         [SerializeField] Button up;
         [SerializeField] Button down;

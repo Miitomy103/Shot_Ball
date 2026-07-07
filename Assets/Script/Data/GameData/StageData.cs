@@ -20,7 +20,7 @@ namespace ShotBall.Data
 
         
 
-        [SerializeField] PrefabLists prefabDataList;
+        [SerializeField] PrefabDatas prefabDataList;
 
         [SerializeField] List<GameObject> GenerateObjects;
         [SerializeField] string loadStageName;

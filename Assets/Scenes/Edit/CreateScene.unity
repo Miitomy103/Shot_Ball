@@ -3211,7 +3211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68882387af127334292b33c98478825b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabLists: {fileID: 0}
+  prefabLists: {fileID: 11400000, guid: 27264b74f151c6f4fb45a10465c7a1b8, type: 2}
   parameters: {fileID: 0}
   objects: {fileID: 752434139}
 --- !u!114 &752434138

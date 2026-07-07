@@ -8,14 +8,14 @@ using UnityEngine;
 namespace ShotBall.Create
 {
     /// <summary>
-    /// Editƒ‚[ƒh‚Å‚ÌAƒIƒuƒWƒFƒNƒg‚ÌƒXƒe[ƒ^ƒX‚ğ•ÏX‚·‚é‚½‚ß‚ÌUIƒNƒ‰ƒX
+    /// Editï¿½ï¿½ï¿½[ï¿½hï¿½Å‚ÌAï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ÌƒXï¿½eï¿½[ï¿½^ï¿½Xï¿½ï¿½ÏXï¿½ï¿½ï¿½é‚½ï¿½ß‚ï¿½UIï¿½Nï¿½ï¿½ï¿½X
     /// </summary>
     public class Inspector : MonoBehaviour
     {
         static Inspector instance;
         public static Inspector Instance => instance;
 
-        [SerializeField] PrefabLists prefabs;
+        [SerializeField] PrefabDatas prefabs;
         [SerializeField] CreateObjectData createObjectData;
         [SerializeField] UIDisplay uiDisplay;
         [SerializeField] ValueInspector valueInspector;
@@ -70,7 +70,7 @@ namespace ShotBall.Create
             }
             valueUIList.Clear();
             Debug.Log("Choice");
-            Debug.Log("–¼‘O‚ªˆê");
+            Debug.Log("ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ê");
             gimmickTextComponent.ChangeText(name);
             uniqueTextComponent.ChangeText(unique);
             int count = 0;
@@ -120,7 +120,7 @@ namespace ShotBall.Create
             {
                 if (IsHideInspector(v2, blockData)) continue;
                 DataType type = GetViewType(v2, blockData.uniqueViews, DataType.Vector2);
-                Debug.Log($"v2: {v2}, Type: {type}"); // ƒfƒoƒbƒOƒƒO‚ğ’Ç‰Á
+                Debug.Log($"v2: {v2}, Type: {type}"); // ï¿½fï¿½oï¿½bï¿½Oï¿½ï¿½ï¿½Oï¿½ï¿½Ç‰ï¿½
                 GameObject obj = GenerateValue(count, type, v2);
 
                 if (obj != null)
