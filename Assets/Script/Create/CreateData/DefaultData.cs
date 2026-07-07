@@ -1,15 +1,14 @@
-using System.IO;
 using ShotBall.Data;
 using UnityEngine;
 
 namespace ShotBall.Create
 {
     /// <summary>
-    /// ƒfƒtƒHƒ‹ƒg‚ÌƒXƒe[ƒWƒf[ƒ^‚ð•Û‘¶Eƒ[ƒh‚·‚éƒNƒ‰ƒX
+    /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ã‚’ä¿å­˜ãƒ»ãƒ­ãƒ¼ãƒ‰ã™ã‚‹ã‚¯ãƒ©ã‚¹
     /// </summary>
     public class DefaultData : MonoBehaviour
     {
-        public BlockDataWrapper defaultData=>LoadFile();
+        public BlockDataWrapper defaultData => LoadFile();
 
         [SerializeField] string fileName;
 
@@ -17,22 +16,27 @@ namespace ShotBall.Create
 
         public void ResetData()
         {
-            BlockDataWrapper data = new BlockDataWrapper();
-            data =objects.Data();
+            BlockDataWrapper data = objects.Data();
             string json = JsonUtility.ToJson(data, true);
-            string path = Application.streamingAssetsPath + $"/{fileName}.json";
-            File.WriteAllText(path, json);
-
+#if UNITY_EDITOR
+            string path = Application.dataPath + $"/Resources/{fileName}.json";
+            System.IO.File.WriteAllText(path, json);
+            UnityEditor.AssetDatabase.Refresh();
             Debug.Log("Default data reset to: " + path);
+#else
+            Debug.LogWarning("ResetData is editor-only.");
+#endif
         }
+
         BlockDataWrapper LoadFile()
         {
-            // ƒtƒ@ƒCƒ‹‚©‚ç“Ç‚Ýž‚Ý
-            string path = Application.streamingAssetsPath + $"/{fileName}.json";
-            string json = File.ReadAllText(path);
-
-            // JSON ¨ ƒNƒ‰ƒX‚É•ÏŠ·
-            return JsonUtility.FromJson<BlockDataWrapper>(json);
+            TextAsset textAsset = Resources.Load<TextAsset>(fileName);
+            if (textAsset == null)
+            {
+                Debug.LogError($"Resources ã«ãƒ•ã‚¡ã‚¤ãƒ«ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“: {fileName}");
+                return null;
+            }
+            return JsonUtility.FromJson<BlockDataWrapper>(textAsset.text);
         }
     }
 }

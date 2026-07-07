@@ -54,6 +54,7 @@ namespace ShotBall.Create
         /// </summary>
         public CreateObject LoadObject(StageBlockData data)
         {
+            if (prefabLists == null) { Debug.LogError("GenerateObject: prefabLists がInspectorに割り当てられていません"); return null; }
             foreach (var p in prefabLists.prefabs)
             {
                 if (p.type == data.Type)

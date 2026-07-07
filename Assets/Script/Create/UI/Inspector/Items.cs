@@ -57,6 +57,7 @@ namespace ShotBall.Create
 
         private void Start()
         {
+            if (prefabDatas == null) { Debug.LogError("Items: prefabDatas がInspectorに割り当てられていません"); return; }
             int totalPrefabs = prefabDatas.prefabs.Length;
             int totalPages = Mathf.CeilToInt((float)totalPrefabs / frameCount);
             itemDatas = new ItemData[totalPages];

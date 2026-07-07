@@ -5,8 +5,8 @@ using UnityEngine;
 namespace ShotBall.Create
 {
     /// <summary>
-    /// ƒIƒuƒWƒFƒNƒg‚ğ‘I‘ğ‚µ‚½‚Æ‚«‚Ì˜g•”•ª
-    /// ƒIƒuƒWƒFƒNƒg‚ğŠg‘åEk¬‚µ‚½‚è‰ñ“]‚·‚é‚±‚Æ‚ª‚Å‚«‚é
+    /// ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½Ì˜gï¿½ï¿½ï¿½ï¿½
+    /// ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½gï¿½ï¿½Eï¿½kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½]ï¿½ï¿½ï¿½é‚±ï¿½Æ‚ï¿½ï¿½Å‚ï¿½ï¿½ï¿½
     /// </summary>
     public class HandleFollower : MonoBehaviour
     {
@@ -16,7 +16,7 @@ namespace ShotBall.Create
         static HandleFollower instance;
         public static HandleFollower Instance => instance;
 
-        public Camera worldCamera; // ’Êí‚ÍƒƒCƒ“ƒJƒƒ‰
+        public Camera worldCamera; // ï¿½Êï¿½Íƒï¿½ï¿½Cï¿½ï¿½ï¿½Jï¿½ï¿½ï¿½ï¿½
         [SerializeField] SpriteResizeHandle topLeftHandle;
         [SerializeField] SpriteResizeHandle topRightHandle;
         [SerializeField] SpriteResizeHandle bottomLeftHandle;
@@ -40,7 +40,7 @@ namespace ShotBall.Create
 
         [SerializeField] ConnectionManager connectionManager;
 
-        public Action OnResize { get; set; } // ƒŠƒTƒCƒYŠJn‚ÌƒAƒNƒVƒ‡ƒ“
+        public Action OnResize { get; set; } // ï¿½ï¿½ï¿½Tï¿½Cï¿½Yï¿½Jï¿½nï¿½ï¿½ï¿½ÌƒAï¿½Nï¿½Vï¿½ï¿½ï¿½ï¿½
 
         private void Awake()
         {
@@ -52,13 +52,14 @@ namespace ShotBall.Create
 
             if (worldCamera == null) worldCamera = Camera.main;
 
-            SpriteSet(null, false); // ‰Šúó‘Ô‚Å‚Íƒnƒ“ƒhƒ‹‚ğ”ñ•\¦‚É‚·‚é
+            SpriteSet(null, false); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚Å‚Íƒnï¿½ï¿½ï¿½hï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½
 
             ChangeHandles();
         }
 
         void Update()
         {
+            if (CreateInputSystem.Instance == null) return;
             if (CreateInputSystem.Instance.IsDragging || CreateInputSystem.Instance.IsZooming||isRotate)
             {
                 ChangeHandles();
@@ -81,7 +82,7 @@ namespace ShotBall.Create
 
         public void SpriteSet(SpriteRenderer s, bool active)
         {
-            if(s==null) active = false; // null ‚Ìê‡‚Í”ñ•\¦‚É‚·‚é
+            if(s==null) active = false; // null ï¿½Ìê‡ï¿½Í”ï¿½\ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½
             spriteRenderer = s;
             foreach (var handle in Handles)
             {
@@ -105,10 +106,10 @@ namespace ShotBall.Create
 
             Transform t = spriteRenderer.transform;
 
-            // Sliced/Tiled ‚Ìê‡‚Í spriteRenderer.size ‚ªuŒ©‚½–Ú‚ÌƒTƒCƒYv
+            // Sliced/Tiled ï¿½Ìê‡ï¿½ï¿½ spriteRenderer.size ï¿½ï¿½ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Ú‚ÌƒTï¿½Cï¿½Yï¿½v
             Vector2 finalSize = spriteRenderer.size;
 
-            // ƒ[ƒJƒ‹‹óŠÔ‚Å‚Ìl‹÷i’†SŠî€j
+            // ï¿½ï¿½ï¿½[ï¿½Jï¿½ï¿½ï¿½ï¿½Ô‚Å‚Ìlï¿½ï¿½ï¿½iï¿½ï¿½ï¿½Sï¿½î€ï¿½j
             Vector3[] localCorners = new Vector3[]
             {
         new Vector3(-finalSize.x / 2f,  finalSize.y / 2f, 0), // Top Left
@@ -117,12 +118,12 @@ namespace ShotBall.Create
         new Vector3( finalSize.x / 2f, -finalSize.y / 2f, 0), // Bottom Right
             };
 
-            // ƒ[ƒ‹ƒhÀ•W‚É•ÏŠ·i‰ñ“]‚ÍTransform‚ª‚Á‚Ä‚é‚Ì‚ÅOKj
+            // ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Wï¿½É•ÏŠï¿½ï¿½iï¿½ï¿½]ï¿½ï¿½Transformï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½Ì‚ï¿½OKï¿½j
             Vector3[] worldCorners = new Vector3[CornerCount];
             for (int i = 0; i < CornerCount; i++)
                 worldCorners[i] = t.TransformPoint(localCorners[i]);
 
-            // UIƒnƒ“ƒhƒ‹‚ğXV
+            // UIï¿½nï¿½ï¿½ï¿½hï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½V
             SetHandlePosition(topLeftHandle.ThisRect, worldCorners[0]);
             SetHandlePosition(topRightHandle.ThisRect, worldCorners[1]);
             SetHandlePosition(bottomLeftHandle.ThisRect, worldCorners[2]);
@@ -145,7 +146,7 @@ namespace ShotBall.Create
             handle.anchoredPosition = localPoint;
         }
         [SerializeField] private bool isRotate = false;
-        private float rotationSpeed = 0.3f; // D‚İ‚É‡‚í‚¹‚Ä’²®
+        private float rotationSpeed = 0.3f; // ï¿½Dï¿½İ‚Éï¿½ï¿½í‚¹ï¿½Ä’ï¿½ï¿½ï¿½
 
         private Vector3 prevMousePos;
         public void RotateDown()
@@ -161,17 +162,17 @@ namespace ShotBall.Create
         }
         public void RotateDrag()
         {
-            // ƒ[ƒ‹ƒhÀ•W‚Ìƒ}ƒEƒXˆÊ’u‚ğæ“¾iƒJƒƒ‰‚©‚ç‚ÌƒXƒNƒŠ[ƒ“•ÏŠ·j
+            // ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Wï¿½Ìƒ}ï¿½Eï¿½Xï¿½Ê’uï¿½ï¿½ï¿½æ“¾ï¿½iï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÌƒXï¿½Nï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÏŠï¿½ï¿½j
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mouseWorldPos.z = 0f; // 2D‚È‚çZ‚ÍŒÅ’è
+            mouseWorldPos.z = 0f; // 2Dï¿½È‚ï¿½Zï¿½ÍŒÅ’ï¿½
 
-            // ©•ª‚ÌˆÊ’u‚©‚çƒ}ƒEƒX‚Ö‚ÌƒxƒNƒgƒ‹‚ğŒvZ
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ÌˆÊ’uï¿½ï¿½ï¿½ï¿½}ï¿½Eï¿½Xï¿½Ö‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½vï¿½Z
             Vector3 dir = mouseWorldPos - spriteRenderer.transform.position;
 
-            // Šp“x‚ğ‹‚ß‚éiƒ‰ƒWƒAƒ“¨“xj
+            // ï¿½pï¿½xï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½iï¿½ï¿½ï¿½Wï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½xï¿½j
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
-            // Z²‰ñ“]‚ğİ’èiuã‚ğƒ}ƒEƒX•ûŒü‚É‚·‚év‚È‚ç -90 “x•â³j
+            // Zï¿½ï¿½ï¿½ï¿½]ï¿½ï¿½İ’ï¿½iï¿½uï¿½ï¿½ï¿½ï¿½}ï¿½Eï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½vï¿½È‚ï¿½ -90 ï¿½xï¿½â³ï¿½j
             spriteRenderer.transform.rotation = Quaternion.Euler(0, 0, angle - RotationOffsetDegrees);
         }
 

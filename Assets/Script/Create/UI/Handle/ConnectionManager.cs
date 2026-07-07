@@ -40,6 +40,7 @@ namespace ShotBall.Create
             PointerDownHandler handler = centerPoint.GetComponent<PointerDownHandler>();
             if (handler == null) Debug.LogError("PointerDownHandlerがアタッチされていません");
             handler.AddListener(OnClick);
+            if (CreateInputSystem.Instance == null) { Debug.LogError("ConnectionManager: CreateInputSystem がシーンに存在しません"); return; }
             CreateInputSystem.Instance.CameraScroll += Scroll;
             CreateInputSystem.Instance.CameraDrag += Scroll;
         }
