@@ -104,12 +104,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b306d3f8fc45e342a907a613b7913e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockType: 0
   ballLayer:
     serializedVersion: 2
     m_Bits: 64
   launchPower: 40
   launchDirection: {x: 1, y: 1}
-  reroad: {fileID: -4003031961456340015}
+  reloadSound: {fileID: -4003031961456340015}
   launchSound: {fileID: -7906268233215227091}
 --- !u!61 &7284439586543942226
 BoxCollider2D:

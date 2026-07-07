@@ -69,18 +69,18 @@ EditorBuildSettings:
     path: Assets/Scenes/04/4-5.unity
     guid: 6688b6098c80af74787255a9cbdf49e5
   - enabled: 1
-    path: Assets/Scenes/0-1.unity
+    path: Assets/Scenes/Sample/0-1.unity
     guid: 65eeb605ba823fe47a495305d2bf0ba8
   - enabled: 1
-    path: Assets/Scenes/CreateTestScene.unity
+    path: Assets/Scenes/Edit/CreateTestScene.unity
     guid: de675b0b457d01144a8b026854264dce
   - enabled: 1
-    path: Assets/Scenes/CreateScene.unity
+    path: Assets/Scenes/Edit/CreateScene.unity
     guid: 726d23fb71fa2af4e9df28483bc8fa57
   - enabled: 1
-    path: Assets/Scenes/SaveData.unity
+    path: Assets/Scenes/Edit/SaveData.unity
     guid: aa54262d979156e4e839ae19be6e8ce5
   - enabled: 1
-    path: Assets/Scenes/InGameScene.unity
+    path: Assets/Scenes/Sample/InGameScene.unity
     guid: 911ce8d7fdb9e9c45a66062d3830d485
   m_configObjects: {}

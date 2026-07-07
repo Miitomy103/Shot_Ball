@@ -45,7 +45,7 @@ namespace ShotBall.InGame
             inBall = true;
             rb.velocity = Vector2.zero;
             rb.gameObject.transform.position = transform.position;
-            reloadSound.Play();
+            reloadSound?.Play();
 
             yield return new WaitForSeconds(coolTime);
 
@@ -53,7 +53,7 @@ namespace ShotBall.InGame
             rb.bodyType = RigidbodyType2D.Dynamic;
             Vector2 worldForce = Quaternion.Euler(0, 0, transform.eulerAngles.z) * Direction;
             rb.AddForce(launchPower * 10 * worldForce);
-            launchSound.Play();
+            launchSound?.Play();
         }
 
         protected override string StringData()

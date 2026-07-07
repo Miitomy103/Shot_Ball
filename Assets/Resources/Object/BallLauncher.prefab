@@ -110,7 +110,7 @@ MonoBehaviour:
     m_Bits: 64
   launchPower: 40
   launchDirection: {x: 1, y: 1}
-  reloadSound: {fileID: 0}
+  reloadSound: {fileID: -4003031961456340015}
   launchSound: {fileID: -7906268233215227091}
 --- !u!61 &7284439586543942226
 BoxCollider2D:

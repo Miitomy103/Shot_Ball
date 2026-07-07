@@ -3322,6 +3322,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 756151095}
     m_Modifications:
+    - target: {fileID: 1667853463349817201, guid: 4e85878939bb037469b26e578c719129, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2124106033525777942, guid: 4e85878939bb037469b26e578c719129, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3421,6 +3425,10 @@ PrefabInstance:
     - target: {fileID: 5431233902981590430, guid: 4e85878939bb037469b26e578c719129, type: 3}
       propertyPath: m_Color.r
       value: 0.6901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 5431233902981590430, guid: 4e85878939bb037469b26e578c719129, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8487065818980989763, guid: 4e85878939bb037469b26e578c719129, type: 3}
       propertyPath: m_IsActive
@@ -9889,6 +9897,36 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2124106033525777942, guid: 4e85878939bb037469b26e578c719129, type: 3}
   m_PrefabInstance: {fileID: 1230615353}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1832914262 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5399390481625445973, guid: 0d38389e83e0a0c45ba51f8dd61dcf4c, type: 3}
+  m_PrefabInstance: {fileID: 3725876701833015630}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1832914263 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8536965512273230379, guid: 0d38389e83e0a0c45ba51f8dd61dcf4c, type: 3}
+  m_PrefabInstance: {fileID: 3725876701833015630}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832914262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1832914266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832914262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e292a6fb7b2ed2498521665ae1ac6e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollRect: {fileID: 1832914263}
+  scrollSpeed: 2.5
 --- !u!1 &1860710293
 GameObject:
   m_ObjectHideFlags: 0
@@ -11532,8 +11570,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8536965512273230379, guid: 0d38389e83e0a0c45ba51f8dd61dcf4c, type: 3}
+      propertyPath: m_Viewport
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536965512273230379, guid: 0d38389e83e0a0c45ba51f8dd61dcf4c, type: 3}
       propertyPath: m_Elasticity
       value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536965512273230379, guid: 0d38389e83e0a0c45ba51f8dd61dcf4c, type: 3}
+      propertyPath: m_MovementType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536965512273230379, guid: 0d38389e83e0a0c45ba51f8dd61dcf4c, type: 3}
+      propertyPath: m_ScrollSensitivity
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9135682024350308248, guid: 0d38389e83e0a0c45ba51f8dd61dcf4c, type: 3}
       propertyPath: m_ChildScaleHeight
@@ -11568,6 +11618,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1949917393}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5399390481625445973, guid: 0d38389e83e0a0c45ba51f8dd61dcf4c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1832914266}
     - targetCorrespondingSourceObject: {fileID: 8301188743450515484, guid: 0d38389e83e0a0c45ba51f8dd61dcf4c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 756151097}
